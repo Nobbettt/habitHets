@@ -1,8 +1,6 @@
-package main.calender;
+package main.model.calendar;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Day {
     private LocalDateTime ldt;

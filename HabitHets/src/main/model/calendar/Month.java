@@ -1,4 +1,4 @@
-package main.calender;
+package main.model.calendar;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
