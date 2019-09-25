@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../../resources/window.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../resources/hour.fxml"));
         primaryStage.setTitle("HabitHets");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.setMaximized(true);
