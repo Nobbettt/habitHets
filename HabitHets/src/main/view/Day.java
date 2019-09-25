@@ -1,4 +1,5 @@
 package main.view;
 
-public class day {
+public class Day {
+
 }
