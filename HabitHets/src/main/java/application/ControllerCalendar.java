@@ -4,9 +4,10 @@ package main.java.application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import main.model.Day;
+import main.view.ExpandedDayView;
 import main.view.WeekView;
 
 import java.net.URL;
@@ -17,19 +18,15 @@ import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
-    private AnchorPane calendarAnchor;
+    private StackPane calendarPane;
 
 
     public ControllerCalendar() {
 
-        System.out.println("first?");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        mainGrid.setGridLinesVisible(true);
-
 
         setupCalender();
 
@@ -45,18 +42,22 @@ public class ControllerCalendar implements Initializable {
         week.add(d);
 
         renderWeek(week);
-
     }
 
     // Day stuff
     @FXML
     private void showCalendarDayClick() {
+        //temporary
+        Day d = new Day(LocalDateTime.now());
+        renderDay(d);
+
         System.out.println("Day");
     }
 
     private void renderDay(Day day) {
-
-        //renderCalendar();
+        ExpandedDayView expandedDayView = ExpandedDayView.getExpandedDayView();
+        ExpandedDayView.updateExpandedDayView(day);
+        renderCalendar(expandedDayView);
     }
 
     // Week stuff
@@ -78,9 +79,9 @@ public class ControllerCalendar implements Initializable {
     }
 
     private void renderWeek(List<Day> week) {
-        WeekView weekView = new WeekView(week);
-        GridPane weekGrid = weekView.getWeekGrid();
-        renderCalendar(weekGrid);
+        WeekView weekView = WeekView.getWeekView();
+        WeekView.updateWeekView(week);
+        renderCalendar(weekView);
     }
 
     // Month stuff
@@ -96,23 +97,23 @@ public class ControllerCalendar implements Initializable {
     }
 
     private void setupCalender() {
-        calendarAnchor = new AnchorPane();
-        calendarAnchor.setStyle("-fx-background-color: red");
-        mainGrid.add(calendarAnchor, 1, 0);
+        calendarPane = new StackPane();
+        calendarPane.setStyle("-fx-background-color: red");
+        mainGrid.add(calendarPane, 1, 0);
     }
 
     private void renderCalendar(Node node) {
-        if(calendarAnchor.getChildren() != null) {
-            calendarAnchor.getChildren().removeAll();
+        if(calendarPane.getChildren() != null) {
+            calendarPane.getChildren().clear();
         }
-        calendarAnchor.getChildren().add(node);
-        fitItem(calendarAnchor, node);
+        calendarPane.getChildren().add(node);
     }
 
+    /*
     private void fitItem(AnchorPane parent, Node child) {
         parent.setTopAnchor(child, 0.0);
         parent.setRightAnchor(child, 0.0);
         parent.setBottomAnchor(child, 0.0);
         parent.setLeftAnchor(child, 0.0);
-    }
+    }*/
 }
