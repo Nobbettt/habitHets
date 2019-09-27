@@ -1,6 +1,10 @@
 package main.view;
 
-import javafx.scene.layout.*;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 import main.model.Day;
 
 import java.util.ArrayList;
@@ -9,6 +13,7 @@ import java.util.List;
 public class WeekView extends StackPane {
     private static WeekView weekView;
     private static GridPane weekGrid;
+    private static ScrollPane scrollPane;
     private static List<DayView> days;
 
     private WeekView() {}
@@ -40,7 +45,14 @@ public class WeekView extends StackPane {
         weekGrid.getRowConstraints().setAll(height);
         weekGrid.getColumnConstraints().setAll(width);
 
-        weekView.getChildren().add(weekGrid);
+        scrollPane = new ScrollPane();
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setContent(weekGrid);
+        weekView.getChildren().add(scrollPane);
     }
 
     private static void createWeek(List<Day> week) {
@@ -60,5 +72,4 @@ public class WeekView extends StackPane {
             // update local week list and update fxml value
         }
     }
-
 }
