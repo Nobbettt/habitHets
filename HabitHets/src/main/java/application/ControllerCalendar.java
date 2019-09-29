@@ -20,9 +20,11 @@ public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
     private AnchorPane calendarPane;
     private WeekView weekView;
+    private ExpandedDayView expandedDayView;
 
     public ControllerCalendar() {
         weekView = new WeekView();
+        expandedDayView = new ExpandedDayView();
     }
 
     @Override
@@ -55,8 +57,7 @@ public class ControllerCalendar implements Initializable {
     }
 
     private void renderDay(Day day) {
-        ExpandedDayView expandedDayView = ExpandedDayView.getExpandedDayView();
-        ExpandedDayView.updateExpandedDayView(day);
+        expandedDayView.updateExpandedDayView(day);
         renderCalendar(expandedDayView);
     }
 

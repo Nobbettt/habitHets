@@ -42,6 +42,15 @@ public class WeekView extends StackPane {
         dayGrid.setGridLinesVisible(true);
     }
 
+    public void updateWeekView(List<Day> week) {
+        for(int i = 0; i < 7; i++) {
+            String weekday = "fuckMig"; //week.get(i)....getWeekdayfunction()
+            weekDays.get(i).setText(weekday);
+            Day tmpDay = new Day(LocalDateTime.now());
+            // weekDayEvents.get(i).updateDay(tmpDay);
+        }
+    }
+
     private void setUpWeek() {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
@@ -63,12 +72,5 @@ public class WeekView extends StackPane {
 
     }
 
-    public void updateWeekView(List<Day> week) {
-        for(int i = 0; i < 7; i++) {
-            String weekday = "fuckMig"; //week.get(i)....getWeekdayfunction()
-            weekDays.get(i).setText(weekday);
-            Day tmpDay = new Day(LocalDateTime.now());
-           // weekDayEvents.get(i).updateDay(tmpDay);
-        }
-    }
+
 }
