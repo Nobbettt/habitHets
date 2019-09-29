@@ -1,9 +1,3 @@
-.day-container {
-    -fx-background-color: #555;
-    -fx-border-color: #ddd;
-    -fx-border-width: 0 1px 0 0;
-}
-
 .day-head {
     -fx-background-color: #595959;
 }
@@ -21,8 +15,10 @@
 }
 .hour-wrapper {
     -fx-background-color: #555;
-    -fx-border-color: #fff;
+    -fx-border-color: #aaa;
     -fx-border-width: 0 0 1px 0;
+    -fx-pref-height: 100px;
+    -fx-pref-width: 100px;
 }
 .hour-label {
     -fx-text-fill: #fff;

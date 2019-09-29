@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="75.0" prefWidth="300.0" styleClass="hour-wrapper" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="7.0" layoutY="14.0" styleClass="hour-label" text="10:00" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-   </children>
+<fx:root minHeight="50.0" minWidth="100.0" styleClass="hour-wrapper" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@css/day-style.css" />
    </stylesheets>
-</AnchorPane>
+</fx:root>

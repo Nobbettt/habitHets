@@ -4,8 +4,8 @@ package main.java.application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import main.model.Day;
 import main.view.ExpandedDayView;
 import main.view.WeekView;
@@ -18,11 +18,11 @@ import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
-    private StackPane calendarPane;
-
+    private AnchorPane calendarPane;
+    private WeekView weekView;
 
     public ControllerCalendar() {
-
+        weekView = new WeekView();
     }
 
     @Override
@@ -79,8 +79,7 @@ public class ControllerCalendar implements Initializable {
     }
 
     private void renderWeek(List<Day> week) {
-        WeekView weekView = WeekView.getWeekView();
-        WeekView.updateWeekView(week);
+        weekView.updateWeekView(week);
         renderCalendar(weekView);
     }
 
@@ -97,8 +96,7 @@ public class ControllerCalendar implements Initializable {
     }
 
     private void setupCalender() {
-        calendarPane = new StackPane();
-        calendarPane.setStyle("-fx-background-color: red");
+        calendarPane = new AnchorPane();
         mainGrid.add(calendarPane, 1, 0);
     }
 
@@ -107,13 +105,13 @@ public class ControllerCalendar implements Initializable {
             calendarPane.getChildren().clear();
         }
         calendarPane.getChildren().add(node);
+        fitItem(calendarPane, node);
     }
 
-    /*
     private void fitItem(AnchorPane parent, Node child) {
         parent.setTopAnchor(child, 0.0);
         parent.setRightAnchor(child, 0.0);
         parent.setBottomAnchor(child, 0.0);
         parent.setLeftAnchor(child, 0.0);
-    }*/
+    }
 }
