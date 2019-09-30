@@ -34,9 +34,13 @@ public class TestTodo {
         todoHandler.add();
         todoHandler.add();
         Assert.assertEquals(2, todoHandler.getTodoList().size());
+        todoHandler.getTodoList().get(0).setTitle("Städa");
+        Assert.assertEquals("Städa", todoHandler.getTodoList().get(0).getTitle() );
         todoHandler.remove(0);
         Assert.assertEquals(1, todoHandler.getTodoList().size());
         Assert.assertEquals(1, todoHandler.getDoneTodoList().size());
+        Assert.assertEquals("testTodo", todoHandler.getTodoList().get(0).getTitle() );
+        Assert.assertEquals("Städa", todoHandler.getDoneTodoList().get(0).getTitle() );
     }
 
     @Test
@@ -48,11 +52,12 @@ public class TestTodo {
         for (int r=0; r<7; r++){
             todoHandler.remove(todoHandler.getTodoList().size()-1);
         }
-
         Assert.assertEquals(1, todoHandler.getTodoList().size());
         Assert.assertEquals(5, todoHandler.getDoneTodoList().size());
+        for(int i =0; i<todoHandler.getDoneTodoList().size(); i++){
 
-
+            System.out.println(todoHandler.getDoneTodoList().get(i).getTitle());
+        }
     }
 
 
