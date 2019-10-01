@@ -5,6 +5,10 @@ import org.junit.Test;
 
 public class TestTodo {
 
+    /**
+     * This test checks that the add-method works the way it is suppose to do.
+     */
+
     @Test
     public void testTodoAdd(){
         TodoHandler todoHandler = TodoHandler.getInstant();
@@ -17,6 +21,11 @@ public class TestTodo {
 
     }
 
+
+    /**
+     * This test checks that you can change the title of the todoo.
+     */
+
     @Test
     public void testTodoUpdateSubject(){
         TodoHandler todoHandler = TodoHandler.getInstant();
@@ -27,6 +36,10 @@ public class TestTodo {
         Assert.assertEquals("Städa", todoHandler.getTodoList().get(0).getTitle() );
         Assert.assertEquals("testTodo", todoHandler.getTodoList().get(1).getTitle() );
     }
+
+    /**
+     * This test checks that when you complete a todoo that the todoo go from the todolist to donetodolist.
+     */
 
     @Test
     public void testTodoRemove() {
@@ -42,6 +55,10 @@ public class TestTodo {
         Assert.assertEquals("testTodo", todoHandler.getTodoList().get(0).getTitle() );
         Assert.assertEquals("Städa", todoHandler.getDoneTodoList().get(0).getTitle() );
     }
+
+    /**
+     * This test checks that the length of the donetodolist never goes over the limit.
+     */
 
     @Test
     public void testLengthOfDoneTodoList() {
@@ -61,6 +78,10 @@ public class TestTodo {
             System.out.println(todoHandler.getDoneTodoList().get(i).getTitle());
         }
     }
+
+    /**
+     * This test checks that you remove a todoo without complete it.
+     */
 
 
     @Test

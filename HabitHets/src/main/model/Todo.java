@@ -1,6 +1,8 @@
 package main.model;
 
-
+/**
+ * This class
+ */
 
 public class Todo {
     private String title;

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class contains methods and lists that affect a todoo.
+ */
+
 public class TodoHandler implements IHandler {
 
 
@@ -11,11 +15,21 @@ public class TodoHandler implements IHandler {
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
 
+    /**
+     * The constructor of TodoHandler sets the list of todos and doneTodos.
+     */
+
 
     public TodoHandler() {
         this.todoList = new ArrayList<>();
         this.doneTodoList = new ArrayList<>();
     }
+
+    /**
+     * Control if object is created , so that there may only be one at a time.
+     * If there is an instant, another one will not be created.
+     * If there is not, an instant will be created.
+     */
 
     public static TodoHandler getInstant() {
         if (instant == null) {
@@ -63,11 +77,9 @@ public class TodoHandler implements IHandler {
      * If it is, then the todoo is added to the list of completed todos. The method calls on
      * another method to check that the donetodo list is not to big. The last step is to remove
      * the todoo from the list of existing todos.
-     * If the id does not exist you get an error message.
-     *
+     * If the id does not exist you get an error message.     *
      * @param id
      */
-
 
     public void doneTodoRemove(int id){ // to remove a todoo when you have completed the task
         for (Todo todo: todoList){
@@ -80,6 +92,8 @@ public class TodoHandler implements IHandler {
         } System.out.println("The ID " +id + " does not exist.");
     }
 
+
+
     public List<Todo> getTodoList() {
         return todoList;
     }
@@ -87,6 +101,11 @@ public class TodoHandler implements IHandler {
     public List<Todo> getDoneTodoList() {
         return doneTodoList;
     }
+
+    /**
+     * When you have completed a todoo, it goes from todolist to doneTodolist. This method
+     * checks that the doneTodolist only have the five most recent completed todos.
+     */
 
     private void doneTodoList(){
         if (doneTodoList.size()>5){
