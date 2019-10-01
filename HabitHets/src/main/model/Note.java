@@ -4,13 +4,15 @@ import java.time.LocalDateTime;
 
 public class Note {
 
+    private int id;
     private String title;
     private String description;
-    private int id;
     private LocalDateTime day;
 
-    public Note(String title) {
+    public Note(int id, String title, String Description, LocalDateTime day) {
         this.title = title;
+        this.description = description;
+        this.day = day;
         this.id = id;
     }
 
@@ -35,6 +37,14 @@ public class Note {
 
     public LocalDateTime getDay() {
         return day;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDay(LocalDateTime day) {
+        this.day = day;
     }
 }
 

@@ -16,4 +16,9 @@ public class Factory {
         id++;
         return createdAdvEvent;
     }
+    public static Note createNote(String title, String description, LocalDateTime day){
+        Note createdNote = new Note(id, title, description, day);
+        id++;
+        return createdNote;
+    }
 }
