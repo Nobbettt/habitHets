@@ -1,0 +1,8 @@
+.window-style {
+    -fx-background-color: #999;
+}
+.navbar-wrapper {
+    -fx-background-color: #555;
+    -fx-border-color: #787878;
+    -fx-border-width: 0 0 3px 0;
+}
