@@ -48,4 +48,12 @@ public class TestWeek {
         Assert.assertEquals("Day{ldt=2020-12-28}", dayList.get(0).getDateString());
         Assert.assertEquals("Day{ldt=2021-1-3}", dayList.get(dayList.size() - 1).getDateString());
     }
+
+    @Test
+    public void testSameDay(){
+        Calender calender = new Calender();
+        LocalDateTime testTime = LocalDateTime.of(2019, 1, 1, 00, 00);
+        Day day = calender.getDayFromLDT(testTime);
+        Assert.assertTrue(day == calender.getYear(2019).getMonth(1).getDays().get(0));
+    }
 }
