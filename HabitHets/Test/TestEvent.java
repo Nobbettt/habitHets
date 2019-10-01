@@ -1,4 +1,5 @@
 import main.model.EventHandler;
+import main.model.HabitHandler;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,4 +18,6 @@ public class TestEvent {
         Assert.assertEquals(3,eventHandler.getEventList().get(3).getId());
 
     }
+
+
 }
