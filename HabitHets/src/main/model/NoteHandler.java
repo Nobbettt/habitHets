@@ -32,7 +32,8 @@ public class NoteHandler implements IHandler {
 
     @Override
     public void add() {
-        // Get input from interface
+        //Get input from database
+        notesList.add(Factory.createNote("title", "desc", LocalDateTime.now()));
     }
 
     @Override
