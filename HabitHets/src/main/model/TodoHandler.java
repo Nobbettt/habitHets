@@ -2,6 +2,7 @@ package main.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TodoHandler implements IHandler {
 
@@ -9,6 +10,7 @@ public class TodoHandler implements IHandler {
     public static TodoHandler instant;
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
+
 
     public TodoHandler() {
         this.todoList = new ArrayList<>();
@@ -25,14 +27,49 @@ public class TodoHandler implements IHandler {
         }
     }
 
+    /**
+     * This method creates a new toddoo. You have to enter the todoo's title, the todoo get it's id from the factory class
+     * where the todoo object is made.
+     */
+
     @Override
     public void add() {
         todoList.add(Factory.createTodo("testTodo"));
+
     }
 
+    /**
+     *This method delete a todoo that hasn't been completed, for example
+     * if you change your mind and don't want to do that todoo anymore.
+     * The remove-method checks that the id of the todoo you want to delete exists in the todolist.
+     * If the id exist, the todoo deletes from the list. If not, you get an error messages
+     * that the id does not exist.
+     * @param id
+     */
 
     @Override
     public void remove(int id) {
+        for (Todo todo: todoList){
+            if(todo.getId() == id){
+                todoList.remove(todo);
+                return;
+            }
+        } System.out.println("The ID " +id + " does not exist.");
+    }
+
+    /**
+     * This method is used when you have completed a todoo. It takes in the id of the
+     * todoo that has been completed. It checks that id is connected to an existing todoo.
+     * If it is, then the todoo is added to the list of completed todos. The method calls on
+     * another method to check that the donetodo list is not to big. The last step is to remove
+     * the todoo from the list of existing todos.
+     * If the id does not exist you get an error message.
+     *
+     * @param id
+     */
+
+
+    public void doneTodoRemove(int id){ // to remove a todoo when you have completed the task
         for (Todo todo: todoList){
             if(todo.getId() == id){
                 doneTodoList.add(todo);
@@ -59,6 +96,8 @@ public class TodoHandler implements IHandler {
             }
         }
     }
+
+
 
 
 }

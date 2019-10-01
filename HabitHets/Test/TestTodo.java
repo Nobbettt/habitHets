@@ -6,7 +6,7 @@ import org.junit.Test;
 public class TestTodo {
 
     @Test
-    public void testTodoadd(){
+    public void testTodoAdd(){
         TodoHandler todoHandler = TodoHandler.getInstant();
         todoHandler.add();
         todoHandler.add();
@@ -36,7 +36,7 @@ public class TestTodo {
         Assert.assertEquals(2, todoHandler.getTodoList().size());
         todoHandler.getTodoList().get(0).setTitle("Städa");
         Assert.assertEquals("Städa", todoHandler.getTodoList().get(0).getTitle() );
-        todoHandler.remove(0);
+        todoHandler.doneTodoRemove(0);
         Assert.assertEquals(1, todoHandler.getTodoList().size());
         Assert.assertEquals(1, todoHandler.getDoneTodoList().size());
         Assert.assertEquals("testTodo", todoHandler.getTodoList().get(0).getTitle() );
@@ -48,16 +48,29 @@ public class TestTodo {
         TodoHandler todoHandler = TodoHandler.getInstant();
         for (int a =0; a<8 ;a++){
             todoHandler.add();
+            todoHandler.getTodoList().get(a).setTitle(""+a+"");
         }
         for (int r=0; r<7; r++){
-            todoHandler.remove(todoHandler.getTodoList().size()-1);
+           todoHandler.doneTodoRemove(todoHandler.getTodoList().size()-1);
         }
+
         Assert.assertEquals(1, todoHandler.getTodoList().size());
         Assert.assertEquals(5, todoHandler.getDoneTodoList().size());
         for(int i =0; i<todoHandler.getDoneTodoList().size(); i++){
 
             System.out.println(todoHandler.getDoneTodoList().get(i).getTitle());
         }
+    }
+
+
+    @Test
+    public void deleteTodo(){
+        TodoHandler todoHandler = TodoHandler.getInstant();
+        todoHandler.add();
+        todoHandler.add();
+        Assert.assertEquals(2, todoHandler.getTodoList().size());
+        todoHandler.remove(todoHandler.getTodoList().get(0).getId());
+        Assert.assertEquals(1, todoHandler.getTodoList().size());
     }
 
 
