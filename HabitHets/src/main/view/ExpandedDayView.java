@@ -50,6 +50,5 @@ public class ExpandedDayView extends StackPane {
 
     private void createDay(Day dayData) {
 
-
     }
 }
