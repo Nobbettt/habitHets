@@ -21,4 +21,13 @@ public class Factory {
         id++;
         return createdNote;
     }
+
+    public static Todo createTodo(String title){
+        Todo createTodo = new Todo(title,id);
+        id++;
+        return createTodo;
+    }
+
+
+
 }
