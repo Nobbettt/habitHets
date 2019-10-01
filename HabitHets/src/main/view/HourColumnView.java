@@ -10,6 +10,7 @@ public class HourColumnView extends VBox {
             AnchorPane block = new AnchorPane();
             this.getStylesheets().add(getClass().getResource("../resources/css/day-style.css").toExternalForm());
             block.getStyleClass().add("hour-wrapper");
+            this.getStyleClass().add("hour-wrapper-column");// todo add right border to this
             this.getChildren().add(block);
 
             Label hourLbl = new Label(i+":00");
@@ -18,3 +19,4 @@ public class HourColumnView extends VBox {
         }
     }
 }
+

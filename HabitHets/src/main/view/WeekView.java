@@ -38,16 +38,17 @@ public class WeekView extends StackPane {
             throw new RuntimeException(exception);
         }
         setUpWeek();
-        weekGrid.setGridLinesVisible(true);
-        dayGrid.setGridLinesVisible(true);
     }
 
     public void updateWeekView(List<Day> week) {
         for(int i = 0; i < 7; i++) {
-            String weekday = "fuckMig"; //week.get(i)....getWeekdayfunction()
-            weekDays.get(i).setText(weekday);
+
             Day tmpDay = new Day(LocalDateTime.now());
-            // weekDayEvents.get(i).updateDay(tmpDay);
+
+            String weekday = "fuckMig"; //week.get(i)....getWeekdayfunction()
+
+            weekDays.get(i).setText(weekday);
+            weekDayEvents.get(i).updateDay(tmpDay);
         }
     }
 
@@ -63,14 +64,10 @@ public class WeekView extends StackPane {
         weekDayEvents = new ArrayList<>();
         weekGrid.add(new HourColumnView(), 0, 0);
         for(int i = 1; i < 8; i++) {
-
-            DayEventListView day = new DayEventListView();
-            weekGrid.add(day, i, 0);
-            weekDayEvents.add(day);
+            DayEventListView dayEvents = new DayEventListView();
+            weekGrid.add(dayEvents, i, 0);
+            weekDayEvents.add(dayEvents);
         }
-
-
     }
-
 
 }
