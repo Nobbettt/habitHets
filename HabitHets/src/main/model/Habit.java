@@ -3,7 +3,8 @@ package main.model;
 import java.time.LocalDate;
 
 /**
- * The class Habit is
+ * The class Habit contains all of the variables a habit needs.
+ * All logic that has to do with only one habit.
  */
 public class Habit {
 
@@ -44,7 +45,7 @@ public class Habit {
         this.bestStreak = bestStreak;
         this.description = description;
         this.color = color;
-        todayHabit();
+        createHabit();
     }
 
 
@@ -116,7 +117,7 @@ public class Habit {
      * by checking if it has been checked before. If not the
      * constructor will set it.
      */
-    public void todayHabit() {
+    public void createHabit() {
         LocalDate date = LocalDate.now();
         LocalDate yesterday = date.now().minusDays(1);
         if (getLastChecked() != null) {
@@ -151,6 +152,13 @@ public class Habit {
     }
 
 
+    /**
+     * This method is called to change getCheckedToday()
+     * from checked to unchecked or the other way around.
+     * This ables the user to regret a checked habit. If
+     * the habit changes to unchecked, the current streak
+     * also needs to decrease.
+     */
     public void checkToggle(){
         if(getCheckedToday() == checkedToday){
             setCheckedToday(false);
@@ -161,7 +169,13 @@ public class Habit {
 
     }
 
-
+    /**
+     * This method is called to set a streak to each
+     * habit that is checked in the application.
+     * Since it already is checked when the habit gets here,
+     * it can either already have a streak which increases with
+     * one, or it lost its streak and is set to 1.
+     */
     public void streak() {
         LocalDate date = LocalDate.now();
         LocalDate yesterday = date.now().minusDays(1);
@@ -174,7 +188,11 @@ public class Habit {
         }
     }
 
-
+    /**
+     * This method is called if the streak increases
+     * and one want to check if it might be the new
+     * best streak.
+     */
     public void bestStreak(){
         if(currentStreak > bestStreak){
             bestStreak = currentStreak;

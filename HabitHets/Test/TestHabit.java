@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class TestHabit {
 
     @Test
-    public void testIdHabit(){
+    public void testAddHabit(){
         HabitHandler habitHandler = HabitHandler.getInstant();
 
         Assert.assertEquals(0,habitHandler.getHabitList().size());
@@ -41,24 +41,24 @@ public class TestHabit {
 
 
     @Test
-    public void testTodayHabit(){
+    public void testCreateHabit(){
         Habit habit = new Habit(2,"test",true, LocalDate.now(),2,6,"testd","green");
         LocalDate date = LocalDate.now();
         LocalDate yesterday = date.now().minusDays(1);
         LocalDate dayBeforeYesterday = date.now().minusDays(2);
         habit.setLastChecked(yesterday);
-        habit.todayHabit();
+        habit.createHabit();
         Assert.assertEquals(3,habit.getCurrentStreak());
         habit.setCurrentStreak(1);
-        habit.todayHabit();
+        habit.createHabit();
         Assert.assertEquals(1,habit.getCurrentStreak());
         habit.setLastChecked(dayBeforeYesterday);
         habit.setCurrentStreak(3);
-        habit.todayHabit();
+        habit.createHabit();
         Assert.assertEquals(0,habit.getCurrentStreak());
         habit.setLastChecked(dayBeforeYesterday);
         habit.setCurrentStreak(1);
-        habit.todayHabit();
+        habit.createHabit();
         Assert.assertEquals(0,habit.getCurrentStreak());
     }
 
