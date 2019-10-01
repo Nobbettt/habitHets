@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
     private AnchorPane calendarPane;
-    private WeekView weekView;
+    public WeekView weekView;
     private ExpandedDayView expandedDayView;
 
     public ControllerCalendar() {
