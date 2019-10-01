@@ -24,6 +24,15 @@ public class Year {
         return months;
     }
 
+    public Month getMonth(int month){
+        for (Month tmpMonth : getMonths()){
+            if(tmpMonth.getDays().get(0).getLdt().getMonthValue() == month){
+                return tmpMonth;
+            }
+        }
+        return null;
+    }
+
     public Day getDayWithWeek(int week){
         for (Month month : getMonths()){
             if (month.getFirstWeek() < week && month.getLastWeek() >= week){

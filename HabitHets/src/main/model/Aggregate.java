@@ -1,11 +1,12 @@
 package main.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Aggregate {
     private Calender calender = new Calender();
 
-    public List<Day> getDaysFromWeek(int year, int weekNr) {
-        return calender.getWeekFromWeek(year, weekNr);
+    public List<Day> getWeekFromDate(LocalDateTime localDateTime) {
+        return calender.getWeekFromLDT(localDateTime);
     }
 }

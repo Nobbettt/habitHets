@@ -8,17 +8,16 @@ public class Calender {
     protected List<Year> years;
 
     public Calender() {
-        LocalDateTime start = LocalDateTime.now().minusYears(2);
-        LocalDateTime end = LocalDateTime.now().plusYears(5);
-        this.years = getYears(start, end);
+        int yearsBack = 2;
+        int yearsForward  = 3;
+        this.years = getYears(yearsBack, yearsForward);
     }
 
-    public List<Year> getYears(LocalDateTime start, LocalDateTime end) {
+    public List<Year> getYears(int yearsBack, int yearsForward) {
         List<Year> tmpYears = new ArrayList<>();
-        while (start.getYear() <= end.getYear()){
-            Year y = new Year(start.getYear());
+        for (int i = -yearsBack; i <yearsForward; i++){
+            Year y = new Year(LocalDateTime.now().getYear()+i);
             tmpYears.add(y);
-            start.plusYears(1);
         }
         return tmpYears;
     }
@@ -36,31 +35,24 @@ public class Calender {
         return null;
     }
 
-    public List<Day> getWeekFromWeek(int year, int week){
-        List<Day> weekList = new ArrayList<>();
-
-        Year toYear = getYear(year);
-        Day day = toYear.getDayWithWeek(week);
-        weekList.add(day);
-        for (int i = 1; i < 7; i++){
-            LocalDateTime tmpLtd = day.getLdt().plusDays(i);
-            Day tmpDay = getDayFromLDT(tmpLtd);
-            weekList.add(tmpDay);
-        }
-        return weekList;
-    }
-
     public List<Day> getWeekFromLDT(LocalDateTime ldt){
         List<Day> weekList = new ArrayList<>();
+
+        /*The two lines below make it so that the list returns a week from MON-SUN, if we want SUN - SAT remove
+        the -1 from the line exactly below. Remove these to lines completely if you just want 7 consecutive Day objects. */
+
+        int dayInWeek = ldt.getDayOfWeek().getValue()-1;
+        LocalDateTime firstDayInWeek = ldt.minusDays(dayInWeek);
+
         for (int i = 0; i<7; i++){
-            LocalDateTime tmpLtd = ldt.plusDays(i);
+            LocalDateTime tmpLtd = firstDayInWeek.plusDays(i);
             Day tmpDay = getDayFromLDT(tmpLtd);
             weekList.add(tmpDay);
         }
         return weekList;
     }
 
-    private Day getDayFromLDT(LocalDateTime ldt){
+    public Day getDayFromLDT(LocalDateTime ldt){
         Year toYear = getYear(ldt.getYear());
         Month toMonth = toYear.getMonthFromLDT(ldt);
         return toMonth.getDayFromLDT(ldt);

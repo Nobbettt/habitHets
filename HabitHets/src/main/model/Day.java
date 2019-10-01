@@ -9,7 +9,6 @@ public class Day {
 
     public Day(LocalDateTime ldt) {
         this.ldt = ldt;
-        System.out.println(ldt.getDayOfWeek());
     }
 
     public LocalDateTime getLdt() {
@@ -24,5 +23,11 @@ public class Day {
         Calendar javaCal = new GregorianCalendar();
         javaCal.set(getLdt().getYear(), getLdt().getMonthValue(), getLdt().getDayOfMonth());
         return javaCal.get(javaCal.WEEK_OF_YEAR);
+    }
+
+    public String getDateString() {
+        return "Day{" +
+                "ldt=" + ldt.getYear() + "-" + ldt.getMonthValue() + "-" + ldt.getDayOfMonth() +
+                '}';
     }
 }
