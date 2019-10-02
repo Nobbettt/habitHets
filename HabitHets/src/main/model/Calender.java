@@ -5,12 +5,24 @@ import java.util.List;
 import java.time.LocalDateTime;
 
 public class Calender {
-    protected List<Year> years;
+    private static Calender instant;
+    protected static List<Year> years;
 
-    public Calender() {
+    private Calender() {
         int yearsBack = 2;
         int yearsForward  = 3;
         this.years = getYears(yearsBack, yearsForward);
+    }
+
+    public static Calender getInstant() {
+        if (instant == null) {
+
+            instant = new Calender();
+            return instant;
+
+        } else {
+            return instant;
+        }
     }
 
     public List<Year> getYears(int yearsBack, int yearsForward) {

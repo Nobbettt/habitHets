@@ -10,7 +10,7 @@ import java.util.List;
 public class TestWeek {
     @Test
     public void testGetDayFromLtd(){
-        Calender calender = new Calender();
+        Calender calender = Calender.getInstant();
         LocalDateTime testLTD = LocalDateTime.of(2019, 12, 12, 0, 0);
         Day testDay = calender.getDayFromLDT(testLTD);
         Assert.assertEquals("Day{ldt=2019-12-12}", testDay.getDateString());
@@ -51,9 +51,17 @@ public class TestWeek {
 
     @Test
     public void testSameDay(){
-        Calender calender = new Calender();
+        Calender calender = Calender.getInstant();
         LocalDateTime testTime = LocalDateTime.of(2019, 1, 1, 00, 00);
         Day day = calender.getDayFromLDT(testTime);
         Assert.assertTrue(day == calender.getYear(2019).getMonth(1).getDays().get(0));
+    }
+
+    @Test
+    public void testSameCalendar(){
+        Calender calender1 = Calender.getInstant();
+        Calender calender2 = Calender.getInstant();
+        Assert.assertTrue(calender2.getYear(2019).getMonth(1).getDays().get(0) == calender1.getYear(2019).getMonth(1).getDays().get(0));
+
     }
 }
