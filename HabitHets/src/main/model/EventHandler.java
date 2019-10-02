@@ -9,7 +9,7 @@ public class EventHandler implements IHandler {
     public static EventHandler instant;
     private static List<Event> eventList;
 
-    public EventHandler() {
+    private EventHandler() {
         this.eventList = new ArrayList<>();
     }
 
@@ -27,12 +27,18 @@ public class EventHandler implements IHandler {
 
     @Override
     public void add() {
-        eventList.add(Factory.createBasicEvent(LocalDateTime.now(), LocalDateTime.now().plusHours(1),"TestEvent"));
+        eventList.add(Factory.createBasicEvent(LocalDateTime.now().plusMinutes(5), LocalDateTime.now().plusMinutes(50),"TestEvent"));
     }
 
     @Override
     public void remove(int id) {
-
+        for (Event event : eventList){
+            if (event.getId() == id){
+                eventList.remove(event);
+                return;
+            }
+        }
+        System.out.println("The ID: '" + id + "' does not exist");
     }
 
     public List<Event> getEventList() {

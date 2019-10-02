@@ -1,11 +1,12 @@
 import main.model.EventHandler;
-import main.model.HabitHandler;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 public class TestEvent {
     @Test
-    public void testEvent(){
+    public void testEventId(){
         EventHandler eventHandler = EventHandler.getInstant();
         eventHandler.add();
         eventHandler.add();
@@ -19,5 +20,37 @@ public class TestEvent {
 
     }
 
+    @Test
+    public void testEventModifiers(){
+        EventHandler eventHandler = EventHandler.getInstant();
+        eventHandler.add();
+        Assert.assertEquals(0, eventHandler.getEventList().get(0).getId());
+        eventHandler.getEventList().get(0).getId();
+        Assert.assertEquals("TestEvent", eventHandler.getEventList().get(0).getTitle());
+        eventHandler.getEventList().get(0).setTitle("NewName");
+        Assert.assertEquals("NewName", eventHandler.getEventList().get(0).getTitle());
+        Assert.assertEquals(1, eventHandler.getEventList().size());
+    }
 
+    @Test
+    public void testAddRemove(){
+        EventHandler eventHandler = EventHandler.getInstant();
+        eventHandler.add();
+        Assert.assertEquals(1,eventHandler.getEventList().size());
+        eventHandler.add();
+        Assert.assertEquals(2,eventHandler.getEventList().size());
+        eventHandler.remove(0);
+        Assert.assertEquals(1,eventHandler.getEventList().size());
+        Assert.assertEquals(1,eventHandler.getEventList().get(0).getId());
+        eventHandler.remove(5);
+        Assert.assertEquals(1,eventHandler.getEventList().size());
+    }
+
+    @Test
+    public void testTime(){
+        EventHandler eventHandler = EventHandler.getInstant();
+        eventHandler.add();
+        Assert.assertTrue((eventHandler.getEventList().get(0).getStartTime().isAfter(LocalDateTime.now())));
+        Assert.assertTrue((eventHandler.getEventList().get(0).getEndTime().isBefore(LocalDateTime.now().plusHours(1))));
+    }
 }
