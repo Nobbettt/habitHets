@@ -6,14 +6,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import main.model.Aggregate;
-import main.model.Day;
-import main.view.ExpandedDayView;
-import main.view.WeekView;
+import main.java.model.Aggregate;
+import main.java.model.Day;
+import main.java.view.ExpandedDayView;
+import main.java.view.WeekView;
 
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
