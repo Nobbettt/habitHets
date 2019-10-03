@@ -26,8 +26,6 @@ public class Day {
     }
 
     public String getDateString() {
-        return "Day{" +
-                "ldt=" + ldt.getYear() + "-" + ldt.getMonthValue() + "-" + ldt.getDayOfMonth() +
-                '}';
+        return "" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "";
     }
 }

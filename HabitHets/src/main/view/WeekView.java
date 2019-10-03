@@ -45,7 +45,7 @@ public class WeekView extends StackPane {
 
             Day tmpDay = new Day(LocalDateTime.now());
 
-            String weekday = "fuckMig"; //week.get(i)....getWeekdayfunction()
+            String weekday = week.get(i).getDateString(); //week.get(i)....getWeekdayfunction()
 
             weekDays.get(i).setText(weekday);
             weekDayEvents.get(i).updateDay(tmpDay);

@@ -30,7 +30,7 @@ public class ExpandedDayView extends StackPane {
     }
 
     public void updateExpandedDayView(Day dayData) {
-        String weekday = "fuckMig"; //week.get(i)....getWeekdayfunction()
+        String weekday = dayData.getDateString(); //week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
         dayEvents.updateDay(dayData);
     }

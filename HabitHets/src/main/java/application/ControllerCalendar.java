@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import main.model.Aggregate;
 import main.model.Day;
 import main.view.ExpandedDayView;
 import main.view.WeekView;
@@ -33,8 +34,9 @@ public class ControllerCalendar implements Initializable {
         setupCalender();
 
         //temporary
-        Day d = new Day(LocalDateTime.now());
-        List<Day> week = new ArrayList<>();
+        Aggregate aggregate = new Aggregate();
+        List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
+        /*
         week.add(d);
         week.add(d);
         week.add(d);
@@ -42,6 +44,7 @@ public class ControllerCalendar implements Initializable {
         week.add(d);
         week.add(d);
         week.add(d);
+        */
 
         renderWeek(week);
     }
@@ -65,15 +68,16 @@ public class ControllerCalendar implements Initializable {
     @FXML
     private void showCalendarWeekClick() {
         //temporary
-        Day d = new Day(LocalDateTime.now());
-        List<Day> week = new ArrayList<>();
+        Aggregate aggregate = new Aggregate();
+        List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
+        /*week.add(d);
         week.add(d);
         week.add(d);
         week.add(d);
         week.add(d);
         week.add(d);
         week.add(d);
-        week.add(d);
+        */
 
         renderWeek(week);
         System.out.println("Week");
