@@ -9,12 +9,14 @@ import javafx.scene.layout.StackPane;
 import main.model.Day;
 
 import java.io.IOException;
+import java.util.List;
 
-public class ExpandedDayView extends StackPane {
+public class ExpandedDayView extends StackPane implements ViewAble{
     @FXML private ScrollPane scrollPane;
     @FXML private GridPane dayGrid;
     @FXML private Label weekDayLbl;
     private DayEventListView dayEvents;
+
 
 
     public ExpandedDayView() {
@@ -26,16 +28,18 @@ public class ExpandedDayView extends StackPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        setupView();
+        setupDayView();
     }
 
-    public void updateExpandedDayView(Day dayData) {
-        String weekday = dayData.getDateString(); //week.get(i)....getWeekdayfunction()
+    @Override
+    public void updateView(List<Day> days) {
+        String weekday = days.get(0).getDateString(); //week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
-        dayEvents.updateDay(dayData);
+        dayEvents.updateDay(days.get(0));
     }
 
-    private void setupView() {
+
+    private void setupDayView() {
         dayGrid.setGridLinesVisible(true);
 
         scrollPane.setFitToWidth(true);

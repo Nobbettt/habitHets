@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class WeekView extends StackPane {
+public class WeekView extends StackPane implements ViewAble {
     @FXML private ScrollPane scrollPane;
     @FXML private GridPane weekGrid;
     @FXML private GridPane dayGrid;
@@ -40,7 +40,8 @@ public class WeekView extends StackPane {
         setUpWeek();
     }
 
-    public void updateWeekView(List<Day> week) {
+    @Override
+    public void updateView(List<Day> week) {
         for(int i = 0; i < 7; i++) {
 
             Day tmpDay = new Day(LocalDateTime.now());
@@ -69,5 +70,4 @@ public class WeekView extends StackPane {
             weekDayEvents.add(dayEvents);
         }
     }
-
 }

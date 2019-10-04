@@ -1,11 +1,14 @@
 package main.java.application;
 
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 import main.model.Aggregate;
 import main.model.Day;
 import main.view.ExpandedDayView;
@@ -20,16 +23,27 @@ import java.util.ResourceBundle;
 public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
     private AnchorPane calendarPane;
-    public WeekView weekView;
+    private WeekView weekView;
     private ExpandedDayView expandedDayView;
-
+    private Timeline timeLineCaller;
     public ControllerCalendar() {
         weekView = new WeekView();
         expandedDayView = new ExpandedDayView();
+
+
+    }
+
+    // function is called every min to update timeline in GUI
+    private void updateTimeline() {
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // timeLine setup stuff
+        timeLineCaller = new Timeline(new KeyFrame(Duration.seconds(5), event -> updateTimeline()));
+        timeLineCaller.setCycleCount(Timeline.INDEFINITE);
+        timeLineCaller.play();
 
         setupCalender();
 
@@ -60,7 +74,9 @@ public class ControllerCalendar implements Initializable {
     }
 
     private void renderDay(Day day) {
-        expandedDayView.updateExpandedDayView(day);
+        List<Day> days = new ArrayList<>();
+        days.add(day);
+        expandedDayView.updateView(days);
         renderCalendar(expandedDayView);
     }
 
@@ -84,7 +100,7 @@ public class ControllerCalendar implements Initializable {
     }
 
     private void renderWeek(List<Day> week) {
-        weekView.updateWeekView(week);
+        weekView.updateView(week);
         renderCalendar(weekView);
     }
 

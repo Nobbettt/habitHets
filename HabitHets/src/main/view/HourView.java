@@ -18,6 +18,5 @@ public class HourView extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
     }
 }
