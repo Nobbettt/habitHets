@@ -1,3 +1,4 @@
+import main.model.DoneHabit;
 import main.model.Habit;
 import main.model.HabitHandler;
 import org.junit.Assert;
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Stack;
 
 public class TestHabit {
-/*
+
     @Test
     public void testAddHabit(){
         HabitHandler habitHandler = HabitHandler.getInstant();
@@ -34,13 +35,59 @@ public class TestHabit {
 
    @Test
    public void testTitle(){
-      Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue");
+      Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue",LocalDate.now());
         Assert.assertEquals("testHabit",habit.getTitle());
         habit.setTitle("k");
         Assert.assertEquals("k",habit.getTitle());
     }
 
 
+    @Test
+    public void testIsCheckedToday() {
+        //When a habit is unchecked, and the someone pushes the checked-button, the methos tests if it is checked today
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "test only", "blue", LocalDate.now());
+        habit.onClickHabit();
+        boolean testValue = habit.isCheckedToday();
+        Assert.assertEquals(true, testValue);
+
+        //A checked habit gets unchecked, the method checks if the stack is empty
+        habit.onClickHabit();
+        Assert.assertEquals(false,habit.isCheckedToday());
+
+        //missmatch dates returns false
+        DoneHabit dh = new DoneHabit();
+        dh.setDate(LocalDate.now().minusDays(1));
+        habit.getDoneHabits().push(dh);
+        Assert.assertEquals(false, habit.isCheckedToday());
+
+    }
+/*
+    @Test
+    public void testIsCheckedYesterday(){
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "test only", "blue", LocalDate.now());
+        boolean testValue = habit.isCheckedYesterday();
+        Assert.assertEquals(false, testValue);
+
+
+        DoneHabit dh = new DoneHabit();
+        DoneHabit dh2 = new DoneHabit();
+        dh.setDate(LocalDate.now().minusDays(1));
+        dh2.setDate(LocalDate.now());
+        habit.getDoneHabits().push(dh);
+        habit.getDoneHabits().push(dh2);
+        System.out.println(habit.getDoneHabits().peek().getDate());
+        System.out.println(habit.getDoneHabits().get(0).getDate());
+        Assert.assertEquals(true, habit.isCheckedYesterday());
+
+
+        DoneHabit dh2 = new DoneHabit();
+        dh2.setDate(LocalDate.now().minusDays(2));
+        habit.getDoneHabits().push(dh2);
+        Assert.assertEquals(false, habit.isCheckedYesterday());
+    }*/
+
+
+/*
     @Test
     public void testCreateHabit(){
         Habit habit = new Habit(2,"test",true, LocalDate.now(),2,6,"testd","green");
@@ -88,13 +135,6 @@ public class TestHabit {
     }
 
 
-    @Test
-    public void testToggle(){
-        Habit habit = new Habit(2,"test",true, LocalDate.now(),2,6,"testd","green");
-        habit.checkToggle();
-        boolean testHabit = habit.getCheckedToday();
-        Assert.assertEquals(testHabit,false);
-    }
 
 
     @Test
@@ -117,21 +157,21 @@ public class TestHabit {
 
     @Test
     public void testBestStreak(){
-        Habit habit = new Habit(2,"test",true, LocalDate.now(),2,6,"testd","green");
+        Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue",LocalDate.now());
         habit.bestStreak();
         Assert.assertEquals(6,habit.getBestStreak());
         habit.setBestStreak(10);
         Assert.assertEquals(10,habit.getBestStreak());
-        habit.setCurrentStreak(11);
-        habit.bestStreak();
-        Assert.assertEquals(11,habit.getBestStreak());
-    }
+      //  habit.setCurrentStreak(11);
+        //habit.bestStreak();
+       // Assert.assertEquals(11,habit.getBestStreak());
+    }*/
 
 
 
     @Test
     public void testDescription(){
-        Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue");
+        Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue",LocalDate.now());
         Assert.assertEquals("test only",habit.getDescription());
         habit.setDescription("this test will work");
         Assert.assertEquals("this test will work",habit.getDescription());
@@ -139,12 +179,12 @@ public class TestHabit {
 
     @Test
     public void testColor(){
-        Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue");
+        Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue",LocalDate.now());
         Assert.assertEquals("blue",habit.getColor());
         habit.setColor("pink");
         Assert.assertEquals("pink",habit.getColor());
     }
-    */
+
 
 
 }
