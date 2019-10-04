@@ -1,4 +1,4 @@
-package java;
+package test.java.model;
 
 import main.java.model.Aggregate;
 import main.java.model.Calender;

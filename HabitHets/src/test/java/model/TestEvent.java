@@ -1,8 +1,8 @@
-package java;
+package test.java.model;
 
 import main.java.model.EventHandler;
 import org.junit.Assert;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.time.LocalDateTime;
 
@@ -28,7 +28,7 @@ public class TestEvent {
         eventHandler.add();
         Assert.assertEquals(0, eventHandler.getEventList().get(0).getId());
         eventHandler.getEventList().get(0).getId();
-        Assert.assertEquals("java.TestEvent", eventHandler.getEventList().get(0).getTitle());
+        Assert.assertEquals("test.java.model.TestEvent", eventHandler.getEventList().get(0).getTitle());
         eventHandler.getEventList().get(0).setTitle("NewName");
         Assert.assertEquals("NewName", eventHandler.getEventList().get(0).getTitle());
         Assert.assertEquals(1, eventHandler.getEventList().size());

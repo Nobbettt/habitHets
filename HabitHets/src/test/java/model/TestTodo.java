@@ -1,4 +1,4 @@
-package java;
+package test.java.model;
 
 import main.java.model.TodoHandler;
 import org.junit.Assert;
