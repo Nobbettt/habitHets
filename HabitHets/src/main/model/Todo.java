@@ -1,4 +1,4 @@
-package main.model;
+package model;
 
 /**
  * This class

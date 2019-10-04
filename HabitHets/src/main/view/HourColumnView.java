@@ -1,4 +1,4 @@
-package main.view;
+package view;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;

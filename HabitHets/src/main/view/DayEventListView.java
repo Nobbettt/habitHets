@@ -1,7 +1,7 @@
-package main.view;
+package view;
 
 import javafx.scene.layout.VBox;
-import main.model.Day;
+import model.Day;
 
 public class DayEventListView extends VBox {
 

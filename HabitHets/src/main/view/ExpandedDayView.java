@@ -1,4 +1,4 @@
-package main.view;
+package view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import main.model.Day;
+import model.Day;
 
 import java.io.IOException;
 
@@ -29,7 +29,7 @@ public class ExpandedDayView extends StackPane {
         setupView();
     }
 
-    public void updateExpandedDayView(Day dayData) {
+    public void updateExpandedDayView(model.Day dayData) {
         String weekday = dayData.getDateString(); //week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
         dayEvents.updateDay(dayData);
@@ -48,7 +48,7 @@ public class ExpandedDayView extends StackPane {
         dayGrid.add(dayEvents, 1, 0);
     }
 
-    private void createDay(Day dayData) {
+    private void createDay(model.Day dayData) {
 
     }
 }

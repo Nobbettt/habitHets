@@ -1,4 +1,4 @@
-package main.view;
+package view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import main.model.Day;
+import model.Day;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

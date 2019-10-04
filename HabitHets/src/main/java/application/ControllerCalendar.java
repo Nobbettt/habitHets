@@ -1,4 +1,4 @@
-package main.java.application;
+package java.application;
 
 
 import javafx.fxml.FXML;
@@ -6,10 +6,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import main.model.Aggregate;
-import main.model.Day;
-import main.view.ExpandedDayView;
-import main.view.WeekView;
+import model.Aggregate;
+import model.Day;
+import view.ExpandedDayView;
+import view.WeekView;
 
 import java.net.URL;
 import java.time.LocalDateTime;
