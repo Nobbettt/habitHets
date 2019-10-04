@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Stack;
 
 public class TestHabit {
-
+/*
     @Test
     public void testAddHabit(){
         HabitHandler habitHandler = HabitHandler.getInstant();
@@ -31,15 +31,15 @@ public class TestHabit {
         Assert.assertEquals(0, habitHandler.getHabitList().get(0).getId());
     }
 
-/*
+
    @Test
    public void testTitle(){
-      Habit habit = new Habit();
-        Assert.assertEquals("test",habit.getTitle());
+      Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue");
+        Assert.assertEquals("testHabit",habit.getTitle());
         habit.setTitle("k");
         Assert.assertEquals("k",habit.getTitle());
     }
-/*
+
 
     @Test
     public void testCreateHabit(){
@@ -131,19 +131,20 @@ public class TestHabit {
 
     @Test
     public void testDescription(){
-        Habit habit = new Habit(2,"test",true, LocalDate.now(),2,6,"testd","green");
-        Assert.assertEquals("testd",habit.getDescription());
+        Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue");
+        Assert.assertEquals("test only",habit.getDescription());
         habit.setDescription("this test will work");
         Assert.assertEquals("this test will work",habit.getDescription());
     }
 
     @Test
     public void testColor(){
-        Habit habit = new Habit(2,"test",true, LocalDate.now(),2,6,"testd","green");
-        Assert.assertEquals("green",habit.getColor());
+        Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue");
+        Assert.assertEquals("blue",habit.getColor());
         habit.setColor("pink");
         Assert.assertEquals("pink",habit.getColor());
     }
-*/
+    */
+
 
 }
