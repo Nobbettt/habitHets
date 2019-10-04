@@ -16,7 +16,7 @@ public class Habit {
     private String color;
     private LocalDate dateRecord;
 
-    Stack<DoneHabit> doneHabits;
+    private Stack<DoneHabit> doneHabits;
     /**
      * This is the only constructor of the Habit class.
      * It contains all of the instance variables. This makes
@@ -75,6 +75,11 @@ public class Habit {
         this.color = color;
     }
 
+    public Stack<DoneHabit> getDoneHabits() {
+        return doneHabits;
+    }
+
+
     /**
      * This method is used as a getter of streak.
      * It counts the streak using the Stack doneHabits.
@@ -87,6 +92,7 @@ public class Habit {
      * fact that someone hasn't checked their habit YET today.
      * @return
      */
+
     public int getStreak() {
         int streak = 0;
         LocalDate date;
@@ -127,9 +133,10 @@ public class Habit {
             }
             doneHabits.pop();
             return;
+        } else {
+            doneHabits.push(new DoneHabit());
+            bestStreak();
         }
-        doneHabits.push(new DoneHabit());
-        bestStreak();
     }
 
 
@@ -138,10 +145,10 @@ public class Habit {
      * by looking at the Stack and comparing it to today's date.
      * @return
      */
-    public Boolean isCheckedToday() {
-        LocalDate lastCheck = doneHabits.peek().getDate();
-        if(doneHabits.size() > 0){
-            if(lastCheck == LocalDate.now()) {
+    public boolean isCheckedToday() {
+        if (doneHabits.size() > 0) {
+            LocalDate lastCheck = doneHabits.peek().getDate();
+            if (LocalDate.now().equals(lastCheck)) {
                 return true;
             }
         }
@@ -154,10 +161,10 @@ public class Habit {
      * by looking at the Stack and comparing it to yesterday's date.
      * @return
      */
-    public Boolean isCheckedYesterday() {
-        LocalDate lastCheck = doneHabits.get(doneHabits.size()-1).getDate();
-        if (doneHabits.size() > 0){
-            if(lastCheck == LocalDate.now().minusDays(-1)) {
+    public boolean isCheckedYesterday() {
+        if (doneHabits.size() > 0) {
+            LocalDate lastCheck = doneHabits.get(doneHabits.size()-1).getDate();
+            if(LocalDate.now().minusDays(-1).equals(lastCheck)) {
                 return true;
             }
         }

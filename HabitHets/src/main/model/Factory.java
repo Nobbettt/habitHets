@@ -31,8 +31,8 @@ public class Factory {
     }
 
 
-    public static Habit createHabit( String title, Stack doneHabits, int bestStreak, String description, String color){
-        Habit createHabit = new Habit(id,title,doneHabits,bestStreak,description,color);
+    public static Habit createHabit( String title, Stack doneHabits, int bestStreak, String description, String color,LocalDate dateRecord){
+        Habit createHabit = new Habit(id,title,doneHabits,bestStreak,description,color, dateRecord);
         id++;
         return createHabit;
     }
