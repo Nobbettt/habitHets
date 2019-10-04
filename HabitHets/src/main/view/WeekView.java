@@ -53,6 +53,11 @@ public class WeekView extends StackPane implements ViewAble {
         }
     }
 
+    @Override
+    public void updateTimeLine() {
+
+    }
+
     private void setUpWeek() {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);

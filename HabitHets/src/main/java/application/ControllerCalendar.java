@@ -37,7 +37,7 @@ public class ControllerCalendar implements Initializable {
 
     // function is called every min to update timeline in GUI
     private void updateTimeline() {
-
+        currentView.updateTimeLine();
     }
 
     @Override
@@ -52,15 +52,6 @@ public class ControllerCalendar implements Initializable {
         //temporary
         Aggregate aggregate = new Aggregate();
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
-        /*
-        week.add(d);
-        week.add(d);
-        week.add(d);
-        week.add(d);
-        week.add(d);
-        week.add(d);
-        week.add(d);
-        */
 
         renderWeek(week);
     }
@@ -89,14 +80,6 @@ public class ControllerCalendar implements Initializable {
         //temporary
         Aggregate aggregate = new Aggregate();
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
-        /*week.add(d);
-        week.add(d);
-        week.add(d);
-        week.add(d);
-        week.add(d);
-        week.add(d);
-        week.add(d);
-        */
 
         renderWeek(week);
         System.out.println("Week");

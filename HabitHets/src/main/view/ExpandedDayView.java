@@ -38,6 +38,10 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         dayEvents.updateDay(days.get(0));
     }
 
+    @Override
+    public void updateTimeLine() {
+
+    }
 
     private void setupDayView() {
         dayGrid.setGridLinesVisible(true);
