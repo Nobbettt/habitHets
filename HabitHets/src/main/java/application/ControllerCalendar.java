@@ -28,6 +28,7 @@ public class ControllerCalendar implements Initializable {
     private ExpandedDayView expandedDayView;
     private Timeline timeLineCaller;
     private ViewAble currentView;
+
     public ControllerCalendar() {
         weekView = new WeekView();
         expandedDayView = new ExpandedDayView();
