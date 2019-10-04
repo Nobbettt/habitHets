@@ -3,6 +3,7 @@ package main.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  *This class handles logic that has to do with more than one habit.
@@ -47,7 +48,7 @@ public class HabitHandler implements IHandler{
      */
     @Override
     public void add() {
-        habitList.add(Factory.createHabit("testHabit", true, LocalDate.now(),2,6,"test only","blue"));
+        habitList.add(Factory.createHabit("testHabit", new Stack(),6,"test only","blue"));
     }
 
     /**

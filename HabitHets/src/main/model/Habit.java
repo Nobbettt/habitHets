@@ -1,6 +1,7 @@
 package main.model;
 
 import java.time.LocalDate;
+import java.util.Stack;
 
 /**
  * The class Habit contains all of the variables a habit needs.
@@ -10,13 +11,12 @@ public class Habit {
 
     private int id;
     private String title;
-    private boolean checkedToday;
-    private LocalDate lastChecked = null;
-    private int currentStreak;
     private int bestStreak;
     private String description;
     private String color;
+    private LocalDate dateRecord;
 
+    Stack<DoneHabit> doneHabits;
     /**
      * This is the only constructor of the Habit class.
      * It contains all of the instance variables. This makes
@@ -29,23 +29,17 @@ public class Habit {
      * a streak.)
      * @param id
      * @param title
-     * @param checkedToday
-     * @param lastChecked
-     * @param currentStreak
      * @param bestStreak
      * @param description
      * @param color
      */
-    public Habit(int id, String title, boolean checkedToday, LocalDate lastChecked, int currentStreak, int bestStreak,String description, String color) {
+    public Habit(int id, String title, Stack doneHabits, int bestStreak,String description, String color) {
         this.id = id;
         this.title = title;
-        this.checkedToday = checkedToday;
-        this.lastChecked = lastChecked;
-        this.currentStreak = currentStreak;
         this.bestStreak = bestStreak;
         this.description = description;
         this.color = color;
-        createHabit();
+        this.doneHabits =  doneHabits;
     }
 
 
@@ -59,30 +53,6 @@ public class Habit {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public boolean getCheckedToday() {
-        return checkedToday;
-    }
-
-    public void setCheckedToday(boolean checkedToday) {
-        this.checkedToday = checkedToday;
-    }
-
-    public LocalDate getLastChecked() {
-        return lastChecked;
-    }
-
-    public void setLastChecked(LocalDate lastChecked) {
-        this.lastChecked = lastChecked;
-    }
-
-    public int getCurrentStreak() {
-        return currentStreak;
-    }
-
-    public void setCurrentStreak(int currentStreak) {
-        this.currentStreak = currentStreak;
     }
 
     public int getBestStreak() {
@@ -109,29 +79,26 @@ public class Habit {
         this.color = color;
     }
 
-
-    /**
-     * This method is called if one makes a new habit or
-     * if a habit is retrieved from the database. The first if-
-     * statement checks if the habit already exists or not
-     * by checking if it has been checked before. If not the
-     * constructor will set it.
-     */
-    public void createHabit() {
-        LocalDate date = LocalDate.now();
-        LocalDate yesterday = date.now().minusDays(1);
-        if (getLastChecked() != null) {
-            if(lastChecked.equals(yesterday) && currentStreak > 1) {
-                currentStreak++;
-                bestStreak();
-            }
-            else if(lastChecked.equals(yesterday)){
-                currentStreak = 1;
-            }
-            else if(lastChecked.isBefore(yesterday)) {
-                currentStreak = 0;
-            }
+    public int getStreak() {
+        int streak = 0;
+        LocalDate date;
+        if(isCheckedToday()) {
+            date = LocalDate.now();
+        } else if(isCheckedYesterday()) {
+            date = LocalDate.now().minusDays(1);
+        } else {
+            return 0;
         }
+
+        for(DoneHabit d : doneHabits){
+            if(d.getDate() == date) {
+                streak++;
+            } else {
+                return streak;
+            }
+            date = date.minusDays(1);
+        }
+        return streak;
     }
 
     /**
@@ -142,60 +109,44 @@ public class Habit {
      * update streaks and possibly best streak.
      */
     public void onClickHabit() {
-        if(checkedToday) {
-            checkToggle();
+        if(doneHabits.size() > 0) {
+            if(isCheckedToday())  {
+                doneHabits.pop();
+                if(getStreak() == bestStreak && dateRecord == LocalDate.now()) {
+                    bestStreak--;
+                }
+                return;
+            }
         }
-        else {
-            setCheckedToday(true);
-            streak();
-        }
+        doneHabits.push(new DoneHabit());
     }
 
-
-    /**
-     * This method is called to change getCheckedToday()
-     * from checked to unchecked or the other way around.
-     * This ables the user to regret a checked habit. If
-     * the habit changes to unchecked, the current streak
-     * also needs to decrease.
-     */
-    public void checkToggle(){
-        if(getCheckedToday() == checkedToday){
-            setCheckedToday(false);
-            currentStreak--;
+    public Boolean isCheckedToday() {
+        LocalDate lastCheck = doneHabits.peek().getDate();
+        if(lastCheck == LocalDate.now()) {
+            return true;
         }
-        else
-            setCheckedToday(true);
-
+        return false;
     }
 
-    /**
-     * This method is called to set a streak to each
-     * habit that is checked in the application.
-     * Since it already is checked when the habit gets here,
-     * it can either already have a streak which increases with
-     * one, or it lost its streak and is set to 1.
-     */
-    public void streak() {
-        LocalDate date = LocalDate.now();
-        LocalDate yesterday = date.now().minusDays(1);
-        if (lastChecked.equals(yesterday)) {
-            currentStreak++;
-            bestStreak();
+    public Boolean isCheckedYesterday() {
+        LocalDate lastCheck = doneHabits.get(doneHabits.size()-1).getDate();
+        if(lastCheck == LocalDate.now().minusDays(-1)) {
+            return true;
         }
-        else if(lastChecked.isBefore(yesterday)) {
-            currentStreak = 1;
-        }
+        return false;
     }
+
 
     /**
      * This method is called if the streak increases
      * and one want to check if it might be the new
      * best streak.
      */
-    public void bestStreak(){
-        if(currentStreak > bestStreak){
-            bestStreak = currentStreak;
+    public void bestStreak() {
+        if(getStreak() > bestStreak){
+            bestStreak = getStreak();
+            dateRecord = LocalDate.now();
         }
     }
 
