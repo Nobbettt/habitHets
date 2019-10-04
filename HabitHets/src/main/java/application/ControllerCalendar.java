@@ -12,6 +12,7 @@ import javafx.util.Duration;
 import main.model.Aggregate;
 import main.model.Day;
 import main.view.ExpandedDayView;
+import main.view.ViewAble;
 import main.view.WeekView;
 
 import java.net.URL;
@@ -26,10 +27,11 @@ public class ControllerCalendar implements Initializable {
     private WeekView weekView;
     private ExpandedDayView expandedDayView;
     private Timeline timeLineCaller;
+    private ViewAble currentView;
     public ControllerCalendar() {
         weekView = new WeekView();
         expandedDayView = new ExpandedDayView();
-
+        currentView = weekView;
 
     }
 
@@ -76,6 +78,7 @@ public class ControllerCalendar implements Initializable {
     private void renderDay(Day day) {
         List<Day> days = new ArrayList<>();
         days.add(day);
+        currentView = expandedDayView;
         expandedDayView.updateView(days);
         renderCalendar(expandedDayView);
     }
@@ -100,6 +103,7 @@ public class ControllerCalendar implements Initializable {
     }
 
     private void renderWeek(List<Day> week) {
+        currentView = weekView;
         weekView.updateView(week);
         renderCalendar(weekView);
     }
