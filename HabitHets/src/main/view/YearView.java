@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import main.model.Day;
+import main.model.CalendarAble;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,7 +31,7 @@ public class YearView extends StackPane implements ViewAble {
     }
 
     @Override
-    public void updateView(List<Day> days) {
+    public void updateView(List<? extends CalendarAble> months) {
 
     }
 

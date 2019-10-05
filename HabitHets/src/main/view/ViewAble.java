@@ -1,10 +1,10 @@
 package main.view;
 
-import main.model.Day;
+import main.model.CalendarAble;
 
 import java.util.List;
 
 public interface ViewAble {
-    public void updateView(List<Day> days);
+    public void updateView(List<? extends CalendarAble> days);
     public void updateTimeLine();
 }

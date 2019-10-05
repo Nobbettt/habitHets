@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import main.model.CalendarAble;
 import main.model.Day;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class WeekView extends StackPane implements ViewAble {
     }
 
     @Override
-    public void updateView(List<Day> week) {
+    public void updateView(List<? extends CalendarAble> week) {
         for(int i = 0; i < 7; i++) {
 
             Day tmpDay = new Day(LocalDateTime.now());

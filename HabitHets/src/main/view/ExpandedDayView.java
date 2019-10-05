@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import main.model.CalendarAble;
 import main.model.Day;
 
 import java.io.IOException;
@@ -32,10 +33,10 @@ public class ExpandedDayView extends StackPane implements ViewAble{
     }
 
     @Override
-    public void updateView(List<Day> days) {
+    public void updateView(List<? extends CalendarAble> days) {
         String weekday = days.get(0).getDateString(); //week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
-        dayEvents.updateDay(days.get(0));
+        dayEvents.updateDay((Day) days.get(0));
     }
 
     @Override

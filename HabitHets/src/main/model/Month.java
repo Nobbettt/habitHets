@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Month {
+public class Month implements CalendarAble {
     List<Day> days;
     int monthNb;
     public Month(int year, int monthNr) {
@@ -60,6 +60,11 @@ public class Month {
             }
         }
         System.out.println("THERE IS NO SUCH DAY");
+        return null;
+    }
+
+    @Override
+    public String getDateString() {
         return null;
     }
 }

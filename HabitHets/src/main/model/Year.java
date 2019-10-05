@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Year {
+public class Year implements CalendarAble {
     List<Month> months;
     public Year(int year) {
         this.months = getMonths(year);
@@ -50,6 +50,11 @@ public class Year {
             }
         }
         System.out.println("THERE IS NO SUCH MONTH");
+        return null;
+    }
+
+    @Override
+    public String getDateString() {
         return null;
     }
 }

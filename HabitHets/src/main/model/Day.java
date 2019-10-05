@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Day {
+public class Day implements CalendarAble {
     private LocalDateTime ldt;
 
     public Day(LocalDateTime ldt) {
