@@ -14,6 +14,7 @@ import main.model.Day;
 import main.view.ExpandedDayView;
 import main.view.ViewAble;
 import main.view.WeekView;
+import main.view.YearView;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -24,12 +25,14 @@ import java.util.ResourceBundle;
 public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
     private AnchorPane calendarPane;
+    private YearView yearView;
     private WeekView weekView;
     private ExpandedDayView expandedDayView;
     private Timeline timeLineCaller;
     private ViewAble currentView;
 
     public ControllerCalendar() {
+        yearView = new YearView();
         weekView = new WeekView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
@@ -101,7 +104,11 @@ public class ControllerCalendar implements Initializable {
     // Year stuff
     @FXML
     private void showCalendarYearClick() {
-        System.out.println("year");
+
+    }
+
+    private void renderYear(List<Day> days) {
+
     }
 
     private void setupCalender() {
