@@ -54,8 +54,10 @@ public class WeekView extends StackPane implements ViewAble {
     }
 
     @Override
-    public void updateTimeLine() {
-
+    public void updateTimeLine(int hour, int minute) {
+        for (DayEventListView dView : weekDayEvents) {
+            dView.updateTimeline(hour, minute);
+        }
     }
 
     private void setUpWeek() {

@@ -28,33 +28,40 @@ public class ControllerCalendar implements Initializable {
     private ExpandedDayView expandedDayView;
     private Timeline timeLineCaller;
     private ViewAble currentView;
+    private LocalDateTime timeNow;
 
     public ControllerCalendar() {
         weekView = new WeekView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
 
+
+        updateTimeline();
     }
 
     // function is called every min to update timeline in GUI
     private void updateTimeline() {
-        currentView.updateTimeLine();
+        timeNow = LocalDateTime.now();
+        currentView.updateTimeLine(timeNow.getHour(), timeNow.getMinute());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // timeLine setup stuff
-        timeLineCaller = new Timeline(new KeyFrame(Duration.seconds(5), event -> updateTimeline()));
+        timeLineCaller = new Timeline(new KeyFrame(Duration.seconds(60), event -> updateTimeline()));
         timeLineCaller.setCycleCount(Timeline.INDEFINITE);
         timeLineCaller.play();
 
         setupCalender();
-
         //temporary
         Aggregate aggregate = new Aggregate();
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
 
         renderWeek(week);
+
+        AnchorPane ap = new AnchorPane();
+        ap.setStyle("-fx-background-color: red");
+        calendarPane.getChildren().add(ap);
     }
 
     // Day stuff
