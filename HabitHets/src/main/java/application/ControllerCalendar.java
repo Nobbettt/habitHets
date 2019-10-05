@@ -27,7 +27,7 @@ public class ControllerCalendar implements Initializable {
     private WeekView weekView;
     private ExpandedDayView expandedDayView;
     private Timeline timeLineCaller;
-    private ViewAble currentView;
+    public ViewAble currentView;
     private LocalDateTime timeNow;
 
     public ControllerCalendar() {
@@ -40,7 +40,7 @@ public class ControllerCalendar implements Initializable {
     }
 
     // function is called every min to update timeline in GUI
-    private void updateTimeline() {
+    public void updateTimeline() {
         timeNow = LocalDateTime.now();
         currentView.updateTimeLine(timeNow.getHour(), timeNow.getMinute());
     }

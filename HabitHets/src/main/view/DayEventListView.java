@@ -14,7 +14,7 @@ public class DayEventListView extends StackPane {
     private Line tl;
     private List<HourView> hours;
     private double hHeight;
-    double timeHeight;
+    public double timeHeight;
 
     public DayEventListView() {
         hours = new ArrayList<>();
