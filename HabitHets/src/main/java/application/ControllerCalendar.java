@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import main.model.Aggregate;
 import main.model.Day;
+import main.model.Month;
 import main.view.ExpandedDayView;
 import main.view.ViewAble;
 import main.view.WeekView;
@@ -66,8 +67,6 @@ public class ControllerCalendar implements Initializable {
         //temporary
         Day d = new Day(LocalDateTime.now());
         renderDay(d);
-
-        System.out.println("Day");
     }
 
     private void renderDay(Day day) {
@@ -84,9 +83,7 @@ public class ControllerCalendar implements Initializable {
         //temporary
         Aggregate aggregate = new Aggregate();
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
-
         renderWeek(week);
-        System.out.println("Week");
     }
 
     private void renderWeek(List<Day> week) {
@@ -104,11 +101,21 @@ public class ControllerCalendar implements Initializable {
     // Year stuff
     @FXML
     private void showCalendarYearClick() {
+        // tmp things
+        List<Month> year = new ArrayList<>();
+        for(int i = 1; i <= 12; i++) {
+            year.add(new Month(2019, i));
+        }
 
+
+        renderYear(year);
+        System.out.println("Week");
     }
 
-    private void renderYear(List<Day> days) {
-
+    private void renderYear(List<Month> year) {
+        currentView = yearView;
+        yearView.updateView(year);
+        renderCalendar(yearView);
     }
 
     private void setupCalender() {
