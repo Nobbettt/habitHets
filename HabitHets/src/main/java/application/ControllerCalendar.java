@@ -12,6 +12,7 @@ import javafx.util.Duration;
 import main.model.Aggregate;
 import main.model.Day;
 import main.view.ExpandedDayView;
+import main.view.TodoView;
 import main.view.ViewAble;
 import main.view.WeekView;
 
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
     private AnchorPane calendarPane;
+    private AnchorPane todoPane;
     private WeekView weekView;
     private ExpandedDayView expandedDayView;
     private Timeline timeLineCaller;
@@ -33,6 +35,8 @@ public class ControllerCalendar implements Initializable {
         weekView = new WeekView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
+
+
 
     }
 
@@ -49,6 +53,11 @@ public class ControllerCalendar implements Initializable {
         timeLineCaller.play();
 
         setupCalender();
+        //setupTodo();
+
+       // todoPane.getChildren().add(new TodoView());
+
+
 
         //temporary
         Aggregate aggregate = new Aggregate();
@@ -108,6 +117,12 @@ public class ControllerCalendar implements Initializable {
         calendarPane = new AnchorPane();
         mainGrid.add(calendarPane, 1, 0);
     }
+/*
+    private void setupTodo() {
+        todoPane = new AnchorPane();
+        mainGrid.add(calendarPane, 2, 0);
+    }*/
+
 
     private void renderCalendar(Node node) {
         if(calendarPane.getChildren() != null) {
