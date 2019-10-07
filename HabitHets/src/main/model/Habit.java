@@ -12,7 +12,6 @@ public class Habit {
     private int id;
     private String title;
     private int bestStreak;
-    private String description;
     private String color;
     private LocalDate dateRecord;
 
@@ -28,12 +27,11 @@ public class Habit {
      * @param description
      * @param color
      */
-    public Habit(int id, String title, Stack doneHabits, int bestStreak,String description, String color, LocalDate dateRecord) {
+    public Habit(int id, String title, Stack doneHabits, int bestStreak, String color, LocalDate dateRecord) {
         this.id = id;
         this.title = title;
         this.doneHabits =  doneHabits;
         this.bestStreak = bestStreak;
-        this.description = description;
         this.color = color;
         this.dateRecord = dateRecord;
     }
@@ -57,14 +55,6 @@ public class Habit {
 
     public void setBestStreak(int bestStreak) {
         this.bestStreak = bestStreak;
-    }
-
-    public String getDescription(){
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getColor(){

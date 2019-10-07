@@ -35,7 +35,7 @@ public class TestHabit {
 
    @Test
    public void testTitle(){
-      Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue",LocalDate.now());
+      Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());
         Assert.assertEquals("testHabit",habit.getTitle());
         habit.setTitle("k");
         Assert.assertEquals("k",habit.getTitle());
@@ -45,7 +45,7 @@ public class TestHabit {
     @Test
     public void testIsCheckedToday() {
         //When a habit is unchecked, and the someone pushes the checked-button, the methos tests if it is checked today
-        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "test only", "blue", LocalDate.now());
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         habit.onClickHabit();
         boolean testValue = habit.isCheckedToday();
         Assert.assertEquals(true, testValue);
@@ -168,18 +168,9 @@ public class TestHabit {
     }*/
 
 
-
-    @Test
-    public void testDescription(){
-        Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue",LocalDate.now());
-        Assert.assertEquals("test only",habit.getDescription());
-        habit.setDescription("this test will work");
-        Assert.assertEquals("this test will work",habit.getDescription());
-    }
-
     @Test
     public void testColor(){
-        Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue",LocalDate.now());
+        Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());
         Assert.assertEquals("blue",habit.getColor());
         habit.setColor("pink");
         Assert.assertEquals("pink",habit.getColor());

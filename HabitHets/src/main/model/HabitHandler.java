@@ -48,7 +48,7 @@ public class HabitHandler implements IHandler{
      */
     @Override
     public void add() {
-        habitList.add(Factory.createHabit("testHabit", new Stack(),6,"test only","blue",LocalDate.now()));
+        habitList.add(Factory.createHabit("testHabit", new Stack(),6,"blue",LocalDate.now()));
     }
 
     /**
