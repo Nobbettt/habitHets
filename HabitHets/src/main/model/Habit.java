@@ -1,5 +1,6 @@
 package main.model;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Stack;
 
@@ -154,7 +155,8 @@ public class Habit {
     public boolean isCheckedYesterday() {
         if (doneHabits.size() > 0) {
             LocalDate lastCheck = doneHabits.get(doneHabits.size()-1).getDate();
-            if(LocalDate.now().minusDays(-1).equals(lastCheck)) {
+            System.out.println("sist:"+ lastCheck);
+            if(LocalDate.now().minusDays(1).equals(lastCheck)) {
                 return true;
             }
         }

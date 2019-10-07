@@ -62,30 +62,36 @@ public class TestHabit {
 
     }
 
-/*
+
     @Test
     public void testIsCheckedYesterday(){
         Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         boolean testValue = habit.isCheckedYesterday();
         Assert.assertEquals(false, testValue);
 
+
+        //test if checked yesterday
         DoneHabit dh = new DoneHabit();
-        DoneHabit dh2 = new DoneHabit();
         dh.setDate(LocalDate.now().minusDays(1));
-        dh2.setDate(LocalDate.now());
         habit.getDoneHabits().push(dh);
-        habit.getDoneHabits().push(dh2);
         System.out.println(habit.getDoneHabits().peek().getDate());
         System.out.println(habit.getDoneHabits().get(0).getDate());
         Assert.assertEquals(true, habit.isCheckedYesterday());
 
 
+        //test if checked today will return false in method
         DoneHabit dh2 = new DoneHabit();
         dh2.setDate(LocalDate.now().minusDays(2));
         habit.getDoneHabits().push(dh2);
         Assert.assertEquals(false, habit.isCheckedYesterday());
-    }
 
+
+        //test if checked 2 days ago will return false in method
+        DoneHabit dh3 = new DoneHabit();
+        dh3.setDate(LocalDate.now());
+        habit.getDoneHabits().push(dh3);
+        Assert.assertEquals(false, habit.isCheckedYesterday());
+    }
 
 /*
     @Test
@@ -133,9 +139,6 @@ public class TestHabit {
         habit.onClickHabit();
         Assert.assertEquals(1,habit.getCurrentStreak());
     }
-
-
-
 
     @Test
     public void testStreak(){
