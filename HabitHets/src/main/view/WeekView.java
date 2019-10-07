@@ -27,9 +27,11 @@ public class WeekView extends StackPane implements ViewAble {
     @FXML private Label weekDay6;
     @FXML private Label weekDay7;
     private List<Label> weekDays;
+    private List<Day> week;
     public List<DayEventListView> weekDayEvents;
 
-    public WeekView() {
+    public WeekView(List<Day> week) {
+        this.week = week;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/week.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -45,9 +47,9 @@ public class WeekView extends StackPane implements ViewAble {
     public void updateView(List<? extends CalendarAble> week) {
         for(int i = 0; i < 7; i++) {
 
-            Day tmpDay = new Day(LocalDateTime.now());
+            Day tmpDay = new Day(LocalDateTime.now().plusDays(i));
 
-            String weekday = week.get(i).getDateString(); //week.get(i)....getWeekdayfunction()
+            String weekday = this.week.get(i).getDateString(); //week.get(i)....getWeekdayfunction()
 
             weekDays.get(i).setText(weekday);
             weekDayEvents.get(i).updateDay(tmpDay);
@@ -73,7 +75,7 @@ public class WeekView extends StackPane implements ViewAble {
         weekDayEvents = new ArrayList<>();
         weekGrid.add(new HourColumnView(), 0, 0);
         for(int i = 1; i < 8; i++) {
-            DayEventListView dayEvents = new DayEventListView();
+            DayEventListView dayEvents = new DayEventListView(week.get(i-1));
             weekGrid.add(dayEvents, i, 0);
             weekDayEvents.add(dayEvents);
         }

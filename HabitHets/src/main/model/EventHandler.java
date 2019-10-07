@@ -26,9 +26,9 @@ public class EventHandler implements IHandler {
 
 
     @Override
-    public void add() {
-        LocalDateTime ldt = LocalDateTime.now();
-        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,07,12,00), LocalDateTime.of(2019,10,07,13,30),"TestEvent"));
+    public void add() { //todo
+        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,07,9,30), LocalDateTime.of(2019,10,7,13,30),"Hets i Dicken"));
+        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,11,45), LocalDateTime.of(2019,10,9,13,15), "Lunch"));
     }
 
     @Override

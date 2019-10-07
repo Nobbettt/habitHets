@@ -33,11 +33,14 @@ public class ControllerCalendar implements Initializable {
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
-    private EventHandler eventHandler = EventHandler.getInstant();
+    EventHandler eventHandler = EventHandler.getInstant();
 
     public ControllerCalendar() {
+        eventHandler.add();
+        timeNow = LocalDateTime.now();
+        Aggregate aggregate = new Aggregate();
         yearView = new YearView();
-        weekView = new WeekView();
+        weekView = new WeekView(aggregate.getWeekFromDate(timeNow));
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
 

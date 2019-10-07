@@ -20,10 +20,11 @@ public class DayEventListView extends StackPane {
     private List<HourView> hours;
     private double hHeight;
     public double timeHeight;
+    Day day;
     EventHandler eventHandler = EventHandler.getInstant();
 
-    public DayEventListView() {
-        eventHandler.add();
+    public DayEventListView(Day day) {
+        this.day = day;
         hours = new ArrayList<>();
         vBox = new VBox();
         vBox2 = new VBox();
@@ -35,12 +36,6 @@ public class DayEventListView extends StackPane {
         }
         this.getChildren().add(vBox);
         this.getChildren().add(vBox2);
-        AnchorPane a = new EventView(eventHandler.getEventList().get(0));
-        vBox2.getChildren().add(a);
-        a.toFront();
-        a.setOpacity(50);
-        a.setTranslateY((eventHandler.getEventList().get(0).getStartTime().getHour()*100) + eventHandler.getEventList().get(0).getStartTime().getMinute());
-        a.setMinSize(100, (calculateLenght(eventHandler.getEventList().get(0)))*100);
         setUpTimeLine();
     }
 
@@ -53,7 +48,17 @@ public class DayEventListView extends StackPane {
     }
 
     public void updateDay(Day day) {
-
+        System.out.println(day.getDateString());
+        vBox2.getChildren().clear();
+        for (Event event : day.getEventsOfDay()) {
+            if (this.day.getLdt().getDayOfYear() == day.getLdt().getDayOfYear()) {
+                AnchorPane a = new EventView(event);
+                vBox2.getChildren().add(a);
+                a.toFront();
+                a.setTranslateY((event.getStartTime().getHour() * 100 + (event.getStartTime().getHour()) * 3) + ((event.getStartTime().getMinute()) * (100 / 60)));
+                a.setMinSize(100, (calculateLenght(event)) * 100);
+            }
+        }
     }
 
     public void updateTimeline(int hour, int minute) {
