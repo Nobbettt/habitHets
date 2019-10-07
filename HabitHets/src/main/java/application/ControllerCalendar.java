@@ -6,11 +6,14 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import main.model.Aggregate;
 import main.model.Day;
+import main.model.Todo;
+import main.model.TodoHandler;
 import main.view.ExpandedDayView;
 import main.view.TodoView;
 import main.view.ViewAble;
@@ -30,11 +33,16 @@ public class ControllerCalendar implements Initializable {
     private ExpandedDayView expandedDayView;
     private Timeline timeLineCaller;
     private ViewAble currentView;
+    private TodoView todoView;
+    @FXML private Button addTodo;
+    private TodoHandler todoHandler;
 
     public ControllerCalendar() {
         weekView = new WeekView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
+
+        todoView = new TodoView();
 
 
 
@@ -53,9 +61,11 @@ public class ControllerCalendar implements Initializable {
         timeLineCaller.play();
 
         setupCalender();
-        //setupTodo();
+        setupTodo();
 
-       // todoPane.getChildren().add(new TodoView());
+
+        todoPane.getChildren().add(todoView);
+        //populateTodo();
 
 
 
@@ -117,12 +127,20 @@ public class ControllerCalendar implements Initializable {
         calendarPane = new AnchorPane();
         mainGrid.add(calendarPane, 1, 0);
     }
-/*
+
     private void setupTodo() {
         todoPane = new AnchorPane();
-        mainGrid.add(calendarPane, 2, 0);
-    }*/
+        mainGrid.add(todoPane, 2, 0);
+    }
 
+   /* private void renderTodo(Node node) {
+        if(todoPane.getChildren() != null) {
+            todoPane.getChildren().clear();
+        }
+        todoPane.getChildren().add(node);
+        fitItem(todoPane, node);
+    }
+*/
 
     private void renderCalendar(Node node) {
         if(calendarPane.getChildren() != null) {
@@ -138,4 +156,20 @@ public class ControllerCalendar implements Initializable {
         parent.setBottomAnchor(child, 0.0);
         parent.setLeftAnchor(child, 0.0);
     }
+
+   /* @FXML
+
+    private void addTodoOnClick(){
+        todoHandler.add();
+
+    }
+    private void addTodoList(){
+        for (Todo todos: todoHandler.getTodoList()){
+
+        }
+    }
+
+    private void populateTodo(){
+        todoView.updateTodoView(todoHandler.getTodoList());
+    }*/
 }

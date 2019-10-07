@@ -1,11 +1,23 @@
 package main.view;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import main.model.TodoHandler;
+import main.model.Todo;
 
 import java.io.IOException;
+import java.util.List;
 
-public class TodoView extends StackPane {
+public class TodoView extends AnchorPane {
+
+    @FXML private AnchorPane todoList;
+   // private VBox vBox;
+
+
 
     public TodoView(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/todo.fxml"));
@@ -18,7 +30,20 @@ public class TodoView extends StackPane {
                 IOException exception) {
             throw new RuntimeException(exception);
         }
+        //vBox = new VBox();
 
 
-}
+
+}/*
+
+        public void updateTodoView(List<Todo> todos ){
+            for (Todo todo: todos){
+                AnchorPane a = new AnchorPane();
+                a.getChildren().add(new Label("todo"));
+                vBox.getChildren().add(a);
+            }
+        }
+        */
+
+
 }
