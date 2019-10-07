@@ -27,7 +27,8 @@ public class EventHandler implements IHandler {
 
     @Override
     public void add() {
-        eventList.add(Factory.createBasicEvent(LocalDateTime.now().plusMinutes(5), LocalDateTime.now().plusMinutes(50),"TestEvent"));
+        LocalDateTime ldt = LocalDateTime.now();
+        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,07,12,00), LocalDateTime.of(2019,10,07,13,30),"TestEvent"));
     }
 
     @Override
