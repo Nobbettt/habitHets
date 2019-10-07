@@ -55,7 +55,7 @@ public class DayEventListView extends StackPane {
                 AnchorPane a = new EventView(event);
                 vBox2.getChildren().add(a);
                 a.toFront();
-                a.setTranslateY((event.getStartTime().getHour() * 100 + (event.getStartTime().getHour()) * 3) + ((event.getStartTime().getMinute()) * (100 / 60)));
+                a.setTranslateY((event.getStartTime().getHour()*100) + (event.getStartTime().getMinute())*(1.66)); //todo WTF
                 a.setMinSize(100, (calculateLenght(event)) * 100);
             }
         }
@@ -80,6 +80,7 @@ public class DayEventListView extends StackPane {
     private double calculateLenght(Event event){
         double startMinutes = (event.getStartTime().getHour()*60) + event.getStartTime().getMinute();
         double endMinutes = (event.getEndTime().getHour()*60) + event.getEndTime().getMinute();
+        System.out.println("Length:" + Double.toString(endMinutes-startMinutes));
         return ((endMinutes-startMinutes)/60);
     }
 }
