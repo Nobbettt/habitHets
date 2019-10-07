@@ -42,7 +42,21 @@ public class TestHabit {
 
 
     @Test
-    public void testOnClick(){
+    public void  testGetStreak(){
+        Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());
+        habit.getDoneHabits().add(new DoneHabit(LocalDate.now().minusDays(1)));
+        habit.getDoneHabits().add(new DoneHabit(LocalDate.now()));
+        Assert.assertEquals(2,habit.getStreak());
+
+        //testing if streak is broken
+        habit.getDoneHabits().add(new DoneHabit(LocalDate.now().minusDays(2)));
+        habit.getDoneHabits().add(new DoneHabit(LocalDate.now()));
+        Assert.assertEquals(1,habit.getStreak());
+    }
+
+
+    @Test
+    public void testOnClickHabit(){
         Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());
         habit.getDoneHabits().add(new DoneHabit(LocalDate.now().minusDays(1)));
         Assert.assertEquals(1,habit.getDoneHabits().size());
@@ -53,7 +67,6 @@ public class TestHabit {
         habit.onClickHabit();
         Assert.assertEquals(1,habit.getDoneHabits().size());
         Assert.assertEquals(false, habit.isCheckedToday());
-
     }
 
 
