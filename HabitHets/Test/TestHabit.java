@@ -61,13 +61,13 @@ public class TestHabit {
         Assert.assertEquals(false, habit.isCheckedToday());
 
     }
+
 /*
     @Test
     public void testIsCheckedYesterday(){
-        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "test only", "blue", LocalDate.now());
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         boolean testValue = habit.isCheckedYesterday();
         Assert.assertEquals(false, testValue);
-
 
         DoneHabit dh = new DoneHabit();
         DoneHabit dh2 = new DoneHabit();
@@ -84,7 +84,7 @@ public class TestHabit {
         dh2.setDate(LocalDate.now().minusDays(2));
         habit.getDoneHabits().push(dh2);
         Assert.assertEquals(false, habit.isCheckedYesterday());
-    }*/
+    }
 
 
 /*
@@ -153,19 +153,31 @@ public class TestHabit {
         Assert.assertEquals(1,habit.getCurrentStreak());
         Assert.assertEquals(habit.getBestStreak(),3);
     }
-
+*/
 
     @Test
     public void testBestStreak(){
-        Habit habit = new Habit(1,"testHabit", new Stack(),6,"test only","blue",LocalDate.now());
+        HabitHandler habitHandler = HabitHandler.getInstant();
+        Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());
         habit.bestStreak();
         Assert.assertEquals(6,habit.getBestStreak());
+
+        //testing setter
         habit.setBestStreak(10);
         Assert.assertEquals(10,habit.getBestStreak());
-      //  habit.setCurrentStreak(11);
-        //habit.bestStreak();
-       // Assert.assertEquals(11,habit.getBestStreak());
-    }*/
+
+
+        //checking a habit yet another day and test if best streak updates
+        Stack<DoneHabit> history = new Stack<>();
+        history.add(new DoneHabit(LocalDate.now().minusDays(3)));
+        history.add(new DoneHabit(LocalDate.now().minusDays(2)));
+        history.add(new DoneHabit(LocalDate.now().minusDays(1)));
+        System.out.println(history.get(history.size()-1).getDate());
+        Habit habit2 = new Habit(1,"testHabit", history,3,"blue",LocalDate.now());
+        habit2.getDoneHabits().add(new DoneHabit());
+        habit2.bestStreak();
+        Assert.assertEquals(4,habit2.getBestStreak());
+    }
 
 
     @Test

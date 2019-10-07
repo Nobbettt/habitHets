@@ -24,7 +24,6 @@ public class Habit {
      * @param id
      * @param title
      * @param bestStreak
-     * @param description
      * @param color
      */
     public Habit(int id, String title, Stack doneHabits, int bestStreak, String color, LocalDate dateRecord) {
@@ -94,8 +93,9 @@ public class Habit {
             return 0;
         }
 
-        for(DoneHabit d : doneHabits){
-            if(d.getDate() == date) {
+        for(int i = doneHabits.size()-1; i >= 0; i--){
+            System.out.println(doneHabits.get(i).getDate());
+            if(doneHabits.get(i).getDate().equals(date)) {
                 streak++;
             } else {
                 return streak;
@@ -168,6 +168,7 @@ public class Habit {
      * best streak.
      */
     public void bestStreak() {
+        System.out.println(getStreak());
         if(getStreak() > bestStreak){
             bestStreak = getStreak();
             dateRecord = LocalDate.now();
