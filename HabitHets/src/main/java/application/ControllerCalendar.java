@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import main.model.Aggregate;
 import main.model.Day;
+import main.model.EventHandler;
 import main.model.Month;
 import main.view.ExpandedDayView;
 import main.view.ViewAble;
@@ -32,6 +33,7 @@ public class ControllerCalendar implements Initializable {
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
+    private EventHandler eventHandler = EventHandler.getInstant();
 
     public ControllerCalendar() {
         yearView = new YearView();

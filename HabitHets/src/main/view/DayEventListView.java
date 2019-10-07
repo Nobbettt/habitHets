@@ -5,6 +5,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import main.model.Day;
+import main.model.EventHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,10 @@ public class DayEventListView extends StackPane {
     private List<HourView> hours;
     private double hHeight;
     public double timeHeight;
+    EventHandler eventHandler = EventHandler.getInstant();
 
     public DayEventListView() {
+        eventHandler.add();
         hours = new ArrayList<>();
         vBox = new VBox();
         for(int i = 0; i < 24; i++) {
@@ -25,6 +28,7 @@ public class DayEventListView extends StackPane {
             hours.add(hour);
         }
         this.getChildren().add(vBox);
+        vBox.getChildren().add(eventHandler.getEventList().get(0).getStartTime().getHour(), new EventView(eventHandler.getEventList().get(0)));
         setUpTimeLine();
     }
 
