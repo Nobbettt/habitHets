@@ -51,7 +51,7 @@ public class YearView extends AnchorPane implements ViewAble {
     }
 
     @Override
-    public void updateTimeLine() {
+    public void updateTimeLine(int hour, int minute) {
         // nothing to see here, just an dumb method required by the interface to be implemented
     }
 }
