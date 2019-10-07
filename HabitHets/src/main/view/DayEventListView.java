@@ -27,7 +27,7 @@ public class DayEventListView extends StackPane {
         hours = new ArrayList<>();
         vBox = new VBox();
         vBox2 = new VBox();
-        vBox2.setOpacity(10);
+        vBox2.setOpacity(0.8);
         for(int i = 0; i < 24; i++) {
             HourView hour = new HourView();
             vBox.getChildren().add(hour);
@@ -38,6 +38,7 @@ public class DayEventListView extends StackPane {
         AnchorPane a = new EventView(eventHandler.getEventList().get(0));
         vBox2.getChildren().add(a);
         a.toFront();
+        a.setOpacity(50);
         a.setTranslateY((eventHandler.getEventList().get(0).getStartTime().getHour()*100) + eventHandler.getEventList().get(0).getStartTime().getMinute());
         a.setMinSize(100, (calculateLenght(eventHandler.getEventList().get(0)))*100);
         setUpTimeLine();
