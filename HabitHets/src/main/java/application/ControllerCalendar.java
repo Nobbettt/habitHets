@@ -163,15 +163,9 @@ public class ControllerCalendar implements Initializable {
         todoHandler.add();
 
     }*/
-    private void addTodoList(){
-        for (Todo todos: todoHandler.getTodoList()){
 
-        }
-    }
 
     private void populateTodo(){
-
-        //a.add(new Todo("test", 1));
         todoHandler.add();
         todoHandler.add();
         todoHandler.getTodoList().get(1).setTitle("Hej");
