@@ -40,8 +40,10 @@ public class ExpandedDayView extends StackPane implements ViewAble{
     }
 
     @Override
-    public void updateTimeLine() {
+    public void updateTimeLine(int hour, int minute) {
 
+        System.out.println("gg");
+        dayEvents.updateTimeline(hour, minute);
     }
 
     private void setupDayView() {

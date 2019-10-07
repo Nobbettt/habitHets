@@ -27,7 +27,7 @@ public class WeekView extends StackPane implements ViewAble {
     @FXML private Label weekDay6;
     @FXML private Label weekDay7;
     private List<Label> weekDays;
-    private List<DayEventListView> weekDayEvents;
+    public List<DayEventListView> weekDayEvents;
 
     public WeekView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/week.fxml"));
@@ -55,8 +55,10 @@ public class WeekView extends StackPane implements ViewAble {
     }
 
     @Override
-    public void updateTimeLine() {
-
+    public void updateTimeLine(int hour, int minute) {
+        for (DayEventListView dView : weekDayEvents) {
+            dView.updateTimeline(hour, minute);
+        }
     }
 
     private void setUpWeek() {

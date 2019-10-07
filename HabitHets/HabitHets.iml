@@ -19,5 +19,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: Arquillian JUnit:Release" level="project" />
   </component>
 </module>

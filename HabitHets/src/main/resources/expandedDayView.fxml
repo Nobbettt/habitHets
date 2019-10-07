@@ -30,7 +30,7 @@
                      <content>
                         <GridPane fx:id="dayGrid" prefHeight="2400.0" prefWidth="146.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="45.0" prefWidth="45.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="45.0" prefWidth="45.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
