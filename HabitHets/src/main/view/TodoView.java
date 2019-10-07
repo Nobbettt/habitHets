@@ -2,6 +2,8 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -15,7 +17,8 @@ import java.util.List;
 public class TodoView extends AnchorPane {
 
     @FXML private AnchorPane todoList;
-   // private VBox vBox;
+
+    @FXML private VBox vboxtodo;
 
 
 
@@ -30,20 +33,22 @@ public class TodoView extends AnchorPane {
                 IOException exception) {
             throw new RuntimeException(exception);
         }
-        //vBox = new VBox();
 
 
 
-}/*
+
+}
 
         public void updateTodoView(List<Todo> todos ){
             for (Todo todo: todos){
+                CheckBox c = new CheckBox(todo.getTitle());
                 AnchorPane a = new AnchorPane();
-                a.getChildren().add(new Label("todo"));
-                vBox.getChildren().add(a);
+                a.getChildren().add(c);
+                a.setCursor(Cursor.CLOSED_HAND);
+                vboxtodo.getChildren().add(a);
             }
         }
-        */
+
 
 
 }

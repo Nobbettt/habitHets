@@ -35,7 +35,7 @@ public class ControllerCalendar implements Initializable {
     private ViewAble currentView;
     private TodoView todoView;
     @FXML private Button addTodo;
-    private TodoHandler todoHandler;
+    private TodoHandler todoHandler= TodoHandler.getInstant();
 
     public ControllerCalendar() {
         weekView = new WeekView();
@@ -65,7 +65,7 @@ public class ControllerCalendar implements Initializable {
 
 
         todoPane.getChildren().add(todoView);
-        //populateTodo();
+        populateTodo();
 
 
 
@@ -162,7 +162,7 @@ public class ControllerCalendar implements Initializable {
     private void addTodoOnClick(){
         todoHandler.add();
 
-    }
+    }*/
     private void addTodoList(){
         for (Todo todos: todoHandler.getTodoList()){
 
@@ -170,6 +170,11 @@ public class ControllerCalendar implements Initializable {
     }
 
     private void populateTodo(){
+
+        //a.add(new Todo("test", 1));
+        todoHandler.add();
+        todoHandler.add();
+        todoHandler.getTodoList().get(1).setTitle("Hej");
         todoView.updateTodoView(todoHandler.getTodoList());
-    }*/
+    }
 }
