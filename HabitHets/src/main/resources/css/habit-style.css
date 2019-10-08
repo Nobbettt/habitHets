@@ -1,0 +1,6 @@
+.habitLabel{
+    -fx-alignment: center;
+    -fx-font-size: 18;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}

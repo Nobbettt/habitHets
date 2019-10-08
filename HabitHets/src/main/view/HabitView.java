@@ -3,9 +3,11 @@ package main.view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import main.model.Habit;
+import main.model.HabitHandler;
 
 
 import java.io.IOException;
@@ -14,7 +16,11 @@ import java.util.List;
 
 public class HabitView extends AnchorPane {
 
+    private HabitHandler handler = HabitHandler.getInstant();
+
     @FXML private VBox vBox;
+    @FXML private ScrollPane scrollPane;
+
 
     public HabitView() {
 
@@ -27,7 +33,23 @@ public class HabitView extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }
+
+
+    @FXML
+    private void addHabitOnClick(){
+        handler.add();
+        List<Habit> newHabit = new ArrayList<>();
+        newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
+        updateHabitView(newHabit);
+
+    }
+
 
 
     List<CheckBox> checkboxes = new ArrayList<>();

@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="330.0" prefWidth="40.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="330.0" prefWidth="200.0" stylesheets="@css/habit-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label prefHeight="18.0" prefWidth="39.0" text="Habits" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <VBox fx:id="vBox" layoutY="30.0" prefHeight="299.0" prefWidth="100.0" />
+      <Label layoutY="10.0" prefHeight="50.0" prefWidth="53.0" styleClass="habitLabel" text="Habits" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button fx:id="addHabit" layoutX="50.0" layoutY="5.0" mnemonicParsing="false" onAction="#addHabitOnClick" prefHeight="18.0" prefWidth="42.0" text="+" AnchorPane.rightAnchor="10.0" />
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="116.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+         <content>
+            <VBox fx:id="vBox" prefHeight="299.0" prefWidth="100.0" />
+         </content>
+      </ScrollPane>
    </children>
 </fx:root>

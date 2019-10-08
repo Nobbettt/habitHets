@@ -66,11 +66,11 @@ public class ControllerCalendar implements Initializable {
         renderWeek(week);
 
         AnchorPane ap = new AnchorPane();
-        ap.setStyle("-fx-background-color: red");
         calendarPane.getChildren().add(ap);
 
         setupHabit();
         habitPane.getChildren().add(habitView);
+        fitItem(habitPane, habitView);
         populateHabit();
     }
 
