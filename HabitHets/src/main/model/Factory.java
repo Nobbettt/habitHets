@@ -2,6 +2,7 @@ package main.model;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.util.Stack;
 
 public class Factory {
     private static int id = 0;
@@ -30,10 +31,8 @@ public class Factory {
     }
 
 
-
-
-    public static Habit createHabit(String title, boolean checkedToday, LocalDate lastChecked, int currentStreak, int bestStreak, String description, String color){
-        Habit createHabit = new Habit(id,title,checkedToday,lastChecked,currentStreak,bestStreak,description,color);
+    public static Habit createHabit( String title, Stack doneHabits, int bestStreak, String color,LocalDate dateRecord){
+        Habit createHabit = new Habit(id,title,doneHabits,bestStreak,color, dateRecord);
         id++;
         return createHabit;
     }
