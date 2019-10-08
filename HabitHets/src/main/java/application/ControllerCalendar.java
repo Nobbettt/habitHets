@@ -157,18 +157,13 @@ public class ControllerCalendar implements Initializable {
         parent.setLeftAnchor(child, 0.0);
     }
 
-   /* @FXML
 
-    private void addTodoOnClick(){
-        todoHandler.add();
-
-    }*/
 
 
     private void populateTodo(){
-        todoHandler.add();
-        todoHandler.add();
-        todoHandler.getTodoList().get(1).setTitle("Hej");
+        //todoHandler.add();
+        //todoHandler.add();
+        //todoHandler.getTodoList().get(1).setTitle("Hej");
         todoView.updateTodoView(todoHandler.getTodoList());
     }
 }
