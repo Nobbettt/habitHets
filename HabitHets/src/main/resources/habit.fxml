@@ -2,10 +2,11 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.VBox?>
 
 <fx:root prefHeight="330.0" prefWidth="40.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label prefHeight="18.0" prefWidth="39.0" text="Habits" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <VBox fx:id="vBox" layoutY="30.0" prefHeight="299.0" prefWidth="100.0" />
    </children>
 </fx:root>

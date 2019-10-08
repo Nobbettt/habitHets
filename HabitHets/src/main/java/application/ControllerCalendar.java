@@ -9,33 +9,34 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-import main.model.Aggregate;
-import main.model.Day;
-import main.model.Month;
-import main.view.ExpandedDayView;
-import main.view.ViewAble;
-import main.view.WeekView;
-import main.view.YearView;
+import main.model.*;
+import main.view.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
     private AnchorPane calendarPane;
+    private AnchorPane habitPane;
     private YearView yearView;
     private WeekView weekView;
+    private HabitView habitView;
     private ExpandedDayView expandedDayView;
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
 
+    private HabitHandler handler = HabitHandler.getInstant();
+
     public ControllerCalendar() {
         yearView = new YearView();
         weekView = new WeekView();
+        habitView = new HabitView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
 
@@ -57,6 +58,7 @@ public class ControllerCalendar implements Initializable {
         timeLineCaller.play();
 
         setupCalender();
+
         //temporary
         Aggregate aggregate = new Aggregate();
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
@@ -66,6 +68,10 @@ public class ControllerCalendar implements Initializable {
         AnchorPane ap = new AnchorPane();
         ap.setStyle("-fx-background-color: red");
         calendarPane.getChildren().add(ap);
+
+        setupHabit();
+        habitPane.getChildren().add(habitView);
+        populateHabit();
     }
 
     // Day stuff
@@ -128,6 +134,17 @@ public class ControllerCalendar implements Initializable {
     private void setupCalender() {
         calendarPane = new AnchorPane();
         mainGrid.add(calendarPane, 1, 0);
+    }
+
+    private void setupHabit() {
+        habitPane = new AnchorPane();
+        mainGrid.add(habitPane,0,0);
+    }
+
+    private void populateHabit(){
+        handler.add();
+        handler.add();
+        habitView.updateHabitView(handler.getHabitList());
     }
 
     private void renderCalendar(Node node) {

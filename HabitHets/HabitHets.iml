@@ -20,5 +20,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Maven: Arquillian JUnit:Release" level="project" />
+    <orderEntry type="library" name="javafx11 new" level="application" />
   </component>
 </module>
