@@ -31,6 +31,6 @@ public class EventView extends AnchorPane {
             throw new RuntimeException(exception);
         }
         titleLabel.setText(event.getTitle());
-        timeLabel.setText("" + event.getStartTime().getHour() + ":" + event.getStartTime().getMinute() + " - " + event.getEndTime().getHour() + ":" + event.getEndTime().getMinute());
+        timeLabel.setText("" + event.getStartTime().getHour() + ":" + event.getStartTime().getMinute() + "-" + event.getEndTime().getHour() + ":" + event.getEndTime().getMinute());
     }
 }

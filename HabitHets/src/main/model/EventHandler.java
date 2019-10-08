@@ -27,10 +27,14 @@ public class EventHandler implements IHandler {
 
     @Override
     public void add() { //todo
+        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,12,30), LocalDateTime.of(2019,10,9,12,45), "Köpa kaffe"));
+        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,8,00), LocalDateTime.of(2019,10,9,9,00), "FRUKOST"));
         eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,07,9,30), LocalDateTime.of(2019,10,7,13,30),"Hets i Dicken"));
+        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,07,9,30), LocalDateTime.of(2019,10,7,13,30),"Hets i Dicken2"));
         eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,11,45), LocalDateTime.of(2019,10,9,13,15), "Lunch"));
+        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,11,45), LocalDateTime.of(2019,10,9,13,15), "Lunch2"));
+        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,12,35), LocalDateTime.of(2019,10,9,14,00), "Dricka kaffe"));
         eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,11,21,15), LocalDateTime.of(2019,10,11,23,59), "FEST FÖFAN"));
-     //   eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,12,30), LocalDateTime.of(2019,10,9,12,45), "Köpa kaffe"));
 
 
     }
