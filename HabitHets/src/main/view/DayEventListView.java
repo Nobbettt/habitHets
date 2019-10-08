@@ -21,14 +21,12 @@ public class DayEventListView extends StackPane {
     private double hHeight;
     public double timeHeight;
     Day day;
-    EventHandler eventHandler = EventHandler.getInstant();
 
     public DayEventListView(Day day) {
         this.day = day;
         hours = new ArrayList<>();
         vBox = new VBox();
         vBox2 = new VBox();
-        vBox2.setOpacity(0.8);
         for(int i = 0; i < 24; i++) {
             HourView hour = new HourView();
             vBox.getChildren().add(hour);
@@ -48,21 +46,23 @@ public class DayEventListView extends StackPane {
     }
 
     public void updateDay(Day day) {
-        System.out.println(day.getDateString());
         vBox2.getChildren().clear();
         for (Event event : day.getEventsOfDay()) {
             if (this.day.getLdt().getDayOfYear() == day.getLdt().getDayOfYear()) {
                 AnchorPane a = new EventView(event);
                 vBox2.getChildren().add(a);
                 a.toFront();
-                a.setTranslateY((event.getStartTime().getHour()*100) + (event.getStartTime().getMinute())*(1.66)); //todo WTF
+                a.setTranslateY((event.getStartTime().getHour()*100) + (event.getStartTime().getMinute())*(1.6666666667)); //todo WTF
                 a.setMinSize(100, (calculateLenght(event)) * 100);
             }
         }
     }
 
     public void updateTimeline(int hour, int minute) {
-        double m =  60/minute;
+        double m = 0;
+        if (minute != 0){
+                m =  60/minute;
+        }
         if(hour < 12) {
             timeHeight = 12 - hour;
             timeHeight -= (1/m);

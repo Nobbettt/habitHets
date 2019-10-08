@@ -10,7 +10,6 @@ import main.model.CalendarAble;
 import main.model.Day;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,9 +44,10 @@ public class WeekView extends StackPane implements ViewAble {
 
     @Override
     public void updateView(List<? extends CalendarAble> week) {
+        List<Day> weekdays = getWeek();
         for(int i = 0; i < 7; i++) {
 
-            Day tmpDay = new Day(LocalDateTime.now().plusDays(i));
+            Day tmpDay = weekdays.get(i);
 
             String weekday = this.week.get(i).getDateString(); //week.get(i)....getWeekdayfunction()
 
@@ -79,5 +79,9 @@ public class WeekView extends StackPane implements ViewAble {
             weekGrid.add(dayEvents, i, 0);
             weekDayEvents.add(dayEvents);
         }
+    }
+
+    public List<Day> getWeek() {
+        return week;
     }
 }
