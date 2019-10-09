@@ -5,13 +5,24 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <fx:root maxWidth="200.0" minWidth="200.0" prefHeight="700.0" prefWidth="200.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="2.0" layoutY="6.0" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: #FFFFFF;" text="Todo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0" />
-      <Label layoutX="2.0" layoutY="226.0" prefHeight="18.0" prefWidth="50.0" text="Done Todo" AnchorPane.bottomAnchor="85.6" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="32.400000000000006" />
-      <Button fx:id="addTodo" layoutX="109.0" layoutY="7.0" mnemonicParsing="false" onAction="#addTodoOnClick" prefHeight="15.0" prefWidth="15.0" text="+" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0" />
-      <ScrollPane layoutY="245.0" prefHeight="85.0" prefWidth="50.0" AnchorPane.bottomAnchor="2.8421709430404007E-14" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.7999999999999972" />
-      <VBox fx:id="vboxtodo" layoutY="42.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Label layoutX="2.0" layoutY="6.0" prefHeight="58.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" text="Todo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font size="36.0" />
+         </font></Label>
+      <Label layoutX="2.0" layoutY="544.6" prefHeight="58.0" prefWidth="100.0" text="Done Todo" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="14.0">
+         <font>
+            <Font size="36.0" />
+         </font></Label>
+      <Button fx:id="addTodo" layoutX="109.0" layoutY="29.0" mnemonicParsing="false" onAction="#addTodoOnClick" prefHeight="15.0" prefWidth="15.0" text="+" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
+      <ScrollPane layoutX="2.0" layoutY="60.0" prefHeight="454.0" prefWidth="200.0">
+         <content>
+            <VBox fx:id="vboxtodo" prefHeight="446.0" prefWidth="195.0" />
+         </content>
+      </ScrollPane>
+      <VBox fx:id="vboxdonetodo" layoutX="2.0" layoutY="550.0" maxWidth="194.0" minWidth="100.0" prefHeight="150.0" prefWidth="194.0" />
    </children>
 </fx:root>

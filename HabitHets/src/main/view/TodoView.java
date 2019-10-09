@@ -20,6 +20,7 @@ public class TodoView extends AnchorPane {
     @FXML private AnchorPane todoList;
 
     @FXML private VBox vboxtodo;
+    @FXML private VBox vboxdonetodo;
     TodoHandler todoHandler = TodoHandler.getInstant();
 
 
@@ -38,9 +39,6 @@ public class TodoView extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-
-
-
 }
 
     @FXML
@@ -53,17 +51,42 @@ public class TodoView extends AnchorPane {
 
     }
 
-    int a =0;
+    List<CheckBox> checkBoxes = new ArrayList<>();
+
+
         public void updateTodoView(List<Todo> todos ){
                 for (Todo todo: todos){
+                    TodoElementView todoElement = new TodoElementView(todo);
+                    vboxtodo.getChildren().add(todoElement);
+
+
+                    /*
                         CheckBox c = new CheckBox(todo.getTitle());
+                        c.setId(todo.getId()+"");
+                        c.setStyle("-fx-font-size: 20");
                         AnchorPane a = new AnchorPane();
                         a.getChildren().add(c);
-                        a.setCursor(Cursor.CLOSED_HAND);
                         vboxtodo.getChildren().add(a);
+                        checkBoxes.add(c);
+                        doneTodoList(checkBoxes);*/
 
                     }
                 }
+
+         public void doneTodoList(List<CheckBox> checkBoxes){
+            for (CheckBox c : checkBoxes){
+                if (c.isSelected()){
+                    CheckBox cd = c;
+                    c.setStyle("-fx-font-size: 20");
+                    AnchorPane a = new AnchorPane();
+                    a.getChildren().add(cd);
+                    vboxdonetodo.getChildren().add(a);
+
+
+                }
+            }
+         }
+
 
 
 
