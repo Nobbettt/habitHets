@@ -56,12 +56,9 @@ public class HabitView extends AnchorPane {
 
     public void updateHabitView(List<Habit> habits) {
         for (Habit habit: habits){
-            CheckBox c  =new CheckBox(habit.getTitle());
-            c.setStyle("-fx-font-size: 20");
-            AnchorPane a = new AnchorPane();
-            a.getChildren().add(c);
-            vBox.getChildren().add(a);
-            checkboxes.add(c);
+            HabitObjectView habitObjectView = new HabitObjectView();
+            vBox.getChildren().add(habitObjectView);
+            habitObjectView.updateElementView(habit);
         }
     }
 
