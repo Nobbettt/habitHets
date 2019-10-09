@@ -1,7 +1,5 @@
 package main.view;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -30,7 +28,7 @@ public class DayEventListView extends StackPane {
         hours = new ArrayList<>();
         hBoxList = new ArrayList<>();
         vBox = new VBox();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             hBoxList.add(new HBox());
         }
         for(int i = 0; i < 24; i++) {
@@ -59,7 +57,7 @@ public class DayEventListView extends StackPane {
         }
         int i = 0;
         int overlap = 0;
-        for (Event event : day.getEventsOfDay()) {
+        for (Event event : EventHandler.getInstant().getEventsOfDay(day)) {
             if (this.day.getLdt().getDayOfYear() == day.getLdt().getDayOfYear()) {
                 i++;
                 AnchorPane a = new EventView(event);
@@ -114,13 +112,32 @@ public class DayEventListView extends StackPane {
 
     private double calculateWidth(Event event){
         double i = 0;
+        List<Event> overlaps = new ArrayList<>();
+        List<Event> overlaps2 = new ArrayList<>();
+        List<Event> events = EventHandler.getInstant().getEventsOfDay(getDay());
         Interval interval = new Interval(event.getStartTime(), true, event.getEndTime(), true);
-        for (Event tmpEvent : day.getEventsOfDay()){
+        for (Event tmpEvent : events){
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
-            if (interval.overlaps(tmpInterval)){
+            if (interval.overlaps(tmpInterval)) {
                 i++;
+                if (!overlaps.contains(tmpEvent) && !tmpEvent.equals(event)) {
+                    overlaps.add(tmpEvent);
+                }
             }
         }
+        for (Event event1 : overlaps) {
+            Interval interval1 = new Interval(event1.getStartTime(), true, event1.getEndTime(), true);
+            for (Event event2 : events) {
+                Interval interval2 = new Interval(event2.getStartTime(), true, event2.getEndTime(), true);
+                if (interval1.overlaps(interval2) && event2 != event1 && event2 != event) {
+                    i++;
+                    if (!overlaps2.contains(event2) && !event2.equals(event1)) {
+                        overlaps2.add(event2);
+                    }
+                }
+            }
+        }
+        events.add(event);
         return 150/i;
     }
 
@@ -136,12 +153,16 @@ public class DayEventListView extends StackPane {
     private double amountOfOverlaps(Event event){
         int i = 0;
         Interval interval = new Interval(event.getStartTime(), true, event.getEndTime(), true);
-        for (Event tmpEvent : day.getEventsOfDay()) {
+        for (Event tmpEvent : EventHandler.getInstant().getEventsOfDay(getDay())) {
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
             if (interval.overlaps(tmpInterval)) {
                 i++;
             }
         }
         return i;
+    }
+
+    private Day getDay() {
+        return day;
     }
 }

@@ -31,14 +31,4 @@ public class Day implements CalendarAble {
         return "" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "";
     }
 
-    public List<Event> getEventsOfDay(){
-        EventHandler eventHandler = EventHandler.getInstant();
-        List<Event> eventList = new ArrayList<>();
-        for (Event event : eventHandler.getEventList()){
-            if (event.getStartTime().getYear() == ldt.getYear() && event.getStartTime().getDayOfYear() == ldt.getDayOfYear()){
-                eventList.add(event);
-            }
-        }
-        return eventList;
-    }
 }
