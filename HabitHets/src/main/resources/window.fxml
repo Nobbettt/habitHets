@@ -60,12 +60,12 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="prevBtn" layoutX="83.0" layoutY="22.0" mnemonicParsing="false" text="&lt;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                              <Button fx:id="prevBtn" layoutX="83.0" layoutY="22.0" mnemonicParsing="false" onAction="#prevClick" text="&lt;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                            <children>
-                              <Button fx:id="nextBtn" layoutX="7.0" layoutY="22.0" mnemonicParsing="false" text="&gt;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                              <Button fx:id="nextBtn" layoutX="7.0" layoutY="22.0" mnemonicParsing="false" onAction="#nextClick" text="&gt;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0" />
                            </children>
                         </AnchorPane>
                      </children>

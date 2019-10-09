@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import main.model.Aggregate;
+import main.model.CalendarAble;
 import main.model.Day;
 import main.model.Month;
 import main.view.ExpandedDayView;
@@ -71,6 +72,30 @@ public class ControllerCalendar implements Initializable {
         AnchorPane ap = new AnchorPane();
         ap.setStyle("-fx-background-color: red");
         calendarPane.getChildren().add(ap);
+    }
+
+    @FXML
+    private void prevClick() {
+        System.out.println("prev");
+        List<? extends CalendarAble> dataList = getPrevData();
+        currentView.updateView(dataList);
+    }
+
+    @FXML
+    private void nextClick() {
+        System.out.println("next");
+        List<? extends CalendarAble> dataList = getNextData();
+        currentView.updateView(dataList);
+    }
+
+    private List<? extends CalendarAble> getPrevData() {
+        List l = new ArrayList();
+        return l;
+    }
+
+    private List<? extends CalendarAble> getNextData() {
+        List l = new ArrayList();
+        return l;
     }
 
     // Day stuff
