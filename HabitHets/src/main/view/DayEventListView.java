@@ -4,6 +4,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import main.model.Day;
 
 import java.util.ArrayList;
@@ -34,6 +35,11 @@ public class DayEventListView extends StackPane {
         tl.setStrokeWidth(2);
         this.getChildren().add(tl);
         hHeight = hours.get(0).getPrefHeight();
+
+        Rectangle r = new Rectangle(0, 0, 100, 20);
+        this.getChildren().add(r);
+        r.setStyle("-fx-background-color: red");
+        r.setTranslateY(-100);
     }
 
     public void updateDay(Day day) {
@@ -53,6 +59,7 @@ public class DayEventListView extends StackPane {
         System.out.println(timeHeight);
         timeHeight = timeHeight*hHeight;
         timeHeight -= (tl.getStrokeWidth() / 2);
+        timeHeight += (hour-12);
         tl.setTranslateY(timeHeight);
     }
 }

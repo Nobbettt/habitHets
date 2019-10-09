@@ -6,6 +6,8 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
@@ -25,6 +27,9 @@ import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
+    @FXML private Label currentValueLbl;
+    @FXML private Button prevBtn;
+    @FXML private Button nextBtn;
     private AnchorPane calendarPane;
     private YearView yearView;
     private WeekView weekView;

@@ -30,6 +30,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
             throw new RuntimeException(exception);
         }
         setupDayView();
+
     }
 
     @Override
