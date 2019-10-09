@@ -44,23 +44,23 @@ public class Event {
         return title;
     }
 
-    public String getLocation() {
+    private String getLocation() {
         return location;
     }
 
-    public String getDescription() {
+    private String getDescription() {
         return description;
     }
 
-    public String getColor() {
+    private String getColor() {
         return color;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    private void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    private void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
@@ -68,15 +68,15 @@ public class Event {
         this.title = title;
     }
 
-    public void setLocation(String location) {
+    private void setLocation(String location) {
         this.location = location;
     }
 
-    public void setDescription(String description) {
+    private void setDescription(String description) {
         this.description = description;
     }
 
-    public void setColor(String color) {
+    private void setColor(String color) {
         this.color = color;
     }
 }

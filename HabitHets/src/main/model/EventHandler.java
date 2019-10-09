@@ -6,11 +6,13 @@ import java.util.List;
 
 public class EventHandler implements IHandler {
 
-    public static EventHandler instant;
+    private static EventHandler instant;
     private static List<Event> eventList;
+    private int i; //todo
 
     private EventHandler() {
         this.eventList = new ArrayList<>();
+        i = 0;
     }
 
     public static EventHandler getInstant() {
@@ -27,11 +29,16 @@ public class EventHandler implements IHandler {
 
     @Override
     public void add() { //todo
-        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,12,30), LocalDateTime.of(2019,10,9,13,30), "hello3"));
-        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,11,00), LocalDateTime.of(2019,10,9,12,00), "hello"));
-        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,11,45), LocalDateTime.of(2019,10,9,12,45), "hello2"));
-        eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019,10,9,21,45), LocalDateTime.of(2019,10,9,22,45), "hello4"));
-
+        if (i == 0) {
+            eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 12, 30), LocalDateTime.of(2019, 10, 9, 13, 30), "hello3"));
+        } else if (i == 1) {
+            eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 11, 00), LocalDateTime.of(2019, 10, 9, 12, 00), "hello"));
+        } else if (i == 2) {
+            eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 11, 45), LocalDateTime.of(2019, 10, 9, 12, 45), "hello2"));
+        } else if (i == 3) {
+            eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 21, 45), LocalDateTime.of(2019, 10, 9, 22, 45), "hello4"));
+        }
+        i++;
     }
 
     @Override

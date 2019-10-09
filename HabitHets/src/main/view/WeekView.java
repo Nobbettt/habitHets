@@ -2,13 +2,17 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import main.model.CalendarAble;
 import main.model.Day;
+import main.model.EventHandler;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +29,7 @@ public class WeekView extends StackPane implements ViewAble {
     @FXML private Label weekDay5;
     @FXML private Label weekDay6;
     @FXML private Label weekDay7;
+    @FXML private Button addButton;
     private List<Label> weekDays;
     private List<Day> week;
     public List<DayEventListView> weekDayEvents;
@@ -79,6 +84,13 @@ public class WeekView extends StackPane implements ViewAble {
             weekGrid.add(dayEvents, i, 0);
             weekDayEvents.add(dayEvents);
         }
+        addButton.setShape(new Circle(40));
+    }
+
+    @FXML
+    private void addEventOnclick(){
+        EventHandler.getInstant().add();
+        updateView(week);
     }
 
     public List<Day> getWeek() {

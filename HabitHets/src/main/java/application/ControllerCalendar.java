@@ -36,7 +36,7 @@ public class ControllerCalendar implements Initializable {
     EventHandler eventHandler = EventHandler.getInstant();
 
     public ControllerCalendar() {
-        eventHandler.add();
+        //eventHandler.add();
         timeNow = LocalDateTime.now();
         Aggregate aggregate = new Aggregate();
         yearView = new YearView();
