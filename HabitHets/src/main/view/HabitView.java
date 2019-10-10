@@ -20,6 +20,7 @@ public class HabitView extends AnchorPane {
 
     @FXML private VBox vBox;
     @FXML private ScrollPane scrollPane;
+    private List<HabitObjectView> habitsList;
 
 
     public HabitView() {
@@ -38,6 +39,7 @@ public class HabitView extends AnchorPane {
         scrollPane.setFitToHeight(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        habitsList = new ArrayList<>();
     }
 
 
@@ -51,7 +53,6 @@ public class HabitView extends AnchorPane {
     }
 
 
-
     List<CheckBox> checkboxes = new ArrayList<>();
 
     public void updateHabitView(List<Habit> habits) {
@@ -59,6 +60,7 @@ public class HabitView extends AnchorPane {
             HabitObjectView habitObjectView = new HabitObjectView();
             vBox.getChildren().add(habitObjectView);
             habitObjectView.updateElementView(habit);
+            habitsList.add(habitObjectView);
         }
     }
 

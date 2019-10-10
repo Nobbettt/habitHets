@@ -2,9 +2,11 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import main.model.Habit;
@@ -21,9 +23,10 @@ public class HabitObjectView extends AnchorPane {
     private Habit habit;
 
     @FXML private Label streakLabel;
-    @FXML private CheckBox checkbox;
     @FXML private Label bestStreakLabel;
-    @FXML private Circle color;
+    @FXML private Button color;
+    @FXML private Label title;
+
 
     public HabitObjectView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/habitElement.fxml"));
@@ -41,26 +44,30 @@ public class HabitObjectView extends AnchorPane {
     @FXML
     private void checkHabit(){
         habit.onClickHabit();
-        if(habit.isCheckedToday()) {
-            checkbox.setSelected(true);
-        } else {
-            checkbox.setSelected(false);
-        }
+        setColor();
+
     }
 
 
 
     public void updateElementView(Habit habit) {
-        checkbox.setText(habit.getTitle());
+        this.habit = habit;
+        title.setText(habit.getTitle());
         Integer streak = habit.getStreak();
         Integer bestStreak = habit.getBestStreak();
         streakLabel.setText(streak.toString());
         bestStreakLabel.setText(bestStreak.toString());
-        checkbox.setSelected(habit.isCheckedToday());
-        this.habit = habit;
-        color.setStyle("-fx-stroke: " + habit.getColor()+"; -fx-fill: "+ habit.getColor());
 
+        setColor();
     }
 
+
+    private void setColor() {
+        if (habit.isCheckedToday()){
+            color.setStyle("-fx-background-color: " + habit.getColor() + "; -fx-border-color: "+habit.getColor());
+        }else{
+            color.setStyle("-fx-background-color: #fff; -fx-border-color: "+habit.getColor());
+        }
+    }
 
 }

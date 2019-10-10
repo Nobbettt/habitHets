@@ -5,21 +5,10 @@
     -fx-font-weight: bold;
 }
 
-.check-box .box {
-
-    -fx-border-color:grey;
-    -fx-border-radius:3px;
-
-}
-
-.check-box:selected .mark {
-
-    -fx-background-color: white;
-
-}
-
-.check-box:selected .box {
-
+.button-check {
+    -fx-border-width: 2px;
+    -fx-border-radius: 100px;
+    -fx-background-radius: 100px;
 }
 
 .container{

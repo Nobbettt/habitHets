@@ -122,7 +122,6 @@ public class ControllerCalendar implements Initializable {
 
 
         renderYear(year);
-        System.out.println("Week");
     }
 
     private void renderYear(List<Month> year) {
@@ -148,6 +147,7 @@ public class ControllerCalendar implements Initializable {
         handler.getHabitList().get(0).onClickHabit();
         handler.getHabitList().get(0).setColor("blue");
         handler.getHabitList().get(1).setTitle("nobbhelge");
+        handler.getHabitList().get(1).setColor("pink");
         habitView.updateHabitView(handler.getHabitList());
     }
 
