@@ -51,6 +51,7 @@ public class ControllerCalendar implements Initializable {
         updateTimeline();
         masterDateTime = LocalDateTime.now();
          aggregate = new Aggregate();
+
     }
 
     // function is called every min to update timeline in GUI
@@ -95,6 +96,7 @@ public class ControllerCalendar implements Initializable {
             calendarData = aggregate.getYearFromDate(masterDateTime);
         }
         currentView.updateView(calendarData);
+        updateHeadLbl();
     }
 
     @FXML
@@ -115,8 +117,25 @@ public class ControllerCalendar implements Initializable {
             calendarData = aggregate.getYearFromDate(masterDateTime);
         }
         currentView.updateView(calendarData);
+        updateHeadLbl();
     }
 
+    private void updateHeadLbl() {
+        String headLbl = "";
+        if(currentView == expandedDayView) {
+            headLbl = aggregate.getDayFromDate(masterDateTime).get(0).getString();
+        } else if(currentView == weekView) {
+            Integer weekNb = aggregate.getDayFromDate(masterDateTime).get(0).getWeekNr();
+            headLbl = weekNb.toString();
+            //} else if(currentView == monthView) {
+
+        } else if(currentView == yearView) {
+            Integer yearNb = masterDateTime.getYear();
+            headLbl = yearNb.toString();
+        }
+
+        currentValueLbl.setText(headLbl);
+    }
     // Day stuff
     @FXML
     private void showCalendarDayClick() {
@@ -184,6 +203,7 @@ public class ControllerCalendar implements Initializable {
         }
         calendarPane.getChildren().add(node);
         fitItem(calendarPane, node);
+        updateHeadLbl();
     }
 
     private void fitItem(AnchorPane parent, Node child) {

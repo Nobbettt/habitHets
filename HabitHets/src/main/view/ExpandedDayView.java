@@ -35,7 +35,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
 
     @Override
     public void updateView(List<? extends CalendarAble> days) {
-        String weekday = days.get(0).getDateString(); //week.get(i)....getWeekdayfunction()
+        String weekday = days.get(0).getString(); //week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
         dayEvents.updateDay((Day) days.get(0));
     }

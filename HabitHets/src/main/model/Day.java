@@ -25,7 +25,7 @@ public class Day implements CalendarAble {
         return javaCal.get(javaCal.WEEK_OF_YEAR);
     }
 
-    public String getDateString() {
+    public String getString() {
         return "" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "";
     }
 }

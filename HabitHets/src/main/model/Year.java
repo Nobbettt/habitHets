@@ -5,8 +5,10 @@ import java.util.List;
 
 public class Year implements CalendarAble {
     List<Month> months;
+    private Integer year;
     public Year(int year) {
         this.months = getMonths(year);
+        this.year = year;
     }
 
     private List<Month> getMonths(int year) {
@@ -53,8 +55,7 @@ public class Year implements CalendarAble {
         return null;
     }
 
-    @Override
-    public String getDateString() {
-        return null;
+    public String getString() {
+        return year.toString();
     }
 }
