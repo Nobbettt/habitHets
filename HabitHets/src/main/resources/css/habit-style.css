@@ -4,3 +4,35 @@
     -fx-text-fill: #333;
     -fx-font-weight: bold;
 }
+
+.check-box .box {
+
+    -fx-background-color: #47bcad;
+    -fx-border-color:grey;
+    -fx-border-radius:3px;
+
+}
+
+.check-box:selected .mark {
+
+    -fx-background-color: white;
+
+}
+
+.check-box:selected .box {
+
+}
+
+.container{
+    -fx-border-color: #666;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.numbers{
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+
+

@@ -20,7 +20,7 @@ public class HabitObjectView extends AnchorPane {
     private Habit habit;
 
     @FXML private Label streakLabel;
-    @FXML private CheckBox checkboxTitle;
+    @FXML private CheckBox checkbox;
     @FXML private Label bestStreakLabel;
 
     public HabitObjectView() {
@@ -40,21 +40,31 @@ public class HabitObjectView extends AnchorPane {
     private void checkHabit(){
         habit.onClickHabit();
         if(habit.isCheckedToday()) {
-            checkboxTitle.setSelected(true);
+            checkbox.setSelected(true);
         } else {
-            checkboxTitle.setSelected(false);
+            checkbox.setSelected(false);
         }
     }
 
 
+
+ /*  @FXML
+    private void colorHabit(){
+       checkbox.get;
+        habit.getColor();
+    }*/
+
+
+
     public void updateElementView(Habit habit) {
-        checkboxTitle.setText(habit.getTitle());
+        checkbox.setText(habit.getTitle());
         Integer streak = habit.getStreak();
         Integer bestStreak = habit.getBestStreak();
         streakLabel.setText(streak.toString());
         bestStreakLabel.setText(bestStreak.toString());
-        checkboxTitle.setSelected(habit.isCheckedToday());
+        checkbox.setSelected(habit.isCheckedToday());
         this.habit = habit;
+
     }
 
 
