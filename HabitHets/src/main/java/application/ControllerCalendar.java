@@ -38,6 +38,8 @@ public class ControllerCalendar implements Initializable {
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
+    private LocalDateTime masterDateTime;
+    private Aggregate aggregate;
 
     public ControllerCalendar() {
         yearView = new YearView();
@@ -47,6 +49,8 @@ public class ControllerCalendar implements Initializable {
 
 
         updateTimeline();
+        masterDateTime = LocalDateTime.now();
+         aggregate = new Aggregate();
     }
 
     // function is called every min to update timeline in GUI
@@ -76,26 +80,41 @@ public class ControllerCalendar implements Initializable {
 
     @FXML
     private void prevClick() {
-        System.out.println("prev");
-        List<? extends CalendarAble> dataList = getPrevData();
-        currentView.updateView(dataList);
+        List<? extends CalendarAble> calendarData = new ArrayList<>();
+        if(currentView == expandedDayView) {
+            masterDateTime = masterDateTime.minusDays(1);
+            calendarData = aggregate.getDayFromDate(masterDateTime);
+        } else if(currentView == weekView) {
+            masterDateTime = masterDateTime.minusWeeks(1);
+            calendarData = aggregate.getWeekFromDate(masterDateTime);
+            //} else if(currentView == monthView) {
+            // masterDateTime = masterDateTime.minusMonths(1);
+            // calendarData = aggregate. todo
+        } else if(currentView == yearView) {
+            masterDateTime = masterDateTime.minusYears(1);
+            calendarData = aggregate.getYearFromDate(masterDateTime);
+        }
+        currentView.updateView(calendarData);
     }
 
     @FXML
     private void nextClick() {
         System.out.println("next");
-        List<? extends CalendarAble> dataList = getNextData();
-        currentView.updateView(dataList);
-    }
-
-    private List<? extends CalendarAble> getPrevData() {
-        List l = new ArrayList();
-        return l;
-    }
-
-    private List<? extends CalendarAble> getNextData() {
-        List l = new ArrayList();
-        return l;
+        List<? extends CalendarAble> calendarData = new ArrayList<>();
+        if(currentView == expandedDayView) {
+            masterDateTime = masterDateTime.plusDays(1);
+            calendarData = aggregate.getDayFromDate(masterDateTime);
+        } else if(currentView == weekView) {
+            masterDateTime = masterDateTime.plusWeeks(1);
+            calendarData = aggregate.getWeekFromDate(masterDateTime);
+            //} else if(currentView == monthView) {
+            // masterDateTime = masterDateTime.minusMonths(1);
+            // calendarData = aggregate. todo
+        } else if(currentView == yearView) {
+            masterDateTime = masterDateTime.plusYears(1);
+            calendarData = aggregate.getYearFromDate(masterDateTime);
+        }
+        currentView.updateView(calendarData);
     }
 
     // Day stuff
@@ -118,7 +137,6 @@ public class ControllerCalendar implements Initializable {
     @FXML
     private void showCalendarWeekClick() {
         //temporary
-        Aggregate aggregate = new Aggregate();
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
         renderWeek(week);
     }

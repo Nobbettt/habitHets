@@ -48,6 +48,7 @@ public class YearView extends AnchorPane implements ViewAble {
         for(MonthView month : months) {
             // update months with method implemented in monthView
         }*/
+        System.out.println(months.get(0).getDateString());
     }
 
     @Override
