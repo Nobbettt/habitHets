@@ -20,12 +20,15 @@ import main.view.ExpandedDayView;
 import main.view.ViewAble;
 import main.view.WeekView;
 import main.view.YearView;
+import main.model.*;
+import main.view.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
@@ -33,8 +36,10 @@ public class ControllerCalendar implements Initializable {
     @FXML private Button prevBtn;
     @FXML private Button nextBtn;
     private AnchorPane calendarPane;
+    private AnchorPane habitPane;
     private YearView yearView;
     private WeekView weekView;
+    private HabitView habitView;
     private ExpandedDayView expandedDayView;
     private Timeline timeLineCaller;
     public ViewAble currentView;
@@ -43,11 +48,14 @@ public class ControllerCalendar implements Initializable {
     private LocalDateTime masterDateTime;
     private Aggregate aggregate;
 
+    private HabitHandler handler = HabitHandler.getInstant();
+
     public ControllerCalendar() {
         masterDateTime = LocalDateTime.now();
         aggregate = new Aggregate();
         yearView = new YearView();
         weekView = new WeekView();
+        habitView = new HabitView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
 
@@ -70,6 +78,7 @@ public class ControllerCalendar implements Initializable {
         timeLineCaller.play();
 
         setupCalender();
+
         //temporary
         Aggregate aggregate = new Aggregate();
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
@@ -77,8 +86,12 @@ public class ControllerCalendar implements Initializable {
         renderWeek(week);
 
         AnchorPane ap = new AnchorPane();
-        ap.setStyle("-fx-background-color: red");
         calendarPane.getChildren().add(ap);
+
+        setupHabit();
+        habitPane.getChildren().add(habitView);
+        fitItem(habitPane, habitView);
+        populateHabit();
     }
 
     @FXML
@@ -186,7 +199,6 @@ public class ControllerCalendar implements Initializable {
 
 
         renderYear(year);
-        System.out.println("Week");
     }
 
     private void renderYear(List<Month> year) {
@@ -198,6 +210,22 @@ public class ControllerCalendar implements Initializable {
     private void setupCalender() {
         calendarPane = new AnchorPane();
         mainGrid.add(calendarPane, 1, 0);
+    }
+
+    private void setupHabit() {
+        habitPane = new AnchorPane();
+        mainGrid.add(habitPane,0,0);
+    }
+
+    private void populateHabit(){
+        handler.add();
+        handler.add();
+        handler.getHabitList().get(0).setTitle("elintina");
+        handler.getHabitList().get(0).onClickHabit();
+        handler.getHabitList().get(0).setColor("blue");
+        handler.getHabitList().get(1).setTitle("nobbhelge");
+        handler.getHabitList().get(1).setColor("pink");
+        habitView.updateHabitView(handler.getHabitList());
     }
 
     private void renderCalendar(Node node) {
