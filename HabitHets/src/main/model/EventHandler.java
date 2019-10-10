@@ -6,11 +6,13 @@ import java.util.List;
 
 public class EventHandler implements IHandler {
 
-    public static EventHandler instant;
+    private static EventHandler instant;
     private static List<Event> eventList;
+    private int i; //todo
 
     private EventHandler() {
         this.eventList = new ArrayList<>();
+        i = 0;
     }
 
     public static EventHandler getInstant() {
@@ -26,8 +28,23 @@ public class EventHandler implements IHandler {
 
 
     @Override
-    public void add() {
-        eventList.add(Factory.createBasicEvent(LocalDateTime.now().plusMinutes(5), LocalDateTime.now().plusMinutes(50),"TestEvent"));
+    public void add() { //todo
+        if (i == 0) {
+            eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 12, 30), LocalDateTime.of(2019, 10, 9, 13, 30), "hello3"));
+        } else if (i == 1) {
+            eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 11, 00), LocalDateTime.of(2019, 10, 9, 12, 00), "hello"));
+        } else if (i == 2) {
+            eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 11, 45), LocalDateTime.of(2019, 10, 9, 12, 45), "hello2"));
+        } else if (i == 3) {
+            eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 21, 45), LocalDateTime.of(2019, 10, 9, 22, 45), "hello4"));
+        }else if (i == 4) {
+            eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 9, 10), LocalDateTime.of(2019, 10, 9, 10, 30), "hello4"));
+        }
+        i++;
+    }
+
+    public void addEvent(Day day, int startHour, int startMinute, int endHour, int endMinute, String title){
+        eventList.add(Factory.createBasicEvent(day.getLdt().withHour(startHour).withMinute(startMinute), day.getLdt().withHour(endHour).plusMinutes(endMinute), title));
     }
 
     @Override
@@ -42,6 +59,16 @@ public class EventHandler implements IHandler {
     }
 
     public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public List<Event> getEventsOfDay(Day day){
+        List<Event> eventList = new ArrayList<>();
+        for (Event event : getEventList()){
+            if (event.getStartTime().getYear() == day.getLdt().getYear() && event.getStartTime().getDayOfYear() == day.getLdt().getDayOfYear()){
+                eventList.add(event);
+            }
+        }
         return eventList;
     }
 }

@@ -1,8 +1,10 @@
 package main.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class Day implements CalendarAble {
     private LocalDateTime ldt;
@@ -28,4 +30,5 @@ public class Day implements CalendarAble {
     public String getString() {
         return "" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "";
     }
+
 }

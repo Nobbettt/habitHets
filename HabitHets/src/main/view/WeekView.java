@@ -2,15 +2,18 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import main.model.CalendarAble;
 import main.model.Day;
+import main.model.EventHandler;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,10 +29,13 @@ public class WeekView extends StackPane implements ViewAble {
     @FXML private Label weekDay5;
     @FXML private Label weekDay6;
     @FXML private Label weekDay7;
+    @FXML private Button addButton;
     private List<Label> weekDays;
+    private List<Day> week;
     public List<DayEventListView> weekDayEvents;
 
-    public WeekView() {
+    public WeekView(List<Day> week) {
+        this.week = week;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/week.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -43,9 +49,10 @@ public class WeekView extends StackPane implements ViewAble {
 
     @Override
     public void updateView(List<? extends CalendarAble> week) {
+        List<Day> weekdays = getWeek();
         for(int i = 0; i < 7; i++) {
 
-            Day tmpDay = new Day(LocalDateTime.now());
+            Day tmpDay = weekdays.get(i);
 
             String weekday = week.get(i).getString(); //week.get(i)....getWeekdayfunction()
 
@@ -73,9 +80,21 @@ public class WeekView extends StackPane implements ViewAble {
         weekDayEvents = new ArrayList<>();
         weekGrid.add(new HourColumnView(), 0, 0);
         for(int i = 1; i < 8; i++) {
-            DayEventListView dayEvents = new DayEventListView();
+            DayEventListView dayEvents = new DayEventListView(week.get(i-1));
             weekGrid.add(dayEvents, i, 0);
             weekDayEvents.add(dayEvents);
         }
+        addButton.setShape(new Circle());
+        addButton.toFront();
+    }
+
+    @FXML
+    private void addEventOnclick(){
+        EventHandler.getInstant().add();
+        updateView(week);
+    }
+
+    public List<Day> getWeek() {
+        return week;
     }
 }
