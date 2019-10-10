@@ -6,6 +6,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import main.model.Habit;
 import main.model.HabitHandler;
 
@@ -22,6 +23,7 @@ public class HabitObjectView extends AnchorPane {
     @FXML private Label streakLabel;
     @FXML private CheckBox checkbox;
     @FXML private Label bestStreakLabel;
+    @FXML private Circle color;
 
     public HabitObjectView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/habitElement.fxml"));
@@ -56,7 +58,7 @@ public class HabitObjectView extends AnchorPane {
         bestStreakLabel.setText(bestStreak.toString());
         checkbox.setSelected(habit.isCheckedToday());
         this.habit = habit;
-        checkbox.setStyle("-fx-background-color: " + habit.getColor());
+        color.setStyle("-fx-stroke: " + habit.getColor()+"; -fx-fill: "+ habit.getColor());
 
     }
 
