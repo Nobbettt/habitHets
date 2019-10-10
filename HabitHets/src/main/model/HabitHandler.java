@@ -64,7 +64,6 @@ public class HabitHandler implements IHandler{
                 return;
             }
         }
-        System.out.println("This habit do not exist");
 
     }
 }

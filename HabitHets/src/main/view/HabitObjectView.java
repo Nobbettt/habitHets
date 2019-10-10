@@ -3,19 +3,15 @@ package main.view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import main.model.Habit;
 import main.model.HabitHandler;
 
-import java.awt.*;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class HabitObjectView extends AnchorPane {
 
@@ -26,6 +22,7 @@ public class HabitObjectView extends AnchorPane {
     @FXML private Label bestStreakLabel;
     @FXML private Button color;
     @FXML private Label title;
+    @FXML private GridPane habitGrid;
 
 
     public HabitObjectView() {
@@ -69,5 +66,13 @@ public class HabitObjectView extends AnchorPane {
             color.setStyle("-fx-background-color: #fff; -fx-border-color: "+habit.getColor());
         }
     }
+
+
+    public void hideHabits(){
+        habitGrid.setVisible(false);
+        title.setVisible(false);
+
+    }
+
 
 }

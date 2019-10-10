@@ -49,7 +49,13 @@ public class HabitView extends AnchorPane {
         List<Habit> newHabit = new ArrayList<>();
         newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
         updateHabitView(newHabit);
+    }
 
+
+    private void hide(){
+        for(HabitObjectView h : habitsList){
+            h.hideHabits();
+        }
     }
 
 
@@ -61,6 +67,7 @@ public class HabitView extends AnchorPane {
             vBox.getChildren().add(habitObjectView);
             habitObjectView.updateElementView(habit);
             habitsList.add(habitObjectView);
+            hide();
         }
     }
 
