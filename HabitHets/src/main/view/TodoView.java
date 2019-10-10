@@ -1,16 +1,12 @@
 package main.view;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.model.TodoHandler;
 import main.model.Todo;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +18,6 @@ public class TodoView extends AnchorPane {
     @FXML private VBox vboxtodo;
     @FXML public VBox vboxdonetodo;
     TodoHandler todoHandler = TodoHandler.getInstant();
-
-
 
 
 
@@ -62,28 +56,19 @@ public class TodoView extends AnchorPane {
                 for (Todo todo : TodoHandler.getInstant().getDoneTodoList()){
                     TodoElementView todoElement = new TodoElementView(todo, this);
                     vboxdonetodo.getChildren().add(todoElement);
+                    todoElement.getCb().setSelected(true);
                 }
 
                 for (int i = 0; i < vboxtodo.getChildren().size(); i++){
                     TodoElementView td = (TodoElementView)vboxtodo.getChildren().get(0);
                     CheckBox c = td.getCb();
                     if (c.isSelected()){
-                        todoHandler.getDoneTodoList().add(td.todo);
-                        todoHandler.getTodoList().remove(td.todo);
+                        todoHandler.doneTodoRemove(td.todo.getId());
                         vboxtodo.getChildren().remove(td);
                         vboxdonetodo.getChildren().add(td);
                     }
                 }
                 }
-
-
-
-
-
-
-
-
-
 
 
 

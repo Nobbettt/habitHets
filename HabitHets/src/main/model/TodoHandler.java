@@ -1,5 +1,9 @@
 package main.model;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,6 +18,7 @@ public class TodoHandler implements IHandler {
     public static TodoHandler instant;
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
+
 
     /**
      * The constructor of TodoHandler sets the list of todos and doneTodos.
@@ -49,6 +54,7 @@ public class TodoHandler implements IHandler {
     @Override
     public void add() {
         todoList.add(Factory.createTodo("testTodo"));
+        notifyListener();
 
     }
 
@@ -87,6 +93,7 @@ public class TodoHandler implements IHandler {
                 doneTodoList.add(todo);
                 doneTodoList();
                 todoList.remove(todo);
+                notifyListener();
                 return;
             }
         } System.out.println("The ID " +id + " does not exist.");
@@ -112,11 +119,22 @@ public class TodoHandler implements IHandler {
             int limit = doneTodoList.size()-5;
             for (int a=0; a<limit ;a++){
                 doneTodoList.remove(0);
+                notifyListener();
             }
         }
     }
 
 
+    private List<Listener> listeners = new ArrayList<>();
 
 
+    public void addListener(Listener l){
+        listeners.add(l);
+
+    }
+
+    private void notifyListener(){
+        for (Listener l : listeners)
+            l.actOnUpdate();
+    }
 }

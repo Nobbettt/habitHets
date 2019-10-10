@@ -3,6 +3,8 @@ package main.java.application;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -10,10 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-import main.model.Aggregate;
-import main.model.Day;
-import main.model.Todo;
-import main.model.TodoHandler;
+import main.model.*;
 import main.view.ExpandedDayView;
 import main.view.TodoView;
 import main.view.ViewAble;
@@ -22,10 +21,11 @@ import main.view.WeekView;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ControllerCalendar implements Initializable {
+public class ControllerCalendar implements Initializable, Listener {
     @FXML private GridPane mainGrid;
     private AnchorPane calendarPane;
     private AnchorPane todoPane;
@@ -37,14 +37,13 @@ public class ControllerCalendar implements Initializable {
     @FXML private Button addTodo;
     private TodoHandler todoHandler= TodoHandler.getInstant();
 
+
     public ControllerCalendar() {
         weekView = new WeekView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
 
         todoView = new TodoView();
-
-
 
     }
 
@@ -62,6 +61,8 @@ public class ControllerCalendar implements Initializable {
 
         setupCalender();
         setupTodo();
+        todoHandler.addListener(this);
+
 
 
         todoPane.getChildren().add(todoView);
@@ -160,10 +161,22 @@ public class ControllerCalendar implements Initializable {
 
 
 
-    private void populateTodo(){
+    private void populateTodo(){ //KAn byta ut denna mot updateTodoview() sen när jag inte vill ha hårdkodat
         todoHandler.add();
         todoHandler.add();
         todoHandler.getTodoList().get(1).setTitle("Hej");
         todoView.updateTodoView(todoHandler.getTodoList());
+
+    }
+
+    private void updateTodoView(){
+        todoView.updateTodoView(todoHandler.getTodoList());
+
+    }
+
+
+    @Override
+    public void actOnUpdate() {
+        updateTodoView();
     }
 }

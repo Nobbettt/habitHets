@@ -13,19 +13,19 @@
          <font>
             <Font size="36.0" />
          </font></Label>
-      <Label layoutX="2.0" layoutY="544.6" prefHeight="58.0" prefWidth="100.0" text="Done Todo" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="14.0">
+      <Label layoutX="2.0" layoutY="470.6" prefHeight="58.0" prefWidth="100.0" text="Done Todo" AnchorPane.bottomAnchor="171.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font size="36.0" />
          </font></Label>
       <Button fx:id="addTodo" layoutX="109.0" layoutY="29.0" mnemonicParsing="false" onAction="#addTodoOnClick" prefHeight="15.0" prefWidth="15.0" text="+" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
-      <ScrollPane layoutX="2.0" layoutY="60.0" prefHeight="454.0" prefWidth="200.0">
+      <ScrollPane layoutX="2.0" layoutY="60.0" prefHeight="410.0" prefWidth="200.0">
          <content>
-            <VBox fx:id="vboxtodo" prefHeight="446.0" prefWidth="195.0" />
+            <VBox fx:id="vboxtodo" prefHeight="390.0" prefWidth="195.0" />
          </content>
       </ScrollPane>
-      <ScrollPane layoutX="8.0" layoutY="549.0" prefHeight="142.0" prefWidth="190.0">
+      <ScrollPane layoutX="8.0" layoutY="520.0" prefHeight="171.0" prefWidth="190.0">
          <content>
-            <VBox fx:id="vboxdonetodo" maxWidth="194.0" minWidth="100.0" prefHeight="140.0" prefWidth="190.0" />
+            <VBox fx:id="vboxdonetodo" maxWidth="194.0" minWidth="100.0" prefHeight="166.0" prefWidth="182.0" />
          </content>
       </ScrollPane>
    </children>
