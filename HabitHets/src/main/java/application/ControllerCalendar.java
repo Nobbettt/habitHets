@@ -44,6 +44,8 @@ public class ControllerCalendar implements Initializable {
     private Aggregate aggregate;
 
     public ControllerCalendar() {
+        masterDateTime = LocalDateTime.now();
+        aggregate = new Aggregate();
         yearView = new YearView();
         weekView = new WeekView();
         expandedDayView = new ExpandedDayView();
@@ -51,8 +53,6 @@ public class ControllerCalendar implements Initializable {
 
 
         updateTimeline();
-        masterDateTime = LocalDateTime.now();
-         aggregate = new Aggregate();
 
     }
 
@@ -111,6 +111,7 @@ public class ControllerCalendar implements Initializable {
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.plusWeeks(1);
             calendarData = aggregate.getWeekFromDate(masterDateTime);
+
             //} else if(currentView == monthView) {
             // masterDateTime = masterDateTime.minusMonths(1);
             // calendarData = aggregate. todo

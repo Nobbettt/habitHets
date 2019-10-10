@@ -9,11 +9,13 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
+import main.model.Aggregate;
 import main.model.CalendarAble;
 import main.model.Day;
 import main.model.EventHandler;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,9 +35,11 @@ public class WeekView extends StackPane implements ViewAble {
     private List<Label> weekDays;
     private List<Day> week;
     public List<DayEventListView> weekDayEvents;
+    Aggregate aggregate;
 
-    public WeekView(List<Day> week) {
-        this.week = week;
+    public WeekView() {
+        aggregate = new Aggregate();
+        week = aggregate.getWeekFromDate(LocalDateTime.now());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/week.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -49,6 +53,7 @@ public class WeekView extends StackPane implements ViewAble {
 
     @Override
     public void updateView(List<? extends CalendarAble> week) {
+        this.week = (List<Day>) week;
         List<Day> weekdays = getWeek();
         for(int i = 0; i < 7; i++) {
 

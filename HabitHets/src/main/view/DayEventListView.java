@@ -49,9 +49,8 @@ public class DayEventListView extends StackPane {
         tl.setStroke(Color.valueOf("#47bcad"));
         tl.setStrokeWidth(2);
         this.getChildren().add(tl);
-        hHeight = hours.get(0).getPrefHeight();
 
-        hHeight = hours.get(0).getPrefHeight() - 2;
+        hHeight = hours.get(0).getPrefHeight();
     }
 
     public void updateDay(Day day) {
@@ -64,7 +63,6 @@ public class DayEventListView extends StackPane {
             if (this.day.getLdt().getDayOfYear() == day.getLdt().getDayOfYear()) {
                 i++;
                 AnchorPane a = new EventView(event);
-                a.toFront();
                 a.setTranslateY((event.getStartTime().getHour() * 100) + (event.getStartTime().getMinute()) * (1.6666666667)); //todo WTF
                 a.setPrefHeight(calculateLenght(event) * 100);
                 a.setPrefWidth(calculateWidth(event));
