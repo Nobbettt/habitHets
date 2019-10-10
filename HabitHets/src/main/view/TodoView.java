@@ -20,7 +20,7 @@ public class TodoView extends AnchorPane {
     @FXML private AnchorPane todoList;
 
     @FXML private VBox vboxtodo;
-    @FXML private VBox vboxdonetodo;
+    @FXML public VBox vboxdonetodo;
     TodoHandler todoHandler = TodoHandler.getInstant();
 
 
@@ -42,50 +42,44 @@ public class TodoView extends AnchorPane {
 }
 
     @FXML
-
     private void addTodoOnClick(){
         todoHandler.add();
         List<Todo> newTodo = new ArrayList<>();
         newTodo.add(todoHandler.getTodoList().get(todoHandler.getTodoList().size()-1));
-        updateTodoView(newTodo);
-
+        updateTodoView(todoHandler.getTodoList());
     }
 
     List<CheckBox> checkBoxes = new ArrayList<>();
 
 
         public void updateTodoView(List<Todo> todos ){
+            vboxtodo.getChildren().clear();
+            vboxdonetodo.getChildren().clear();
                 for (Todo todo: todos){
-                    TodoElementView todoElement = new TodoElementView(todo);
+                    TodoElementView todoElement = new TodoElementView(todo, this);
                     vboxtodo.getChildren().add(todoElement);
+                    }
+                for (Todo todo : TodoHandler.getInstant().getDoneTodoList()){
+                    TodoElementView todoElement = new TodoElementView(todo, this);
+                    vboxdonetodo.getChildren().add(todoElement);
+                }
 
-
-                    /*
-                        CheckBox c = new CheckBox(todo.getTitle());
-                        c.setId(todo.getId()+"");
-                        c.setStyle("-fx-font-size: 20");
-                        AnchorPane a = new AnchorPane();
-                        a.getChildren().add(c);
-                        vboxtodo.getChildren().add(a);
-                        checkBoxes.add(c);
-                        doneTodoList(checkBoxes);*/
-
+                for (int i = 0; i < vboxtodo.getChildren().size(); i++){
+                    TodoElementView td = (TodoElementView)vboxtodo.getChildren().get(0);
+                    CheckBox c = td.getCb();
+                    if (c.isSelected()){
+                        todoHandler.getDoneTodoList().add(td.todo);
+                        todoHandler.getTodoList().remove(td.todo);
+                        vboxtodo.getChildren().remove(td);
+                        vboxdonetodo.getChildren().add(td);
                     }
                 }
-
-         public void doneTodoList(List<CheckBox> checkBoxes){
-            for (CheckBox c : checkBoxes){
-                if (c.isSelected()){
-                    CheckBox cd = c;
-                    c.setStyle("-fx-font-size: 20");
-                    AnchorPane a = new AnchorPane();
-                    a.getChildren().add(cd);
-                    vboxdonetodo.getChildren().add(a);
-
-
                 }
-            }
-         }
+
+
+
+
+
 
 
 

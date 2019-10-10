@@ -23,6 +23,10 @@
             <VBox fx:id="vboxtodo" prefHeight="446.0" prefWidth="195.0" />
          </content>
       </ScrollPane>
-      <VBox fx:id="vboxdonetodo" layoutX="2.0" layoutY="550.0" maxWidth="194.0" minWidth="100.0" prefHeight="150.0" prefWidth="194.0" />
+      <ScrollPane layoutX="8.0" layoutY="549.0" prefHeight="142.0" prefWidth="190.0">
+         <content>
+            <VBox fx:id="vboxdonetodo" maxWidth="194.0" minWidth="100.0" prefHeight="140.0" prefWidth="190.0" />
+         </content>
+      </ScrollPane>
    </children>
 </fx:root>
