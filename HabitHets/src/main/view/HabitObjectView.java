@@ -15,7 +15,6 @@ import java.io.IOException;
 
 public class HabitObjectView extends AnchorPane {
 
-    private HabitHandler handler = HabitHandler.getInstant();
     private Habit habit;
 
     @FXML private Label streakLabel;
