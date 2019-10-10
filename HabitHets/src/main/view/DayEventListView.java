@@ -28,16 +28,16 @@ public class DayEventListView extends StackPane {
         hours = new ArrayList<>();
         hBoxList = new ArrayList<>();
         vBox = new VBox();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 10; i++) {
             hBoxList.add(new HBox());
         }
-        for(int i = 0; i < 24; i++) {
+        for (int i = 0; i < 24; i++) {
             HourView hour = new HourView();
             vBox.getChildren().add(hour);
             hours.add(hour);
         }
         this.getChildren().add(vBox);
-        for (HBox hBox : hBoxList){
+        for (HBox hBox : hBoxList) {
             this.getChildren().add(hBox);
         }
         setUpTimeLine();
@@ -48,7 +48,7 @@ public class DayEventListView extends StackPane {
         tl.setStroke(Color.valueOf("#47bcad"));
         tl.setStrokeWidth(2);
         this.getChildren().add(tl);
-        hHeight = hours.get(0).getPrefHeight()-2;
+        hHeight = hours.get(0).getPrefHeight() - 2;
     }
 
     public void updateDay(Day day) {
@@ -62,24 +62,20 @@ public class DayEventListView extends StackPane {
                 i++;
                 AnchorPane a = new EventView(event);
                 a.toFront();
-                a.setTranslateY((event.getStartTime().getHour()*100) + (event.getStartTime().getMinute())*(1.6666666667)); //todo WTF
+                a.setTranslateY((event.getStartTime().getHour() * 100) + (event.getStartTime().getMinute()) * (1.6666666667)); //todo WTF
                 a.setPrefHeight(calculateLenght(event) * 100);
                 a.setPrefWidth(calculateWidth(event));
-                if (calculateTranslateX(event) != 0){
-                    if (overlap == 3){
-                        a.setTranslateX(calculateTranslateX(event) *3);
-                    }
-                    else if (overlap == 2){
-                        a.setTranslateX(calculateTranslateX(event) *2);
-                    }
-                    else if (overlap==1){
+                if (calculateTranslateX(event) != 0) {
+                    if (overlap == 3) {
+                        a.setTranslateX(calculateTranslateX(event) * 3);
+                    } else if (overlap == 2) {
+                        a.setTranslateX(calculateTranslateX(event) * 2);
+                    } else if (overlap == 1) {
                         a.setTranslateX(calculateTranslateX(event));
                     }
                     overlap++;
                 }
-                System.out.println(event.getTitle());
-                System.out.println(calculateWidth(event));
-                hBoxList.get(i-1).getChildren().add(a);
+                hBoxList.get(i - 1).getChildren().add(a);
 
             }
         }
@@ -87,36 +83,36 @@ public class DayEventListView extends StackPane {
 
     public void updateTimeline(int hour, int minute) {
         double m = 0;
-        if (minute != 0){
-                m =  60/minute;
+        if (minute != 0) {
+            m = 60 / minute;
         }
-        if(hour < 12) {
+        if (hour < 12) {
             timeHeight = 12 - hour;
-            timeHeight -= (1/m);
+            timeHeight -= (1 / m);
             timeHeight *= -1;
         } else {
             timeHeight = hour - 12;
-            timeHeight += 1/m;
+            timeHeight += 1 / m;
         }
         System.out.println(timeHeight);
-        timeHeight = timeHeight*hHeight;
+        timeHeight = timeHeight * hHeight;
         timeHeight -= (tl.getStrokeWidth() / 2);
         tl.setTranslateY(timeHeight);
     }
 
-    private double calculateLenght(Event event){
-        double startMinutes = (event.getStartTime().getHour()*60) + event.getStartTime().getMinute();
-        double endMinutes = (event.getEndTime().getHour()*60) + event.getEndTime().getMinute();
-        return ((endMinutes-startMinutes)/60);
+    private double calculateLenght(Event event) {
+        double startMinutes = (event.getStartTime().getHour() * 60) + event.getStartTime().getMinute();
+        double endMinutes = (event.getEndTime().getHour() * 60) + event.getEndTime().getMinute();
+        return ((endMinutes - startMinutes) / 60);
     }
 
-    private double calculateWidth(Event event){
+    private double calculateWidth(Event event) {
         double i = 0;
         List<Event> overlaps = new ArrayList<>();
         List<Event> overlaps2 = new ArrayList<>();
         List<Event> events = EventHandler.getInstant().getEventsOfDay(getDay());
         Interval interval = new Interval(event.getStartTime(), true, event.getEndTime(), true);
-        for (Event tmpEvent : events){
+        for (Event tmpEvent : events) {
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
             if (interval.overlaps(tmpInterval)) {
                 i++;
@@ -138,19 +134,19 @@ public class DayEventListView extends StackPane {
             }
         }
         events.add(event);
-        return 150/i;
+        return 150 / i;
     }
 
-    private double calculateTranslateX(Event event){
-       double x = calculateWidth(event);
-       if (x == 150){
-           return 0;
-       } else {
-           return x;
-       }
+    private double calculateTranslateX(Event event) {
+        double x = calculateWidth(event);
+        if (x == 150) {
+            return 0;
+        } else {
+            return x;
+        }
     }
 
-    private double amountOfOverlaps(Event event){
+    private double amountOfOverlaps(Event event) {
         int i = 0;
         Interval interval = new Interval(event.getStartTime(), true, event.getEndTime(), true);
         for (Event tmpEvent : EventHandler.getInstant().getEventsOfDay(getDay())) {

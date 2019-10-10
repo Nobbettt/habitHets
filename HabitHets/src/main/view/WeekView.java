@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
@@ -12,7 +13,6 @@ import main.model.CalendarAble;
 import main.model.Day;
 import main.model.EventHandler;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,7 +84,8 @@ public class WeekView extends StackPane implements ViewAble {
             weekGrid.add(dayEvents, i, 0);
             weekDayEvents.add(dayEvents);
         }
-        addButton.setShape(new Circle(40));
+        addButton.setShape(new Circle());
+        addButton.toFront();
     }
 
     @FXML

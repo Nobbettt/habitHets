@@ -37,8 +37,14 @@ public class EventHandler implements IHandler {
             eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 11, 45), LocalDateTime.of(2019, 10, 9, 12, 45), "hello2"));
         } else if (i == 3) {
             eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 21, 45), LocalDateTime.of(2019, 10, 9, 22, 45), "hello4"));
+        }else if (i == 4) {
+            eventList.add(Factory.createBasicEvent(LocalDateTime.of(2019, 10, 9, 9, 10), LocalDateTime.of(2019, 10, 9, 10, 30), "hello4"));
         }
         i++;
+    }
+
+    public void addEvent(Day day, int startHour, int startMinute, int endHour, int endMinute, String title){
+        eventList.add(Factory.createBasicEvent(day.getLdt().withHour(startHour).withMinute(startMinute), day.getLdt().withHour(endHour).plusMinutes(endMinute), title));
     }
 
     @Override

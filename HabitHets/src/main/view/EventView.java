@@ -12,10 +12,8 @@ public class EventView extends AnchorPane {
 
     @FXML
     private Label titleLabel;
-
     @FXML
     private Label timeLabel;
-
     Event event;
 
     public EventView(Event event) {
@@ -31,6 +29,22 @@ public class EventView extends AnchorPane {
             throw new RuntimeException(exception);
         }
         titleLabel.setText(event.getTitle());
-        timeLabel.setText("" + event.getStartTime().getHour() + ":" + event.getStartTime().getMinute() + "-" + event.getEndTime().getHour() + ":" + event.getEndTime().getMinute());
+        timeLabel.setText(eventTimeString());
+    }
+
+    private String eventTimeString() {
+        String hour;
+        String minute;
+        if (event.getStartTime().getHour() < 10) {
+            hour = "0" + event.getStartTime().getHour();
+        } else {
+            hour = Integer.toString(event.getStartTime().getHour());
+        }
+        if (event.getStartTime().getMinute() < 10) {
+            minute = "0" + event.getStartTime().getMinute();
+        } else {
+            minute = Integer.toString(event.getStartTime().getMinute());
+        }
+        return hour + ":" + minute;
     }
 }
