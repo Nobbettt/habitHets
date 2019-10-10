@@ -48,14 +48,6 @@ public class HabitObjectView extends AnchorPane {
 
 
 
- /*  @FXML
-    private void colorHabit(){
-       checkbox.get;
-        habit.getColor();
-    }*/
-
-
-
     public void updateElementView(Habit habit) {
         checkbox.setText(habit.getTitle());
         Integer streak = habit.getStreak();
@@ -64,6 +56,7 @@ public class HabitObjectView extends AnchorPane {
         bestStreakLabel.setText(bestStreak.toString());
         checkbox.setSelected(habit.isCheckedToday());
         this.habit = habit;
+        checkbox.setStyle("-fx-background-color: " + habit.getColor());
 
     }
 

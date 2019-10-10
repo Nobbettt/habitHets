@@ -7,7 +7,6 @@
 
 .check-box .box {
 
-    -fx-background-color: #47bcad;
     -fx-border-color:grey;
     -fx-border-radius:3px;
 
@@ -29,9 +28,21 @@
 }
 
 .numbers{
+    -fx-alignment: center_left;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.letters{
+    -fx-alignment: center_right;
+    -fx-font-weight: normal;
+    -fx-font-size: 12 px;
+}
+
+.title{
     -fx-alignment: center;
     -fx-font-weight: bold;
-    -fx-font-size: 16px;
+    -fx-font-size: 16;
 }
 
 
