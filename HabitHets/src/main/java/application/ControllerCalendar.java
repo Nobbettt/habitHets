@@ -6,19 +6,13 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import main.model.Aggregate;
-import main.model.CalendarAble;
 import main.model.Day;
 import main.model.Month;
-import main.view.ExpandedDayView;
-import main.view.ViewAble;
-import main.view.WeekView;
-import main.view.YearView;
+import main.view.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -28,19 +22,14 @@ import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable {
     @FXML private GridPane mainGrid;
-    @FXML private Label currentValueLbl;
-    @FXML private Button prevBtn;
-    @FXML private Button nextBtn;
     private AnchorPane calendarPane;
     private YearView yearView;
     private WeekView weekView;
     private ExpandedDayView expandedDayView;
+    private MonthView monthView;
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
-    private MonthView monthView;
-    private LocalDateTime masterDateTime;
-    private Aggregate aggregate;
 
     public ControllerCalendar() {
         yearView = new YearView();
@@ -51,9 +40,6 @@ public class ControllerCalendar implements Initializable {
 
 
         updateTimeline();
-        masterDateTime = LocalDateTime.now();
-         aggregate = new Aggregate();
-
     }
 
     // function is called every min to update timeline in GUI
@@ -81,63 +67,6 @@ public class ControllerCalendar implements Initializable {
         calendarPane.getChildren().add(ap);
     }
 
-    @FXML
-    private void prevClick() {
-        List<? extends CalendarAble> calendarData = new ArrayList<>();
-        if(currentView == expandedDayView) {
-            masterDateTime = masterDateTime.minusDays(1);
-            calendarData = aggregate.getDayFromDate(masterDateTime);
-        } else if(currentView == weekView) {
-            masterDateTime = masterDateTime.minusWeeks(1);
-            calendarData = aggregate.getWeekFromDate(masterDateTime);
-            //} else if(currentView == monthView) {
-            // masterDateTime = masterDateTime.minusMonths(1);
-            // calendarData = aggregate. todo
-        } else if(currentView == yearView) {
-            masterDateTime = masterDateTime.minusYears(1);
-            calendarData = aggregate.getYearFromDate(masterDateTime);
-        }
-        currentView.updateView(calendarData);
-        updateHeadLbl();
-    }
-
-    @FXML
-    private void nextClick() {
-        System.out.println("next");
-        List<? extends CalendarAble> calendarData = new ArrayList<>();
-        if(currentView == expandedDayView) {
-            masterDateTime = masterDateTime.plusDays(1);
-            calendarData = aggregate.getDayFromDate(masterDateTime);
-        } else if(currentView == weekView) {
-            masterDateTime = masterDateTime.plusWeeks(1);
-            calendarData = aggregate.getWeekFromDate(masterDateTime);
-            //} else if(currentView == monthView) {
-            // masterDateTime = masterDateTime.minusMonths(1);
-            // calendarData = aggregate. todo
-        } else if(currentView == yearView) {
-            masterDateTime = masterDateTime.plusYears(1);
-            calendarData = aggregate.getYearFromDate(masterDateTime);
-        }
-        currentView.updateView(calendarData);
-        updateHeadLbl();
-    }
-
-    private void updateHeadLbl() {
-        String headLbl = "";
-        if(currentView == expandedDayView) {
-            headLbl = aggregate.getDayFromDate(masterDateTime).get(0).getString();
-        } else if(currentView == weekView) {
-            Integer weekNb = aggregate.getDayFromDate(masterDateTime).get(0).getWeekNr();
-            headLbl = weekNb.toString();
-            //} else if(currentView == monthView) {
-
-        } else if(currentView == yearView) {
-            Integer yearNb = masterDateTime.getYear();
-            headLbl = yearNb.toString();
-        }
-
-        currentValueLbl.setText(headLbl);
-    }
     // Day stuff
     @FXML
     private void showCalendarDayClick() {

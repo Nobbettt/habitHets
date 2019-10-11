@@ -74,12 +74,42 @@ public class MonthView extends StackPane implements ViewAble {
 
     }
 
-    private void updateMonthView(List<Day> month){
-        for(int i = 0; i < 30; i++){
-            monthdays.get(i).setText(month.get(i).getDateString());
+    private void updateMonthView(List<Day> month) {
+        int mth = 4;
+        int yr = 2019;
+        Month m = new Month(yr, mth);
+        int i = 0;
+        int d = m.getFirstWeek() - 4;
+
+   /*     while (i < 5) {
+            weeknb.get(i).setText("" + d);
+            d++;
+            i++;
+        } */
+
+        int j = 0;
+        for (Label l : monthdays){
+            l.setText("" + month.get(j).getLdt().plusDays(j).getDayOfMonth() + "/" + month.get(j).getLdt().plusDays(j).getMonthValue());
+            if (j < month.size()-1)
+            j++;
         }
-        for(int i = 0; i < 5; i++){
-            weeknb.get(i).setText("week "+i+"");
+        /*while (j < 30) {
+                monthdays.get(j).setText(month.get(j).getString());
+
+                count++;
+                j++;
         }
+        */
     }
-}
+
+
+
+/*
+        for(int i = month.get(0).getLdt().getDayOfWeek().getValue(); i < 30; i++){
+            monthdays.get(i - 1).setText(month.get(i).getString());
+        }
+        weeknb.get(0).setText(month.get(0).getWeekNr()+"");
+*/
+
+    }
+
