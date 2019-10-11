@@ -6,12 +6,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import main.model.Day;
 import main.model.Event;
 import main.model.EventHandler;
 import main.model.Interval;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,14 +17,12 @@ public class DayEventListView extends StackPane {
     private VBox vBox;
     private List<HBox> hBoxList;
     private Line tl;
-    private List<HourView> hours;
     private double hHeight;
     public double timeHeight;
     Day day;
 
     public DayEventListView(Day day) {
         this.day = day;
-        hours = new ArrayList<>();
         hBoxList = new ArrayList<>();
         vBox = new VBox();
         for (int i = 0; i < 10; i++) {
@@ -35,7 +31,6 @@ public class DayEventListView extends StackPane {
         for (int i = 0; i < 24; i++) {
             HourView hour = new HourView();
             vBox.getChildren().add(hour);
-            hours.add(hour);
         }
         this.getChildren().add(vBox);
         for (HBox hBox : hBoxList) {
@@ -50,7 +45,7 @@ public class DayEventListView extends StackPane {
         tl.setStrokeWidth(2);
         this.getChildren().add(tl);
 
-        hHeight = hours.get(0).getPrefHeight();
+        hHeight = new HourView().getPrefHeight();
     }
 
     public void updateDay(Day day) {
@@ -60,7 +55,7 @@ public class DayEventListView extends StackPane {
         }
         int i = 0;
         int overlap = 0;
-        for (Event event : EventHandler.getInstant().getEventsOfDay(day)) {
+        for (Event event : EventHandler.getInstant().getEventsOfDay(day.getLdt())) {
             if (this.day.getLdt().getDayOfYear() == day.getLdt().getDayOfYear()) {
                 i++;
                 AnchorPane a = new EventView(event);
@@ -113,7 +108,7 @@ public class DayEventListView extends StackPane {
         double i = 0;
         List<Event> overlaps = new ArrayList<>();
         List<Event> overlaps2 = new ArrayList<>();
-        List<Event> events = EventHandler.getInstant().getEventsOfDay(getDay());
+        List<Event> events = EventHandler.getInstant().getEventsOfDay(getDay().getLdt());
         Interval interval = new Interval(event.getStartTime(), true, event.getEndTime(), true);
         for (Event tmpEvent : events) {
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
@@ -152,7 +147,7 @@ public class DayEventListView extends StackPane {
     private double amountOfOverlaps(Event event) {
         int i = 0;
         Interval interval = new Interval(event.getStartTime(), true, event.getEndTime(), true);
-        for (Event tmpEvent : EventHandler.getInstant().getEventsOfDay(getDay())) {
+        for (Event tmpEvent : EventHandler.getInstant().getEventsOfDay(getDay().getLdt())) {
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
             if (interval.overlaps(tmpInterval)) {
                 i++;
