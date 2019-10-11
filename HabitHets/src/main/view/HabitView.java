@@ -22,6 +22,8 @@ public class HabitView extends AnchorPane {
     @FXML private ScrollPane scrollPane;
     private List<HabitObjectView> habitsList;
 
+    private boolean isExpanded;
+
 
     public HabitView() {
 
@@ -40,8 +42,13 @@ public class HabitView extends AnchorPane {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         habitsList = new ArrayList<>();
+        isExpanded = false;
+        hide();
     }
 
+    public boolean getIsExpanded() {
+        return isExpanded;
+    }
 
     @FXML
     private void addHabitOnClick(){
@@ -52,14 +59,22 @@ public class HabitView extends AnchorPane {
     }
 
 
-    private void hide(){
+    public void hide(){
         for(HabitObjectView h : habitsList){
             h.hideHabits();
         }
+        isExpanded = false;
+    }
+
+    public void visiable(){
+        for(HabitObjectView h : habitsList){
+            h.showHabits();
+        }
+        isExpanded = true;
     }
 
 
-    List<CheckBox> checkboxes = new ArrayList<>();
+    //List<CheckBox> checkboxes = new ArrayList<>();
 
     public void updateHabitView(List<Habit> habits) {
         for (Habit habit: habits){

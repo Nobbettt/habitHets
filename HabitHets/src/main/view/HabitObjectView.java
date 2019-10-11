@@ -73,5 +73,10 @@ public class HabitObjectView extends AnchorPane {
 
     }
 
+    public void showHabits(){
+        habitGrid.setVisible(true);
+        title.setVisible(true);
+    }
+
 
 }
