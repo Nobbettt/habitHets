@@ -7,16 +7,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import main.model.Aggregate;
 import main.model.CalendarAble;
 import main.model.Day;
 import main.model.Month;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import java.util.List;
 
 public class MonthView extends StackPane implements ViewAble {
@@ -61,7 +58,6 @@ public class MonthView extends StackPane implements ViewAble {
                  monthGrid.add(a, j, i);
              }
          }
-
      }
 
     @Override
@@ -75,41 +71,18 @@ public class MonthView extends StackPane implements ViewAble {
     }
 
     private void updateMonthView(List<Day> month) {
-        int mth = 4;
-        int yr = 2019;
-        Month m = new Month(yr, mth);
-        int i = 0;
-        int d = m.getFirstWeek() - 4;
-
-   /*     while (i < 5) {
-            weeknb.get(i).setText("" + d);
-            d++;
-            i++;
-        } */
-
+        Aggregate aggregate = new Aggregate();
+        Month m = aggregate.getMonth(month.get(1).getLdt());
         int j = 0;
+        int w = m.getFirstWeek()-4;
         for (Label l : monthdays){
-            l.setText("" + month.get(j).getLdt().plusDays(j).getDayOfMonth() + "/" + month.get(j).getLdt().plusDays(j).getMonthValue());
+            l.setText("" + month.get(0).getLdt().plusDays(j).getDayOfMonth() + "/" + month.get(0).getLdt().plusDays(j).getMonthValue());
             if (j < month.size()-1)
             j++;
         }
-        /*while (j < 30) {
-                monthdays.get(j).setText(month.get(j).getString());
-
-                count++;
-                j++;
+        for(Label l : weeknb){
+            l.setText("" + w++);
         }
-        */
     }
-
-
-
-/*
-        for(int i = month.get(0).getLdt().getDayOfWeek().getValue(); i < 30; i++){
-            monthdays.get(i - 1).setText(month.get(i).getString());
-        }
-        weeknb.get(0).setText(month.get(0).getWeekNr()+"");
-*/
-
     }
 

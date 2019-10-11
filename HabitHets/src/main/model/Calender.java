@@ -72,7 +72,13 @@ public class Calender {
 
     public List<Month> getYearFromLDT(LocalDateTime ldt) {
         Year y = getYear(ldt.getYear());
-        return new ArrayList<>(y.getMonths());
+        List<Month> months = y.getMonths();
+        return months;
+    }
+
+    public Month getMonth(LocalDateTime localDateTime){
+        List<Month> months = getYearFromLDT(localDateTime);
+        return months.get(localDateTime.getMonthValue()-1);
     }
 
 }

@@ -30,6 +30,7 @@ public class ControllerCalendar implements Initializable {
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
+    private Aggregate aggregate;
 
     public ControllerCalendar() {
         yearView = new YearView();
@@ -37,7 +38,7 @@ public class ControllerCalendar implements Initializable {
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
         monthView = new MonthView();
-
+        aggregate = new Aggregate();
 
         updateTimeline();
     }
@@ -103,15 +104,16 @@ public class ControllerCalendar implements Initializable {
     @FXML
     private void showCalendarMonthClick() {
         List<Day> monthDays = new ArrayList<>();
-        for(int i = 1; i < 31; i++){
-            monthDays.add(new Day(LocalDateTime.of(1,1,i,1,1,1)));
+        Month m = aggregate.getMonth(LocalDateTime.now());
+        for (Day day : m.getDays()){
+            monthDays.add(day);
         }
         renderMonth(monthDays);
     }
 
     private void renderMonth(List<Day> month){
         currentView = monthView;
-        monthView.updateView(month); //TOdo
+        monthView.updateView(month);
         renderCalendar(monthView);
     }
 
