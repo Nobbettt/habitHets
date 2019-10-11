@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Stack;
 
 public class ControllerCalendar implements Initializable, Listener {
     @FXML private GridPane mainGrid;
@@ -164,10 +163,10 @@ public class ControllerCalendar implements Initializable, Listener {
     private void updateHeadLbl() {
         String headLbl = "";
         if(currentView == expandedDayView) {
-            headLbl = aggregate.getDayFromDate(masterDateTime).get(0).getString();
+            headLbl = aggregate.getDayFromDate(masterDateTime).get(0).getWeekDayString();
         } else if(currentView == weekView) {
             Integer weekNb = aggregate.getDayFromDate(masterDateTime).get(0).getWeekNr();
-            headLbl = weekNb.toString();
+            headLbl = "Week " + weekNb.toString();
             //} else if(currentView == monthView) {
 
         } else if(currentView == yearView) {

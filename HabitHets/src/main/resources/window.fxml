@@ -25,22 +25,22 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                      <children>
-                        <Button layoutX="31.0" layoutY="22.0" mnemonicParsing="false" onAction="#showCalendarYearClick" text="Year" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                        <Button layoutX="31.0" layoutY="22.0" mnemonicParsing="false" onAction="#showCalendarYearClick" styleClass="navbar-btn" text="Year" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                      <children>
-                        <Button layoutX="25.0" layoutY="19.0" mnemonicParsing="false" onAction="#showCalendarMonthClick" text="Month" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                        <Button layoutX="25.0" layoutY="19.0" mnemonicParsing="false" onAction="#showCalendarMonthClick" styleClass="navbar-btn" text="Month" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
-                        <Button layoutX="26.0" layoutY="20.0" mnemonicParsing="false" onAction="#showCalendarWeekClick" text="Week" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                        <Button layoutX="26.0" layoutY="20.0" mnemonicParsing="false" onAction="#showCalendarWeekClick" styleClass="navbar-btn" text="Week" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Button layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#showCalendarDayClick" text="Day" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                        <Button layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#showCalendarDayClick" styleClass="navbar-btn" text="Day" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
                      </children>
                   </AnchorPane>
                   <GridPane>
@@ -55,17 +55,17 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <children>
-                              <Label fx:id="currentValueLbl" alignment="CENTER" layoutX="78.0" layoutY="26.0" text="January" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Label fx:id="currentValueLbl" alignment="CENTER" layoutX="78.0" layoutY="26.0" styleClass="navbar-head-lbl" text="January" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="prevBtn" layoutX="83.0" layoutY="22.0" mnemonicParsing="false" onAction="#prevClick" text="&lt;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                              <Button fx:id="prevBtn" layoutX="83.0" layoutY="22.0" mnemonicParsing="false" onAction="#prevClick" styleClass="navbar-arrow-btn" text="&lt;" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                            <children>
-                              <Button fx:id="nextBtn" layoutX="7.0" layoutY="22.0" mnemonicParsing="false" onAction="#nextClick" text="&gt;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                              <Button fx:id="nextBtn" layoutX="7.0" layoutY="22.0" mnemonicParsing="false" onAction="#nextClick" styleClass="navbar-arrow-btn" text="&gt;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0" />
                            </children>
                         </AnchorPane>
                      </children>
