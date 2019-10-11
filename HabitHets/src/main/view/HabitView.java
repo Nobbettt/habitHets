@@ -67,7 +67,7 @@ public class HabitView extends AnchorPane {
             vBox.getChildren().add(habitObjectView);
             habitObjectView.updateElementView(habit);
             habitsList.add(habitObjectView);
-            hide();
+         //   hide();
         }
     }
 

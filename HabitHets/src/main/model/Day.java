@@ -1,10 +1,8 @@
 package main.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public class Day implements CalendarAble {
     private LocalDateTime ldt;
@@ -29,6 +27,37 @@ public class Day implements CalendarAble {
 
     public String getString() {
         return "" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "";
+    }
+
+    public String getWeekDayString() {
+        String string = "";
+        switch (ldt.getDayOfWeek().getValue()) {
+            case 1:
+                string = "Monday";
+                break;
+            case 2:
+                string = "Tuesday";
+                break;
+            case 3:
+                string = "Wednesday";
+                break;
+            case 4:
+                string = "Thursday";
+                break;
+            case 5:
+                string = "Friday";
+                break;
+            case 6:
+                string = "Saturday";
+                break;
+            case 7:
+                string = "Sunday";
+                break;
+            default:
+                string = "Bitch day";
+                break;
+        }
+        return string + " " + ldt.getDayOfMonth();
     }
 
 }
