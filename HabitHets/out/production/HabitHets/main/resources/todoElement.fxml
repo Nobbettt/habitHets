@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root prefHeight="40.0" prefWidth="98.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <CheckBox layoutX="8.0" layoutY="11.0" mnemonicParsing="false" onAction="#remove" text="CheckBox" />
+   </children>
+</fx:root>

@@ -3,11 +3,14 @@ package main.java.application;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
@@ -16,7 +19,9 @@ import main.model.CalendarAble;
 import main.model.Day;
 import main.model.EventHandler;
 import main.model.Month;
+import main.model.*;
 import main.view.ExpandedDayView;
+import main.view.TodoView;
 import main.view.ViewAble;
 import main.view.WeekView;
 import main.view.YearView;
@@ -26,11 +31,12 @@ import main.view.*;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Stack;
 
-public class ControllerCalendar implements Initializable {
+public class ControllerCalendar implements Initializable, Listener {
     @FXML private GridPane mainGrid;
     @FXML private Label currentValueLbl;
     @FXML private Button prevBtn;
@@ -38,6 +44,7 @@ public class ControllerCalendar implements Initializable {
     private AnchorPane calendarPane;
     private AnchorPane habitPane;
     private YearView yearView;
+    private AnchorPane todoPane;
     private WeekView weekView;
     private HabitView habitView;
     private ExpandedDayView expandedDayView;
@@ -49,6 +56,9 @@ public class ControllerCalendar implements Initializable {
     private Aggregate aggregate;
 
     private HabitHandler handler = HabitHandler.getInstant();
+    private TodoView todoView;
+    private TodoHandler todoHandler= TodoHandler.getInstant();
+
 
     public ControllerCalendar() {
         masterDateTime = LocalDateTime.now();
@@ -61,6 +71,8 @@ public class ControllerCalendar implements Initializable {
 
 
         updateTimeline();
+
+        todoView = new TodoView();
 
     }
 
@@ -78,6 +90,15 @@ public class ControllerCalendar implements Initializable {
         timeLineCaller.play();
 
         setupCalender();
+        setupTodo();
+        todoHandler.addListener(this);
+
+
+
+        todoPane.getChildren().add(todoView);
+        populateTodo();
+
+
 
         //temporary
         Aggregate aggregate = new Aggregate();
@@ -232,6 +253,13 @@ public class ControllerCalendar implements Initializable {
         habitView.updateHabitView(handler.getHabitList());
     }
 
+    private void setupTodo() {
+        todoPane = new AnchorPane();
+        mainGrid.add(todoPane, 2, 0);
+    }
+
+
+
     private void renderCalendar(Node node) {
         if(calendarPane.getChildren() != null) {
             calendarPane.getChildren().clear();
@@ -246,5 +274,25 @@ public class ControllerCalendar implements Initializable {
         parent.setRightAnchor(child, 0.0);
         parent.setBottomAnchor(child, 0.0);
         parent.setLeftAnchor(child, 0.0);
+    }
+
+
+
+
+    private void populateTodo(){ //KAn byta ut denna mot updateTodoview() sen när jag inte vill ha hårdkodat
+        todoHandler.add();
+        todoHandler.add();
+        todoHandler.getTodoList().get(1).setTitle("Hej");
+        todoView.updateTodoView(todoHandler.getTodoList());
+
+    }
+
+    private void updateTodoView(){
+        todoView.updateTodoView(todoHandler.getTodoList());
+    }
+
+    @Override
+    public void actOnUpdate() {
+        updateTodoView();
     }
 }
