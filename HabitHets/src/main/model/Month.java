@@ -1,5 +1,6 @@
 package main.model;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,10 +9,14 @@ import java.util.List;
 
 public class Month implements CalendarAble {
     List<Day> days;
+    List<Label> dayDate;
     int monthNb;
+
+
     public Month(int year, int monthNr) {
         this.days = getDays(year, monthNr);
     }
+
 
     public List<Day> getDays(int year, int monthNb){
         LocalDateTime ldt = LocalDateTime.of(year, monthNb,1,0,0);

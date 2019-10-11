@@ -27,6 +27,7 @@ import main.view.WeekView;
 import main.view.YearView;
 import main.model.*;
 import main.view.*;
+import main.view.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -47,6 +48,7 @@ public class ControllerCalendar implements Initializable, Listener {
     private WeekView weekView;
     private HabitView habitView;
     private ExpandedDayView expandedDayView;
+    private MonthView monthView;
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
@@ -72,6 +74,7 @@ public class ControllerCalendar implements Initializable, Listener {
         updateTimeline();
 
         todoView = new TodoView();
+        monthView = new MonthView();
 
     }
 
@@ -206,10 +209,22 @@ public class ControllerCalendar implements Initializable, Listener {
         renderCalendar(weekView);
     }
 
+
     // Month stuff
     @FXML
     private void showCalendarMonthClick() {
-        System.out.println("Month");
+        List<Day> monthDays = new ArrayList<>();
+        Month m = aggregate.getMonth(LocalDateTime.now());
+        for (Day day : m.getDays()){
+            monthDays.add(day);
+        }
+        renderMonth(monthDays);
+    }
+
+    private void renderMonth(List<Day> month){
+        currentView = monthView;
+        monthView.updateView(month);
+        renderCalendar(monthView);
     }
 
     // Year stuff
@@ -294,4 +309,5 @@ public class ControllerCalendar implements Initializable, Listener {
     public void actOnUpdate() {
         updateTodoView();
     }
+
 }

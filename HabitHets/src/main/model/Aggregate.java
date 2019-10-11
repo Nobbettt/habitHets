@@ -20,4 +20,8 @@ public class Aggregate {
     public List<Month> getYearFromDate(LocalDateTime localDateTime) {
         return calender.getYearFromLDT(localDateTime);
     }
+
+    public Month getMonth (LocalDateTime ldt){
+        return calender.getMonth(ldt);
+    }
 }
