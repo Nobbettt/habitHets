@@ -5,6 +5,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import main.model.Listener;
 import main.model.TodoHandler;
 import main.model.Todo;
 import java.io.IOException;
@@ -18,7 +19,6 @@ public class TodoView extends AnchorPane {
     @FXML private VBox vboxtodo;
     @FXML public VBox vboxdonetodo;
     TodoHandler todoHandler = TodoHandler.getInstant();
-
 
 
     public TodoView(){
@@ -46,30 +46,30 @@ public class TodoView extends AnchorPane {
     List<CheckBox> checkBoxes = new ArrayList<>();
 
 
-        public void updateTodoView(List<Todo> todos ){
+        public void updateTodoView(List<Todo> todos ) {
             vboxtodo.getChildren().clear();
             vboxdonetodo.getChildren().clear();
-                for (Todo todo: todos){
-                    TodoElementView todoElement = new TodoElementView(todo, this);
-                    vboxtodo.getChildren().add(todoElement);
-                    }
-                for (Todo todo : TodoHandler.getInstant().getDoneTodoList()){
-                    TodoElementView todoElement = new TodoElementView(todo, this);
-                    vboxdonetodo.getChildren().add(todoElement);
-                    todoElement.getCb().setSelected(true);
-                }
+            for (Todo todo : todos) {
+                TodoElementView todoElement = new TodoElementView(todo, this);
+                vboxtodo.getChildren().add(todoElement);
+            }
+            for (Todo todo : TodoHandler.getInstant().getDoneTodoList()) {
+                TodoElementView todoElement = new TodoElementView(todo, this);
+                vboxdonetodo.getChildren().add(todoElement);
+                todoElement.getCb().setSelected(true);
+            }
 
-                for (int i = 0; i < vboxtodo.getChildren().size(); i++){
-                    TodoElementView td = (TodoElementView)vboxtodo.getChildren().get(0);
-                    CheckBox c = td.getCb();
-                    if (c.isSelected()){
-                        todoHandler.doneTodoRemove(td.todo.getId());
-                        vboxtodo.getChildren().remove(td);
-                        vboxdonetodo.getChildren().add(td);
-                    }
+            for (int i = 0; i < vboxtodo.getChildren().size(); i++) {
+                TodoElementView td = (TodoElementView) vboxtodo.getChildren().get(i);
+                CheckBox c = td.getCb();
+                if (c.isSelected()) {
+                    todoHandler.doneTodoRemove(td.todo.getId());
+                    vboxtodo.getChildren().remove(td);
+                    vboxdonetodo.getChildren().add(td);
+                    td.getCb().setSelected(true);
                 }
-                }
-
+            }
+        }
 
 
 }
