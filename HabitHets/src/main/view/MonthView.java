@@ -7,10 +7,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import main.model.Aggregate;
 import main.model.CalendarAble;
 import main.model.Day;
-import main.model.Month;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -71,10 +69,8 @@ public class MonthView extends StackPane implements ViewAble {
     }
 
     private void updateMonthView(List<Day> month) {
-        Aggregate aggregate = new Aggregate();
-        Month m = aggregate.getMonth(month.get(1).getLdt());
         int j = 0;
-        int w = m.getFirstWeek()-4;
+        int w = month.get(0).getWeekNr()-4;
         for (Label l : monthdays){
             l.setText("" + month.get(0).getLdt().plusDays(j).getDayOfMonth() + "/" + month.get(0).getLdt().plusDays(j).getMonthValue());
             if (j < month.size()-1)

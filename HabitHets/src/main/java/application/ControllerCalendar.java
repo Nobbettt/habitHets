@@ -3,36 +3,20 @@ package main.java.application;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-import main.model.Aggregate;
-import main.model.CalendarAble;
-import main.model.Day;
-import main.model.EventHandler;
-import main.model.Month;
 import main.model.*;
-import main.view.ExpandedDayView;
-import main.view.TodoView;
-import main.view.ViewAble;
-import main.view.WeekView;
-import main.view.YearView;
-import main.model.*;
-import main.view.*;
 import main.view.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -130,9 +114,9 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.minusWeeks(1);
             calendarData = aggregate.getWeekFromDate(masterDateTime);
-            //} else if(currentView == monthView) {
-            // masterDateTime = masterDateTime.minusMonths(1);
-            // calendarData = aggregate. todo
+        } else if(currentView == monthView) {
+            masterDateTime = masterDateTime.minusMonths(1);
+            calendarData = aggregate.getMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.minusYears(1);
             calendarData = aggregate.getYearFromDate(masterDateTime);
@@ -151,10 +135,9 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.plusWeeks(1);
             calendarData = aggregate.getWeekFromDate(masterDateTime);
-
-            //} else if(currentView == monthView) {
-            // masterDateTime = masterDateTime.minusMonths(1);
-            // calendarData = aggregate. todo
+        } else if(currentView == monthView) {
+            masterDateTime = masterDateTime.plusMonths(1);
+            calendarData = aggregate.getMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.plusYears(1);
             calendarData = aggregate.getYearFromDate(masterDateTime);
@@ -170,8 +153,9 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             Integer weekNb = aggregate.getDayFromDate(masterDateTime).get(0).getWeekNr();
             headLbl = "Week " + weekNb.toString();
-            //} else if(currentView == monthView) {
-
+        } else if(currentView == monthView) {
+            Integer yearNb = masterDateTime.getYear();
+            headLbl = aggregate.getMonth(masterDateTime).getString() + " " + yearNb;
         } else if(currentView == yearView) {
             Integer yearNb = masterDateTime.getYear();
             headLbl = yearNb.toString();
