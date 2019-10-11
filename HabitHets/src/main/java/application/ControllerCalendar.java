@@ -81,6 +81,10 @@ public class ControllerCalendar implements Initializable {
 
         //temporary
         Aggregate aggregate = new Aggregate();
+
+        List<Day> days = aggregate.getDayFromDate(masterDateTime);
+        renderDay(days.get(0));
+
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
 
         renderWeek(week);
@@ -156,7 +160,7 @@ public class ControllerCalendar implements Initializable {
     @FXML
     private void showCalendarDayClick() {
         //temporary
-        Day d = new Day(LocalDateTime.now());
+        Day d = aggregate.getDayFromDate(LocalDateTime.now()).get(0);
         renderDay(d);
     }
 

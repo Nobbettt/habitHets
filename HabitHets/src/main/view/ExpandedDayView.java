@@ -39,12 +39,12 @@ public class ExpandedDayView extends StackPane implements ViewAble{
     public void updateView(List<? extends CalendarAble> days) {
         String weekday = days.get(0).getString(); //week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
-        dayEvents.updateDay((Day) days.get(0));
+        Day day = (Day) days.get(0);
+        dayEvents.updateDay(day);
     }
 
     @Override
     public void updateTimeLine(int hour, int minute) {
-
         System.out.println("gg");
         dayEvents.updateTimeline(hour, minute);
     }

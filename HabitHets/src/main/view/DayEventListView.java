@@ -54,6 +54,7 @@ public class DayEventListView extends StackPane {
     }
 
     public void updateDay(Day day) {
+        this.day = day;
         for (HBox hBox : hBoxList) {
             hBox.getChildren().clear();
         }
