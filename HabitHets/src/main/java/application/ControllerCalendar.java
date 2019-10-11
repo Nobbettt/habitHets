@@ -134,14 +134,7 @@ public class ControllerCalendar implements Initializable, Listener {
         mainGrid.add(todoPane, 2, 0);
     }
 
-   /* private void renderTodo(Node node) {
-        if(todoPane.getChildren() != null) {
-            todoPane.getChildren().clear();
-        }
-        todoPane.getChildren().add(node);
-        fitItem(todoPane, node);
-    }
-*/
+
 
     private void renderCalendar(Node node) {
         if(calendarPane.getChildren() != null) {
@@ -171,9 +164,7 @@ public class ControllerCalendar implements Initializable, Listener {
 
     private void updateTodoView(){
         todoView.updateTodoView(todoHandler.getTodoList());
-
     }
-
 
     @Override
     public void actOnUpdate() {

@@ -2,9 +2,11 @@ package main.view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import main.model.Listener;
 import main.model.TodoHandler;
 import main.model.Todo;
@@ -15,10 +17,11 @@ import java.util.List;
 public class TodoView extends AnchorPane {
 
     @FXML private AnchorPane todoList;
-
+    @FXML private Button addTodo;
     @FXML private VBox vboxtodo;
     @FXML public VBox vboxdonetodo;
     TodoHandler todoHandler = TodoHandler.getInstant();
+
 
 
     public TodoView(){
@@ -32,8 +35,10 @@ public class TodoView extends AnchorPane {
                 IOException exception) {
             throw new RuntimeException(exception);
         }
+        //addTodo.setShape(new Circle());
 
-}
+
+    }
 
     @FXML
     private void addTodoOnClick(){
