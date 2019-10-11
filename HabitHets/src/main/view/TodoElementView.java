@@ -1,11 +1,8 @@
 package main.view;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import main.model.Todo;
 import main.model.TodoHandler;
@@ -22,7 +19,7 @@ public class TodoElementView extends AnchorPane  {
 
 
 
-    public TodoElementView(Todo todo, TodoView todoView) {
+    public TodoElementView(Todo todo) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/todoElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

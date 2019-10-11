@@ -43,8 +43,8 @@ public class EventHandler implements IHandler {
         i++;
     }
 
-    public void addEvent(Day day, int startHour, int startMinute, int endHour, int endMinute, String title){
-        eventList.add(Factory.createBasicEvent(day.getLdt().withHour(startHour).withMinute(startMinute), day.getLdt().withHour(endHour).plusMinutes(endMinute), title));
+    public void addEvent(LocalDateTime ldt, int startHour, int startMinute, int endHour, int endMinute, String title){
+        eventList.add(Factory.createBasicEvent(ldt.withHour(startHour).withMinute(startMinute), ldt.withHour(endHour).plusMinutes(endMinute), title));
     }
 
     @Override
@@ -62,10 +62,10 @@ public class EventHandler implements IHandler {
         return eventList;
     }
 
-    public List<Event> getEventsOfDay(Day day){
+    public List<Event> getEventsOfDay(LocalDateTime ldt){
         List<Event> eventList = new ArrayList<>();
         for (Event event : getEventList()){
-            if (event.getStartTime().getYear() == day.getLdt().getYear() && event.getStartTime().getDayOfYear() == day.getLdt().getDayOfYear()){
+            if (event.getStartTime().getYear() == ldt.getYear() && event.getStartTime().getDayOfYear() == ldt.getDayOfYear()){
                 eventList.add(event);
             }
         }

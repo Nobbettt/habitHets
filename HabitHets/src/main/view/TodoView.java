@@ -1,15 +1,13 @@
 package main.view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import main.model.Listener;
-import main.model.TodoHandler;
 import main.model.Todo;
+import main.model.TodoHandler;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,11 +53,11 @@ public class TodoView extends AnchorPane {
             vboxtodo.getChildren().clear();
             vboxdonetodo.getChildren().clear();
             for (Todo todo : todos) {
-                TodoElementView todoElement = new TodoElementView(todo, this);
+                TodoElementView todoElement = new TodoElementView(todo);
                 vboxtodo.getChildren().add(todoElement);
             }
             for (Todo todo : TodoHandler.getInstant().getDoneTodoList()) {
-                TodoElementView todoElement = new TodoElementView(todo, this);
+                TodoElementView todoElement = new TodoElementView(todo);
                 vboxdonetodo.getChildren().add(todoElement);
                 todoElement.getCb().setSelected(true);
             }
