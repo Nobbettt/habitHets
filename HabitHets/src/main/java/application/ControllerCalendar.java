@@ -38,6 +38,7 @@ public class ControllerCalendar implements Initializable {
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
+    private MonthView monthView;
     private LocalDateTime masterDateTime;
     private Aggregate aggregate;
 
@@ -46,6 +47,7 @@ public class ControllerCalendar implements Initializable {
         weekView = new WeekView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
+        monthView = new MonthView();
 
 
         updateTimeline();
@@ -156,6 +158,7 @@ public class ControllerCalendar implements Initializable {
     @FXML
     private void showCalendarWeekClick() {
         //temporary
+        Aggregate aggregate = new Aggregate();
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
         renderWeek(week);
     }
@@ -166,10 +169,21 @@ public class ControllerCalendar implements Initializable {
         renderCalendar(weekView);
     }
 
+
     // Month stuff
     @FXML
     private void showCalendarMonthClick() {
-        System.out.println("Month");
+        List<Day> monthDays = new ArrayList<>();
+        for(int i = 1; i < 31; i++){
+            monthDays.add(new Day(LocalDateTime.of(1,1,i,1,1,1)));
+        }
+        renderMonth(monthDays);
+    }
+
+    private void renderMonth(List<Day> month){
+        currentView = monthView;
+        monthView.updateView(month); //TOdo
+        renderCalendar(monthView);
     }
 
     // Year stuff
@@ -203,7 +217,6 @@ public class ControllerCalendar implements Initializable {
         }
         calendarPane.getChildren().add(node);
         fitItem(calendarPane, node);
-        updateHeadLbl();
     }
 
     private void fitItem(AnchorPane parent, Node child) {
@@ -212,4 +225,5 @@ public class ControllerCalendar implements Initializable {
         parent.setBottomAnchor(child, 0.0);
         parent.setLeftAnchor(child, 0.0);
     }
+
 }
