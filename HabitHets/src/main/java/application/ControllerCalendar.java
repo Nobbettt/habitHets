@@ -3,41 +3,25 @@ package main.java.application;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-import main.model.Aggregate;
-import main.model.CalendarAble;
-import main.model.Day;
-import main.model.EventHandler;
-import main.model.Month;
 import main.model.*;
-import main.view.ExpandedDayView;
-import main.view.TodoView;
-import main.view.ViewAble;
-import main.view.WeekView;
-import main.view.YearView;
-import main.model.*;
-import main.view.*;
 import main.view.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable, Listener {
-    @FXML private GridPane mainGrid;
+    //@FXML private GridPane mainGrid;
+    @FXML private AnchorPane mainPane;
     @FXML private Label currentValueLbl;
     @FXML private Button prevBtn;
     @FXML private Button nextBtn;
@@ -117,7 +101,7 @@ public class ControllerCalendar implements Initializable, Listener {
 
         setupHabit();
         habitPane.getChildren().add(habitView);
-        fitItem(habitPane, habitView);
+        fitItem(habitPane, habitView, 0, 0, 0, 0);
         populateHabit();
     }
 
@@ -248,12 +232,25 @@ public class ControllerCalendar implements Initializable, Listener {
 
     private void setupCalender() {
         calendarPane = new AnchorPane();
-        mainGrid.add(calendarPane, 1, 0);
+        mainPane.getChildren().add(calendarPane);
+        fitItem(mainPane, calendarPane, 70, 200, 0, 200);
+        //mainGrid.add(calendarPane, 1, 0);
     }
 
     private void setupHabit() {
         habitPane = new AnchorPane();
-        mainGrid.add(habitPane,0,0);
+        mainPane.getChildren().add(habitPane);
+        habitPane.setPrefWidth(200);
+        fitItem(mainPane, habitPane, 70, -1, 0, 0);
+        //mainGrid.add(habitPane,0,0);
+    }
+
+    private void setupTodo() {
+        todoPane = new AnchorPane();
+        mainPane.getChildren().add(todoPane);
+        todoPane.setPrefWidth(200);
+        fitItem(mainPane, todoPane, 70, 0, 0, -1);
+        //mainGrid.add(todoPane, 2, 0);
     }
 
     private void populateHabit(){
@@ -267,27 +264,33 @@ public class ControllerCalendar implements Initializable, Listener {
         habitView.updateHabitView(handler.getHabitList());
     }
 
-    private void setupTodo() {
-        todoPane = new AnchorPane();
-        mainGrid.add(todoPane, 2, 0);
+    @FXML
+    private void collapseHabitClick() {
+
     }
-
-
 
     private void renderCalendar(Node node) {
         if(calendarPane.getChildren() != null) {
             calendarPane.getChildren().clear();
         }
         calendarPane.getChildren().add(node);
-        fitItem(calendarPane, node);
+        fitItem(calendarPane, node, 0, 0, 0, 0);
         updateHeadLbl();
     }
 
-    private void fitItem(AnchorPane parent, Node child) {
-        parent.setTopAnchor(child, 0.0);
-        parent.setRightAnchor(child, 0.0);
-        parent.setBottomAnchor(child, 0.0);
-        parent.setLeftAnchor(child, 0.0);
+    private void fitItem(AnchorPane parent, Node child, double top, double right, double bottom, double left) {
+        if (top != -1) {
+            parent.setTopAnchor(child, top);
+        }
+        if (right != -1) {
+            parent.setRightAnchor(child, right);
+        }
+        if (bottom != -1) {
+            parent.setBottomAnchor(child, bottom);
+        }
+        if (left != -1) {
+            parent.setLeftAnchor(child, left);
+        }
     }
 
 
