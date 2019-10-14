@@ -20,6 +20,7 @@ public class HabitView extends AnchorPane {
 
     @FXML private VBox vBox;
     @FXML private ScrollPane scrollPane;
+    @FXML private AnchorPane newHabit;
     private List<HabitObjectView> habitsList;
 
     private boolean isExpanded;
@@ -50,12 +51,26 @@ public class HabitView extends AnchorPane {
         return isExpanded;
     }
 
+
     @FXML
-    private void addHabitOnClick(){
+    private void addNewHabit(){
+        newHabit.setVisible(true);
+        newHabit.toFront();
+    }
+
+    @FXML
+    private void saveHabitOnClick(){
         handler.add();
         List<Habit> newHabit = new ArrayList<>();
         newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
         updateHabitView(newHabit);
+        close();
+    }
+
+    @FXML
+    private void close(){
+        newHabit.setVisible(false);
+        newHabit.toBack();
     }
 
 
