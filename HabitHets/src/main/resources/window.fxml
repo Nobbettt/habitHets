@@ -61,7 +61,7 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Button fx:id="prevBtn" layoutX="83.0" layoutY="22.0" mnemonicParsing="false" onAction="#prevClick" styleClass="navbar-arrow-btn" text="&lt;" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
-                              <Button layoutY="35.0" mnemonicParsing="false" onAction="#collapseHabitClick" text="Button" />
+                              <Button layoutY="35.0" mnemonicParsing="false" onAction="#toggleHabitClick" text="Button" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">

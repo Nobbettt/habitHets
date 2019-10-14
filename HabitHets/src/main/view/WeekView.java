@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
@@ -51,21 +50,27 @@ public class WeekView extends StackPane implements ViewAble {
         setUpWeek();
     }
 
+    /**
+     * Updated the week view and its content given a week list containing 7 day objects
+     * @param week
+     */
     @Override
     public void updateView(List<? extends CalendarAble> week) {
         this.week = (List<Day>) week;
         List<Day> weekdays = getWeek();
         for(int i = 0; i < 7; i++) {
-
             Day tmpDay = weekdays.get(i);
-
             String weekday = week.get(i).getString(); //week.get(i)....getWeekdayfunction()
-
             weekDays.get(i).setText(weekday);
-            weekDayEvents.get(i).updateDay(tmpDay);
+            weekDayEvents.get(i).updateDay(tmpDay, weekGrid.getCellBounds(1, 0).getWidth());
         }
     }
 
+    /**
+     * updates the horizontal line that indicates the time given the two parameters
+     * @param hour
+     * @param minute
+     */
     @Override
     public void updateTimeLine(int hour, int minute) {
         for (DayEventListView dView : weekDayEvents) {
@@ -73,6 +78,9 @@ public class WeekView extends StackPane implements ViewAble {
         }
     }
 
+    /**
+     * Initializes and prepares the columns for content
+     */
     private void setUpWeek() {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
@@ -93,12 +101,19 @@ public class WeekView extends StackPane implements ViewAble {
         addButton.toFront();
     }
 
+    /**
+     * Adds new event and updates the view
+     */
     @FXML
     private void addEventOnclick(){
         EventHandler.getInstant().add();
         updateView(week);
     }
 
+    /**
+     * returns week list
+     * @return
+     */
     public List<Day> getWeek() {
         return week;
     }

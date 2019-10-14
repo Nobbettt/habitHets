@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable, Listener {
-    //@FXML private GridPane mainGrid;
     @FXML private AnchorPane mainPane;
     @FXML private Label currentValueLbl;
     @FXML private Button prevBtn;
@@ -39,11 +38,9 @@ public class ControllerCalendar implements Initializable, Listener {
     EventHandler eventHandler = EventHandler.getInstant();
     private LocalDateTime masterDateTime;
     private Aggregate aggregate;
-
     private HabitHandler handler = HabitHandler.getInstant();
     private TodoView todoView;
     private TodoHandler todoHandler= TodoHandler.getInstant();
-
 
     public ControllerCalendar() {
         masterDateTime = LocalDateTime.now();
@@ -62,7 +59,9 @@ public class ControllerCalendar implements Initializable, Listener {
 
     }
 
-    // function is called every min to update timeline in GUI
+    /**
+     * function is called every min to update timeline in GUI
+     */
     public void updateTimeline() {
         timeNow = LocalDateTime.now();
         currentView.updateTimeLine(timeNow.getHour(), timeNow.getMinute());
@@ -85,16 +84,11 @@ public class ControllerCalendar implements Initializable, Listener {
         populateTodo();
 
 
-
-        //temporary
-        Aggregate aggregate = new Aggregate();
-
-        List<Day> days = aggregate.getDayFromDate(masterDateTime);
-        renderDay(days.get(0));
+        renderDay();
 
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
 
-        renderWeek(week);
+        renderWeek();
 
         AnchorPane ap = new AnchorPane();
         calendarPane.getChildren().add(ap);
@@ -105,6 +99,9 @@ public class ControllerCalendar implements Initializable, Listener {
         populateHabit();
     }
 
+    /**
+     * on click this methods moves the represented time unit back in time depending on the current view.
+     */
     @FXML
     private void prevClick() {
         List<? extends CalendarAble> calendarData = new ArrayList<>();
@@ -125,6 +122,9 @@ public class ControllerCalendar implements Initializable, Listener {
         updateHeadLbl();
     }
 
+    /**
+     * on click this methods moves the represented time unit forward in time depending on the current view.
+     */
     @FXML
     private void nextClick() {
         System.out.println("next");
@@ -135,7 +135,6 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.plusWeeks(1);
             calendarData = aggregate.getWeekFromDate(masterDateTime);
-
             //} else if(currentView == monthView) {
             // masterDateTime = masterDateTime.minusMonths(1);
             // calendarData = aggregate. todo
@@ -167,11 +166,11 @@ public class ControllerCalendar implements Initializable, Listener {
     @FXML
     private void showCalendarDayClick() {
         //temporary
-        Day d = aggregate.getDayFromDate(LocalDateTime.now()).get(0);
-        renderDay(d);
+        renderDay();
     }
 
-    private void renderDay(Day day) {
+    private void renderDay() {
+        Day day = aggregate.getDayFromDate(LocalDateTime.now()).get(0);
         List<Day> days = new ArrayList<>();
         days.add(day);
         currentView = expandedDayView;
@@ -182,14 +181,12 @@ public class ControllerCalendar implements Initializable, Listener {
     // Week stuff
     @FXML
     private void showCalendarWeekClick() {
-        //temporary
-        List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
-        renderWeek(week);
+        renderWeek();
     }
 
-    private void renderWeek(List<Day> week) {
+    private void renderWeek() {
         currentView = weekView;
-        weekView.updateView(week);
+        weekView.updateView(aggregate.getWeekFromDate(masterDateTime));
         renderCalendar(weekView);
     }
 
@@ -265,8 +262,29 @@ public class ControllerCalendar implements Initializable, Listener {
     }
 
     @FXML
-    private void collapseHabitClick() {
-
+    private void toggleHabitClick() {
+        int expanded = 200;
+        int collapsed= 70;
+        if(habitView.getIsExpanded()) {
+            for(double i = expanded; i >= collapsed; i-=1) {
+                habitPane.setPrefWidth(i);
+                mainPane.setLeftAnchor(calendarPane, i);
+            }
+            habitView.setIsExpanded(false);
+            // todo call on hide things in habit view
+        } else {
+            for(double i = collapsed; i <= expanded; i+=1) {
+                habitPane.setPrefWidth(i);
+                mainPane.setLeftAnchor(calendarPane, i);
+            }
+            habitView.setIsExpanded(true);
+            // todo call on show things in habit view
+        }
+        if(currentView == weekView) {
+            renderWeek();
+        } else if(currentView == expandedDayView) {
+            renderDay();
+        }
     }
 
     private void renderCalendar(Node node) {
