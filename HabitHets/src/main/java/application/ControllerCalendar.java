@@ -3,13 +3,10 @@ package main.java.application;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -17,7 +14,6 @@ import javafx.util.Duration;
 import main.model.Aggregate;
 import main.model.CalendarAble;
 import main.model.Day;
-import main.model.EventHandler;
 import main.model.Month;
 import main.model.*;
 import main.view.ExpandedDayView;
@@ -25,22 +21,33 @@ import main.view.TodoView;
 import main.view.ViewAble;
 import main.view.WeekView;
 import main.view.YearView;
-import main.model.*;
-import main.view.*;
 import main.view.*;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable, Listener {
     @FXML private GridPane mainGrid;
     @FXML private Label currentValueLbl;
+    @FXML private AnchorPane creationPage;
     @FXML private Button prevBtn;
     @FXML private Button nextBtn;
+    @FXML private TextField titleField;
+    @FXML private DatePicker dateChooser;
+    @FXML private ComboBox<String> fromHourTime;
+    @FXML private ComboBox<String>fromMinuteTime;
+    @FXML private TextField LocationField;
+    @FXML private ComboBox<String> toHourTime;
+    @FXML private ComboBox<String> toMinuteTime;
+    @FXML private TextArea descField;
+    @FXML private Button creationButton;
+    @FXML private Button closeButton;
+    @FXML private Button addButton;
     private AnchorPane calendarPane;
     private AnchorPane habitPane;
     private YearView yearView;
@@ -52,7 +59,6 @@ public class ControllerCalendar implements Initializable, Listener {
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
-    EventHandler eventHandler = EventHandler.getInstant();
     private LocalDateTime masterDateTime;
     private Aggregate aggregate;
 
@@ -119,6 +125,7 @@ public class ControllerCalendar implements Initializable, Listener {
         habitPane.getChildren().add(habitView);
         fitItem(habitPane, habitView);
         populateHabit();
+        setUpChoiceBoxes();
     }
 
     @FXML
@@ -308,6 +315,67 @@ public class ControllerCalendar implements Initializable, Listener {
     @Override
     public void actOnUpdate() {
         updateTodoView();
+    }
+
+    @FXML
+    private void addButtonClick(){
+        creationPage.toFront();
+    }
+    @FXML
+    private void closeButtonClick(){
+        clearAllField();
+        creationPage.toBack();
+    }
+    @FXML
+    private void createButtonClick(){
+        EventHandler ev = EventHandler.getInstant();
+        LocalDate ld = dateChooser.getValue();
+        LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.now());
+        int fromHour = Integer.parseInt(fromHourTime.getValue());
+        int fromMinute = Integer.parseInt(fromMinuteTime.getValue());
+        int toHour = Integer.parseInt(toHourTime.getValue());
+        int toMinute = Integer.parseInt(toMinuteTime.getValue());
+        ev.addEvent(ldt, fromHour, fromMinute, toHour, toMinute, titleField.getText(), LocationField.getText(), descField.getText());
+        clearAllField();
+        creationPage.toBack();
+    }
+
+    private void setUpChoiceBoxes(){
+        setUpChoicebox(fromHourTime, true);
+        setUpChoicebox(fromMinuteTime, false);
+        setUpChoicebox(toHourTime, true);
+        setUpChoicebox(toMinuteTime, false);
+    }
+
+    private void setUpChoicebox (ComboBox<String> c, boolean isHour){
+        ArrayList<String> a = new ArrayList<>();
+        c.setEditable(true);
+        if (isHour) {
+            System.out.println("Hour");
+            for (int i = 0; i < 24; i++) {
+                a.add("" + i);
+            }
+        }
+        else {
+            System.out.println("Minute");
+            for (int i = 0; i < 60; i++) {
+                a.add("" + i);
+            }
+        }
+        c.getItems().addAll(a);
+        c.getSelectionModel().selectNext();
+
+    }
+
+    public void clearAllField(){
+        titleField.clear();
+        dateChooser.getEditor().clear();
+        LocationField.clear();
+        descField.clear();
+        fromHourTime.getSelectionModel().clearSelection();
+        fromMinuteTime.getSelectionModel().clearSelection();
+        toHourTime.getSelectionModel().clearSelection();
+        toMinuteTime.getSelectionModel().clearSelection();
     }
 
 }

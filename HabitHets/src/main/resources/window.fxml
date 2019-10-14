@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="720.0" styleClass="window-style" stylesheets="@css/base-style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.application.ControllerCalendar">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1258.0" styleClass="window-style" stylesheets="@css/base-style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.application.ControllerCalendar">
    <children>
+      <AnchorPane fx:id="creationPage" layoutX="193.0" layoutY="78.0" prefHeight="399.0" prefWidth="1110.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="150.0" layoutY="-1.0" prefHeight="400.0" prefWidth="436.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="200.0">
+               <children>
+                  <Label layoutX="65.0" layoutY="189.0" text="Location" />
+                  <TextField fx:id="titleField" layoutX="129.0" layoutY="41.0" prefHeight="27.0" prefWidth="255.0" promptText="What...?" />
+                  <Label layoutX="86.0" layoutY="46.0" prefHeight="17.0" prefWidth="43.0" text="Title:" />
+                  <DatePicker fx:id="dateChooser" layoutX="120.0" layoutY="92.0" prefHeight="27.0" prefWidth="255.0" promptText="When...?" />
+                  <TextField fx:id="LocationField" layoutX="129.0" layoutY="185.0" prefHeight="27.0" prefWidth="255.0" promptText="Where...?" />
+                  <TextArea fx:id="descField" layoutX="129.0" layoutY="228.0" prefHeight="124.0" prefWidth="255.0" promptText="Description..." />
+                  <Button fx:id="creationButton" layoutX="175.0" layoutY="359.0" mnemonicParsing="false" onAction="#createButtonClick" text="Create" />
+                  <Label layoutX="87.0" layoutY="97.0" text="Date:" />
+                  <Label layoutX="86.0" layoutY="143.0" text="Time:" />
+                  <ImageView fitHeight="27.0" fitWidth="23.0" layoutX="410.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@%3F.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="46.0" layoutY="231.0" text="Description:" />
+                  <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonClick" text="Close" />
+                  <ComboBox fx:id="fromHourTime" layoutX="129.0" layoutY="139.0" prefHeight="27.0" prefWidth="60.0" visibleRowCount="12" />
+                  <ComboBox fx:id="fromMinuteTime" layoutX="194.0" layoutY="139.0" prefHeight="27.0" prefWidth="60.0" />
+                  <ComboBox fx:id="toHourTime" layoutX="280.0" layoutY="139.0" prefHeight="27.0" prefWidth="60.0" />
+                  <ComboBox fx:id="toMinuteTime" layoutX="345.0" layoutY="139.0" prefHeight="27.0" prefWidth="60.0" />
+                  <Label layoutX="264.0" layoutY="144.0" prefHeight="17.0" prefWidth="0.0" text="-" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
       <AnchorPane prefHeight="70.0" prefWidth="534.0" styleClass="navbar-wrapper" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <GridPane gridLinesVisible="true" layoutX="58.0" layoutY="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -83,5 +118,6 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
+      <Button fx:id="addButton" alignment="CENTER" mnemonicParsing="false" onAction="#addButtonClick" text="Button" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="120.0" />
    </children>
 </AnchorPane>

@@ -43,8 +43,8 @@ public class EventHandler implements IHandler {
         i++;
     }
 
-    public void addEvent(LocalDateTime ldt, int startHour, int startMinute, int endHour, int endMinute, String title){
-        eventList.add(Factory.createBasicEvent(ldt.withHour(startHour).withMinute(startMinute), ldt.withHour(endHour).plusMinutes(endMinute), title));
+    public void addEvent(LocalDateTime ldt, Integer startHour, Integer startMinute, Integer endHour, Integer endMinute, String title, String location, String desc){
+        eventList.add(Factory.createAdvEvent(ldt.withHour(Integer.valueOf(startHour)).withMinute(Integer.valueOf(startMinute)), ldt.withHour(Integer.valueOf(endHour)).plusMinutes(Integer.valueOf(endMinute)), title, location, desc, null));
     }
 
     @Override
