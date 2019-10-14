@@ -54,12 +54,13 @@ public class NoteHandler implements IHandler {
      */
     @Override
     public void remove(int id) {
-        for(Note note : notesList){
-            if(note.getId() == id){
+        for (Note note : notesList){
+            if (note.getId() == id){
                 notesList.remove(note);
                 return;
             }
         }
+        System.out.println("The ID: '" + id + "' does not exist");
     }
 
     /**

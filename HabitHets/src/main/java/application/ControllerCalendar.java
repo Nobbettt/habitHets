@@ -170,7 +170,10 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             Integer weekNb = aggregate.getDayFromDate(masterDateTime).get(0).getWeekNr();
             headLbl = "Week " + weekNb.toString();
-            //} else if(currentView == monthView) {
+        } else if(currentView == monthView) {
+            Integer monthNb = aggregate.getDayFromDate(masterDateTime).get(0).getMonthNbr();
+            Integer yearNb = aggregate.getDayFromDate(masterDateTime).get(0).getYearNbr();
+            headLbl = "Month " + monthNb.toString() + " / " + yearNb;
 
         } else if(currentView == yearView) {
             Integer yearNb = masterDateTime.getYear();
