@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import main.model.*;
 import main.view.*;
@@ -24,6 +25,8 @@ public class ControllerCalendar implements Initializable, Listener {
     @FXML private Label currentValueLbl;
     @FXML private Button prevBtn;
     @FXML private Button nextBtn;
+    @FXML private Button toggleHabitBtn;
+    @FXML private GridPane navbarGrid;
     private AnchorPane calendarPane;
     private AnchorPane habitPane;
     private YearView yearView;
@@ -232,15 +235,25 @@ public class ControllerCalendar implements Initializable, Listener {
         calendarPane = new AnchorPane();
         mainPane.getChildren().add(calendarPane);
         fitItem(mainPane, calendarPane, 70, 200, 0, 200);
-        //mainGrid.add(calendarPane, 1, 0);
     }
 
     private void setupHabit() {
         habitPane = new AnchorPane();
         mainPane.getChildren().add(habitPane);
         habitPane.setPrefWidth(200);
+
+        toggleHabitBtn.toFront();
+        double centerY = getCenterHeightOfMainGrid();
+        toggleHabitBtn.setTranslateY(centerY);
+
+        fitItem(mainPane, toggleHabitBtn, -1, -1, -1, 200);
         fitItem(mainPane, habitPane, 70, -1, 0, 0);
-        //mainGrid.add(habitPane,0,0);
+    }
+
+    private double getCenterHeightOfMainGrid() {
+        double centerY = mainPane.getBoundsInLocal().getHeight()/2;
+        centerY += navbarGrid.getPrefHeight();
+        return centerY;
     }
 
     private void setupTodo() {
@@ -248,7 +261,6 @@ public class ControllerCalendar implements Initializable, Listener {
         mainPane.getChildren().add(todoPane);
         todoPane.setPrefWidth(200);
         fitItem(mainPane, todoPane, 70, 0, 0, -1);
-        //mainGrid.add(todoPane, 2, 0);
     }
 
     private void populateHabit(){
@@ -270,6 +282,8 @@ public class ControllerCalendar implements Initializable, Listener {
             for(double i = expanded; i >= collapsed; i-=1) {
                 habitPane.setPrefWidth(i);
                 mainPane.setLeftAnchor(calendarPane, i);
+                mainPane.setLeftAnchor(toggleHabitBtn, i);
+                toggleHabitBtn.setText(">");
             }
             habitView.setIsExpanded(false);
             // todo call on hide things in habit view
@@ -277,6 +291,8 @@ public class ControllerCalendar implements Initializable, Listener {
             for(double i = collapsed; i <= expanded; i+=1) {
                 habitPane.setPrefWidth(i);
                 mainPane.setLeftAnchor(calendarPane, i);
+                mainPane.setLeftAnchor(toggleHabitBtn, i);
+                toggleHabitBtn.setText("<");
             }
             habitView.setIsExpanded(true);
             // todo call on show things in habit view
@@ -312,15 +328,11 @@ public class ControllerCalendar implements Initializable, Listener {
         }
     }
 
-
-
-
     private void populateTodo(){ //KAn byta ut denna mot updateTodoview() sen när jag inte vill ha hårdkodat
         todoHandler.add();
         todoHandler.add();
         todoHandler.getTodoList().get(1).setTitle("Hej");
         todoView.updateTodoView(todoHandler.getTodoList());
-
     }
 
     private void updateTodoView(){
