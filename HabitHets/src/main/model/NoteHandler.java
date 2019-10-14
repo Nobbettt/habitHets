@@ -44,7 +44,7 @@ public class NoteHandler implements IHandler {
     @Override
     public void add() {
         //Get input from database
-        notesList.add(Factory.createNote("title", "desc", LocalDateTime.now()));
+        notesList.add(Factory.createNote("desc", LocalDateTime.now()));
     }
 
 
@@ -74,5 +74,9 @@ public class NoteHandler implements IHandler {
                 }
         }return null;
     }
+
+
+
+
 }
 
