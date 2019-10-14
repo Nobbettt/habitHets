@@ -62,6 +62,11 @@ public class TodoElementView extends AnchorPane  {
 
     }
 
+    @FXML
+    private void deleteTodo(){
+        todoHandler.remove(todo.getId());
+    }
+
 
 
 
