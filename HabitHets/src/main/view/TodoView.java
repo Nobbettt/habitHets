@@ -18,6 +18,9 @@ public class TodoView extends AnchorPane {
     @FXML private Button addTodo;
     @FXML private VBox vboxtodo;
     @FXML public VBox vboxdonetodo;
+    @FXML public AnchorPane newTodo;
+    @FXML public Button closeNewTodo;
+    @FXML public Button saveNewTodo;
     TodoHandler todoHandler = TodoHandler.getInstant();
 
 
@@ -39,11 +42,32 @@ public class TodoView extends AnchorPane {
     }
 
     @FXML
-    private void addTodoOnClick(){
+    private void closeNewTodoWindow(){
+        newTodo.setVisible(false);
+        newTodo.toBack();
+    }
+
+    @FXML
+    private void saveNewTodo(){
+        newTodo.setVisible(false);
+        newTodo.toBack();
         todoHandler.add();
         List<Todo> newTodo = new ArrayList<>();
         newTodo.add(todoHandler.getTodoList().get(todoHandler.getTodoList().size()-1));
         updateTodoView(todoHandler.getTodoList());
+    }
+
+    @FXML
+    private void addTodoOnClick(){
+        newTodo.setVisible(true);
+        newTodo.toFront();/*
+
+
+
+        todoHandler.add();
+        List<Todo> newTodo = new ArrayList<>();
+        newTodo.add(todoHandler.getTodoList().get(todoHandler.getTodoList().size()-1));
+        updateTodoView(todoHandler.getTodoList());*/
     }
 
     List<CheckBox> checkBoxes = new ArrayList<>();
