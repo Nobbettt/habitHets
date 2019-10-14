@@ -2,14 +2,15 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import main.model.CalendarAble;
 import main.model.Calender;
 import main.model.Day;
+import main.model.Note;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,7 +19,10 @@ public class ExpandedDayView extends StackPane implements ViewAble{
     @FXML private ScrollPane scrollPane;
     @FXML private GridPane dayGrid;
     @FXML private Label weekDayLbl;
+    @FXML private TextArea noteField;
+    @FXML private Button saveNoteButton;
     private DayEventListView dayEvents;
+    private Note note;
 
 
 
@@ -60,6 +64,17 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         dayGrid.add(new HourColumnView(), 0, 0);
         dayEvents = new DayEventListView(Calender.getInstant().getDayFromLDT(LocalDateTime.now()));
         dayGrid.add(dayEvents, 1, 0);
+    }
+
+    @FXML
+    private void notehandle(List<? extends CalendarAble> days) {
+        this.note = note;
+
+        System.out.println(noteField.getText());
+        Day d = (Day) days.get(0);
+
+        note.setDescription(noteField.getText());
+        note.setDay(d.getLdt());
     }
 
     private void createDay(Day dayData) {
