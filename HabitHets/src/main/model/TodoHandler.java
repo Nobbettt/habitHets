@@ -58,6 +58,12 @@ public class TodoHandler implements IHandler {
 
     }
 
+    public void addTodo(String title) {
+        todoList.add(Factory.createTodo(title));
+        notifyListener();
+
+    }
+
     /**
      *This method delete a todoo that hasn't been completed, for example
      * if you change your mind and don't want to do that todoo anymore.

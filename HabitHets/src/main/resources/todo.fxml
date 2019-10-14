@@ -10,15 +10,6 @@
 
 <fx:root maxWidth="200.0" minWidth="200.0" prefHeight="700.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="newTodo" layoutX="10.0" layoutY="10.0" prefHeight="130.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
-         <children>
-            <TextField AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="9.4" AnchorPane.topAnchor="42.0" />
-            <Label layoutX="21.0" layoutY="14.0" text="Create a new Todo" />
-            <Label layoutX="21.0" layoutY="42.0" text="Title:" />
-            <Button fx:id="closeNewTodo" layoutX="162.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeNewTodoWindow" text="X" />
-            <Button fx:id="saveNewTodo" layoutX="147.0" layoutY="60.0" mnemonicParsing="false" onAction="#saveNewTodo" text="Save" AnchorPane.bottomAnchor="15.0" />
-         </children>
-      </AnchorPane>
       <Label layoutX="2.0" layoutY="6.0" prefHeight="58.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" text="Todo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
          <font>
             <Font size="36.0" />
@@ -38,5 +29,14 @@
             <VBox fx:id="vboxdonetodo" maxWidth="194.0" minWidth="100.0" prefHeight="166.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" />
          </content>
       </ScrollPane>
+      <AnchorPane fx:id="newTodo" layoutX="10.0" layoutY="10.0" prefHeight="130.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <TextField fx:id="todoTitle" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="9.4" AnchorPane.topAnchor="42.0" />
+            <Label layoutX="21.0" layoutY="14.0" text="Create a new Todo" />
+            <Label layoutX="21.0" layoutY="42.0" text="Title:" />
+            <Button fx:id="closeNewTodo" layoutX="162.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeNewTodoWindow" text="X" />
+            <Button fx:id="saveNewTodo" layoutX="147.0" layoutY="60.0" mnemonicParsing="false" onAction="#saveNewTodo" text="Save" AnchorPane.bottomAnchor="15.0" />
+         </children>
+      </AnchorPane>
    </children>
 </fx:root>

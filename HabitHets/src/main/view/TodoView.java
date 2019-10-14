@@ -3,6 +3,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import main.model.Todo;
@@ -21,6 +22,7 @@ public class TodoView extends AnchorPane {
     @FXML public AnchorPane newTodo;
     @FXML public Button closeNewTodo;
     @FXML public Button saveNewTodo;
+    @FXML public TextField todoTitle;
     TodoHandler todoHandler = TodoHandler.getInstant();
 
 
@@ -51,10 +53,16 @@ public class TodoView extends AnchorPane {
     private void saveNewTodo(){
         newTodo.setVisible(false);
         newTodo.toBack();
-        todoHandler.add();
-        List<Todo> newTodo = new ArrayList<>();
-        newTodo.add(todoHandler.getTodoList().get(todoHandler.getTodoList().size()-1));
+        if (todoTitle.getText() != null && !todoTitle.getText().isEmpty()){
+            todoHandler.addTodo(todoTitle.getText());
+            todoTitle.clear();
+
+        }
+        else{
+            todoTitle.clear();
+        }
         updateTodoView(todoHandler.getTodoList());
+
     }
 
     @FXML
