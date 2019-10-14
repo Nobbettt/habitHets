@@ -15,10 +15,10 @@
             <Label layoutX="47.0" layoutY="26.0" prefHeight="23.0" prefWidth="115.0" styleClass="habitLabel" text="New Habit" />
             <Label layoutX="11.0" layoutY="66.0" prefHeight="23.0" prefWidth="42.0" styleClass="title" text="Title:" />
             <Label layoutX="6.0" layoutY="101.0" prefHeight="23.0" prefWidth="48.0" styleClass="title" text="Color:" />
-            <TextField layoutX="54.0" layoutY="64.0" prefHeight="27.0" prefWidth="139.0" />
+            <TextField fx:id="title" layoutX="54.0" layoutY="64.0" prefHeight="27.0" prefWidth="139.0" />
             <ColorPicker layoutX="55.0" layoutY="99.0" prefHeight="27.0" prefWidth="139.0" />
             <Button layoutX="138.0" layoutY="159.0" mnemonicParsing="false" onAction="#saveHabitOnClick" text="Save" />
-            <Button layoutX="163.0" layoutY="5.0" mnemonicParsing="false" onAction="#close" prefHeight="23.0" prefWidth="25.0" text="x" />
+            <Button layoutX="163.0" layoutY="5.0" mnemonicParsing="false" onAction="#closeNewHabitWindow" prefHeight="23.0" prefWidth="25.0" text="x" />
          </children>
       </AnchorPane>
       <Label layoutY="10.0" prefHeight="50.0" prefWidth="53.0" styleClass="habitLabel" text="Habits" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />

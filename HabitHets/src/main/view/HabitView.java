@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import main.model.Habit;
@@ -21,6 +22,8 @@ public class HabitView extends AnchorPane {
     @FXML private VBox vBox;
     @FXML private ScrollPane scrollPane;
     @FXML private AnchorPane newHabit;
+    @FXML private TextField title;
+    private String color = "blue";
     private List<HabitObjectView> habitsList;
 
     private boolean isExpanded;
@@ -60,15 +63,23 @@ public class HabitView extends AnchorPane {
 
     @FXML
     private void saveHabitOnClick(){
-        handler.add();
-        List<Habit> newHabit = new ArrayList<>();
-        newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
-        updateHabitView(newHabit);
-        close();
+        closeNewHabitWindow();
+        if(title.getText() != null && !title.getText().isEmpty()){
+            handler.addHabit(title.getText(), color);
+            title.clear();
+            List<Habit> newHabit = new ArrayList<>();
+            newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
+            updateHabitView(newHabit);
+        }
+        else {
+            title.clear();
+        }
+
+
     }
 
     @FXML
-    private void close(){
+    private void closeNewHabitWindow(){
         newHabit.setVisible(false);
         newHabit.toBack();
     }

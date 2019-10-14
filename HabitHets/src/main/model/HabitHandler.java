@@ -66,4 +66,9 @@ public class HabitHandler implements IHandler{
         }
 
     }
+
+    public void addHabit(String title, String color) {
+        habitList.add(Factory.createHabit(title, new Stack(),6,color,LocalDate.now()));
+    }
+
 }
