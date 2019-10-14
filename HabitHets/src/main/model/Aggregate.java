@@ -16,7 +16,9 @@ public class Aggregate {
         singleDayList.add(calender.getDayFromLDT(localDateTime));
         return singleDayList;
     }
-
+    public List<Day> getMonthFromDate(LocalDateTime localDateTime) {
+        return calender.getMonth(localDateTime).getDays();
+    }
     public List<Month> getYearFromDate(LocalDateTime localDateTime) {
         return calender.getYearFromLDT(localDateTime);
     }

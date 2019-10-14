@@ -111,9 +111,9 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.minusWeeks(1);
             calendarData = aggregate.getWeekFromDate(masterDateTime);
-            //} else if(currentView == monthView) {
-            // masterDateTime = masterDateTime.minusMonths(1);
-            // calendarData = aggregate. todo
+        } else if(currentView == monthView) {
+            masterDateTime = masterDateTime.minusMonths(1);
+            calendarData = aggregate.getMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.minusYears(1);
             calendarData = aggregate.getYearFromDate(masterDateTime);
@@ -135,9 +135,9 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.plusWeeks(1);
             calendarData = aggregate.getWeekFromDate(masterDateTime);
-            //} else if(currentView == monthView) {
-            // masterDateTime = masterDateTime.minusMonths(1);
-            // calendarData = aggregate. todo
+        } else if(currentView == monthView) {
+            masterDateTime = masterDateTime.plusMonths(1);
+            calendarData = aggregate.getMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.plusYears(1);
             calendarData = aggregate.getYearFromDate(masterDateTime);
@@ -153,8 +153,9 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             Integer weekNb = aggregate.getDayFromDate(masterDateTime).get(0).getWeekNr();
             headLbl = "Week " + weekNb.toString();
-            //} else if(currentView == monthView) {
-
+        } else if(currentView == monthView) {
+            Integer yearNb = masterDateTime.getYear();
+            headLbl = aggregate.getMonth(masterDateTime).getString() + " " + yearNb;
         } else if(currentView == yearView) {
             Integer yearNb = masterDateTime.getYear();
             headLbl = yearNb.toString();
