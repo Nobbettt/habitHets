@@ -47,6 +47,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         day = (Day) days.get(0);
         dayEvents.updateDay(day);
         note = noteHandler.getNoteDate(day.getLdt());
+        noteField.clear();
         if(note != null){
             noteField.setText(note.getDescription());
         }
