@@ -261,9 +261,9 @@ public class ControllerCalendar implements Initializable, Listener {
         handler.add();
         handler.getHabitList().get(0).setTitle("elintina");
         handler.getHabitList().get(0).onClickHabit();
-        handler.getHabitList().get(0).setColor("blue");
+        handler.getHabitList().get(0).setColor("#47BCAD");
         handler.getHabitList().get(1).setTitle("nobbhelge");
-        handler.getHabitList().get(1).setColor("pink");
+        handler.getHabitList().get(1).setColor("#47BCAD");
         habitView.updateHabitView(handler.getHabitList());
     }
 

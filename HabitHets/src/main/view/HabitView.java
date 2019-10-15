@@ -76,7 +76,9 @@ public class HabitView extends AnchorPane {
         setVisibilityEdit(true);
         saveFromEdit.toFront();
         title.setText(habitObjectView.getHabit().getTitle());
-        //TODO set color
+        java.awt.Color tmpC = java.awt.Color.decode(habitObjectView.getHabit().getColor());
+        Color c = Color.rgb(tmpC.getRed(),tmpC.getGreen(),tmpC.getBlue());
+        colorPicker.setValue(c);
         editing = habitObjectView;
     }
 
@@ -92,41 +94,30 @@ public class HabitView extends AnchorPane {
 
     @FXML
     private void saveHabitOnClick(){
-       // saveFromAdd.setVisible(true);
-        //saveFromAdd.toFront();
-        //saveFromEdit.toBack();
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
-            handler.addHabit(title.getText(), ColorToString(colorPicker.getValue()));
-            title.clear();
+            handler.addHabit(title.getText(), colorToString(colorPicker.getValue()));
             List<Habit> newHabit = new ArrayList<>();
             newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
             updateHabitView(newHabit);
         }
-        else {
-            title.clear();
-        }
+        title.clear();
+        colorPicker.setValue(Color.WHITE);
     }
 
     @FXML
     private void saveFrEdit(){
-       // saveFromAdd.setVisible(false);
-       // saveFromEdit.setVisible(true);
-        //saveFromEdit.toFront();
-        //saveFromAdd.toBack();
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
             editing.getHabit().setTitle(title.getText());
-            // todo color
+            editing.getHabit().setColor(colorToString(colorPicker.getValue()));
             editing.updateElementView(editing.getHabit());
-            title.clear();
         }
-        else {
-            title.clear();
-        }
+        title.clear();
+        colorPicker.setValue(Color.WHITE);
     }
 
-    private String ColorToString(Color color){
+    private String colorToString(Color color){
         return String.format("#%02X%02X%02X",
                 ((int)color.getRed())*255,
                 ((int)color.getGreen())*255,
