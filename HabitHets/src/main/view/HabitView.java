@@ -2,10 +2,7 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -26,7 +23,10 @@ public class HabitView extends AnchorPane {
     @FXML private AnchorPane newHabit;
     @FXML private TextField title;
     @FXML private ColorPicker colorPicker ;
+    @FXML private Button saveFromAdd;
+    @FXML private Button saveFromEdit;
     private List<HabitObjectView> habitsList;
+    private HabitObjectView editing;
 
     private boolean isExpanded;
 
@@ -52,19 +52,49 @@ public class HabitView extends AnchorPane {
         hide();
     }
 
+
+
     public boolean getIsExpanded() {
         return isExpanded;
     }
 
 
+    private void setVisibilityAdd(Boolean visibility){
+        saveFromAdd.setVisible(visibility);
+    }
+
+    private void setVisibilityEdit(Boolean visibility){
+        saveFromEdit.setVisible(visibility);
+    }
+
+
+    public void edit(HabitObjectView habitObjectView){
+        newHabit.setVisible(true);
+        newHabit.toFront();
+        setVisibilityAdd(false);
+        saveFromAdd.toBack();
+        setVisibilityEdit(true);
+        saveFromEdit.toFront();
+        title.setText(habitObjectView.getHabit().getTitle());
+        //TODO set color
+        editing = habitObjectView;
+    }
+
     @FXML
     private void addNewHabit(){
         newHabit.setVisible(true);
         newHabit.toFront();
+        setVisibilityEdit(false);
+        saveFromEdit.toBack();
+        setVisibilityAdd(true);
+        saveFromAdd.toFront();
     }
 
     @FXML
     private void saveHabitOnClick(){
+       // saveFromAdd.setVisible(true);
+        //saveFromAdd.toFront();
+        //saveFromEdit.toBack();
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
             handler.addHabit(title.getText(), ColorToString(colorPicker.getValue()));
@@ -78,6 +108,23 @@ public class HabitView extends AnchorPane {
         }
     }
 
+    @FXML
+    private void saveFrEdit(){
+       // saveFromAdd.setVisible(false);
+       // saveFromEdit.setVisible(true);
+        //saveFromEdit.toFront();
+        //saveFromAdd.toBack();
+        closeNewHabitWindow();
+        if(title.getText() != null && !title.getText().isEmpty()){
+            editing.getHabit().setTitle(title.getText());
+            // todo color
+            editing.updateElementView(editing.getHabit());
+            title.clear();
+        }
+        else {
+            title.clear();
+        }
+    }
 
     private String ColorToString(Color color){
         return String.format("#%02X%02X%02X",
@@ -112,7 +159,7 @@ public class HabitView extends AnchorPane {
 
     public void updateHabitView(List<Habit> habits) {
         for (Habit habit: habits){
-            HabitObjectView habitObjectView = new HabitObjectView();
+            HabitObjectView habitObjectView = new HabitObjectView(this);
             vBox.getChildren().add(habitObjectView);
             habitObjectView.updateElementView(habit);
             habitsList.add(habitObjectView);

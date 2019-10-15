@@ -22,9 +22,12 @@ public class HabitObjectView extends AnchorPane {
     @FXML private Button color;
     @FXML private Label title;
     @FXML private GridPane habitGrid;
+    @FXML private Button edit;
+
+    private HabitView habitView;
 
 
-    public HabitObjectView() {
+    public HabitObjectView(HabitView habitView) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/habitElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -34,6 +37,13 @@ public class HabitObjectView extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+        this.habitView = habitView;
+    }
+
+
+    public Habit getHabit() {
+        return habit;
     }
 
 
@@ -41,9 +51,12 @@ public class HabitObjectView extends AnchorPane {
     private void checkHabit(){
         habit.onClickHabit();
         setColor();
-
     }
 
+    @FXML
+    private void editHabit(){
+        habitView.edit(this);
+    }
 
 
     public void updateElementView(Habit habit) {
