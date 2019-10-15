@@ -24,6 +24,7 @@ public class HabitView extends AnchorPane {
     @FXML private ColorPicker colorPicker ;
     @FXML private Button saveFromAdd;
     @FXML private Button saveFromEdit;
+    @FXML private Button addHabit;
     private List<HabitObjectView> habitsList;
     private HabitObjectView editing;
 
@@ -44,8 +45,6 @@ public class HabitView extends AnchorPane {
 
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         habitsList = new ArrayList<>();
         isExpanded = true;
     }
@@ -134,6 +133,7 @@ public class HabitView extends AnchorPane {
         for(HabitObjectView h : habitsList){
             h.hideHabits();
         }
+        addHabit.setVisible(false);
         isExpanded = false;
     }
 
@@ -141,6 +141,7 @@ public class HabitView extends AnchorPane {
         for(HabitObjectView h : habitsList){
             h.showHabits();
         }
+        addHabit.setVisible(true);
         isExpanded = true;
     }
 

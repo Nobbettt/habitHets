@@ -83,12 +83,15 @@ public class HabitObjectView extends AnchorPane {
     public void hideHabits(){
         habitGrid.setVisible(false);
         title.setVisible(false);
-
+        this.setPrefHeight(40);
+        habitGrid.setPrefHeight(0);
     }
 
     public void showHabits(){
         habitGrid.setVisible(true);
         title.setVisible(true);
+        this.setPrefHeight(100);
+        habitGrid.setPrefHeight(USE_COMPUTED_SIZE);
     }
 
 

@@ -254,6 +254,8 @@ public class ControllerCalendar implements Initializable, Listener {
         habitPane = new AnchorPane();
         mainPane.getChildren().add(habitPane);
         habitPane.setPrefWidth(200);
+        habitPane.setMinWidth(200);
+        habitPane.setMaxWidth(200);
 
         toggleHabitBtn.toFront();
         double centerY = getCenterHeightOfMainGrid();
@@ -289,27 +291,24 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     private void toggleHabitClick() {
-        int expanded = 200;
-        int collapsed= 70;
+        double widthValue;
         if(habitView.getIsExpanded()) {
-            for(double i = expanded; i >= collapsed; i-=1) {
-                habitPane.setPrefWidth(i);
-                mainPane.setLeftAnchor(calendarPane, i);
-                mainPane.setLeftAnchor(toggleHabitBtn, i);
-                toggleHabitBtn.setText(">");
-            }
+            widthValue = 70;
             habitView.setIsExpanded(false);
-            // todo call on hide things in habit view
+            toggleHabitBtn.setText(">");
+            habitView.hide();
         } else {
-            for(double i = collapsed; i <= expanded; i+=1) {
-                habitPane.setPrefWidth(i);
-                mainPane.setLeftAnchor(calendarPane, i);
-                mainPane.setLeftAnchor(toggleHabitBtn, i);
-                toggleHabitBtn.setText("<");
-            }
+            widthValue = 200;
+            toggleHabitBtn.setText("<");
             habitView.setIsExpanded(true);
-            // todo call on show things in habit view
+            habitView.visiable();
         }
+
+        habitPane.setPrefWidth(widthValue);
+        habitPane.setMinWidth(widthValue);
+        habitPane.setMaxWidth(widthValue);
+        mainPane.setLeftAnchor(calendarPane, widthValue);
+        mainPane.setLeftAnchor(toggleHabitBtn, widthValue);
         if(currentView == weekView) {
             renderWeek();
         } else if(currentView == expandedDayView) {
