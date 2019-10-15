@@ -3,10 +3,12 @@ package main.view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import main.model.Habit;
 import main.model.HabitHandler;
 
@@ -23,7 +25,7 @@ public class HabitView extends AnchorPane {
     @FXML private ScrollPane scrollPane;
     @FXML private AnchorPane newHabit;
     @FXML private TextField title;
-    private String color = "blue";
+    @FXML private ColorPicker colorPicker ;
     private List<HabitObjectView> habitsList;
 
     private boolean isExpanded;
@@ -65,7 +67,7 @@ public class HabitView extends AnchorPane {
     private void saveHabitOnClick(){
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
-            handler.addHabit(title.getText(), color);
+            handler.addHabit(title.getText(), ColorToString(colorPicker.getValue()));
             title.clear();
             List<Habit> newHabit = new ArrayList<>();
             newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
@@ -74,8 +76,14 @@ public class HabitView extends AnchorPane {
         else {
             title.clear();
         }
+    }
 
 
+    private String ColorToString(Color color){
+        return String.format("#%02X%02X%02X",
+                ((int)color.getRed())*255,
+                ((int)color.getGreen())*255,
+                ((int)color.getBlue())*255);
     }
 
     @FXML
