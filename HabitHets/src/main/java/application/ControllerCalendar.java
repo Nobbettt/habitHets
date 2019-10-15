@@ -296,13 +296,15 @@ public class ControllerCalendar implements Initializable, Listener {
     private void populateTodo(){ //KAn byta ut denna mot updateTodoview() sen när jag inte vill ha hårdkodat
         todoHandler.add();
         todoHandler.add();
+        todoHandler.add();
+        todoHandler.doneTodoRemove(todoHandler.getTodoList().get(0).getId());
         todoHandler.getTodoList().get(1).setTitle("Hej");
-        todoView.updateTodoView(todoHandler.getTodoList());
+        todoView.updateTodoView();
 
     }
 
     private void updateTodoView(){
-        todoView.updateTodoView(todoHandler.getTodoList());
+        todoView.updateTodoView();
     }
 
     @Override

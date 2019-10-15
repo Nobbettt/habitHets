@@ -57,6 +57,7 @@ public class TodoElementView extends AnchorPane  {
         for (CheckBox c : cb){
             if (c.isSelected()){
                 todoHandler.doneTodoRemove(todo.getId());
+                System.out.println("Blääää");
                 }
         }
 
