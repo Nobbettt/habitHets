@@ -1,12 +1,7 @@
 package main.model;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * This class contains methods and lists that affect a todoo.
@@ -55,7 +50,6 @@ public class TodoHandler implements IHandler {
     public void add() {
         todoList.add(Factory.createTodo("testTodo"));
         notifyListener();
-
     }
 
     /**
@@ -99,8 +93,6 @@ public class TodoHandler implements IHandler {
         } System.out.println("The ID " +id + " does not exist.");
     }
 
-
-
     public List<Todo> getTodoList() {
         return todoList;
     }
@@ -124,9 +116,7 @@ public class TodoHandler implements IHandler {
         }
     }
 
-
     private List<Listener> listeners = new ArrayList<>();
-
 
     public void addListener(Listener l){
         listeners.add(l);

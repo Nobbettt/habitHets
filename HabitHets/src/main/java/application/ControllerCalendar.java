@@ -27,6 +27,10 @@ public class ControllerCalendar implements Initializable, Listener {
     @FXML private Button nextBtn;
     @FXML private Button toggleHabitBtn;
     @FXML private GridPane navbarGrid;
+    @FXML private Button dayBtn;
+    @FXML private Button weekBtn;
+    @FXML private Button monthBtn;
+    @FXML private Button yearBtn;
     private AnchorPane calendarPane;
     private AnchorPane habitPane;
     private YearView yearView;
@@ -53,7 +57,6 @@ public class ControllerCalendar implements Initializable, Listener {
         habitView = new HabitView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
-
 
         updateTimeline();
 
@@ -100,6 +103,7 @@ public class ControllerCalendar implements Initializable, Listener {
         habitPane.getChildren().add(habitView);
         fitItem(habitPane, habitView, 0, 0, 0, 0);
         populateHabit();
+        setAsMarkedInNavBar(weekBtn);
     }
 
     /**
@@ -171,6 +175,7 @@ public class ControllerCalendar implements Initializable, Listener {
     private void showCalendarDayClick() {
         //temporary
         renderDay();
+        setAsMarkedInNavBar(dayBtn);
     }
 
     private void renderDay() {
@@ -186,6 +191,7 @@ public class ControllerCalendar implements Initializable, Listener {
     @FXML
     private void showCalendarWeekClick() {
         renderWeek();
+        setAsMarkedInNavBar(weekBtn);
     }
 
     private void renderWeek() {
@@ -193,7 +199,6 @@ public class ControllerCalendar implements Initializable, Listener {
         weekView.updateView(aggregate.getWeekFromDate(masterDateTime));
         renderCalendar(weekView);
     }
-
 
     // Month stuff
     @FXML
@@ -204,6 +209,7 @@ public class ControllerCalendar implements Initializable, Listener {
             monthDays.add(day);
         }
         renderMonth(monthDays);
+        setAsMarkedInNavBar(monthBtn);
     }
 
     private void renderMonth(List<Day> month){
@@ -220,9 +226,16 @@ public class ControllerCalendar implements Initializable, Listener {
         for(int i = 1; i <= 12; i++) {
             year.add(new Month(2019, i));
         }
-
-
         renderYear(year);
+        setAsMarkedInNavBar(yearBtn);
+    }
+
+    private void setAsMarkedInNavBar(Button b) {
+        yearBtn.setStyle("-fx-background-color: transparent");
+        monthBtn.setStyle("-fx-background-color: transparent");
+        weekBtn.setStyle("-fx-background-color: transparent");
+        dayBtn.setStyle("-fx-background-color: transparent");
+        b.setStyle("-fx-background-color: #474747");
     }
 
     private void renderYear(List<Month> year) {
