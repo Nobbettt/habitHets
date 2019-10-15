@@ -13,8 +13,9 @@ public class Month implements CalendarAble {
     int monthNb;
 
 
-    public Month(int year, int monthNr) {
-        this.days = getDays(year, monthNr);
+    public Month(int year, int monthNb) {
+        this.monthNb = monthNb;
+        this.days = getDays(year, monthNb);
     }
 
 

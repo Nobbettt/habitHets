@@ -3,44 +3,34 @@ package main.java.application;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-import main.model.Aggregate;
-import main.model.CalendarAble;
-import main.model.Day;
-import main.model.EventHandler;
-import main.model.Month;
 import main.model.*;
-import main.view.ExpandedDayView;
-import main.view.TodoView;
-import main.view.ViewAble;
-import main.view.WeekView;
-import main.view.YearView;
-import main.model.*;
-import main.view.*;
 import main.view.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable, Listener {
-    @FXML private GridPane mainGrid;
+    @FXML private AnchorPane mainPane;
     @FXML private Label currentValueLbl;
     @FXML private Button prevBtn;
     @FXML private Button nextBtn;
+    @FXML private Button toggleHabitBtn;
+    @FXML private GridPane navbarGrid;
+    @FXML private Button dayBtn;
+    @FXML private Button weekBtn;
+    @FXML private Button monthBtn;
+    @FXML private Button yearBtn;
     private AnchorPane calendarPane;
     private AnchorPane habitPane;
     private YearView yearView;
@@ -55,11 +45,9 @@ public class ControllerCalendar implements Initializable, Listener {
     EventHandler eventHandler = EventHandler.getInstant();
     private LocalDateTime masterDateTime;
     private Aggregate aggregate;
-
     private HabitHandler handler = HabitHandler.getInstant();
     private TodoView todoView;
     private TodoHandler todoHandler= TodoHandler.getInstant();
-
 
     public ControllerCalendar() {
         masterDateTime = LocalDateTime.now();
@@ -70,7 +58,6 @@ public class ControllerCalendar implements Initializable, Listener {
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
 
-
         updateTimeline();
 
         todoView = new TodoView();
@@ -78,7 +65,9 @@ public class ControllerCalendar implements Initializable, Listener {
 
     }
 
-    // function is called every min to update timeline in GUI
+    /**
+     * function is called every min to update timeline in GUI
+     */
     public void updateTimeline() {
         timeNow = LocalDateTime.now();
         currentView.updateTimeLine(timeNow.getHour(), timeNow.getMinute());
@@ -101,26 +90,25 @@ public class ControllerCalendar implements Initializable, Listener {
         populateTodo();
 
 
-
-        //temporary
-        Aggregate aggregate = new Aggregate();
-
-        List<Day> days = aggregate.getDayFromDate(masterDateTime);
-        renderDay(days.get(0));
+        renderDay();
 
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
 
-        renderWeek(week);
+        renderWeek();
 
         AnchorPane ap = new AnchorPane();
         calendarPane.getChildren().add(ap);
 
         setupHabit();
         habitPane.getChildren().add(habitView);
-        fitItem(habitPane, habitView);
+        fitItem(habitPane, habitView, 0, 0, 0, 0);
         populateHabit();
+        setAsMarkedInNavBar(weekBtn);
     }
 
+    /**
+     * on click this methods moves the represented time unit back in time depending on the current view.
+     */
     @FXML
     private void prevClick() {
         List<? extends CalendarAble> calendarData = new ArrayList<>();
@@ -130,9 +118,9 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.minusWeeks(1);
             calendarData = aggregate.getWeekFromDate(masterDateTime);
-            //} else if(currentView == monthView) {
-            // masterDateTime = masterDateTime.minusMonths(1);
-            // calendarData = aggregate. todo
+        } else if(currentView == monthView) {
+            masterDateTime = masterDateTime.minusMonths(1);
+            calendarData = aggregate.getMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.minusYears(1);
             calendarData = aggregate.getYearFromDate(masterDateTime);
@@ -141,6 +129,9 @@ public class ControllerCalendar implements Initializable, Listener {
         updateHeadLbl();
     }
 
+    /**
+     * on click this methods moves the represented time unit forward in time depending on the current view.
+     */
     @FXML
     private void nextClick() {
         System.out.println("next");
@@ -151,10 +142,9 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.plusWeeks(1);
             calendarData = aggregate.getWeekFromDate(masterDateTime);
-
-            //} else if(currentView == monthView) {
-            // masterDateTime = masterDateTime.minusMonths(1);
-            // calendarData = aggregate. todo
+        } else if(currentView == monthView) {
+            masterDateTime = masterDateTime.plusMonths(1);
+            calendarData = aggregate.getMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.plusYears(1);
             calendarData = aggregate.getYearFromDate(masterDateTime);
@@ -170,8 +160,9 @@ public class ControllerCalendar implements Initializable, Listener {
         } else if(currentView == weekView) {
             Integer weekNb = aggregate.getDayFromDate(masterDateTime).get(0).getWeekNr();
             headLbl = "Week " + weekNb.toString();
-            //} else if(currentView == monthView) {
-
+        } else if(currentView == monthView) {
+            Integer yearNb = masterDateTime.getYear();
+            headLbl = aggregate.getMonth(masterDateTime).getString() + " " + yearNb;
         } else if(currentView == yearView) {
             Integer yearNb = masterDateTime.getYear();
             headLbl = yearNb.toString();
@@ -183,11 +174,12 @@ public class ControllerCalendar implements Initializable, Listener {
     @FXML
     private void showCalendarDayClick() {
         //temporary
-        Day d = aggregate.getDayFromDate(LocalDateTime.now()).get(0);
-        renderDay(d);
+        renderDay();
+        setAsMarkedInNavBar(dayBtn);
     }
 
-    private void renderDay(Day day) {
+    private void renderDay() {
+        Day day = aggregate.getDayFromDate(LocalDateTime.now()).get(0);
         List<Day> days = new ArrayList<>();
         days.add(day);
         currentView = expandedDayView;
@@ -198,17 +190,15 @@ public class ControllerCalendar implements Initializable, Listener {
     // Week stuff
     @FXML
     private void showCalendarWeekClick() {
-        //temporary
-        List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
-        renderWeek(week);
+        renderWeek();
+        setAsMarkedInNavBar(weekBtn);
     }
 
-    private void renderWeek(List<Day> week) {
+    private void renderWeek() {
         currentView = weekView;
-        weekView.updateView(week);
+        weekView.updateView(aggregate.getWeekFromDate(masterDateTime));
         renderCalendar(weekView);
     }
-
 
     // Month stuff
     @FXML
@@ -219,6 +209,7 @@ public class ControllerCalendar implements Initializable, Listener {
             monthDays.add(day);
         }
         renderMonth(monthDays);
+        setAsMarkedInNavBar(monthBtn);
     }
 
     private void renderMonth(List<Day> month){
@@ -235,9 +226,16 @@ public class ControllerCalendar implements Initializable, Listener {
         for(int i = 1; i <= 12; i++) {
             year.add(new Month(2019, i));
         }
-
-
         renderYear(year);
+        setAsMarkedInNavBar(yearBtn);
+    }
+
+    private void setAsMarkedInNavBar(Button b) {
+        yearBtn.setStyle("-fx-background-color: transparent");
+        monthBtn.setStyle("-fx-background-color: transparent");
+        weekBtn.setStyle("-fx-background-color: transparent");
+        dayBtn.setStyle("-fx-background-color: transparent");
+        b.setStyle("-fx-background-color: #474747");
     }
 
     private void renderYear(List<Month> year) {
@@ -248,12 +246,34 @@ public class ControllerCalendar implements Initializable, Listener {
 
     private void setupCalender() {
         calendarPane = new AnchorPane();
-        mainGrid.add(calendarPane, 1, 0);
+        mainPane.getChildren().add(calendarPane);
+        fitItem(mainPane, calendarPane, 70, 200, 0, 200);
     }
 
     private void setupHabit() {
         habitPane = new AnchorPane();
-        mainGrid.add(habitPane,0,0);
+        mainPane.getChildren().add(habitPane);
+        habitPane.setPrefWidth(200);
+
+        toggleHabitBtn.toFront();
+        double centerY = getCenterHeightOfMainGrid();
+        toggleHabitBtn.setTranslateY(centerY);
+
+        fitItem(mainPane, toggleHabitBtn, -1, -1, -1, 200);
+        fitItem(mainPane, habitPane, 70, -1, 0, 0);
+    }
+
+    private double getCenterHeightOfMainGrid() {
+        double centerY = mainPane.getBoundsInLocal().getHeight()/2;
+        centerY += navbarGrid.getPrefHeight();
+        return centerY;
+    }
+
+    private void setupTodo() {
+        todoPane = new AnchorPane();
+        mainPane.getChildren().add(todoPane);
+        todoPane.setPrefWidth(200);
+        fitItem(mainPane, todoPane, 70, 0, 0, -1);
     }
 
     private void populateHabit(){
@@ -267,38 +287,65 @@ public class ControllerCalendar implements Initializable, Listener {
         habitView.updateHabitView(handler.getHabitList());
     }
 
-    private void setupTodo() {
-        todoPane = new AnchorPane();
-        mainGrid.add(todoPane, 2, 0);
+    @FXML
+    private void toggleHabitClick() {
+        int expanded = 200;
+        int collapsed= 70;
+        if(habitView.getIsExpanded()) {
+            for(double i = expanded; i >= collapsed; i-=1) {
+                habitPane.setPrefWidth(i);
+                mainPane.setLeftAnchor(calendarPane, i);
+                mainPane.setLeftAnchor(toggleHabitBtn, i);
+                toggleHabitBtn.setText(">");
+            }
+            habitView.setIsExpanded(false);
+            // todo call on hide things in habit view
+        } else {
+            for(double i = collapsed; i <= expanded; i+=1) {
+                habitPane.setPrefWidth(i);
+                mainPane.setLeftAnchor(calendarPane, i);
+                mainPane.setLeftAnchor(toggleHabitBtn, i);
+                toggleHabitBtn.setText("<");
+            }
+            habitView.setIsExpanded(true);
+            // todo call on show things in habit view
+        }
+        if(currentView == weekView) {
+            renderWeek();
+        } else if(currentView == expandedDayView) {
+            renderDay();
+        }
     }
-
-
 
     private void renderCalendar(Node node) {
         if(calendarPane.getChildren() != null) {
             calendarPane.getChildren().clear();
         }
         calendarPane.getChildren().add(node);
-        fitItem(calendarPane, node);
+        fitItem(calendarPane, node, 0, 0, 0, 0);
         updateHeadLbl();
     }
 
-    private void fitItem(AnchorPane parent, Node child) {
-        parent.setTopAnchor(child, 0.0);
-        parent.setRightAnchor(child, 0.0);
-        parent.setBottomAnchor(child, 0.0);
-        parent.setLeftAnchor(child, 0.0);
+    private void fitItem(AnchorPane parent, Node child, double top, double right, double bottom, double left) {
+        if (top != -1) {
+            parent.setTopAnchor(child, top);
+        }
+        if (right != -1) {
+            parent.setRightAnchor(child, right);
+        }
+        if (bottom != -1) {
+            parent.setBottomAnchor(child, bottom);
+        }
+        if (left != -1) {
+            parent.setLeftAnchor(child, left);
+        }
     }
-
-
-
 
     private void populateTodo(){ //KAn byta ut denna mot updateTodoview() sen när jag inte vill ha hårdkodat
         todoHandler.add();
         todoHandler.add();
         todoHandler.getTodoList().get(1).setTitle("Hej");
         todoView.updateTodoView(todoHandler.getTodoList());
-
     }
 
     private void updateTodoView(){

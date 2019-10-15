@@ -19,6 +19,7 @@ public class DayEventListView extends StackPane {
     private Line tl;
     private double hHeight;
     public double timeHeight;
+    private double vBoxWidth;
     Day day;
 
     public DayEventListView(Day day) {
@@ -48,7 +49,9 @@ public class DayEventListView extends StackPane {
         hHeight = new HourView().getPrefHeight();
     }
 
-    public void updateDay(Day day) {
+    public void updateDay(Day day, double vBoxWidth) {
+        this.vBoxWidth = vBoxWidth;
+        System.out.println(vBoxWidth);
         this.day = day;
         for (HBox hBox : hBoxList) {
             hBox.getChildren().clear();
@@ -132,12 +135,13 @@ public class DayEventListView extends StackPane {
             }
         }
         events.add(event);
-        return 150 / i;
+        //double vboxWidth = getVboxWidth();
+        return vBoxWidth / i;
     }
 
     private double calculateTranslateX(Event event) {
         double x = calculateWidth(event);
-        if (x == 150) {
+        if (x == vBoxWidth) {
             return 0;
         } else {
             return x;

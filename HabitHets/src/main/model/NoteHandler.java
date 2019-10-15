@@ -47,7 +47,6 @@ public class NoteHandler implements IHandler {
         notesList.add(Factory.createNote("title", "desc", LocalDateTime.now()));
     }
 
-
     /**
      * Method that removes a Note from a list of Notes, using the id set when creating a Note from Factory.
      * @param id, which is how we locate which note to remove.
