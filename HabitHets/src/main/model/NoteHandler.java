@@ -44,7 +44,6 @@ public class NoteHandler implements IHandler {
     @Override
     public void add() {
         //Get input from database
-        notesList.add(Factory.createNote("title", "desc", LocalDateTime.now()));
     }
 
 
@@ -54,12 +53,13 @@ public class NoteHandler implements IHandler {
      */
     @Override
     public void remove(int id) {
-        for(Note note : notesList){
-            if(note.getId() == id){
+        for (Note note : notesList){
+            if (note.getId() == id){
                 notesList.remove(note);
                 return;
             }
         }
+        System.out.println("The ID: '" + id + "' does not exist");
     }
 
     /**
@@ -72,7 +72,15 @@ public class NoteHandler implements IHandler {
                 if(n.getDay().getDayOfYear() == d.getDayOfYear() && n.getDay().getYear() == d.getYear()){
                     return n;
                 }
-        }return null;
+        }
+        return null;
     }
-}
+
+    public Note addNote (String s, LocalDateTime date){
+
+            notesList.add(Factory.createNote(s, date));
+            return notesList.get(notesList.size() - 1);
+        }
+    }
+
 
