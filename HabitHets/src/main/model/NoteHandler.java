@@ -44,7 +44,6 @@ public class NoteHandler implements IHandler {
     @Override
     public void add() {
         //Get input from database
-        notesList.add(Factory.createNote("desc", LocalDateTime.now()));
     }
 
 
@@ -73,15 +72,15 @@ public class NoteHandler implements IHandler {
                 if(n.getDay().getDayOfYear() == d.getDayOfYear() && n.getDay().getYear() == d.getYear()){
                     return n;
                 }
-        }return null;
-
-
-
-
+        }
+        return null;
     }
 
+    public Note addNote (String s, LocalDateTime date){
 
+            notesList.add(Factory.createNote(s, date));
+            return notesList.get(notesList.size() - 1);
+        }
+    }
 
-
-}
 

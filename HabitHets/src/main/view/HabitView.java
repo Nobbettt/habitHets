@@ -58,7 +58,6 @@ public class HabitView extends AnchorPane {
         updateHabitView(newHabit);
     }
 
-
     public void hide(){
         for(HabitObjectView h : habitsList){
             h.hideHabits();

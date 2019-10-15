@@ -5,14 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import main.model.CalendarAble;
-import main.model.Calender;
-import main.model.Day;
-import main.model.Note;
+import main.model.*;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpandedDayView extends StackPane implements ViewAble{
@@ -23,6 +21,8 @@ public class ExpandedDayView extends StackPane implements ViewAble{
     @FXML private Button saveNoteButton;
     private DayEventListView dayEvents;
     private Note note;
+    private Day day;
+    private NoteHandler noteHandler = NoteHandler.getInstance();
 
 
 
@@ -37,14 +37,21 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         }
         setupDayView();
 
+
     }
 
     @Override
     public void updateView(List<? extends CalendarAble> days) {
         String weekday = days.get(0).getString(); //week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
-        Day day = (Day) days.get(0);
+        day = (Day) days.get(0);
         dayEvents.updateDay(day);
+        note = noteHandler.getNoteDate(day.getLdt());
+        if(note != null){
+            noteField.setText(note.getDescription());
+        }
+
+
     }
 
     @Override
@@ -64,20 +71,26 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         dayGrid.add(new HourColumnView(), 0, 0);
         dayEvents = new DayEventListView(Calender.getInstant().getDayFromLDT(LocalDateTime.now()));
         dayGrid.add(dayEvents, 1, 0);
+
     }
 
     @FXML
-    private void notehandle(List<? extends CalendarAble> days) {
-        this.note = note;
-
+    private void notehandle() {
         System.out.println(noteField.getText());
-        Day d = (Day) days.get(0);
+        if(note == null){
+            String noteString = noteField.getText();
+            LocalDateTime d = day.getLdt();
+            note = noteHandler.addNote(noteString, d);
+        }
+        else{
+            note.setDescription(noteField.getText());
+            note.setDay(day.getLdt());
+        }
 
-        note.setDescription(noteField.getText());
-        note.setDay(d.getLdt());
+
+    }
+        private void createDay (Day dayData){
+
+        }
     }
 
-    private void createDay(Day dayData) {
-
-    }
-}

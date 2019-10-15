@@ -9,10 +9,14 @@ public class Note{
     private String description;
     private LocalDateTime day;
 
-    private Note(int id, String Description, LocalDateTime day) {
+    public Note(int id, String Description, LocalDateTime day) {
         this.description = description;
         this.day = day;
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
