@@ -3,6 +3,7 @@ package main.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * This class contains methods and lists that affect a todoo.
  */
@@ -50,6 +51,13 @@ public class TodoHandler implements IHandler {
     public void add() {
         todoList.add(Factory.createTodo("testTodo"));
         notifyListener();
+
+    }
+
+    public void addTodo(String title) {
+        todoList.add(Factory.createTodo(title));
+        notifyListener();
+
     }
 
     /**
@@ -66,6 +74,7 @@ public class TodoHandler implements IHandler {
         for (Todo todo: todoList){
             if(todo.getId() == id){
                 todoList.remove(todo);
+                notifyListener();
                 return;
             }
         } System.out.println("The ID " +id + " does not exist.");
@@ -126,5 +135,15 @@ public class TodoHandler implements IHandler {
     private void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();
+    }
+
+    public void moveBackDoneTodo(int id) {
+        for (int i = 0; i < doneTodoList.size(); i++) {
+            if (doneTodoList.get(i).getId() == id) {
+                doneTodoList.remove(i);
+                notifyListener();
+                return;
+            }
+        }
     }
 }
