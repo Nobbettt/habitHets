@@ -13,6 +13,15 @@
     -fx-alignment: center;
 }
 
+.collapsedTitle{
+    -fx-background-color: #555;
+    -fx-border-color: #787878;
+    -fx-font-size: 40px;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
 
 .button-check {
     -fx-border-width: 2px;
@@ -43,6 +52,27 @@
     -fx-font-size: 16;
 }
 
+.editButton{
+    -fx-background-color: transparent;
+    -fx-border-color: #fff;
+    -fx-border-width: 0px;
+}
+
+
+.editButton:hover {
+    -fx-cursor: hand;
+    -fx-opacity: .5;
+}
+
+.save-btn{
+    -fx-background-color: transparent;
+    -fx-border-color: #fff;
+    -fx-border-width: 3px;
+    -fx-font-size: 20px;
+    -fx-padding: 0;
+    -fx-border-radius: 5px;
+    -fx-text-fill: #fff;
+}
 
 
 

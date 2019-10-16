@@ -26,6 +26,9 @@ public class HabitView extends AnchorPane {
     @FXML private Button saveFromEdit;
     @FXML private Button addHabit;
     @FXML private Label generalTitle;
+    @FXML private AnchorPane titleBackground;
+    @FXML private Label collapsedTitle;
+    @FXML private Label habitModifyTypeLabel;
     private List<HabitObjectView> habitsList;
     private HabitObjectView editing;
 
@@ -79,6 +82,8 @@ public class HabitView extends AnchorPane {
         Color c = Color.rgb(tmpC.getRed(),tmpC.getGreen(),tmpC.getBlue());
         colorPicker.setValue(c);
         editing = habitObjectView;
+        habitModifyTypeLabel.setText("Edit Habit");
+
     }
 
     @FXML
@@ -136,6 +141,8 @@ public class HabitView extends AnchorPane {
         }
         addHabit.setVisible(false);
         generalTitle.setVisible(false);
+        titleBackground.setVisible(true);
+        collapsedTitle.setVisible(true);
         isExpanded = false;
     }
 
@@ -145,6 +152,8 @@ public class HabitView extends AnchorPane {
         }
         addHabit.setVisible(true);
         generalTitle.setVisible(true);
+        titleBackground.setVisible(false);
+        collapsedTitle.setVisible(false);
         isExpanded = true;
     }
 

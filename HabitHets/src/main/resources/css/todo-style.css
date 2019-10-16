@@ -9,3 +9,12 @@
     
 }
 
+.todoBtn {
+    -fx-background-color: transparent;
+    -fx-border-width: 0px;
+}
+
+.todoBtn:hover {
+    -fx-cursor: hand;
+    -fx-opacity: .5;
+}
