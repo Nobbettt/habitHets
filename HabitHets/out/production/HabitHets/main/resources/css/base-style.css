@@ -22,3 +22,19 @@
 .navbar-arrow-btn {
     -fx-font-size: 34px;
 }
+.habitToggleBtn {
+    -fx-text-fill: #eee;
+    -fx-background-color: #666666B6;
+    -fx-border-radius: 0 100 100 0;
+    -fx-background-radius: 0 100px 100 0;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-padding: 0;
+    -fx-border-color: #888888;
+    -fx-border-width: 2px 2px 2px 0;
+}
+.habitToggleBtn:hover {
+    -fx-background-color: #666666;
+    -fx-border-color: #888888B6;
+    -fx-cursor: hand;
+}
