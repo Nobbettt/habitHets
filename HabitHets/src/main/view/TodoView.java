@@ -89,20 +89,21 @@ public class TodoView extends AnchorPane {
             vboxtodo.getChildren().add(todoElement);
         }
         for (Todo todo : TodoHandler.getInstant().getDoneTodoList()) {
-            TodoElementView todoElement = new TodoElementView(todo);
-            todoElement.getChildren().get(1).setVisible(false);
-            vboxdonetodo.getChildren().add(todoElement);
-            todoElement.getCb().setSelected(true);
+            TodoDoneElementView todoDoneElement = new TodoDoneElementView(todo);
+            //todoDoneElement.getChildren().get(1).setVisible(false);
+            vboxdonetodo.getChildren().add(todoDoneElement);
+            //todoDoneElement.getCb().setSelected(true);
         }
 
         for (int i = 0; i < vboxtodo.getChildren().size(); i++) {
             TodoElementView td = (TodoElementView) vboxtodo.getChildren().get(i);
             CheckBox c = td.getCb();
             if (c.isSelected()) {
-                todoHandler.doneTodoRemove(td.todo.getId());
+                //todoHandler.doneTodoRemove(td.todo.getId());
                 vboxtodo.getChildren().remove(td);
-                vboxdonetodo.getChildren().add(td);
-                td.getCb().setSelected(true);
+                TodoDoneElementView tdd=new TodoDoneElementView(td.todo);
+                vboxdonetodo.getChildren().add(tdd);
+
             }
         }
 

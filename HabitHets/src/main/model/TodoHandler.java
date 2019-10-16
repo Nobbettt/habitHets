@@ -139,4 +139,14 @@ public class TodoHandler implements IHandler {
         for (Listener l : listeners)
             l.actOnUpdate();
     }
+
+    public void moveBackDoneTodo(int id) {
+        for (int i = 0; i < doneTodoList.size(); i++) {
+            if (doneTodoList.get(i).getId() == id) {
+                doneTodoList.remove(i);
+                notifyListener();
+                return;
+            }
+        }
+    }
 }

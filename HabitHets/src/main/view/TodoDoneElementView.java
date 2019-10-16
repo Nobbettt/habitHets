@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodoElementView extends AnchorPane  {
+public class TodoDoneElementView extends AnchorPane  {
 
     Todo todo;
     TodoHandler todoHandler = TodoHandler.getInstant();
@@ -19,8 +19,8 @@ public class TodoElementView extends AnchorPane  {
 
 
 
-    public TodoElementView(Todo todo) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/todoElement.fxml"));
+    public TodoDoneElementView(Todo todo) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/todoDoneElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -30,7 +30,7 @@ public class TodoElementView extends AnchorPane  {
                 IOException exception) {
             throw new RuntimeException(exception);
         }
-         this.todo = todo;
+        this.todo = todo;
         setUpTodo();
 
     }
@@ -45,6 +45,7 @@ public class TodoElementView extends AnchorPane  {
         CheckBox c = (CheckBox)getChildren().get(0);
         c.setText(todo.getTitle());
         c.setStyle("-fx-font-size: 15");
+        c.setSelected(true);
         cb.add(c);
     }
 
@@ -55,17 +56,15 @@ public class TodoElementView extends AnchorPane  {
     @FXML
     private void remove(){
         for (CheckBox c : cb){
-            if (c.isSelected()){
-                todoHandler.doneTodoRemove(todo.getId());
-                }
+            if (!c.isSelected()){
+                todoHandler.addTodo(todo.getTitle());
+                todoHandler.moveBackDoneTodo(todo.getId());
+            }
         }
 
     }
 
-    @FXML
-    private void deleteTodo(){
-        todoHandler.remove(todo.getId());
-    }
+
 
 
 
