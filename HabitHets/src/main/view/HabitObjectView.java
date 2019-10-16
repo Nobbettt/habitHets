@@ -23,7 +23,6 @@ public class HabitObjectView extends AnchorPane {
     @FXML private Label title;
     @FXML private GridPane habitGrid;
     @FXML private Button edit;
-
     private HabitView habitView;
 
 
@@ -58,7 +57,6 @@ public class HabitObjectView extends AnchorPane {
         habitView.edit(this);
     }
 
-
     public void updateElementView(Habit habit) {
         this.habit = habit;
         title.setText(habit.getTitle());
@@ -69,7 +67,6 @@ public class HabitObjectView extends AnchorPane {
 
         setColor();
     }
-
 
     private void setColor() {
         if (habit.isCheckedToday()){

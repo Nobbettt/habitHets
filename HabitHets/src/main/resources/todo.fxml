@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxWidth="200.0" minWidth="200.0" prefHeight="700.0" prefWidth="200.0" stylesheets="@css/todo-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxWidth="200.0" minWidth="200.0" prefHeight="700.0" prefWidth="200.0" stylesheets="@css/todo-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="2.0" layoutY="6.0" prefHeight="58.0" prefWidth="200.0" styleClass="todo-title" text="Todo" AnchorPane.bottomAnchor="635.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
@@ -18,7 +18,7 @@
          <font>
             <Font size="36.0" />
          </font></Label>
-      <Button fx:id="addTodo" layoutX="131.0" layoutY="21.0" mnemonicParsing="false" onAction="#addTodoOnClick" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #FFFFFF;" text="+" AnchorPane.leftAnchor="131.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="21.0" />
+      <Button fx:id="addTodo" layoutX="161.0" layoutY="6.0" mnemonicParsing="false" onAction="#addTodoOnClick" prefHeight="27.0" prefWidth="31.0" style="-fx-background-color: #FFFFFF;" text="+" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="6.0" />
       <ScrollPane layoutX="2.0" layoutY="60.0" prefHeight="410.0" prefWidth="200.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <content>
             <VBox fx:id="vboxtodo" prefHeight="407.0" prefWidth="196.0" style="-fx-background-color: #999;" />
