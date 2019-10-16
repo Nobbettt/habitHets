@@ -67,10 +67,10 @@
 .save-btn{
     -fx-background-color: transparent;
     -fx-border-color: #fff;
-    -fx-border-width: 3px;
-    -fx-font-size: 20px;
+    -fx-border-width: 2px;
+    -fx-font-size: 10px;
     -fx-padding: 0;
-    -fx-border-radius: 5px;
+    -fx-border-radius: 3px;
     -fx-text-fill: #fff;
 }
 
