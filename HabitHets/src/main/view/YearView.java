@@ -36,8 +36,8 @@ public class YearView extends AnchorPane implements ViewAble {
         yearGrid.setGridLinesVisible(true); // remove soon
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
-                Label month = new Label("month things");// new month or something instead todo
-                yearGrid.add(month, i, j);
+                MonthInYear miy = new MonthInYear();
+                yearGrid.add(miy, i, j);
                 // months.add(month); add created month to list months which doesnt exist todo
             }
         }
