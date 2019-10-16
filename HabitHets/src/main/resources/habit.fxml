@@ -10,7 +10,7 @@
 
 <fx:root prefHeight="330.0" prefWidth="50.0" style="-fx-background-color: #999;" stylesheets="@css/habit-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutY="10.0" prefHeight="50.0" prefWidth="53.0" styleClass="habitLabel" text="Habits" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="generalTitle" layoutY="10.0" prefHeight="50.0" prefWidth="53.0" styleClass="habitLabel" text="Habits" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Button fx:id="addHabit" layoutX="161.0" layoutY="6.0" mnemonicParsing="false" onAction="#addNewHabit" prefHeight="27.0" prefWidth="31.0" text="+" AnchorPane.rightAnchor="8.0" />
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="116.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #999;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <content>

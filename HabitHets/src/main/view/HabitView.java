@@ -25,6 +25,7 @@ public class HabitView extends AnchorPane {
     @FXML private Button saveFromAdd;
     @FXML private Button saveFromEdit;
     @FXML private Button addHabit;
+    @FXML private Label generalTitle;
     private List<HabitObjectView> habitsList;
     private HabitObjectView editing;
 
@@ -134,6 +135,7 @@ public class HabitView extends AnchorPane {
             h.hideHabits();
         }
         addHabit.setVisible(false);
+        generalTitle.setVisible(false);
         isExpanded = false;
     }
 
@@ -142,6 +144,7 @@ public class HabitView extends AnchorPane {
             h.showHabits();
         }
         addHabit.setVisible(true);
+        generalTitle.setVisible(true);
         isExpanded = true;
     }
 
