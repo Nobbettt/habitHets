@@ -1,6 +1,5 @@
 package main.model;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,7 +8,6 @@ import java.util.List;
 
 public class Month implements CalendarAble {
     List<Day> days;
-    List<Label> dayDate;
     int monthNb;
 
 
