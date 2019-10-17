@@ -43,6 +43,9 @@ public class MonthInYear extends AnchorPane  {
         int k = firstDay.getLdt().getDayOfWeek().getValue()-1;
         int dc = 0;
         monthLabel.setText(monthName);
+        for (int e=0; e<k; e++){
+            days.get(e).setText(" ");
+        }
         for (int i = k; i < days.size(); i++){
             if (dc< months.size()){
                 Day tmpDay = (Day)months.get(dc);
@@ -69,10 +72,8 @@ public class MonthInYear extends AnchorPane  {
                 a.getChildren().add(label);
                 gridPane.add(a,j,i);
                 fitItem(a, label);
-
             }
         }
-
 
     }
 

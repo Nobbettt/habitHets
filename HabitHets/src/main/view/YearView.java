@@ -37,11 +37,11 @@ public class YearView extends AnchorPane implements ViewAble {
         yearScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         yearScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         yearGrid.setGridLinesVisible(true); // remove soon
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
                 MonthInYear miy = new MonthInYear();
                 monthInYears.add(miy);
-                yearGrid.add(miy, i, j);
+                yearGrid.add(miy, j, i);
                 // months.add(month); add created month to list months which doesnt exist todo
             }
         }
