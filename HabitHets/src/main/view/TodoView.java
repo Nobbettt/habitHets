@@ -3,6 +3,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -23,6 +24,8 @@ public class TodoView extends AnchorPane {
     @FXML public Button closeNewTodo;
     @FXML public Button saveNewTodo;
     @FXML public TextField todoTitle;
+    @FXML private ScrollPane todoScrollpane;
+    @FXML private ScrollPane doneTodoScrollpane;
     TodoHandler todoHandler = TodoHandler.getInstant();
 
 
@@ -38,7 +41,10 @@ public class TodoView extends AnchorPane {
                 IOException exception) {
             throw new RuntimeException(exception);
         }
-        //addTodo.setShape(new Circle());
+        todoScrollpane.setFitToWidth(true);
+        todoScrollpane.setFitToHeight(true);
+        doneTodoScrollpane.setFitToWidth(true);
+        doneTodoScrollpane.setFitToHeight(true);
 
 
     }

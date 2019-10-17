@@ -16,9 +16,6 @@ public class TodoElementView extends AnchorPane  {
     Todo todo;
     TodoHandler todoHandler = TodoHandler.getInstant();
 
-
-
-
     public TodoElementView(Todo todo) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/todoElement.fxml"));
         fxmlLoader.setRoot(this);
@@ -50,16 +47,13 @@ public class TodoElementView extends AnchorPane  {
 
     List<CheckBox> checkBoxes= new ArrayList<>();
 
-
-
     @FXML
     private void remove(){
         for (CheckBox c : cb){
             if (c.isSelected()){
                 todoHandler.doneTodoRemove(todo.getId());
-                }
+            }
         }
-
     }
 
     @FXML

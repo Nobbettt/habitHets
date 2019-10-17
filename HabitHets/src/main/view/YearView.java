@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import main.model.CalendarAble;
+import main.model.Month;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class YearView extends AnchorPane implements ViewAble {
     @FXML private ScrollPane yearScroll;
     @FXML private GridPane yearGrid;
     private List<MonthView> months = new ArrayList(); //guess its gonna be something like this.... :/ todo
+    List<MonthInYear> monthInYears = new ArrayList<>();
 
     public YearView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/year.fxml"));
@@ -30,23 +32,24 @@ public class YearView extends AnchorPane implements ViewAble {
     }
 
     private void setUpYear() {
-        yearScroll.setFitToWidth(true);
-        yearScroll.setFitToHeight(true);
-        yearScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        yearScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        yearGrid.setGridLinesVisible(true); // remove soon
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 4; j++) {
-                MonthViewMini month = new MonthViewMini();
-                yearGrid.setGridLinesVisible(true);
-                yearGrid.add(month, i, j);
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
+                MonthInYear miy = new MonthInYear();
+                monthInYears.add(miy);
+                yearGrid.add(miy, j, i);
                 // months.add(month); add created month to list months which doesnt exist todo
             }
         }
     }
 
     @Override
-    public void updateView(List<? extends CalendarAble> months) {/*
+    public void updateView(List<? extends CalendarAble> months) {
+        for(int i=0; i< monthInYears.size(); i++){
+            Month m = (Month) months.get(i);
+            monthInYears.get(i).updateView(m.getDays(), m.getString());
+        }
+        /*
         for(MonthView month : months) {
             // update months with method implemented in monthView
         }*/
