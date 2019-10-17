@@ -27,6 +27,10 @@ public class ControllerCalendar implements Initializable, Listener {
     @FXML private Button nextBtn;
     @FXML private Button toggleHabitBtn;
     @FXML private GridPane navbarGrid;
+    @FXML private Button dayBtn;
+    @FXML private Button weekBtn;
+    @FXML private Button monthBtn;
+    @FXML private Button yearBtn;
     private AnchorPane calendarPane;
     private AnchorPane habitPane;
     private YearView yearView;
@@ -54,7 +58,6 @@ public class ControllerCalendar implements Initializable, Listener {
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
 
-
         updateTimeline();
 
         todoView = new TodoView();
@@ -81,12 +84,8 @@ public class ControllerCalendar implements Initializable, Listener {
         setupTodo();
         todoHandler.addListener(this);
 
-
-
         todoPane.getChildren().add(todoView);
         populateTodo();
-
-
         renderDay();
 
         List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
@@ -100,6 +99,7 @@ public class ControllerCalendar implements Initializable, Listener {
         habitPane.getChildren().add(habitView);
         fitItem(habitPane, habitView, 0, 0, 0, 0);
         populateHabit();
+        setAsMarkedInNavBar(weekBtn);
     }
 
     /**
@@ -130,7 +130,6 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     @FXML
     private void nextClick() {
-        System.out.println("next");
         List<? extends CalendarAble> calendarData = new ArrayList<>();
         if(currentView == expandedDayView) {
             masterDateTime = masterDateTime.plusDays(1);
@@ -149,6 +148,9 @@ public class ControllerCalendar implements Initializable, Listener {
         updateHeadLbl();
     }
 
+    /**
+     * Updates the main label between the arrow buttons in the navigation bar depending on view/ time-unit and masterDateTime (the date that is visible on screen)
+     */
     private void updateHeadLbl() {
         String headLbl = "";
         if(currentView == expandedDayView) {
@@ -166,69 +168,102 @@ public class ControllerCalendar implements Initializable, Listener {
 
         currentValueLbl.setText(headLbl);
     }
-    // Day stuff
+
+    /**
+     * On click method for day button, responsible for changing the calendar view to desired time unit
+     */
     @FXML
     private void showCalendarDayClick() {
-        //temporary
         renderDay();
+        setAsMarkedInNavBar(dayBtn);
     }
 
+    /**
+     * Is called upon click from view (and by showCalendarDayClick())
+     * Changes currentView to expandedDayView
+     * Updates child view, in this case expandedDayView with day info
+     * Changes the calendar view to single day view
+     */
     private void renderDay() {
-        Day day = aggregate.getDayFromDate(LocalDateTime.now()).get(0);
-        List<Day> days = new ArrayList<>();
-        days.add(day);
         currentView = expandedDayView;
-        expandedDayView.updateView(days);
+        expandedDayView.updateView(aggregate.getDayFromDate(masterDateTime));
         renderCalendar(expandedDayView);
     }
 
-    // Week stuff
+    /**
+     * On click method for week button, responsible for changing the calendar view to desired time unit
+     */
     @FXML
     private void showCalendarWeekClick() {
         renderWeek();
+        setAsMarkedInNavBar(weekBtn);
     }
 
+    /**
+     * Is called upon click from view (and by showCalendarWeekClick())
+     * Changes currentView to weekView
+     * Updates child view, in this case weeView with week info
+     * Changes the calendar view to week schedule view
+     */
     private void renderWeek() {
         currentView = weekView;
         weekView.updateView(aggregate.getWeekFromDate(masterDateTime));
         renderCalendar(weekView);
     }
 
-
-    // Month stuff
+    /**
+     * On click method for month button, responsible for changing the calendar view to desired time unit
+     */
     @FXML
     private void showCalendarMonthClick() {
-        List<Day> monthDays = new ArrayList<>();
-        Month m = aggregate.getMonth(LocalDateTime.now());
-        for (Day day : m.getDays()){
-            monthDays.add(day);
-        }
-        renderMonth(monthDays);
+        renderMonth();
+        setAsMarkedInNavBar(monthBtn);
     }
 
-    private void renderMonth(List<Day> month){
+    /**
+     * Is called upon click from view (and by showCalendarMonthClick())
+     * Changes currentView to monthView
+     * Updates child view, in this case monthView with month info
+     * Changes the calendar view to overview of a month view
+     */
+    private void renderMonth(){
         currentView = monthView;
-        monthView.updateView(month);
+        monthView.updateView(aggregate.getMonthFromDate(masterDateTime));
         renderCalendar(monthView);
     }
 
-    // Year stuff
+    /**
+     * On click method for year button, responsible for changing the calendar view to desired time unit
+     */
     @FXML
     private void showCalendarYearClick() {
-        // tmp things
-        List<Month> year = new ArrayList<>();
-        for(int i = 1; i <= 12; i++) {
-            year.add(new Month(2019, i));
-        }
-
-
-        renderYear(year);
+        renderYear();
+        setAsMarkedInNavBar(yearBtn);
     }
 
-    private void renderYear(List<Month> year) {
+    /**
+     * Is called upon click from view (and by showCalendarYearClick())
+     * Changes currentView to yearView
+     * Updates child view, in this case yearView with year info
+     * Changes the calendar view to overview of a year view
+     */
+    private void renderYear() {
         currentView = yearView;
-        yearView.updateView(year);
+        yearView.updateView(aggregate.getYearFromDate(masterDateTime));
         renderCalendar(yearView);
+    }
+
+    /**
+     * Is called upon every time one of the 4 view options (in the navigation bar) are clicked.
+     * Resets all buttons to default style
+     * Marks the clicked button by making its background darker than the default style
+     */
+    private void setAsMarkedInNavBar(Button b) {
+        yearBtn.setStyle("-fx-background-color: transparent");
+        monthBtn.setStyle("-fx-background-color: transparent");
+        weekBtn.setStyle("-fx-background-color: transparent");
+        dayBtn.setStyle("-fx-background-color: transparent");
+        b.setStyle("-fx-background-color: #474747");
     }
 
     private void setupCalender() {
@@ -241,6 +276,8 @@ public class ControllerCalendar implements Initializable, Listener {
         habitPane = new AnchorPane();
         mainPane.getChildren().add(habitPane);
         habitPane.setPrefWidth(200);
+        habitPane.setMinWidth(200);
+        habitPane.setMaxWidth(200);
 
         toggleHabitBtn.toFront();
         double centerY = getCenterHeightOfMainGrid();
@@ -268,35 +305,32 @@ public class ControllerCalendar implements Initializable, Listener {
         handler.add();
         handler.getHabitList().get(0).setTitle("elintina");
         handler.getHabitList().get(0).onClickHabit();
-        handler.getHabitList().get(0).setColor("blue");
+        handler.getHabitList().get(0).setColor("#47BCAD");
         handler.getHabitList().get(1).setTitle("nobbhelge");
-        handler.getHabitList().get(1).setColor("pink");
+        handler.getHabitList().get(1).setColor("#47BCAD");
         habitView.updateHabitView(handler.getHabitList());
     }
 
     @FXML
     private void toggleHabitClick() {
-        int expanded = 200;
-        int collapsed= 70;
+        double widthValue;
         if(habitView.getIsExpanded()) {
-            for(double i = expanded; i >= collapsed; i-=1) {
-                habitPane.setPrefWidth(i);
-                mainPane.setLeftAnchor(calendarPane, i);
-                mainPane.setLeftAnchor(toggleHabitBtn, i);
-                toggleHabitBtn.setText(">");
-            }
+            widthValue = 70;
             habitView.setIsExpanded(false);
-            // todo call on hide things in habit view
+            toggleHabitBtn.setText(">");
+            habitView.hide();
         } else {
-            for(double i = collapsed; i <= expanded; i+=1) {
-                habitPane.setPrefWidth(i);
-                mainPane.setLeftAnchor(calendarPane, i);
-                mainPane.setLeftAnchor(toggleHabitBtn, i);
-                toggleHabitBtn.setText("<");
-            }
+            widthValue = 200;
+            toggleHabitBtn.setText("<");
             habitView.setIsExpanded(true);
-            // todo call on show things in habit view
+            habitView.visiable();
         }
+
+        habitPane.setPrefWidth(widthValue);
+        habitPane.setMinWidth(widthValue);
+        habitPane.setMaxWidth(widthValue);
+        mainPane.setLeftAnchor(calendarPane, widthValue);
+        mainPane.setLeftAnchor(toggleHabitBtn, widthValue);
         if(currentView == weekView) {
             renderWeek();
         } else if(currentView == expandedDayView) {
@@ -331,12 +365,16 @@ public class ControllerCalendar implements Initializable, Listener {
     private void populateTodo(){ //KAn byta ut denna mot updateTodoview() sen när jag inte vill ha hårdkodat
         todoHandler.add();
         todoHandler.add();
+        todoHandler.add();
+        todoHandler.doneTodoRemove(todoHandler.getTodoList().get(0).getId());
         todoHandler.getTodoList().get(1).setTitle("Hej");
-        todoView.updateTodoView(todoHandler.getTodoList());
+        todoView.updateTodoView();
+
+
     }
 
     private void updateTodoView(){
-        todoView.updateTodoView(todoHandler.getTodoList());
+        todoView.updateTodoView();
     }
 
     @Override

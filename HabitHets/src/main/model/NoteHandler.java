@@ -46,7 +46,6 @@ public class NoteHandler implements IHandler {
         //Get input from database
     }
 
-
     /**
      * Method that removes a Note from a list of Notes, using the id set when creating a Note from Factory.
      * @param id, which is how we locate which note to remove.

@@ -1,12 +1,8 @@
 package main.model;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 /**
  * This class contains methods and lists that affect a todoo.
@@ -58,6 +54,12 @@ public class TodoHandler implements IHandler {
 
     }
 
+    public void addTodo(String title) {
+        todoList.add(Factory.createTodo(title));
+        notifyListener();
+
+    }
+
     /**
      *This method delete a todoo that hasn't been completed, for example
      * if you change your mind and don't want to do that todoo anymore.
@@ -72,6 +74,7 @@ public class TodoHandler implements IHandler {
         for (Todo todo: todoList){
             if(todo.getId() == id){
                 todoList.remove(todo);
+                notifyListener();
                 return;
             }
         } System.out.println("The ID " +id + " does not exist.");
@@ -99,8 +102,6 @@ public class TodoHandler implements IHandler {
         } System.out.println("The ID " +id + " does not exist.");
     }
 
-
-
     public List<Todo> getTodoList() {
         return todoList;
     }
@@ -124,9 +125,7 @@ public class TodoHandler implements IHandler {
         }
     }
 
-
     private List<Listener> listeners = new ArrayList<>();
-
 
     public void addListener(Listener l){
         listeners.add(l);
@@ -136,5 +135,15 @@ public class TodoHandler implements IHandler {
     private void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();
+    }
+
+    public void moveBackDoneTodo(int id) {
+        for (int i = 0; i < doneTodoList.size(); i++) {
+            if (doneTodoList.get(i).getId() == id) {
+                doneTodoList.remove(i);
+                notifyListener();
+                return;
+            }
+        }
     }
 }
