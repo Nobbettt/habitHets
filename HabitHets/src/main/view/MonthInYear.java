@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import main.model.CalendarAble;
 import main.model.Day;
 
@@ -68,6 +69,7 @@ public class MonthInYear extends AnchorPane  {
                 AnchorPane a = new AnchorPane();
                 Label label = new Label();
                 label.setAlignment(Pos.CENTER);
+                label.setTextFill(Color.valueOf("#FFFF"));
                 days.add(label);
                 a.getChildren().add(label);
                 gridPane.add(a,j,i);
