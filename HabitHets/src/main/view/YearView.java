@@ -9,12 +9,13 @@ import javafx.scene.layout.GridPane;
 import main.model.CalendarAble;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class YearView extends AnchorPane implements ViewAble {
     @FXML private ScrollPane yearScroll;
     @FXML private GridPane yearGrid;
-    // private List<MonthView> months = new ArrayList(); guess its gonna be something like this.... :/ todo
+    private List<MonthView> months = new ArrayList(); //guess its gonna be something like this.... :/ todo
 
     public YearView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/year.fxml"));
@@ -36,7 +37,8 @@ public class YearView extends AnchorPane implements ViewAble {
         yearGrid.setGridLinesVisible(true); // remove soon
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
-                Label month = new Label("month things");// new month or something instead todo
+                MonthViewMini month = new MonthViewMini();
+                yearGrid.setGridLinesVisible(true);
                 yearGrid.add(month, i, j);
                 // months.add(month); add created month to list months which doesnt exist todo
             }

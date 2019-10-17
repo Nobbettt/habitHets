@@ -45,7 +45,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         String weekday = days.get(0).getString(); //week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
         day = (Day) days.get(0);
-        dayEvents.updateDay(day);
+        dayEvents.updateDay(day, dayGrid.getCellBounds(1,0).getWidth());
         note = noteHandler.getNoteDate(day.getLdt());
         noteField.clear();
         if(note != null){
