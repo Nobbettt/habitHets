@@ -51,7 +51,16 @@
             </AnchorPane>
          </children>
       </GridPane>
-      <Label fx:id="title" layoutX="67.0" layoutY="12.0" prefHeight="20.0" prefWidth="20.0" styleClass="title" text="title" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
-      <Button fx:id="color" layoutX="14.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkHabit" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: blue;" styleClass="button-check" text="b" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="10.0" />
+      <Label fx:id="title" layoutX="33.0" layoutY="10.0" prefHeight="20.0" prefWidth="116.0" styleClass="title" text="title" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0" />
+      <Button fx:id="color" layoutX="8.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkHabit" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: blue;" styleClass="button-check" text="b" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="10.0" />
+      <Button fx:id="deleteHabit" layoutX="152.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteHabit" prefHeight="14.0" prefWidth="14.0" styleClass="todoBtn" stylesheets="@css/todo-style.css">
+         <graphic>
+            <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/delete-icon1c.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </fx:root>

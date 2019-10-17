@@ -103,7 +103,7 @@ public class HabitView extends AnchorPane {
             handler.addHabit(title.getText(), colorToString(colorPicker.getValue()));
             List<Habit> newHabit = new ArrayList<>();
             newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
-            updateHabitView(newHabit);
+            updateHabitView(handler.getHabitList());
         }
         title.clear();
         colorPicker.setValue(Color.WHITE);
@@ -161,6 +161,7 @@ public class HabitView extends AnchorPane {
     //List<CheckBox> checkboxes = new ArrayList<>();
 
     public void updateHabitView(List<Habit> habits) {
+        vBox.getChildren().clear();
         for (Habit habit: habits){
             HabitObjectView habitObjectView = new HabitObjectView(this);
             vBox.getChildren().add(habitObjectView);
