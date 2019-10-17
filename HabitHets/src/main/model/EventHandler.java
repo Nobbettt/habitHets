@@ -44,7 +44,7 @@ public class EventHandler implements IHandler {
     }
 
     public void addEvent(LocalDateTime ldt, Integer startHour, Integer startMinute, Integer endHour, Integer endMinute, String title, String location, String desc){
-        eventList.add(Factory.createAdvEvent(ldt.withHour(Integer.valueOf(startHour)).withMinute(Integer.valueOf(startMinute)), ldt.withHour(Integer.valueOf(endHour)).plusMinutes(Integer.valueOf(endMinute)), title, location, desc, null));
+        eventList.add(Factory.createAdvEvent(ldt.withHour(startHour).withMinute(startMinute), ldt.withHour(endHour).withMinute(endMinute), title, location, desc, null));
     }
 
     @Override
@@ -70,5 +70,16 @@ public class EventHandler implements IHandler {
             }
         }
         return eventList;
+    }
+
+    public Event getEventOfId(int id){
+        for (Event event : eventList){
+            if (event.getId() == id){
+                return event;
+            } else {
+                System.out.println("NO SUCH EVENT");
+            }
+        }
+        return null;
     }
 }

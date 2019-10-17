@@ -18,6 +18,7 @@ public class TodoHandler implements IHandler {
     public static TodoHandler instant;
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
+    private List<Listener> listeners = new ArrayList<>();
 
 
     /**
@@ -123,9 +124,6 @@ public class TodoHandler implements IHandler {
             }
         }
     }
-
-
-    private List<Listener> listeners = new ArrayList<>();
 
 
     public void addListener(Listener l){

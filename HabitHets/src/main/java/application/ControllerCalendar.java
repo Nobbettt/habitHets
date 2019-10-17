@@ -48,6 +48,20 @@ public class ControllerCalendar implements Initializable, Listener {
     @FXML private Button creationButton;
     @FXML private Button closeButton;
     @FXML private Button addButton;
+    @FXML private AnchorPane editPage;
+    @FXML private TextField editTitle;
+    @FXML private DatePicker editDate;
+    @FXML private TextField editLocation;
+    @FXML private TextArea editDesc;
+    @FXML private Button saveButton;
+    @FXML private Button editCloseButton;
+    @FXML private ComboBox<String> editFromHourTime;
+    @FXML private ComboBox<String> editFromMinuteTime;
+    @FXML private ComboBox<String> editToHourTime;
+    @FXML private ComboBox<String> editToMinuteTime;
+    @FXML private Button deleteButton;
+    @FXML private Label idLabel;
+
     private AnchorPane calendarPane;
     private AnchorPane habitPane;
     private YearView yearView;
@@ -61,6 +75,7 @@ public class ControllerCalendar implements Initializable, Listener {
     private LocalDateTime timeNow;
     private LocalDateTime masterDateTime;
     private Aggregate aggregate;
+    public static ControllerCalendar instance;
 
     private HabitHandler handler = HabitHandler.getInstant();
     private TodoView todoView;
@@ -75,6 +90,7 @@ public class ControllerCalendar implements Initializable, Listener {
         habitView = new HabitView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
+        instance = this;
 
 
         updateTimeline();
@@ -150,7 +166,6 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     private void nextClick() {
-        System.out.println("next");
         List<? extends CalendarAble> calendarData = new ArrayList<>();
         if(currentView == expandedDayView) {
             masterDateTime = masterDateTime.plusDays(1);
@@ -320,12 +335,16 @@ public class ControllerCalendar implements Initializable, Listener {
     @FXML
     private void addButtonClick(){
         creationPage.toFront();
+        dateChooser.setValue(LocalDate.now());
+        titleField.setText("New Event");
     }
+
     @FXML
     private void closeButtonClick(){
-        clearAllField();
+        resetAllField();
         creationPage.toBack();
     }
+
     @FXML
     private void createButtonClick(){
         EventHandler ev = EventHandler.getInstant();
@@ -335,9 +354,25 @@ public class ControllerCalendar implements Initializable, Listener {
         int fromMinute = Integer.parseInt(fromMinuteTime.getValue());
         int toHour = Integer.parseInt(toHourTime.getValue());
         int toMinute = Integer.parseInt(toMinuteTime.getValue());
-        ev.addEvent(ldt, fromHour, fromMinute, toHour, toMinute, titleField.getText(), LocationField.getText(), descField.getText());
-        clearAllField();
-        creationPage.toBack();
+        checkCreationInput();
+        if (toHour > fromHour || toHour == fromHour && toMinute > fromMinute) {
+            checkCreationInput();
+            ev.addEvent(ldt, fromHour, fromMinute, toHour, toMinute, titleField.getText(), LocationField.getText(), descField.getText());
+            resetAllField();
+            creationPage.toBack();
+        }
+    }
+
+    private void checkCreationInput(){
+        if (titleField.getText() == null){
+            titleField.setText("New Event");
+        }
+        if (LocationField.getText() == null){
+            LocationField.setText("");
+        }
+        if (descField.getText() == null){
+            descField.setText("");
+        }
     }
 
     private void setUpChoiceBoxes(){
@@ -345,19 +380,21 @@ public class ControllerCalendar implements Initializable, Listener {
         setUpChoicebox(fromMinuteTime, false);
         setUpChoicebox(toHourTime, true);
         setUpChoicebox(toMinuteTime, false);
+        setUpChoicebox(editFromHourTime, true);
+        setUpChoicebox(editFromMinuteTime, false);
+        setUpChoicebox(editToHourTime, true);
+        setUpChoicebox(editToMinuteTime, false);
     }
 
     private void setUpChoicebox (ComboBox<String> c, boolean isHour){
         ArrayList<String> a = new ArrayList<>();
         c.setEditable(true);
         if (isHour) {
-            System.out.println("Hour");
             for (int i = 0; i < 24; i++) {
                 a.add("" + i);
             }
         }
         else {
-            System.out.println("Minute");
             for (int i = 0; i < 60; i++) {
                 a.add("" + i);
             }
@@ -367,15 +404,78 @@ public class ControllerCalendar implements Initializable, Listener {
 
     }
 
-    public void clearAllField(){
+    public void resetAllField(){
         titleField.clear();
-        dateChooser.getEditor().clear();
+        dateChooser.setValue(LocalDate.now());
         LocationField.clear();
         descField.clear();
-        fromHourTime.getSelectionModel().clearSelection();
-        fromMinuteTime.getSelectionModel().clearSelection();
-        toHourTime.getSelectionModel().clearSelection();
-        toMinuteTime.getSelectionModel().clearSelection();
+        fromHourTime.getSelectionModel().selectFirst();
+        fromMinuteTime.getSelectionModel().selectFirst();
+        toHourTime.getSelectionModel().selectFirst();
+        toMinuteTime.getSelectionModel().selectFirst();
+    }
+
+    @FXML
+    public void editEventPressed(Event event){
+        editPage.toFront();
+        populateExtendedEvent(event);
+    }
+
+    @FXML
+    public void editClosePressed(){
+        editPage.toBack();
+    }
+
+    @FXML
+    public void editSavePressed() {
+        EventHandler ev = EventHandler.getInstant();
+        Event editedEvent = ev.getEventOfId(Integer.valueOf(idLabel.getText()));
+        int fromHour = Integer.parseInt(editFromHourTime.getValue());
+        int fromMinute = Integer.parseInt(editFromMinuteTime.getValue());
+        int toHour = Integer.parseInt(editToHourTime.getValue());
+        int toMinute = Integer.parseInt(editToMinuteTime.getValue());
+        if (toHour > fromHour || toHour == fromHour && toMinute > fromMinute) {
+            checkEditInput();
+            editedEvent.setTitle(editTitle.getText());
+            editedEvent.setLocation(editLocation.getText());
+            editedEvent.setDescription(editDesc.getText());
+            editedEvent.setStartTime(LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), fromHour, fromMinute));
+            editedEvent.setEndTime(LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), toHour, toMinute));
+        }
+        editPage.toBack();
+    }
+
+    private void checkEditInput(){
+        if (editTitle.getText() == null){
+            editTitle.setText("Edited Event");
+        }
+        if (editLocation.getText() == null){
+            editLocation.setText("");
+        }
+        if (editDesc.getText() == null){
+            editDesc.setText("");
+        }
+    }
+
+    @FXML
+    private void deleteEventPressed(){
+        EventHandler ev = EventHandler.getInstant();
+        Event editedEvent = ev.getEventOfId(Integer.valueOf(idLabel.getText()));
+        editPage.toBack();
+        ev.getEventList().remove(editedEvent);
+    }
+
+    public void populateExtendedEvent(Event event){
+        System.out.println(event.getEndTime().getMinute());
+        editTitle.setText(event.getTitle());
+        editDate.setValue(event.getStartTime().toLocalDate());
+        editFromHourTime.setValue(Integer.toString(event.getStartTime().getHour()));
+        editFromMinuteTime.setValue(Integer.toString(event.getStartTime().getMinute()));
+        editToHourTime.setValue(Integer.toString(event.getEndTime().getHour()));
+        editToMinuteTime.setValue(Integer.toString(event.getEndTime().getMinute()));
+        editDesc.setText(event.getDescription());
+        editLocation.setText(event.getLocation());
+        idLabel.setText(Integer.toString(event.getId()));
     }
 
 }
