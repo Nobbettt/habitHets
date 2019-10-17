@@ -97,8 +97,9 @@ public class WeekView extends StackPane implements ViewAble {
             weekGrid.add(dayEvents, i, 0);
             weekDayEvents.add(dayEvents);
         }
-        addButton.setShape(new Circle());
-        addButton.toFront();
+        //addButton.setShape(new Circle());
+        //addButton.toFront();
+
     }
 
     /**

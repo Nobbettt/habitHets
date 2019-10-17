@@ -62,6 +62,7 @@
 .editButton:hover {
     -fx-cursor: hand;
     -fx-opacity: .5;
+    -fx-background-color: #0000ff;
 }
 
 .save-btn{
@@ -74,6 +75,11 @@
     -fx-text-fill: #fff;
 }
 
+.save-btn:hover {
+    -fx-cursor: hand;
+    -fx-opacity: .8;
+
+}
 
 
 

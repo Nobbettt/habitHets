@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="330.0" prefWidth="50.0" style="-fx-background-color: #999;" stylesheets="@css/habit-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="330.0" prefWidth="50.0" style="-fx-background-color: #999;" stylesheets="@css/habit-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="generalTitle" layoutY="10.0" prefHeight="50.0" prefWidth="53.0" styleClass="habitLabel" text="Habits" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Button fx:id="addHabit" layoutX="159.0" layoutY="9.0" mnemonicParsing="false" onAction="#addNewHabit" prefHeight="27.0" prefWidth="31.0" styleClass="btn" stylesheets="@css/base-style.css" text="+" AnchorPane.rightAnchor="10.0" />
@@ -26,7 +26,7 @@
             <Label layoutX="6.0" layoutY="101.0" prefHeight="23.0" prefWidth="48.0" styleClass="title" text="Color:" />
             <TextField fx:id="title" layoutX="54.0" layoutY="64.0" prefHeight="27.0" prefWidth="139.0" />
             <ColorPicker fx:id="colorPicker" layoutX="55.0" layoutY="99.0" prefHeight="27.0" prefWidth="139.0" />
-            <Button fx:id="create" layoutX="138.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="25.0" prefWidth="40.0" styleClass="save-btn" stylesheets="@css/habit-style.css" text="Create" />
+            <Button fx:id="create" layoutX="138.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="32.0" prefWidth="56.0" styleClass="save-btn" stylesheets="@css/habit-style.css" text="Create" />
             <Button layoutX="163.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeNewHabitWindow" prefHeight="18.0" prefWidth="18.0" styleClass="todoBtn" stylesheets="@css/todo-style.css">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">

@@ -17,4 +17,5 @@
 .todoBtn:hover {
     -fx-cursor: hand;
     -fx-opacity: .5;
+    -fx-background-color: #ff0000;
 }

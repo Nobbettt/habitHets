@@ -120,9 +120,10 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <Button fx:id="addButton" defaultButton="true" mnemonicParsing="false" onAction="#addEventOnclick" prefHeight="52.0" prefWidth="53.0" text="+" translateX="-30.0" translateY="-10.0" StackPane.alignment="BOTTOM_RIGHT">
+      <Button fx:id="addButton" mnemonicParsing="false" onAction="#addEventOnclick" prefHeight="52.0" prefWidth="53.0" style="-fx-background-color: GREY;" styleClass="addbtn" stylesheets="@css/base-style.css" text="+" textFill="RED" translateX="-30.0" translateY="-10.0" StackPane.alignment="BOTTOM_RIGHT">
          <font>
             <Font name="Arial" size="27.0" />
-         </font></Button>
+         </font>
+      </Button>
    </children>
 </fx:root>

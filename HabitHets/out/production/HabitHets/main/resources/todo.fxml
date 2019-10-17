@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxWidth="200.0" minWidth="200.0" prefHeight="700.0" prefWidth="200.0" stylesheets="@css/todo-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxWidth="200.0" minWidth="200.0" prefHeight="700.0" prefWidth="200.0" stylesheets="@css/todo-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="2.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" styleClass="todo-title" text="Todo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
@@ -44,7 +44,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="saveNewTodo" layoutX="147.0" layoutY="60.0" mnemonicParsing="false" onAction="#saveNewTodo" styleClass="save-btn" stylesheets="@css/habit-style.css" text="Create" AnchorPane.bottomAnchor="15.0" />
+            <Button fx:id="saveNewTodo" layoutX="136.0" layoutY="60.0" mnemonicParsing="false" onAction="#saveNewTodo" prefHeight="32.0" prefWidth="56.0" styleClass="save-btn" stylesheets="@css/habit-style.css" text="Create" AnchorPane.bottomAnchor="16.0" />
          </children>
       </AnchorPane>
    </children>
