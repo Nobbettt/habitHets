@@ -82,8 +82,6 @@ public class DayEventListView extends StackPane {
 
     public void updateTimeline(int hour, int minute) {
         double timeHeight = 0;
-        hour = 15;
-        minute = 30;
         if (hour < 12) {
             timeHeight = (12-hour)* hHeight;
             timeHeight += hHeight-(minute*2);
@@ -92,7 +90,6 @@ public class DayEventListView extends StackPane {
             timeHeight = (hour - 12)*hHeight;
             timeHeight += (minute*2);
         }
-        System.out.println(timeHeight);
         tl.setTranslateY(timeHeight);
     }
 
