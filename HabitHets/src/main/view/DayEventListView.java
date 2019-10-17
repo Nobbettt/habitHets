@@ -18,7 +18,6 @@ public class DayEventListView extends StackPane {
     private List<HBox> hBoxList;
     private Line tl;
     private double hHeight;
-    public double timeHeight;
     private double vBoxWidth;
     Day day;
 
@@ -82,22 +81,18 @@ public class DayEventListView extends StackPane {
     }
 
     public void updateTimeline(int hour, int minute) {
-        double m = 0;
-        if (minute != 0) {
-            m = 60 / minute;
-        }
+        double timeHeight = 0;
+        hour = 15;
+        minute = 30;
         if (hour < 12) {
-            timeHeight = 12 - hour;
-            timeHeight -= (1 / m);
+            timeHeight = (12-hour)* hHeight;
+            timeHeight += hHeight-(minute*2);
             timeHeight *= -1;
         } else {
-            timeHeight = hour - 12;
-            timeHeight += 1 / m;
+            timeHeight = (hour - 12)*hHeight;
+            timeHeight += (minute*2);
         }
         System.out.println(timeHeight);
-        timeHeight = timeHeight * hHeight;
-        timeHeight -= (tl.getStrokeWidth() / 2);
-        timeHeight += (hour-12);
         tl.setTranslateY(timeHeight);
     }
 

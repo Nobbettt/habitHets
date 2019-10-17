@@ -3,7 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0" styleClass="hour-wrapper" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" minHeight="-Infinity" prefHeight="120.0" prefWidth="100.0" styleClass="hour-wrapper" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@css/day-style.css" />
    </stylesheets>
