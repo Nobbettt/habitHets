@@ -128,7 +128,6 @@ public class HabitView extends AnchorPane {
         newHabit.toBack();
     }
 
-
     public void hide(){
         for(HabitObjectView h : habitsList){
             h.hideHabits();
