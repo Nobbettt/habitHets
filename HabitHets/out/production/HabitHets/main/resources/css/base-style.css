@@ -22,22 +22,6 @@
 .navbar-arrow-btn {
     -fx-font-size: 34px;
 }
-.navbar-head-lbl, .navbar-btn, .navbar-arrow-btn {
-    -fx-font-size: 20px;
-    -fx-text-fill: #fff;
-    -fx-font-weight: bold;
-}
-.navbar-btn:hover, .navbar-arrow-btn:hover {
-    -fx-opacity: .75;
-    -fx-cursor: hand;
-}
-.navbar-btn, .navbar-arrow-btn {
-    -fx-background-color: transparent;
-    -fx-cursor: hand;
-}
-.navbar-arrow-btn {
-    -fx-font-size: 34px;
-}
 .habitToggleBtn {
     -fx-text-fill: #eee;
     -fx-background-color: #666666B6;

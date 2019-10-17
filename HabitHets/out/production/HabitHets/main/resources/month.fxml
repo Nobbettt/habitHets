@@ -49,42 +49,42 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="28.0" layoutY="14.0" text="Week" textFill="WHITE" underline="true" />
+                        <Label layoutX="46.0" layoutY="28.0" text="Week" textFill="WHITE" underline="true" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Label layoutX="32.0" layoutY="14.0" text="Mon" textFill="WHITE" underline="true" />
+                        <Label layoutX="46.0" layoutY="28.0" text="Mon" textFill="WHITE" underline="true" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
-                        <Label layoutX="34.0" layoutY="14.0" text="Tue" textFill="WHITE" underline="true" />
+                        <Label layoutX="46.0" layoutY="28.0" text="Tue" textFill="WHITE" underline="true" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                      <children>
-                        <Label layoutX="32.0" layoutY="14.0" text="Wed" textFill="WHITE" underline="true" />
+                        <Label layoutX="46.0" layoutY="28.0" text="Wed" textFill="WHITE" underline="true" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                      <children>
-                        <Label layoutX="34.0" layoutY="14.0" text="Thu" textFill="WHITE" underline="true" />
+                        <Label layoutX="46.0" layoutY="28.0" text="Thu" textFill="WHITE" underline="true" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
                      <children>
-                        <Label layoutX="30.0" layoutY="14.0" text="Fri" textFill="WHITE" underline="true" />
+                        <Label layoutX="46.0" layoutY="28.0" text="Fri" textFill="WHITE" underline="true" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
                      <children>
-                        <Label layoutX="25.0" layoutY="14.0" text="Sat" textFill="WHITE" underline="true" />
+                        <Label layoutX="46.0" layoutY="28.0" text="Sat" textFill="WHITE" underline="true" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7">
                      <children>
-                        <Label layoutX="22.0" layoutY="14.0" text="Sun" textFill="WHITE" underline="true" />
+                        <Label layoutX="46.0" layoutY="28.0" text="Sun" textFill="WHITE" underline="true" />
                      </children>
                   </AnchorPane>
                </children>

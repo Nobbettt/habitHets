@@ -57,7 +57,6 @@ public class ExpandedDayView extends StackPane implements ViewAble{
 
     @Override
     public void updateTimeLine(int hour, int minute) {
-        System.out.println("gg");
         dayEvents.updateTimeline(hour, minute);
     }
 
@@ -77,7 +76,6 @@ public class ExpandedDayView extends StackPane implements ViewAble{
 
     @FXML
     private void notehandle() {
-        System.out.println(noteField.getText());
         if(note == null){
             String noteString = noteField.getText();
             LocalDateTime d = day.getLdt();
