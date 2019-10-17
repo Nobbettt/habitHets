@@ -16,6 +16,7 @@ import java.io.IOException;
 public class HabitObjectView extends AnchorPane {
 
     private Habit habit;
+    HabitHandler habitHandler = HabitHandler.getInstant();
 
     @FXML private Label streakLabel;
     @FXML private Label bestStreakLabel;
@@ -23,7 +24,7 @@ public class HabitObjectView extends AnchorPane {
     @FXML private Label title;
     @FXML private GridPane habitGrid;
     @FXML private Button edit;
-
+    @FXML private Button deleteHabit;
     private HabitView habitView;
 
 
@@ -54,10 +55,15 @@ public class HabitObjectView extends AnchorPane {
     }
 
     @FXML
+    private void deleteHabit(){
+        habitHandler.remove(habit.getId());
+        habitView.updateHabitView(habitHandler.getHabitList());
+    }
+
+    @FXML
     private void editHabit(){
         habitView.edit(this);
     }
-
 
     public void updateElementView(Habit habit) {
         this.habit = habit;
@@ -69,7 +75,6 @@ public class HabitObjectView extends AnchorPane {
 
         setColor();
     }
-
 
     private void setColor() {
         if (habit.isCheckedToday()){

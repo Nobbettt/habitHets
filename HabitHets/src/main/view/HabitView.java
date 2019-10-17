@@ -22,9 +22,13 @@ public class HabitView extends AnchorPane {
     @FXML private AnchorPane newHabit;
     @FXML private TextField title;
     @FXML private ColorPicker colorPicker ;
-    @FXML private Button saveFromAdd;
-    @FXML private Button saveFromEdit;
+    @FXML private Button create;
+    @FXML private Button save;
     @FXML private Button addHabit;
+    @FXML private Label generalTitle;
+    @FXML private AnchorPane titleBackground;
+    @FXML private Label collapsedTitle;
+    @FXML private Label habitModifyTypeLabel;
     private List<HabitObjectView> habitsList;
     private HabitObjectView editing;
 
@@ -58,11 +62,11 @@ public class HabitView extends AnchorPane {
 
 
     private void setVisibilityAdd(Boolean visibility){
-        saveFromAdd.setVisible(visibility);
+        create.setVisible(visibility);
     }
 
     private void setVisibilityEdit(Boolean visibility){
-        saveFromEdit.setVisible(visibility);
+        save.setVisible(visibility);
     }
 
 
@@ -70,14 +74,16 @@ public class HabitView extends AnchorPane {
         newHabit.setVisible(true);
         newHabit.toFront();
         setVisibilityAdd(false);
-        saveFromAdd.toBack();
+        create.toBack();
         setVisibilityEdit(true);
-        saveFromEdit.toFront();
+        save.toFront();
         title.setText(habitObjectView.getHabit().getTitle());
         java.awt.Color tmpC = java.awt.Color.decode(habitObjectView.getHabit().getColor());
         Color c = Color.rgb(tmpC.getRed(),tmpC.getGreen(),tmpC.getBlue());
         colorPicker.setValue(c);
         editing = habitObjectView;
+        habitModifyTypeLabel.setText("Edit Habit");
+
     }
 
     @FXML
@@ -85,26 +91,26 @@ public class HabitView extends AnchorPane {
         newHabit.setVisible(true);
         newHabit.toFront();
         setVisibilityEdit(false);
-        saveFromEdit.toBack();
+        save.toBack();
         setVisibilityAdd(true);
-        saveFromAdd.toFront();
+        create.toFront();
     }
 
     @FXML
-    private void saveHabitOnClick(){
+    private void create(){
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
             handler.addHabit(title.getText(), colorToString(colorPicker.getValue()));
             List<Habit> newHabit = new ArrayList<>();
             newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
-            updateHabitView(newHabit);
+            updateHabitView(handler.getHabitList());
         }
         title.clear();
         colorPicker.setValue(Color.WHITE);
     }
 
     @FXML
-    private void saveFrEdit(){
+    private void save(){
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
             editing.getHabit().setTitle(title.getText());
@@ -133,6 +139,9 @@ public class HabitView extends AnchorPane {
             h.hideHabits();
         }
         addHabit.setVisible(false);
+        generalTitle.setVisible(false);
+        titleBackground.setVisible(true);
+        collapsedTitle.setVisible(true);
         isExpanded = false;
     }
 
@@ -141,6 +150,9 @@ public class HabitView extends AnchorPane {
             h.showHabits();
         }
         addHabit.setVisible(true);
+        generalTitle.setVisible(true);
+        titleBackground.setVisible(false);
+        collapsedTitle.setVisible(false);
         isExpanded = true;
     }
 
@@ -148,6 +160,7 @@ public class HabitView extends AnchorPane {
     //List<CheckBox> checkboxes = new ArrayList<>();
 
     public void updateHabitView(List<Habit> habits) {
+        vBox.getChildren().clear();
         for (Habit habit: habits){
             HabitObjectView habitObjectView = new HabitObjectView(this);
             vBox.getChildren().add(habitObjectView);

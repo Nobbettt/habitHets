@@ -7,7 +7,7 @@
     -fx-border-width: 0 0 3px 0;
 }
 .navbar-head-lbl, .navbar-btn, .navbar-arrow-btn {
-    -fx-font-size: 20px;
+    -fx-font-size: 30px;
     -fx-text-fill: #fff;
     -fx-font-weight: bold;
 }
@@ -24,7 +24,7 @@
 }
 .habitToggleBtn {
     -fx-text-fill: #eee;
-    -fx-background-color: #666666B6;
+    -fx-background-color: #FFFFFF80;
     -fx-border-radius: 0 100 100 0;
     -fx-background-radius: 0 100px 100 0;
     -fx-font-size: 24px;
@@ -37,4 +37,18 @@
     -fx-background-color: #666666;
     -fx-border-color: #888888B6;
     -fx-cursor: hand;
+}
+
+.btn {
+    -fx-background-color: transparent;
+    -fx-border-color: #fff;
+    -fx-border-width: 3px;
+    -fx-font-size: 20px;
+    -fx-padding: 0;
+    -fx-border-radius: 5px;
+    -fx-text-fill: #fff;
+}
+.btn:hover {
+    -fx-cursor: hand;
+    -fx-opacity: .8;
 }
