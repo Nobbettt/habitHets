@@ -26,7 +26,7 @@
             <Label layoutX="6.0" layoutY="101.0" prefHeight="23.0" prefWidth="48.0" styleClass="title" text="Color:" />
             <TextField fx:id="title" layoutX="54.0" layoutY="64.0" prefHeight="27.0" prefWidth="139.0" />
             <ColorPicker fx:id="colorPicker" layoutX="55.0" layoutY="99.0" prefHeight="27.0" prefWidth="139.0" />
-            <Button fx:id="saveFromAdd" layoutX="138.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveHabitOnClick" prefHeight="25.0" prefWidth="40.0" styleClass="save-btn" stylesheets="@css/habit-style.css" text="Save" />
+            <Button fx:id="create" layoutX="138.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#create" prefHeight="25.0" prefWidth="40.0" styleClass="save-btn" stylesheets="@css/habit-style.css" text="Create" />
             <Button layoutX="163.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeNewHabitWindow" prefHeight="18.0" prefWidth="18.0" styleClass="todoBtn" stylesheets="@css/todo-style.css">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
@@ -35,7 +35,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="saveFromEdit" layoutX="138.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveFrEdit" prefHeight="25.0" prefWidth="40.0" styleClass="save-btn" stylesheets="@css/habit-style.css" text="Save" />
+            <Button fx:id="save" layoutX="138.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="40.0" styleClass="save-btn" stylesheets="@css/habit-style.css" text="Save" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="titleBackground" prefHeight="50.0" prefWidth="53.0" styleClass="habitLabel" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
