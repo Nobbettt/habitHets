@@ -81,6 +81,7 @@ public class MonthView extends StackPane implements ViewAble {
             Day tmpDay = prevMonth.get(lastDayPrevMonth);
             Integer daynb = tmpDay.getLdt().getDayOfMonth();
             monthdays.get(l).setText(daynb.toString());
+            monthdays.get(l).setStyle("-fx-opacity: .5");
             lastDayPrevMonth--;
         }
 
@@ -90,6 +91,7 @@ public class MonthView extends StackPane implements ViewAble {
                 Day tmpDay = month.get(j);
                 Integer daynb = tmpDay.getLdt().getDayOfMonth();
                 monthdays.get(i).setText(daynb.toString());
+                monthdays.get(i).setStyle("-fx-opacity: 1");
                 j++;
             }else{
                 monthdays.get(i).setText(" ");
@@ -103,6 +105,7 @@ public class MonthView extends StackPane implements ViewAble {
             Day tmpDay = nextMonth.get(firstDayNextMonth);
             Integer daynb = tmpDay.getLdt().getDayOfMonth();
             monthdays.get(l).setText(daynb.toString());
+            monthdays.get(l).setStyle("-fx-opacity: .5");
             firstDayNextMonth++;
         }
 

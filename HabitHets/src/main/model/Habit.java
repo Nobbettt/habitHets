@@ -119,7 +119,7 @@ public class Habit {
      */
     public void onClickHabit() {
         if(isCheckedToday()) {
-            if(getStreak() == bestStreak && dateRecord == LocalDate.now()) {
+            if(getStreak() == bestStreak && dateRecord.equals(LocalDate.now())) {
                 bestStreak--;
             }
             doneHabits.pop();

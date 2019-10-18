@@ -51,6 +51,7 @@ public class HabitObjectView extends AnchorPane {
     @FXML
     private void checkHabit(){
         habit.onClickHabit();
+        updateStreaks();
         setColor();
     }
 
@@ -68,12 +69,15 @@ public class HabitObjectView extends AnchorPane {
     public void updateElementView(Habit habit) {
         this.habit = habit;
         title.setText(habit.getTitle());
+        updateStreaks();
+        setColor();
+    }
+
+    private void updateStreaks() {
         Integer streak = habit.getStreak();
         Integer bestStreak = habit.getBestStreak();
         streakLabel.setText(streak.toString());
         bestStreakLabel.setText(bestStreak.toString());
-
-        setColor();
     }
 
     private void setColor() {

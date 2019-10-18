@@ -28,7 +28,10 @@
     -fx-border-radius: 100px;
     -fx-background-radius: 100px;
 }
-
+.button-check:hover {
+    -fx-cursor: hand;
+    -fx-opacity: 0.8;
+}
 .container{
     -fx-border-color: #666;
     -fx-border-width: 0 0 2px 0;
@@ -80,6 +83,5 @@
     -fx-opacity: .8;
 
 }
-
 
 
