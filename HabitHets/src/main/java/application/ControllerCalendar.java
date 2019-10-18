@@ -299,6 +299,10 @@ public class ControllerCalendar implements Initializable, Listener {
         b.setStyle("-fx-background-color: #474747");
     }
 
+    /**
+     * Is called upon application start
+     * Attaches the calendar view to application window
+     */
     private void setupCalender() {
         calendarPane = new AnchorPane();
         mainPane.getChildren().add(calendarPane);
@@ -306,6 +310,10 @@ public class ControllerCalendar implements Initializable, Listener {
         addButton.toFront();
     }
 
+    /**
+     * Is called upon application start
+     * Attaches the habit view to application window
+     */
     private void setupHabit() {
         habitPane = new AnchorPane();
         mainPane.getChildren().add(habitPane);
@@ -321,12 +329,20 @@ public class ControllerCalendar implements Initializable, Listener {
         fitItem(mainPane, habitPane, 70, -1, 0, 0);
     }
 
+    /**
+     * Is used to calculate center y-value of calender view
+     * Needed to calculate y-position of the habit toggle button
+     */
     private double getCenterHeightOfMainGrid() {
         double centerY = mainPane.getBoundsInLocal().getHeight()/2;
         centerY += navbarGrid.getPrefHeight();
         return centerY;
     }
 
+    /**
+     * Is called upon application start
+     * Attaches the to do view to application window
+     */
     private void setupTodo() {
         todoPane = new AnchorPane();
         mainPane.getChildren().add(todoPane);
@@ -347,6 +363,10 @@ public class ControllerCalendar implements Initializable, Listener {
         habitView.updateHabitView(handler.getHabitList());
     }
 
+    /**
+     * Click function for the habit toggle button
+     * Collapses and extends the habit view and stretches the calendar view accordingly
+     */
     @FXML
     private void toggleHabitClick() {
         double widthValue;
@@ -374,6 +394,12 @@ public class ControllerCalendar implements Initializable, Listener {
         }
     }
 
+    /**
+     * Is used by the 4 different calendar views to clean and add the current view to the application window
+     * Accepts a node which gets attached to the calender pane
+     * Also calls method to update the head label with appropriate text depending on current view and date-time
+     * @param node
+     */
     private void renderCalendar(Node node) {
         if(calendarPane.getChildren() != null) {
             calendarPane.getChildren().clear();
@@ -383,6 +409,16 @@ public class ControllerCalendar implements Initializable, Listener {
         updateHeadLbl();
     }
 
+    /**
+     * Method is used as a tool to anchor child nodes to parent nodes given doubles as distances between the nodes
+     * Method ignores values of -1
+     * @param parent
+     * @param child
+     * @param top
+     * @param right
+     * @param bottom
+     * @param left
+     */
     private void fitItem(AnchorPane parent, Node child, double top, double right, double bottom, double left) {
         if (top != -1) {
             AnchorPane.setTopAnchor(child, top);
