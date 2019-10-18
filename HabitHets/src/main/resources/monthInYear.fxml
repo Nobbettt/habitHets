@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: #595959;" styleClass="yearwindow" stylesheets="@css/yearView-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: #595959;" styleClass="yearwindow" stylesheets="@css/yearView-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane fx:id="gridPane" layoutX="8.0" layoutY="28.0" prefHeight="356.0" prefWidth="569.0" styleClass="textcolor" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="27.0">
         <columnConstraints>

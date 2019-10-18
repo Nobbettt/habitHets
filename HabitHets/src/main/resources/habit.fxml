@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="330.0" prefWidth="50.0" style="-fx-background-color: #999;" stylesheets="@css/habit-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="330.0" prefWidth="50.0" style="-fx-background-color: #999;" stylesheets="@css/habit-style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="generalTitle" layoutY="10.0" prefHeight="50.0" prefWidth="53.0" styleClass="habitLabel" text="Habits" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Button fx:id="addHabit" layoutX="159.0" layoutY="9.0" mnemonicParsing="false" onAction="#addNewHabit" prefHeight="27.0" prefWidth="31.0" styleClass="btn" stylesheets="@css/base-style.css" text="+" AnchorPane.rightAnchor="10.0" />
