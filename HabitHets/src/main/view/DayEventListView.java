@@ -22,7 +22,7 @@ public class DayEventListView extends StackPane {
     private Line tl;
     private double hHeight;
     public double timeHeight;
-    Day day;
+    private Day day;
 
     public DayEventListView(Day day) {
         this.day = day;

@@ -16,11 +16,6 @@ import main.model.CalendarAble;
 import main.model.Day;
 import main.model.Month;
 import main.model.*;
-import main.view.ExpandedDayView;
-import main.view.TodoView;
-import main.view.ViewAble;
-import main.view.WeekView;
-import main.view.YearView;
 import main.view.*;
 
 import java.net.URL;
@@ -328,8 +323,8 @@ public class ControllerCalendar implements Initializable, Listener {
     }
 
     @Override
-    public void actOnUpdate() {
-        updateTodoView();
+    public void actOnUpdate() { updateTodoView();
+
     }
 
     @FXML
