@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import main.model.Aggregate;
+import main.model.Facade;
 import main.model.CalendarAble;
 import main.model.Day;
 import main.model.EventOrganizer;
@@ -31,11 +31,11 @@ public class WeekView extends StackPane implements ViewAble {
     private List<Label> weekDays;
     private List<Day> week;
     public List<DayEventListView> weekDayEvents;
-    Aggregate aggregate;
+    Facade facade;
 
     public WeekView() {
-        aggregate = new Aggregate();
-        week = aggregate.getWeekFromDate(LocalDateTime.now());
+        facade = new Facade();
+        week = facade.getWeekFromDate(LocalDateTime.now());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/week.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -59,7 +59,7 @@ public class WeekView extends StackPane implements ViewAble {
             Day tmpDay = weekdays.get(i);
             String weekday = week.get(i).getString(); //week.get(i)....getWeekdayfunction()
             weekDays.get(i).setText(weekday);
-            weekDayEvents.get(i).updateDay(tmpDay, weekGrid.getCellBounds(1, 0).getWidth());
+            weekDayEvents.get(i).updateDay(tmpDay.getLdt(), weekGrid.getCellBounds(1, 0).getWidth());
         }
     }
 
@@ -90,7 +90,7 @@ public class WeekView extends StackPane implements ViewAble {
         weekDayEvents = new ArrayList<>();
         weekGrid.add(new HourColumnView(), 0, 0);
         for(int i = 1; i < 8; i++) {
-            DayEventListView dayEvents = new DayEventListView(week.get(i-1));
+            DayEventListView dayEvents = new DayEventListView(week.get(i-1).getLdt());
             weekGrid.add(dayEvents, i, 0);
             weekDayEvents.add(dayEvents);
         }

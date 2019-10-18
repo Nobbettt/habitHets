@@ -43,7 +43,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         String weekday = days.get(0).getString(); //week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
         day = (Day) days.get(0);
-        dayEvents.updateDay(day, dayGrid.getCellBounds(1,0).getWidth());
+        dayEvents.updateDay(day.getLdt(), dayGrid.getCellBounds(1,0).getWidth());
         note = noteOrganizer.getNoteDate(day.getLdt());
         noteField.clear();
         if(note != null){
@@ -67,7 +67,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         dayGrid.add(new HourColumnView(), 0, 0);
-        dayEvents = new DayEventListView(Calender.getInstant().getDayFromLDT(LocalDateTime.now()));
+        dayEvents = new DayEventListView(LocalDateTime.now());
         dayGrid.add(dayEvents, 1, 0);
 
     }

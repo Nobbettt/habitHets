@@ -73,7 +73,7 @@ public class ControllerCalendar implements Initializable, Listener {
     private LocalDateTime timeNow;
     EventOrganizer eventOrganizer = EventOrganizer.getInstant();
     private LocalDateTime masterDateTime;
-    private Aggregate aggregate;
+    private Facade facade;
     public static ControllerCalendar instance;
 
     private HabitOrganizer handler = HabitOrganizer.getInstant();
@@ -82,7 +82,7 @@ public class ControllerCalendar implements Initializable, Listener {
 
     public ControllerCalendar() {
         masterDateTime = LocalDateTime.now();
-        aggregate = new Aggregate();
+        facade = new Facade();
         yearView = new YearView();
         weekView = new WeekView();
         habitView = new HabitView();
@@ -120,7 +120,7 @@ public class ControllerCalendar implements Initializable, Listener {
         populateTodo();
         renderDay();
 
-        List<Day> week = aggregate.getWeekFromDate(LocalDateTime.now());
+        List<Day> week = facade.getWeekFromDate(LocalDateTime.now());
 
         renderWeek();
 
@@ -143,16 +143,16 @@ public class ControllerCalendar implements Initializable, Listener {
         List<? extends CalendarAble> calendarData = new ArrayList<>();
         if(currentView == expandedDayView) {
             masterDateTime = masterDateTime.minusDays(1);
-            calendarData = aggregate.getDayFromDate(masterDateTime);
+            calendarData = facade.getDayFromDate(masterDateTime);
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.minusWeeks(1);
-            calendarData = aggregate.getWeekFromDate(masterDateTime);
+            calendarData = facade.getWeekFromDate(masterDateTime);
         } else if(currentView == monthView) {
             masterDateTime = masterDateTime.minusMonths(1);
-            calendarData = aggregate.getMonthFromDate(masterDateTime);
+            calendarData = facade.getMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.minusYears(1);
-            calendarData = aggregate.getYearFromDate(masterDateTime);
+            calendarData = facade.getYearFromDate(masterDateTime);
         }
         currentView.updateView(calendarData);
         updateHeadLbl();
@@ -166,16 +166,16 @@ public class ControllerCalendar implements Initializable, Listener {
         List<? extends CalendarAble> calendarData = new ArrayList<>();
         if(currentView == expandedDayView) {
             masterDateTime = masterDateTime.plusDays(1);
-            calendarData = aggregate.getDayFromDate(masterDateTime);
+            calendarData = facade.getDayFromDate(masterDateTime);
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.plusWeeks(1);
-            calendarData = aggregate.getWeekFromDate(masterDateTime);
+            calendarData = facade.getWeekFromDate(masterDateTime);
         } else if(currentView == monthView) {
             masterDateTime = masterDateTime.plusMonths(1);
-            calendarData = aggregate.getMonthFromDate(masterDateTime);
+            calendarData = facade.getMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.plusYears(1);
-            calendarData = aggregate.getYearFromDate(masterDateTime);
+            calendarData = facade.getYearFromDate(masterDateTime);
         }
         currentView.updateView(calendarData);
         updateHeadLbl();
@@ -187,13 +187,13 @@ public class ControllerCalendar implements Initializable, Listener {
     private void updateHeadLbl() {
         String headLbl = "";
         if(currentView == expandedDayView) {
-            headLbl = aggregate.getDayFromDate(masterDateTime).get(0).getWeekDayString();
+            headLbl = facade.getDayFromDate(masterDateTime).get(0).getWeekDayString();
         } else if(currentView == weekView) {
-            Integer weekNb = aggregate.getDayFromDate(masterDateTime).get(0).getWeekNr();
+            Integer weekNb = facade.getDayFromDate(masterDateTime).get(0).getWeekNr();
             headLbl = "Week " + weekNb.toString();
         } else if(currentView == monthView) {
             Integer yearNb = masterDateTime.getYear();
-            headLbl = aggregate.getMonth(masterDateTime).getString() + " " + yearNb;
+            headLbl = facade.getMonth(masterDateTime).getString() + " " + yearNb;
         } else if(currentView == yearView) {
             Integer yearNb = masterDateTime.getYear();
             headLbl = yearNb.toString();
@@ -219,7 +219,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderDay() {
         currentView = expandedDayView;
-        expandedDayView.updateView(aggregate.getDayFromDate(masterDateTime));
+        expandedDayView.updateView(facade.getDayFromDate(masterDateTime));
         renderCalendar(expandedDayView);
     }
 
@@ -240,7 +240,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderWeek() {
         currentView = weekView;
-        weekView.updateView(aggregate.getWeekFromDate(masterDateTime));
+        weekView.updateView(facade.getWeekFromDate(masterDateTime));
         renderCalendar(weekView);
     }
 
@@ -261,7 +261,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderMonth(){
         currentView = monthView;
-        monthView.updateView(aggregate.getMonthFromDate(masterDateTime));
+        monthView.updateView(facade.getMonthFromDate(masterDateTime));
         renderCalendar(monthView);
     }
 
@@ -282,7 +282,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderYear() {
         currentView = yearView;
-        yearView.updateView(aggregate.getYearFromDate(masterDateTime));
+        yearView.updateView(facade.getYearFromDate(masterDateTime));
         renderCalendar(yearView);
     }
 
@@ -502,9 +502,9 @@ public class ControllerCalendar implements Initializable, Listener {
     }
 
     @FXML
-    public void editEventPressed(Event event){
+    public void editEventPressed(IPlanable ip){
         editPage.toFront();
-        populateExtendedEvent(event);
+        populateExtendedEvent(ip);
     }
 
     @FXML
@@ -551,17 +551,17 @@ public class ControllerCalendar implements Initializable, Listener {
         ev.getEventList().remove(editedEvent);
     }
 
-    public void populateExtendedEvent(Event event){
-        System.out.println(event.getEndTime().getMinute());
-        editTitle.setText(event.getTitle());
-        editDate.setValue(event.getStartTime().toLocalDate());
-        editFromHourTime.setValue(Integer.toString(event.getStartTime().getHour()));
-        editFromMinuteTime.setValue(Integer.toString(event.getStartTime().getMinute()));
-        editToHourTime.setValue(Integer.toString(event.getEndTime().getHour()));
-        editToMinuteTime.setValue(Integer.toString(event.getEndTime().getMinute()));
-        editDesc.setText(event.getDescription());
-        editLocation.setText(event.getLocation());
-        idLabel.setText(Integer.toString(event.getId()));
+    public void populateExtendedEvent(IPlanable ip){
+        System.out.println(ip.getInfo().get(9));
+        editTitle.setText(ip.getInfo().get(0));
+        editDate.setValue(LocalDate.ofYearDay(Integer.valueOf(ip.getInfo().get(4)),Integer.valueOf(ip.getInfo().get(5))));
+        editFromHourTime.setValue(ip.getInfo().get(6));
+        editFromMinuteTime.setValue(ip.getInfo().get(7));
+        editToHourTime.setValue(ip.getInfo().get(8));
+        editToMinuteTime.setValue(ip.getInfo().get(9));
+        editDesc.setText(ip.getInfo().get(3));
+        editLocation.setText(ip.getInfo().get(2));
+        idLabel.setText(ip.getInfo().get(1));
     }
 
 }
