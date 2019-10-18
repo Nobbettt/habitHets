@@ -8,9 +8,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import model.Aggregate;
-import model.CalendarAble;
-import model.Day;
+import main.model.Facade;
+import main.model.CalendarAble;
+import main.model.Day;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class MonthView extends StackPane implements ViewAble {
         int k = firstday.getLdt().getDayOfWeek().getValue();
 
 
-        Aggregate a = new Aggregate();
+        Facade a = new Facade();
 
         List<Day> prevMonth = a.getMonthFromDate(firstday.getLdt().minusMonths(1));
         int lastDayPrevMonth = prevMonth.size()-1;

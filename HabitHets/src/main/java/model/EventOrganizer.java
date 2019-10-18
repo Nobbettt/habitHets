@@ -82,4 +82,14 @@ public class EventOrganizer implements IHandler {
         }
         return null;
     }
+
+    public List<Integer> getAllIDsOfDay(LocalDateTime ldt){
+        List<Integer> ids = new ArrayList<>();
+        for (Event event : eventList){
+            if (event.getStartTime().getYear() == ldt.getYear() && event.getStartTime().getDayOfYear() == ldt.getDayOfYear()) {
+                ids.add(event.getId());
+            }
+        }
+        return ids;
+    }
 }
