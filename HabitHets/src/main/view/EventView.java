@@ -52,7 +52,6 @@ public class EventView extends AnchorPane {
 
     @FXML
     public void editEventClicked(){
-        System.out.println(controllerCalendar.toString());
         if (event != null) {
             controllerCalendar.editEventPressed(event);
         } else {
