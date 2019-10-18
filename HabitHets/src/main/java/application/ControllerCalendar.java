@@ -1,4 +1,4 @@
-package main.java.application;
+package application;
 
 
 import javafx.animation.KeyFrame;
@@ -12,8 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-import main.model.*;
-import main.view.*;
+import model.*;
+import view.*;
 
 import java.net.URL;
 import java.time.LocalDate;
