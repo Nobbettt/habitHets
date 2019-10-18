@@ -54,6 +54,7 @@ public class HabitOrganizer implements IHandler{
         s.add(new DoneHabit(LocalDate.now().minusDays(1)));
         s.add(new DoneHabit(LocalDate.now()));
         habitList.add(Factory.createHabit("testHabit", s,0,"white",LocalDate.now()));
+        notifyListener();
     }
 
     /**
@@ -66,6 +67,7 @@ public class HabitOrganizer implements IHandler{
         for(Habit habit : habitList){
             if (habit.getId() == id){
                 habitList.remove(habit);
+                notifyListener();
                 return;
             }
         }
@@ -74,6 +76,30 @@ public class HabitOrganizer implements IHandler{
 
     public void addHabit(String title, String color) {
         habitList.add(Factory.createHabit(title, new Stack(),0,color,LocalDate.now()));
+        notifyListener();
+    }
+
+    private List<Listener> listeners = new ArrayList<>();
+
+
+    public void addListener(Listener l){
+        listeners.add(l);
+
+    }
+
+    private void notifyListener(){
+        for (Listener l : listeners)
+            l.actOnUpdate();
+    }
+
+    public Habit getHabitById(String msg) {
+        int id = Integer.valueOf(msg);
+        for (Habit h : habitList) {
+            if(h.getId() == id) {
+                return h;
+            }
+        }
+        return null;
     }
 
 }

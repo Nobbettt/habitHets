@@ -115,6 +115,7 @@ public class ControllerCalendar implements Initializable, Listener {
         setupCalender();
         setupTodo();
         todoOrganizer.addListener(this);
+        handler.addListener(this);
 
         todoPane.getChildren().add(todoView);
         populateTodo();
@@ -344,7 +345,7 @@ public class ControllerCalendar implements Initializable, Listener {
         handler.getHabitList().get(1).setTitle("nobbhelge");
         handler.getHabitList().get(1).setColor("#47BCAD");
         handler.getHabitList().get(1).setBestStreak(7);
-        habitView.updateHabitView(handler.getHabitList());
+        habitView.updateHabitView();
     }
 
     @FXML
@@ -413,9 +414,14 @@ public class ControllerCalendar implements Initializable, Listener {
         todoView.updateTodoView();
     }
 
-    @Override
-    public void actOnUpdate() { updateTodoView();
+    private void updateHabitView(){
+        habitView.updateHabitView();
+    }
 
+    @Override
+    public void actOnUpdate() {
+        updateTodoView();
+        updateHabitView();
     }
 
     @FXML
