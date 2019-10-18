@@ -30,7 +30,6 @@ public class WeekView extends StackPane implements ViewAble {
     @FXML private Label weekDay5;
     @FXML private Label weekDay6;
     @FXML private Label weekDay7;
-    @FXML private Button addButton;
     private List<Label> weekDays;
     private List<Day> week;
     public List<DayEventListView> weekDayEvents;

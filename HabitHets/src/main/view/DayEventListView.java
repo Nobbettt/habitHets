@@ -10,6 +10,9 @@ import main.model.Day;
 import main.model.Event;
 import main.model.EventHandler;
 import main.model.Interval;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +22,7 @@ public class DayEventListView extends StackPane {
     private Line tl;
     private double hHeight;
     private double vBoxWidth;
-    Day day;
+    private Day day;
 
     public DayEventListView(Day day) {
         this.day = day;
@@ -35,8 +38,10 @@ public class DayEventListView extends StackPane {
         this.getChildren().add(vBox);
         for (HBox hBox : hBoxList) {
             this.getChildren().add(hBox);
+            hBox.setPickOnBounds(false);
         }
         setUpTimeLine();
+        vBox.setPickOnBounds(false);
     }
 
     private void setUpTimeLine() {
@@ -61,8 +66,9 @@ public class DayEventListView extends StackPane {
             if (this.day.getLdt().getDayOfYear() == day.getLdt().getDayOfYear()) {
                 i++;
                 AnchorPane a = new EventView(event);
-                a.setTranslateY((event.getStartTime().getHour() * 100) + (event.getStartTime().getMinute()) * (1.6666666667)); //todo WTF
-                a.setPrefHeight(calculateLenght(event) * 100);
+                a.setTranslateY((event.getStartTime().getHour() * 120) + event.getStartTime().getMinute()*2); //todo WTF
+                double height = calculateLenght(event)*2;
+                a.setPrefHeight(height);
                 a.setPrefWidth(calculateWidth(event));
                 if (calculateTranslateX(event) != 0) {
                     if (overlap == 3) {
@@ -75,7 +81,6 @@ public class DayEventListView extends StackPane {
                     overlap++;
                 }
                 hBoxList.get(i - 1).getChildren().add(a);
-
             }
         }
     }
@@ -94,9 +99,8 @@ public class DayEventListView extends StackPane {
     }
 
     private double calculateLenght(Event event) {
-        double startMinutes = (event.getStartTime().getHour() * 60) + event.getStartTime().getMinute();
-        double endMinutes = (event.getEndTime().getHour() * 60) + event.getEndTime().getMinute();
-        return ((endMinutes - startMinutes) / 60);
+        long valueMinute = ChronoUnit.MINUTES.between(event.getStartTime(),event.getEndTime());
+        return (valueMinute);
     }
 
     private double calculateWidth(Event event) {

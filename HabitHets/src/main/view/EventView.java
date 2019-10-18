@@ -4,17 +4,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import main.java.application.ControllerCalendar;
 import main.model.Event;
 
 import java.io.IOException;
 
 public class EventView extends AnchorPane {
-
     @FXML
     private Label titleLabel;
     @FXML
     private Label timeLabel;
     Event event;
+    ControllerCalendar controllerCalendar;
 
     public EventView(Event event) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/event.fxml"));
@@ -30,6 +31,7 @@ public class EventView extends AnchorPane {
         }
         titleLabel.setText(event.getTitle());
         timeLabel.setText(eventTimeString());
+        controllerCalendar = ControllerCalendar.instance;
     }
 
     private String eventTimeString() {
@@ -46,5 +48,15 @@ public class EventView extends AnchorPane {
             minute = Integer.toString(event.getStartTime().getMinute());
         }
         return hour + ":" + minute;
+    }
+
+    @FXML
+    public void editEventClicked(){
+        System.out.println(controllerCalendar.toString());
+        if (event != null) {
+            controllerCalendar.editEventPressed(event);
+        } else {
+            System.out.println("FUUUUCK");
+        }
     }
 }
