@@ -54,7 +54,6 @@ public class DayEventListView extends StackPane {
 
     public void updateDay(Day day, double vBoxWidth) {
         this.vBoxWidth = vBoxWidth;
-        System.out.println(vBoxWidth);
         this.day = day;
         for (HBox hBox : hBoxList) {
             hBox.getChildren().clear();

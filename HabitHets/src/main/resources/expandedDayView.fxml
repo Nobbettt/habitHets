@@ -47,11 +47,11 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="338.0" style="-fx-background-color: #595959;">
                <children>
-                  <TextArea fx:id="noteField" layoutX="109.0" layoutY="66.0" opacity="0.8" prefHeight="200.0" prefWidth="200.0" promptText="Write your notes here" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <TextArea fx:id="noteField" layoutX="109.0" layoutY="66.0" onKeyPressed="#notehandle" opacity="0.8" prefHeight="200.0" prefWidth="200.0" promptText="Write your notes here" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets></TextArea>
-                  <Button fx:id="saveNoteButton" layoutX="189.0" layoutY="303.0" mnemonicParsing="false" onAction="#notehandle" prefHeight="46.0" prefWidth="44.0" style="-fx-background-color: GREY;" styleClass="addbtn" stylesheets="@css/base-style.css" text="+" textFill="RED" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="54.0">
+                  <Button fx:id="saveNoteButton" layoutX="189.0" layoutY="303.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="44.0" style="-fx-background-color: GREY;" styleClass="addbtn" stylesheets="@css/base-style.css" text="+" textFill="RED" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="54.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

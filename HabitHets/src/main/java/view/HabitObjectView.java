@@ -11,6 +11,8 @@ import model.HabitOrganizer;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HabitObjectView extends AnchorPane {
@@ -25,11 +27,11 @@ public class HabitObjectView extends AnchorPane {
     @FXML private GridPane habitGrid;
     @FXML private Button edit;
     @FXML private Button deleteHabit;
-    private HabitView habitView;
 
 
-    public HabitObjectView(HabitView habitView) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/habitElement.fxml"));
+
+    public HabitObjectView(Habit habit) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/habitElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -39,7 +41,7 @@ public class HabitObjectView extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        this.habitView = habitView;
+        this.habit = habit;
     }
 
 
@@ -58,16 +60,16 @@ public class HabitObjectView extends AnchorPane {
     @FXML
     private void deleteHabit(){
         habitOrganizer.remove(habit.getId());
-        habitView.updateHabitView(habitOrganizer.getHabitList());
+        //habitView.updateHabitView();
     }
 
     @FXML
     private void editHabit(){
-        habitView.edit(this);
+        notifyListener(Integer.toString(habit.getId()));
+        //habitView.edit(this);
     }
 
-    public void updateElementView(Habit habit) {
-        this.habit = habit;
+    public void updateElementView() {
         title.setText(habit.getTitle());
         updateStreaks();
         setColor();
@@ -103,5 +105,17 @@ public class HabitObjectView extends AnchorPane {
         habitGrid.setPrefHeight(USE_COMPUTED_SIZE);
     }
 
+    private List<ViewListener> listeners = new ArrayList<>();
 
-}
+
+    public void addListener(ViewListener l){
+        listeners.add(l);
+
+    }
+
+    private void notifyListener(String msg){
+        for (ViewListener l : listeners)
+            l.actOnUpdate(msg);
+    }
+
+    }

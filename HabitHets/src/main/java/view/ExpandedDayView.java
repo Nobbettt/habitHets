@@ -16,7 +16,6 @@ public class ExpandedDayView extends StackPane implements ViewAble{
     @FXML private GridPane dayGrid;
     @FXML private Label weekDayLbl;
     @FXML private TextArea noteField;
-    @FXML private Button saveNoteButton;
     private DayEventListView dayEvents;
     private Note note;
     private Day day;
@@ -49,8 +48,6 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         if(note != null){
             noteField.setText(note.getDescription());
         }
-
-
     }
 
     @Override
@@ -74,20 +71,15 @@ public class ExpandedDayView extends StackPane implements ViewAble{
 
     @FXML
     private void notehandle() {
+        System.out.println("gg");
         if(note == null){
             String noteString = noteField.getText();
             LocalDateTime d = day.getLdt();
             note = noteOrganizer.addNote(noteString, d);
-        }
-        else{
+        } else{
             note.setDescription(noteField.getText());
             note.setDay(day.getLdt());
         }
-
-
     }
-        private void createDay (Day dayData){
-
-        }
-    }
+}
 
