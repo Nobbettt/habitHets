@@ -8,17 +8,17 @@ import java.util.Stack;
 /**
  *This class handles logic that has to do with more than one habit.
  */
-public class HabitHandler implements IHandler{
+public class HabitOrganizer implements IHandler{
 
-    public static HabitHandler instant;
+    public static HabitOrganizer instant;
     private static List<Habit> habitList;
 
 
     /**
-     * Constructor of HabitHandler that creates
+     * Constructor of HabitOrganizer that creates
      * a list of habits
      */
-    private HabitHandler() {
+    private HabitOrganizer() {
         habitList = new ArrayList<>();
     }
 
@@ -30,9 +30,9 @@ public class HabitHandler implements IHandler{
      * an instance will be created.
      * @return
      */
-    public static HabitHandler getInstant() {
+    public static HabitOrganizer getInstant() {
         if (instant == null) {
-            instant = new HabitHandler();
+            instant = new HabitOrganizer();
         }
         return instant;
 

@@ -1,6 +1,6 @@
 import main.model.DoneHabit;
 import main.model.Habit;
-import main.model.HabitHandler;
+import main.model.HabitOrganizer;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,26 +9,26 @@ import java.util.Stack;
 
 public class TestHabit {
 
-    HabitHandler habitHandler = HabitHandler.getInstant();
+    HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
 
 
     @Test
     public void testAddHabit(){
-        Assert.assertEquals(0,habitHandler.getHabitList().size());
-        habitHandler.add();
-        habitHandler.add();
-        Assert.assertEquals(2,habitHandler.getHabitList().size());
-        Assert.assertEquals(0, habitHandler.getHabitList().get(0).getId());
-        Assert.assertEquals(1,habitHandler.getHabitList().get(1).getId());
+        Assert.assertEquals(0, habitOrganizer.getHabitList().size());
+        habitOrganizer.add();
+        habitOrganizer.add();
+        Assert.assertEquals(2, habitOrganizer.getHabitList().size());
+        Assert.assertEquals(0, habitOrganizer.getHabitList().get(0).getId());
+        Assert.assertEquals(1, habitOrganizer.getHabitList().get(1).getId());
     }
 
     @Test
     public void testRemoveHabit(){
-        habitHandler.add();
-        habitHandler.add();
-        habitHandler.remove(1);
-        Assert.assertEquals(1,habitHandler.getHabitList().size());
-        Assert.assertEquals(0, habitHandler.getHabitList().get(0).getId());
+        habitOrganizer.add();
+        habitOrganizer.add();
+        habitOrganizer.remove(1);
+        Assert.assertEquals(1, habitOrganizer.getHabitList().size());
+        Assert.assertEquals(0, habitOrganizer.getHabitList().get(0).getId());
     }
 
 

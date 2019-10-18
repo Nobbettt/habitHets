@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import main.model.Habit;
-import main.model.HabitHandler;
+import main.model.HabitOrganizer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class HabitView extends AnchorPane {
 
-    private HabitHandler handler = HabitHandler.getInstant();
+    private HabitOrganizer handler = HabitOrganizer.getInstant();
     @FXML private VBox vBox;
     @FXML private ScrollPane scrollPane;
     @FXML private AnchorPane newHabit;

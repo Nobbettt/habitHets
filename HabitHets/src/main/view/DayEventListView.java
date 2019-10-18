@@ -8,10 +8,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import main.model.Day;
 import main.model.Event;
-import main.model.EventHandler;
+import main.model.EventOrganizer;
 import main.model.Interval;
 
-import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +61,7 @@ public class DayEventListView extends StackPane {
         }
         int i = 0;
         int overlap = 0;
-        for (Event event : EventHandler.getInstant().getEventsOfDay(day.getLdt())) {
+        for (Event event : EventOrganizer.getInstant().getEventsOfDay(day.getLdt())) {
             if (this.day.getLdt().getDayOfYear() == day.getLdt().getDayOfYear()) {
                 i++;
                 AnchorPane a = new EventView(event);
@@ -89,7 +88,7 @@ public class DayEventListView extends StackPane {
         double timeHeight = 0;
         if (hour < 12) {
             timeHeight = (12-hour)* hHeight;
-            timeHeight += hHeight-(minute*2);
+            timeHeight -= hHeight-(minute*2);
             timeHeight *= -1;
         } else {
             timeHeight = (hour - 12)*hHeight;
@@ -107,7 +106,7 @@ public class DayEventListView extends StackPane {
         double i = 0;
         List<Event> overlaps = new ArrayList<>();
         List<Event> overlaps2 = new ArrayList<>();
-        List<Event> events = EventHandler.getInstant().getEventsOfDay(getDay().getLdt());
+        List<Event> events = EventOrganizer.getInstant().getEventsOfDay(getDay().getLdt());
         Interval interval = new Interval(event.getStartTime(), true, event.getEndTime(), true);
         for (Event tmpEvent : events) {
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
@@ -147,7 +146,7 @@ public class DayEventListView extends StackPane {
     private double amountOfOverlaps(Event event) {
         int i = 0;
         Interval interval = new Interval(event.getStartTime(), true, event.getEndTime(), true);
-        for (Event tmpEvent : EventHandler.getInstant().getEventsOfDay(getDay().getLdt())) {
+        for (Event tmpEvent : EventOrganizer.getInstant().getEventsOfDay(getDay().getLdt())) {
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
             if (interval.overlaps(tmpInterval)) {
                 i++;

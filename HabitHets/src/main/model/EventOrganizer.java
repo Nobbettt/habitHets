@@ -4,21 +4,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventHandler implements IHandler {
+public class EventOrganizer implements IHandler {
 
-    private static EventHandler instant;
+    private static EventOrganizer instant;
     private static List<Event> eventList;
     private int i; //todo
 
-    private EventHandler() {
+    private EventOrganizer() {
         eventList = new ArrayList<>();
         i = 0;
     }
 
-    public static EventHandler getInstant() {
+    public static EventOrganizer getInstant() {
         if (instant == null) {
 
-            instant = new EventHandler();
+            instant = new EventOrganizer();
             return instant;
 
         } else {

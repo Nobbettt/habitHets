@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;
 import main.model.Todo;
-import main.model.TodoHandler;
+import main.model.TodoOrganizer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
 public class TodoElementView extends AnchorPane  {
 
     Todo todo;
-    TodoHandler todoHandler = TodoHandler.getInstant();
+    TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
 
     public TodoElementView(Todo todo) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/todoElement.fxml"));
@@ -51,14 +51,14 @@ public class TodoElementView extends AnchorPane  {
     private void remove(){
         for (CheckBox c : cb){
             if (c.isSelected()){
-                todoHandler.doneTodoRemove(todo.getId());
+                todoOrganizer.doneTodoRemove(todo.getId());
             }
         }
     }
 
     @FXML
     private void deleteTodo(){
-        todoHandler.remove(todo.getId());
+        todoOrganizer.remove(todo.getId());
     }
 
 

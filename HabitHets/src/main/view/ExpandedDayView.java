@@ -7,10 +7,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import main.model.*;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExpandedDayView extends StackPane implements ViewAble{
@@ -22,7 +20,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
     private DayEventListView dayEvents;
     private Note note;
     private Day day;
-    private NoteHandler noteHandler = NoteHandler.getInstance();
+    private NoteOrganizer noteOrganizer = NoteOrganizer.getInstance();
 
 
 
@@ -46,7 +44,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         weekDayLbl.setText(weekday);
         day = (Day) days.get(0);
         dayEvents.updateDay(day, dayGrid.getCellBounds(1,0).getWidth());
-        note = noteHandler.getNoteDate(day.getLdt());
+        note = noteOrganizer.getNoteDate(day.getLdt());
         noteField.clear();
         if(note != null){
             noteField.setText(note.getDescription());
@@ -79,7 +77,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         if(note == null){
             String noteString = noteField.getText();
             LocalDateTime d = day.getLdt();
-            note = noteHandler.addNote(noteString, d);
+            note = noteOrganizer.addNote(noteString, d);
         }
         else{
             note.setDescription(noteField.getText());

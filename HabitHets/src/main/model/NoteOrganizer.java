@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * NoteHandler class holds all logic for Note, in order to create a more modular class structure.
+ * NoteOrganizer class holds all logic for Note, in order to create a more modular class structure.
  * Therefore the Open-Closed principle is exerted.
  */
 
-public class NoteHandler implements IHandler {
+public class NoteOrganizer implements IHandler {
 
-    public static NoteHandler instant;
+    public static NoteOrganizer instant;
     public static List<Note> notesList;
 
-    private NoteHandler(){
+    private NoteOrganizer(){
         notesList = new ArrayList<>();
     }
 
@@ -23,9 +23,9 @@ public class NoteHandler implements IHandler {
      * If there is not, an instant will be created.
      */
 
-    public static NoteHandler getInstance(){
+    public static NoteOrganizer getInstance(){
         if(instant == null) {
-            instant = new NoteHandler();
+            instant = new NoteOrganizer();
             return instant;
 
         }else {

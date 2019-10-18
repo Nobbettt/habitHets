@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import main.model.Todo;
-import main.model.TodoHandler;
+import main.model.TodoOrganizer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class TodoView extends AnchorPane {
     @FXML public TextField todoTitle;
     @FXML private ScrollPane todoScrollpane;
     @FXML private ScrollPane doneTodoScrollpane;
-    TodoHandler todoHandler = TodoHandler.getInstant();
+    TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
 
 
 
@@ -60,7 +60,7 @@ public class TodoView extends AnchorPane {
         newTodo.setVisible(false);
         newTodo.toBack();
         if (todoTitle.getText() != null && !todoTitle.getText().isEmpty()){
-            todoHandler.addTodo(todoTitle.getText());
+            todoOrganizer.addTodo(todoTitle.getText());
             todoTitle.clear();
 
         }
@@ -78,10 +78,10 @@ public class TodoView extends AnchorPane {
 
 
 
-        todoHandler.add();
+        todoOrganizer.add();
         List<Todo> newTodo = new ArrayList<>();
-        newTodo.add(todoHandler.getTodoList().get(todoHandler.getTodoList().size()-1));
-        updateTodoView(todoHandler.getTodoList());*/
+        newTodo.add(todoOrganizer.getTodoList().get(todoOrganizer.getTodoList().size()-1));
+        updateTodoView(todoOrganizer.getTodoList());*/
     }
 
     List<CheckBox> checkBoxes = new ArrayList<>();
@@ -90,11 +90,11 @@ public class TodoView extends AnchorPane {
     public void updateTodoView( ) {
         vboxtodo.getChildren().clear();
         vboxdonetodo.getChildren().clear();
-        for (Todo todo : todoHandler.getTodoList()) {
+        for (Todo todo : todoOrganizer.getTodoList()) {
             TodoElementView todoElement = new TodoElementView(todo);
             vboxtodo.getChildren().add(todoElement);
         }
-        for (Todo todo : TodoHandler.getInstant().getDoneTodoList()) {
+        for (Todo todo : TodoOrganizer.getInstant().getDoneTodoList()) {
             TodoDoneElementView todoDoneElement = new TodoDoneElementView(todo);
             //todoDoneElement.getChildren().get(1).setVisible(false);
             vboxdonetodo.getChildren().add(todoDoneElement);
@@ -105,7 +105,7 @@ public class TodoView extends AnchorPane {
             TodoElementView td = (TodoElementView) vboxtodo.getChildren().get(i);
             CheckBox c = td.getCb();
             if (c.isSelected()) {
-                //todoHandler.doneTodoRemove(td.todo.getId());
+                //todoOrganizer.doneTodoRemove(td.todo.getId());
                 vboxtodo.getChildren().remove(td);
                 TodoDoneElementView tdd=new TodoDoneElementView(td.todo);
                 vboxdonetodo.getChildren().add(tdd);

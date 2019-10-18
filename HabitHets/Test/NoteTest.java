@@ -1,18 +1,18 @@
-import main.model.NoteHandler;
+import main.model.NoteOrganizer;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class NoteTest{
     @Test
     public void noteTest(){
-        NoteHandler noteHandler = NoteHandler.getInstance();
-        noteHandler.add();
-        noteHandler.add();
-        noteHandler.add();
-        Assert.assertEquals(3, noteHandler.getNotes().size());
-        Assert.assertEquals(0, noteHandler.getNotes().get(0).getId());
-        Assert.assertEquals(1, noteHandler.getNotes().get(1).getId());
-        Assert.assertEquals(2, noteHandler.getNotes().get(2).getId());
+        NoteOrganizer noteOrganizer = NoteOrganizer.getInstance();
+        noteOrganizer.add();
+        noteOrganizer.add();
+        noteOrganizer.add();
+        Assert.assertEquals(3, noteOrganizer.getNotes().size());
+        Assert.assertEquals(0, noteOrganizer.getNotes().get(0).getId());
+        Assert.assertEquals(1, noteOrganizer.getNotes().get(1).getId());
+        Assert.assertEquals(2, noteOrganizer.getNotes().get(2).getId());
     }
 
 

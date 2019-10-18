@@ -8,20 +8,20 @@ import java.util.List;
  * This class contains methods and lists that affect a todoo.
  */
 
-public class TodoHandler implements IHandler {
+public class TodoOrganizer implements IHandler {
 
 
-    public static TodoHandler instant;
+    public static TodoOrganizer instant;
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
 
 
     /**
-     * The constructor of TodoHandler sets the list of todos and doneTodos.
+     * The constructor of TodoOrganizer sets the list of todos and doneTodos.
      */
 
 
-    public TodoHandler() {
+    public TodoOrganizer() {
         todoList = new ArrayList<>();
         doneTodoList = new ArrayList<>();
     }
@@ -32,9 +32,9 @@ public class TodoHandler implements IHandler {
      * If there is not, an instant will be created.
      */
 
-    public static TodoHandler getInstant() {
+    public static TodoOrganizer getInstant() {
         if (instant == null) {
-            instant = new TodoHandler();
+            instant = new TodoOrganizer();
             return instant;
 
         } else {

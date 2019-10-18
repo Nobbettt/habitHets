@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import main.model.Habit;
-import main.model.HabitHandler;
+import main.model.HabitOrganizer;
 
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class HabitObjectView extends AnchorPane {
 
     private Habit habit;
-    HabitHandler habitHandler = HabitHandler.getInstant();
+    HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
 
     @FXML private Label streakLabel;
     @FXML private Label bestStreakLabel;
@@ -57,8 +57,8 @@ public class HabitObjectView extends AnchorPane {
 
     @FXML
     private void deleteHabit(){
-        habitHandler.remove(habit.getId());
-        habitView.updateHabitView(habitHandler.getHabitList());
+        habitOrganizer.remove(habit.getId());
+        habitView.updateHabitView(habitOrganizer.getHabitList());
     }
 
     @FXML

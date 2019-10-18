@@ -71,14 +71,14 @@ public class ControllerCalendar implements Initializable, Listener {
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
-    EventHandler eventHandler = EventHandler.getInstant();
+    EventOrganizer eventOrganizer = EventOrganizer.getInstant();
     private LocalDateTime masterDateTime;
     private Aggregate aggregate;
     public static ControllerCalendar instance;
 
-    private HabitHandler handler = HabitHandler.getInstant();
+    private HabitOrganizer handler = HabitOrganizer.getInstant();
     private TodoView todoView;
-    private TodoHandler todoHandler= TodoHandler.getInstant();
+    private TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
 
     public ControllerCalendar() {
         masterDateTime = LocalDateTime.now();
@@ -114,7 +114,7 @@ public class ControllerCalendar implements Initializable, Listener {
 
         setupCalender();
         setupTodo();
-        todoHandler.addListener(this);
+        todoOrganizer.addListener(this);
 
         todoPane.getChildren().add(todoView);
         populateTodo();
@@ -399,11 +399,11 @@ public class ControllerCalendar implements Initializable, Listener {
     }
 
     private void populateTodo(){ //KAn byta ut denna mot updateTodoview() sen när jag inte vill ha hårdkodat
-        todoHandler.add();
-        todoHandler.add();
-        todoHandler.add();
-        todoHandler.doneTodoRemove(todoHandler.getTodoList().get(0).getId());
-        todoHandler.getTodoList().get(1).setTitle("Hej");
+        todoOrganizer.add();
+        todoOrganizer.add();
+        todoOrganizer.add();
+        todoOrganizer.doneTodoRemove(todoOrganizer.getTodoList().get(0).getId());
+        todoOrganizer.getTodoList().get(1).setTitle("Hej");
         todoView.updateTodoView();
 
 
@@ -433,7 +433,7 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     private void createButtonClick(){
-        EventHandler ev = EventHandler.getInstant();
+        EventOrganizer ev = EventOrganizer.getInstant();
         LocalDate ld = dateChooser.getValue();
         LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.now());
         int fromHour = Integer.parseInt(fromHourTime.getValue());
@@ -514,7 +514,7 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     public void editSavePressed() {
-        EventHandler ev = EventHandler.getInstant();
+        EventOrganizer ev = EventOrganizer.getInstant();
         Event editedEvent = ev.getEventOfId(Integer.valueOf(idLabel.getText()));
         int fromHour = Integer.parseInt(editFromHourTime.getValue());
         int fromMinute = Integer.parseInt(editFromMinuteTime.getValue());
@@ -545,7 +545,7 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     private void deleteEventPressed(){
-        EventHandler ev = EventHandler.getInstant();
+        EventOrganizer ev = EventOrganizer.getInstant();
         Event editedEvent = ev.getEventOfId(Integer.valueOf(idLabel.getText()));
         editPage.toBack();
         ev.getEventList().remove(editedEvent);
