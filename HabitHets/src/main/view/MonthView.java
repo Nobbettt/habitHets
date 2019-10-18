@@ -69,7 +69,7 @@ public class MonthView extends StackPane implements ViewAble {
     }
 
     private void updateMonthView(List<Day> month) {
-        Day firstday = (Day) month.get(0);
+        Day firstday = month.get(0);
         int k = firstday.getLdt().getDayOfWeek().getValue();
 
 
@@ -78,7 +78,7 @@ public class MonthView extends StackPane implements ViewAble {
         List<Day> prevMonth = a.getMonthFromDate(firstday.getLdt().minusMonths(1));
         int lastDayPrevMonth = prevMonth.size()-1;
         for(int l = k; 0 <= l; l--){
-            Day tmpDay = (Day) prevMonth.get(lastDayPrevMonth);
+            Day tmpDay = prevMonth.get(lastDayPrevMonth);
             Integer daynb = tmpDay.getLdt().getDayOfMonth();
             monthdays.get(l).setText(daynb.toString());
             lastDayPrevMonth--;
@@ -87,7 +87,7 @@ public class MonthView extends StackPane implements ViewAble {
         int j = 0;
         for(int i = k; i< monthdays.size(); i++){
             if(j < month.size()){
-                Day tmpDay = (Day) month.get(j);
+                Day tmpDay = month.get(j);
                 Integer daynb = tmpDay.getLdt().getDayOfMonth();
                 monthdays.get(i).setText(daynb.toString());
                 j++;
@@ -100,7 +100,7 @@ public class MonthView extends StackPane implements ViewAble {
         List<Day> nextMonth = a.getMonthFromDate(firstday.getLdt().plusMonths(1));
         int firstDayNextMonth = 0;
         for(int l = month.size()+k; l < monthdays.size(); l++){
-            Day tmpDay = (Day) nextMonth.get(firstDayNextMonth);
+            Day tmpDay = nextMonth.get(firstDayNextMonth);
             Integer daynb = tmpDay.getLdt().getDayOfMonth();
             monthdays.get(l).setText(daynb.toString());
             firstDayNextMonth++;

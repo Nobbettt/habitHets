@@ -14,7 +14,7 @@ public class NoteHandler implements IHandler {
     public static List<Note> notesList;
 
     private NoteHandler(){
-        this.notesList = new ArrayList<>();
+        notesList = new ArrayList<>();
     }
 
     /**

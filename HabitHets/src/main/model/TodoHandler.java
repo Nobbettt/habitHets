@@ -22,8 +22,8 @@ public class TodoHandler implements IHandler {
 
 
     public TodoHandler() {
-        this.todoList = new ArrayList<>();
-        this.doneTodoList = new ArrayList<>();
+        todoList = new ArrayList<>();
+        doneTodoList = new ArrayList<>();
     }
 
     /**

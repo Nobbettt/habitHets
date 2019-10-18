@@ -3,8 +3,8 @@ package main.model;
 import java.util.List;
 
 public interface IHandler {
-    public void add();
+    void add();
 
-    public void remove(int id);
+    void remove(int id);
 
 }

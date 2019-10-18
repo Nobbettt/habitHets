@@ -81,13 +81,13 @@ public class MonthInYear extends AnchorPane  {
 
     private void fitItem(AnchorPane parent, Node child) {
 
-            parent.setTopAnchor(child, 0.0);
+            setTopAnchor(child, 0.0);
 
-            parent.setRightAnchor(child, 0.0);
+            setRightAnchor(child, 0.0);
 
-            parent.setBottomAnchor(child, 0.0);
+            setBottomAnchor(child, 0.0);
 
-            parent.setLeftAnchor(child, 0.0);
+            setLeftAnchor(child, 0.0);
         }
 
 }

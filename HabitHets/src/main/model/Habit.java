@@ -139,9 +139,7 @@ public class Habit {
     public boolean isCheckedToday() {
         if (doneHabits.size() > 0) {
             LocalDate lastCheck = doneHabits.peek().getDate();
-            if (LocalDate.now().equals(lastCheck)) {
-                return true;
-            }
+            return LocalDate.now().equals(lastCheck);
         }
         return false;
     }
@@ -156,9 +154,7 @@ public class Habit {
         if (doneHabits.size() > 0) {
             LocalDate lastCheck = doneHabits.get(doneHabits.size()-1).getDate();
             System.out.println("sist:"+ lastCheck);
-            if(LocalDate.now().minusDays(1).equals(lastCheck)) {
-                return true;
-            }
+            return LocalDate.now().minusDays(1).equals(lastCheck);
         }
         return false;
     }

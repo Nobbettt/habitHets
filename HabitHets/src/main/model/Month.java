@@ -36,7 +36,7 @@ public class Month implements CalendarAble {
         Calendar javaCal = new GregorianCalendar();
         LocalDateTime firstDay = getDays().get(0).getLdt();
         javaCal.set(firstDay.getYear(), firstDay.getMonthValue(), 1);
-        return javaCal.get(javaCal.WEEK_OF_YEAR);
+        return javaCal.get(Calendar.WEEK_OF_YEAR);
     }
 
     public int getLastWeek(){
@@ -44,7 +44,7 @@ public class Month implements CalendarAble {
         int nbrDays = getDays().size() -1;
         LocalDateTime lastDay = getDays().get(nbrDays).getLdt();
         javaCal.set(lastDay.getYear(), lastDay.getMonthValue(), lastDay.getDayOfMonth());
-        return javaCal.get(javaCal.WEEK_OF_YEAR);
+        return javaCal.get(Calendar.WEEK_OF_YEAR);
     }
 
     public Day getFirstDayInWeek(int week){

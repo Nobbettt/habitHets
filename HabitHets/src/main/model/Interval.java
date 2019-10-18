@@ -53,18 +53,14 @@ public class Interval {
 
 
         // the other interval contains this interval
-        if(
-                ( ( other.getStart().equals(this.start) && this.inclusiveStart )
-                        || other.getStart().isAfter(this.start) )
-                        &&
-                        ( ( other.end.equals(this.end) && this.inclusiveEnd )
-                                ||
-                                other.getEnd().isBefore(this.end) )
-        )
-            return true;
+        return ((other.getStart().equals(this.start) && this.inclusiveStart)
+                || other.getStart().isAfter(this.start))
+                &&
+                ((other.end.equals(this.end) && this.inclusiveEnd)
+                        ||
+                        other.getEnd().isBefore(this.end));
 
 
-        return false;
     }
 
     public LocalDateTime getStart() {

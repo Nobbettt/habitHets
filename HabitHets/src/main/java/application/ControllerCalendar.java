@@ -9,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
@@ -304,6 +303,7 @@ public class ControllerCalendar implements Initializable, Listener {
         calendarPane = new AnchorPane();
         mainPane.getChildren().add(calendarPane);
         fitItem(mainPane, calendarPane, 70, 200, 0, 200);
+        addButton.toFront();
     }
 
     private void setupHabit() {
@@ -363,8 +363,8 @@ public class ControllerCalendar implements Initializable, Listener {
         habitPane.setPrefWidth(widthValue);
         habitPane.setMinWidth(widthValue);
         habitPane.setMaxWidth(widthValue);
-        mainPane.setLeftAnchor(calendarPane, widthValue);
-        mainPane.setLeftAnchor(toggleHabitBtn, widthValue);
+        AnchorPane.setLeftAnchor(calendarPane, widthValue);
+        AnchorPane.setLeftAnchor(toggleHabitBtn, widthValue);
         if(currentView == weekView) {
             renderWeek();
         } else if(currentView == expandedDayView) {
@@ -383,16 +383,16 @@ public class ControllerCalendar implements Initializable, Listener {
 
     private void fitItem(AnchorPane parent, Node child, double top, double right, double bottom, double left) {
         if (top != -1) {
-            parent.setTopAnchor(child, top);
+            AnchorPane.setTopAnchor(child, top);
         }
         if (right != -1) {
-            parent.setRightAnchor(child, right);
+            AnchorPane.setRightAnchor(child, right);
         }
         if (bottom != -1) {
-            parent.setBottomAnchor(child, bottom);
+            AnchorPane.setBottomAnchor(child, bottom);
         }
         if (left != -1) {
-            parent.setLeftAnchor(child, left);
+            AnchorPane.setLeftAnchor(child, left);
         }
     }
 

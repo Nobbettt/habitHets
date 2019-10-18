@@ -11,7 +11,7 @@ public class Calender {
     private Calender() {
         int yearsBack = 2;
         int yearsForward  = 4;
-        this.years = getYears(yearsBack, yearsForward);
+        years = getYears(yearsBack, yearsForward);
     }
 
     public static Calender getInstant() {

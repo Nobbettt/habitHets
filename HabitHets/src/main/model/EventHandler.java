@@ -11,7 +11,7 @@ public class EventHandler implements IHandler {
     private int i; //todo
 
     private EventHandler() {
-        this.eventList = new ArrayList<>();
+        eventList = new ArrayList<>();
         i = 0;
     }
 

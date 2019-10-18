@@ -24,7 +24,7 @@ public class Day implements CalendarAble {
     public int getWeekNr(){
         Calendar javaCal = new GregorianCalendar();
         javaCal.set(getLdt().getYear(), getLdt().getMonthValue(), getLdt().getDayOfMonth());
-        return javaCal.get(javaCal.WEEK_OF_YEAR);
+        return javaCal.get(Calendar.WEEK_OF_YEAR);
     }
 
     public String getString() {
