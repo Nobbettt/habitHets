@@ -4,8 +4,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import main.java.application.ControllerCalendar;
-import main.model.IPlanable;
+import application.ControllerCalendar;
+import model.IPlanable;
+import model.Event;
 
 import java.io.IOException;
 
@@ -17,8 +18,8 @@ public class EventView extends AnchorPane {
     IPlanable ip;
     ControllerCalendar controllerCalendar;
 
-    public EventView(IPlanable ip) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/event.fxml"));
+    public EventView(Event ip) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/event.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

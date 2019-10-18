@@ -6,10 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import main.model.Facade;
-import main.model.CalendarAble;
-import main.model.Day;
-import main.model.EventOrganizer;
+import model.Facade;
+import model.CalendarAble;
+import model.Day;
+import model.EventOrganizer;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -36,7 +36,7 @@ public class WeekView extends StackPane implements ViewAble {
     public WeekView() {
         facade = new Facade();
         week = facade.getWeekFromDate(LocalDateTime.now());
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/week.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/week.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {

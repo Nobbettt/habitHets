@@ -1,6 +1,6 @@
-import main.model.Facade;
-import main.model.Calender;
-import main.model.Day;
+import model.Facade;
+import model.Calender;
+import model.Day;
 import org.junit.Assert;
 import org.junit.Test;
 

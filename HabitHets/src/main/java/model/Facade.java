@@ -1,4 +1,4 @@
-package main.model;
+package model;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

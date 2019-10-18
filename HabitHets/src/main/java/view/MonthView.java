@@ -8,9 +8,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import main.model.Facade;
-import main.model.CalendarAble;
-import main.model.Day;
+import model.Facade;
+import model.CalendarAble;
+import model.Day;
 
 import java.io.IOException;
 import java.util.ArrayList;

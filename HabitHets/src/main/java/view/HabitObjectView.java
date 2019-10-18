@@ -31,7 +31,7 @@ public class HabitObjectView extends AnchorPane {
 
 
     public HabitObjectView(Habit habit) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/habitElement.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/habitElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

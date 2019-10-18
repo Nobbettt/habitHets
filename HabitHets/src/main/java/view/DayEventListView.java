@@ -6,7 +6,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import main.model.Facade;
+import model.Facade;
+import model.Event;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
