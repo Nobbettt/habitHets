@@ -1,3 +1,5 @@
+package Test;
+
 import model.EventOrganizer;
 import org.junit.Assert;
 import org.junit.Test;

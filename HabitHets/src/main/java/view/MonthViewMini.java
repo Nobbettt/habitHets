@@ -39,7 +39,7 @@ public class MonthViewMini extends StackPane implements ViewAble {
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 8; j++){
                 AnchorPane a = new AnchorPane();
-                Label l = new Label("test");
+                Label l = new Label("Test");
                 a.getChildren().add(l);
 
                 if(j == 0){

@@ -1,3 +1,5 @@
+package Test;
+
 import model.TodoOrganizer;
 import org.junit.Assert;
 import org.junit.Test;
@@ -5,7 +7,7 @@ import org.junit.Test;
 public class TestTodo {
 
     /**
-     * This test checks that the add-method works the way it is suppose to do.
+     * This Test checks that the add-method works the way it is suppose to do.
      */
 
     @Test
@@ -22,7 +24,7 @@ public class TestTodo {
 
 
     /**
-     * This test checks that you can change the title of the todoo.
+     * This Test checks that you can change the title of the todoo.
      */
 
     @Test
@@ -37,7 +39,7 @@ public class TestTodo {
     }
 
     /**
-     * This test checks that when you complete a todoo that the todoo go from the todolist to donetodolist.
+     * This Test checks that when you complete a todoo that the todoo go from the todolist to donetodolist.
      */
 
     @Test
@@ -56,7 +58,7 @@ public class TestTodo {
     }
 
     /**
-     * This test checks that the length of the donetodolist never goes over the limit.
+     * This Test checks that the length of the donetodolist never goes over the limit.
      */
 
     @Test
@@ -79,7 +81,7 @@ public class TestTodo {
     }
 
     /**
-     * This test checks that you remove a todoo without complete it.
+     * This Test checks that you remove a todoo without complete it.
      */
 
 

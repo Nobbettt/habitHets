@@ -1,3 +1,5 @@
+package Test;
+
 import model.NoteOrganizer;
 import org.junit.Assert;
 import org.junit.Test;

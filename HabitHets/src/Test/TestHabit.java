@@ -1,3 +1,5 @@
+package Test;
+
 import model.DoneHabit;
 import model.Habit;
 import model.HabitOrganizer;
@@ -99,7 +101,7 @@ public class TestHabit {
         Assert.assertEquals(false, testValue);
 
 
-        //test if checked yesterday
+        //Test if checked yesterday
         DoneHabit dh = new DoneHabit();
         dh.setDate(LocalDate.now().minusDays(1));
         habit.getDoneHabits().push(dh);
@@ -108,14 +110,14 @@ public class TestHabit {
         Assert.assertEquals(true, habit.isCheckedYesterday());
 
 
-        //test if checked today will return false in method
+        //Test if checked today will return false in method
         DoneHabit dh2 = new DoneHabit();
         dh2.setDate(LocalDate.now().minusDays(2));
         habit.getDoneHabits().push(dh2);
         Assert.assertEquals(false, habit.isCheckedYesterday());
 
 
-        //test if checked 2 days ago will return false in method
+        //Test if checked 2 days ago will return false in method
         DoneHabit dh3 = new DoneHabit();
         dh3.setDate(LocalDate.now());
         habit.getDoneHabits().push(dh3);
@@ -135,7 +137,7 @@ public class TestHabit {
         Assert.assertEquals(10,habit.getBestStreak());
 
 
-        //checking a habit yet another day and test if best streak updates
+        //checking a habit yet another day and Test if best streak updates
         Stack<DoneHabit> history = new Stack<>();
         history.add(new DoneHabit(LocalDate.now().minusDays(3)));
         history.add(new DoneHabit(LocalDate.now().minusDays(2)));

@@ -1,3 +1,5 @@
+package Test;
+
 import javafx.application.Application;
 import application.Main;
 import org.junit.Test;

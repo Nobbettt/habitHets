@@ -180,6 +180,6 @@ public class HabitView extends AnchorPane implements ViewListener {
     @Override
     public void actOnUpdate(String msg) {
         edit(msg);
-        System.out.println("test");
+        System.out.println("Test");
     }
 }
