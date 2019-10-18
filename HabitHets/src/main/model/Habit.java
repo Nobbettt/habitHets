@@ -2,6 +2,8 @@ package main.model;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -99,10 +101,12 @@ public class Habit {
             if(doneHabits.get(i).getDate().equals(date)) {
                 streak++;
             } else {
+                notifyListener();
                 return streak;
             }
             date = date.minusDays(1);
         }
+        notifyListener();
         return streak;
     }
 
@@ -123,10 +127,12 @@ public class Habit {
                 bestStreak--;
             }
             doneHabits.pop();
+            notifyListener();
             return;
         } else {
             doneHabits.push(new DoneHabit());
             bestStreak();
+            notifyListener();
         }
     }
 
@@ -170,7 +176,21 @@ public class Habit {
         if(getStreak() > bestStreak){
             bestStreak = getStreak();
             dateRecord = LocalDate.now();
+            notifyListener();
         }
+    }
+
+    private List<Listener> listeners = new ArrayList<>();
+
+
+    public void addListener(Listener l){
+        listeners.add(l);
+
+    }
+
+    private void notifyListener(){
+        for (Listener l : listeners)
+            l.actOnUpdate();
     }
 
 }

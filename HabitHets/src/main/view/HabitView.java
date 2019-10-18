@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HabitView extends AnchorPane {
+public class HabitView extends AnchorPane implements ViewListener {
 
     private HabitOrganizer handler = HabitOrganizer.getInstant();
     @FXML private VBox vBox;
@@ -30,9 +30,9 @@ public class HabitView extends AnchorPane {
     @FXML private Label collapsedTitle;
     @FXML private Label habitModifyTypeLabel;
     private List<HabitObjectView> habitsList;
-    private HabitObjectView editing;
-
+    private Habit habit;
     private boolean isExpanded;
+    private HabitObjectView hov;
 
 
     public HabitView() {
@@ -51,6 +51,7 @@ public class HabitView extends AnchorPane {
         scrollPane.setFitToHeight(true);
         habitsList = new ArrayList<>();
         isExpanded = true;
+
     }
 
 
@@ -70,18 +71,18 @@ public class HabitView extends AnchorPane {
     }
 
 
-    public void edit(HabitObjectView habitObjectView){
+    public void edit(String msg){
+        habit = handler.getHabitById(msg);
         newHabit.setVisible(true);
         newHabit.toFront();
         setVisibilityAdd(false);
         create.toBack();
         setVisibilityEdit(true);
         save.toFront();
-        title.setText(habitObjectView.getHabit().getTitle());
-        java.awt.Color tmpC = java.awt.Color.decode(habitObjectView.getHabit().getColor());
+        title.setText(habit.getTitle());
+        java.awt.Color tmpC = java.awt.Color.decode(habit.getColor());
         Color c = Color.rgb(tmpC.getRed(),tmpC.getGreen(),tmpC.getBlue());
         colorPicker.setValue(c);
-        editing = habitObjectView;
         habitModifyTypeLabel.setText("Edit Habit");
 
     }
@@ -103,7 +104,7 @@ public class HabitView extends AnchorPane {
             handler.addHabit(title.getText(), colorToString(colorPicker.getValue()));
             List<Habit> newHabit = new ArrayList<>();
             newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
-            updateHabitView(handler.getHabitList());
+            updateHabitView();
         }
         title.clear();
         colorPicker.setValue(Color.WHITE);
@@ -113,9 +114,13 @@ public class HabitView extends AnchorPane {
     private void save(){
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
-            editing.getHabit().setTitle(title.getText());
-            editing.getHabit().setColor(colorToString(colorPicker.getValue()));
-            editing.updateElementView(editing.getHabit());
+            habit.setTitle(title.getText());
+            habit.setColor(colorToString(colorPicker.getValue()));
+            for (HabitObjectView h : habitsList) {
+                if(h.getHabit().getId() == habit.getId()) {
+                    h.updateElementView();
+                }
+            }
         }
         title.clear();
         colorPicker.setValue(Color.WHITE);
@@ -159,16 +164,22 @@ public class HabitView extends AnchorPane {
 
     //List<CheckBox> checkboxes = new ArrayList<>();
 
-    public void updateHabitView(List<Habit> habits) {
+    public void updateHabitView() {
         vBox.getChildren().clear();
-        for (Habit habit: habits){
-            HabitObjectView habitObjectView = new HabitObjectView(this);
+        for (Habit habit: handler.getHabitList()){
+            HabitObjectView habitObjectView = new HabitObjectView(habit);
+            habitObjectView.addListener(this);
             vBox.getChildren().add(habitObjectView);
-            habitObjectView.updateElementView(habit);
+            habitObjectView.updateElementView();
             habitsList.add(habitObjectView);
          //   hide();
         }
     }
 
 
+    @Override
+    public void actOnUpdate(String msg) {
+        edit(msg);
+        System.out.println("test");
+    }
 }
