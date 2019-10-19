@@ -67,8 +67,7 @@ public class DayEventListView extends StackPane {
                 a.setTranslateY((Integer.valueOf(facade.getEventFromID(id).getInfo().get(6)) * 120) + (Integer.valueOf(facade.getEventFromID(id).getInfo().get(7)) * 2)); //todo WTF
                 double height = calculateLenght(id) * 2;
                 a.setPrefHeight(height);
-                double width = (vBoxWidth)/facade.calculateWidth(ldt,id);
-                System.out.println("asdadsasdaa" + width);
+                double width = this.vBoxWidth/facade.calculateWidth(ldt,id);
                 a.setPrefWidth((width));
                 if (calculateTranslateX(id) != 0) {
                     if (overlap == 3) {

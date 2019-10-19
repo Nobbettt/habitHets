@@ -31,6 +31,11 @@ public class Day implements CalendarAble {
         return "" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "";
     }
 
+    @Override
+    public LocalDateTime getLocalDateTime() {
+        return ldt;
+    }
+
     public String getWeekDayString() {
         String string = "";
         switch (ldt.getDayOfWeek().getValue()) {

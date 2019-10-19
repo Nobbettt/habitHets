@@ -58,6 +58,15 @@ public class EventOrganizer implements IHandler {
         System.out.println("The ID: '" + id + "' does not exist");
     }
 
+    public void editEvent(int id, String title, String location, String desc, LocalDateTime startTime, LocalDateTime endTime){
+        Event eventToEdit = getEventOfId(id);
+        eventToEdit.setTitle(title);
+        eventToEdit.setLocation(location);
+        eventToEdit.setDescription(desc);
+        eventToEdit.setStartTime(startTime);
+        eventToEdit.setEndTime(endTime);
+    }
+
     public List<Event> getEventList() {
         return eventList;
     }

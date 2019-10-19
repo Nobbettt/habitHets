@@ -7,9 +7,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import main.model.Facade;
-import main.model.CalendarAble;
-import main.model.Day;
-import main.model.EventOrganizer;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -29,13 +26,17 @@ public class WeekView extends StackPane implements ViewAble {
     @FXML private Label weekDay6;
     @FXML private Label weekDay7;
     private List<Label> weekDays;
-    private List<Day> week;
+    private List<LocalDateTime> week;
     public List<DayEventListView> weekDayEvents;
     Facade facade;
 
     public WeekView() {
         facade = new Facade();
-        week = facade.getWeekFromDate(LocalDateTime.now());
+        List<LocalDateTime> week = new ArrayList<>();
+        this.week = week;
+        for (LocalDateTime localDateTime : facade.getLdtWeekFromDate(LocalDateTime.now())){
+            week.add(localDateTime);
+        }
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/week.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -52,14 +53,13 @@ public class WeekView extends StackPane implements ViewAble {
      * @param week
      */
     @Override
-    public void updateView(List<? extends CalendarAble> week) {
-        this.week = (List<Day>) week;
-        List<Day> weekdays = getWeek();
+    public void updateView(List<LocalDateTime> week) {
+
         for(int i = 0; i < 7; i++) {
-            Day tmpDay = weekdays.get(i);
-            String weekday = week.get(i).getString(); //week.get(i)....getWeekdayfunction()
+            LocalDateTime tmpDay = week.get(i);
+            String weekday = "" + week.get(i).getDayOfMonth() + "/" + week.get(i).getMonthValue(); //week.get(i)....getWeekdayfunction()
             weekDays.get(i).setText(weekday);
-            weekDayEvents.get(i).updateDay(tmpDay.getLdt(), weekGrid.getCellBounds(1, 0).getWidth());
+            weekDayEvents.get(i).updateDay(tmpDay, weekGrid.getCellBounds(1, 0).getWidth());
         }
     }
 
@@ -90,29 +90,17 @@ public class WeekView extends StackPane implements ViewAble {
         weekDayEvents = new ArrayList<>();
         weekGrid.add(new HourColumnView(), 0, 0);
         for(int i = 1; i < 8; i++) {
-            DayEventListView dayEvents = new DayEventListView(week.get(i-1).getLdt());
+            DayEventListView dayEvents = new DayEventListView(week.get(i-1));
             weekGrid.add(dayEvents, i, 0);
             weekDayEvents.add(dayEvents);
         }
-        //addButton.setShape(new Circle());
-        //addButton.toFront();
-
-    }
-
-    /**
-     * Adds new event and updates the view
-     */
-    @FXML
-    private void addEventOnclick(){
-        EventOrganizer.getInstant().add();
-        updateView(week);
     }
 
     /**
      * returns week list
      * @return
      */
-    public List<Day> getWeek() {
+    public List<LocalDateTime> getWeek() {
         return week;
     }
 }

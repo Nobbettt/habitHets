@@ -7,10 +7,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import main.model.CalendarAble;
-import main.model.Day;
+import main.model.Facade;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,8 +55,8 @@ public class MonthViewMini extends StackPane implements ViewAble {
     }
 
     @Override
-    public void updateView(List<? extends CalendarAble> month) {
-        updateMonthView((List<Day>) month);
+    public void updateView(List<LocalDateTime> month) {
+        updateMonthView(month);
     }
 
     @Override
@@ -64,11 +64,12 @@ public class MonthViewMini extends StackPane implements ViewAble {
 
     }
 
-    private void updateMonthView(List<Day> month) {
+    private void updateMonthView(List<LocalDateTime> month) {
+        Facade f = new Facade();
         int j = 0;
-        int w = month.get(0).getWeekNr()-4;
+        int w = f.getWeekFromLdt(month.get(0));
         for (Label l : monthdays){
-            l.setText("" + month.get(0).getLdt().plusDays(j).getDayOfMonth() + "/" + month.get(0).getLdt().plusDays(j).getMonthValue());
+            l.setText("" + month.get(0).plusDays(j).getDayOfMonth() + "/" + month.get(0).plusDays(j).getMonthValue());
             if (j < month.size()-1)
                 j++;
         }

@@ -71,7 +71,6 @@ public class ControllerCalendar implements Initializable, Listener {
     private Timeline timeLineCaller;
     public ViewAble currentView;
     private LocalDateTime timeNow;
-    EventOrganizer eventOrganizer = EventOrganizer.getInstant();
     private LocalDateTime masterDateTime;
     private Facade facade;
     public static ControllerCalendar instance;
@@ -120,7 +119,6 @@ public class ControllerCalendar implements Initializable, Listener {
         populateTodo();
         renderDay();
 
-        List<Day> week = facade.getWeekFromDate(LocalDateTime.now());
 
         renderWeek();
 
@@ -140,19 +138,19 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     @FXML
     private void prevClick() {
-        List<? extends CalendarAble> calendarData = new ArrayList<>();
+        List<LocalDateTime> calendarData = new ArrayList<>();
         if(currentView == expandedDayView) {
             masterDateTime = masterDateTime.minusDays(1);
-            calendarData = facade.getDayFromDate(masterDateTime);
+            calendarData.add(copyMasterdate());
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.minusWeeks(1);
-            calendarData = facade.getWeekFromDate(masterDateTime);
+            calendarData = facade.getLdtWeekFromDate(masterDateTime);
         } else if(currentView == monthView) {
             masterDateTime = masterDateTime.minusMonths(1);
-            calendarData = facade.getMonthFromDate(masterDateTime);
+            calendarData = facade.getLdtMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.minusYears(1);
-            calendarData = facade.getYearFromDate(masterDateTime);
+            calendarData = facade.getLdtYearFromDate(masterDateTime);
         }
         currentView.updateView(calendarData);
         updateHeadLbl();
@@ -163,19 +161,19 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     @FXML
     private void nextClick() {
-        List<? extends CalendarAble> calendarData = new ArrayList<>();
+        List<LocalDateTime> calendarData = new ArrayList<>();
         if(currentView == expandedDayView) {
             masterDateTime = masterDateTime.plusDays(1);
-            calendarData = facade.getDayFromDate(masterDateTime);
+            calendarData.add(copyMasterdate());
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.plusWeeks(1);
-            calendarData = facade.getWeekFromDate(masterDateTime);
+            calendarData = facade.getLdtWeekFromDate(masterDateTime);
         } else if(currentView == monthView) {
             masterDateTime = masterDateTime.plusMonths(1);
-            calendarData = facade.getMonthFromDate(masterDateTime);
+            calendarData = facade.getLdtMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.plusYears(1);
-            calendarData = facade.getYearFromDate(masterDateTime);
+            calendarData = facade.getLdtYearFromDate(masterDateTime);
         }
         currentView.updateView(calendarData);
         updateHeadLbl();
@@ -218,8 +216,10 @@ public class ControllerCalendar implements Initializable, Listener {
      * Changes the calendar view to single day view
      */
     private void renderDay() {
+        List<LocalDateTime> list = new ArrayList<>();
+        list.add(copyMasterdate());
         currentView = expandedDayView;
-        expandedDayView.updateView(facade.getDayFromDate(masterDateTime));
+        expandedDayView.updateView(list);
         renderCalendar(expandedDayView);
     }
 
@@ -240,7 +240,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderWeek() {
         currentView = weekView;
-        weekView.updateView(facade.getWeekFromDate(masterDateTime));
+        weekView.updateView(facade.getLdtWeekFromDate(copyMasterdate()));
         renderCalendar(weekView);
     }
 
@@ -261,7 +261,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderMonth(){
         currentView = monthView;
-        monthView.updateView(facade.getMonthFromDate(masterDateTime));
+        monthView.updateView(facade.getLdtMonthFromDate(copyMasterdate()));
         renderCalendar(monthView);
     }
 
@@ -282,7 +282,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderYear() {
         currentView = yearView;
-        yearView.updateView(facade.getYearFromDate(masterDateTime));
+        yearView.updateView(facade.getLdtYearFromDate(copyMasterdate()));
         renderCalendar(yearView);
     }
 
@@ -433,7 +433,6 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     private void createButtonClick(){
-        EventOrganizer ev = EventOrganizer.getInstant();
         LocalDate ld = dateChooser.getValue();
         LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.now());
         int fromHour = Integer.parseInt(fromHourTime.getValue());
@@ -443,7 +442,7 @@ public class ControllerCalendar implements Initializable, Listener {
         checkCreationInput();
         if (toHour > fromHour || toHour == fromHour && toMinute > fromMinute) {
             checkCreationInput();
-            ev.addEvent(ldt, fromHour, fromMinute, toHour, toMinute, titleField.getText(), LocationField.getText(), descField.getText());
+            facade.createEvent(ldt, fromHour, fromMinute, toHour, toMinute, titleField.getText(), LocationField.getText(), descField.getText());
             resetAllField();
             creationPage.toBack();
         }
@@ -514,19 +513,16 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     public void editSavePressed() {
-        EventOrganizer ev = EventOrganizer.getInstant();
-        Event editedEvent = ev.getEventOfId(Integer.valueOf(idLabel.getText()));
         int fromHour = Integer.parseInt(editFromHourTime.getValue());
         int fromMinute = Integer.parseInt(editFromMinuteTime.getValue());
         int toHour = Integer.parseInt(editToHourTime.getValue());
         int toMinute = Integer.parseInt(editToMinuteTime.getValue());
         if (toHour > fromHour || toHour == fromHour && toMinute > fromMinute) {
             checkEditInput();
-            editedEvent.setTitle(editTitle.getText());
-            editedEvent.setLocation(editLocation.getText());
-            editedEvent.setDescription(editDesc.getText());
-            editedEvent.setStartTime(LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), fromHour, fromMinute));
-            editedEvent.setEndTime(LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), toHour, toMinute));
+            LocalDateTime from = LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), fromHour, fromMinute);
+            LocalDateTime to = LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), toHour, toMinute);
+            facade.editEvent(Integer.valueOf(idLabel.getText()), editTitle.getText(), editLocation.getText(), editDesc.getText(), to, from);
+
         }
         editPage.toBack();
     }
@@ -545,10 +541,8 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     private void deleteEventPressed(){
-        EventOrganizer ev = EventOrganizer.getInstant();
-        Event editedEvent = ev.getEventOfId(Integer.valueOf(idLabel.getText()));
         editPage.toBack();
-        ev.getEventList().remove(editedEvent);
+        facade.deleteEvent(Integer.valueOf(idLabel.getText()));
     }
 
     public void populateExtendedEvent(IPlanable ip){
@@ -562,6 +556,10 @@ public class ControllerCalendar implements Initializable, Listener {
         editDesc.setText(ip.getInfo().get(3));
         editLocation.setText(ip.getInfo().get(2));
         idLabel.setText(ip.getInfo().get(1));
+    }
+
+    public LocalDateTime copyMasterdate(){
+        return LocalDateTime.of(masterDateTime.getYear(), masterDateTime.getMonthValue(), masterDateTime.getDayOfMonth(), masterDateTime.getHour(), masterDateTime.getMinute());
     }
 
 }

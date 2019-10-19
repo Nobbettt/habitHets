@@ -97,4 +97,9 @@ public class Month implements CalendarAble {
                 return "Bitch month";
         }
     }
+
+    @Override
+    public LocalDateTime getLocalDateTime() {
+        return days.get(0).getLdt();
+    }
 }

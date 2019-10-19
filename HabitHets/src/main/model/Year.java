@@ -58,4 +58,9 @@ public class Year implements CalendarAble {
     public String getString() {
         return year.toString();
     }
+
+    @Override
+    public LocalDateTime getLocalDateTime() {
+        return months.get(0).days.get(0).getLdt();
+    }
 }
