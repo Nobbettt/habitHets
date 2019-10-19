@@ -334,6 +334,7 @@ public class ControllerCalendar implements Initializable, Listener {
         fitItem(mainPane, todoPane, 70, 0, 0, -1);
     }
 
+    // TODO: 2019-10-19  
     private void populateHabit(){
         handler.add();
         handler.add();
@@ -398,6 +399,7 @@ public class ControllerCalendar implements Initializable, Listener {
         }
     }
 
+    // TODO: 2019-10-19  
     private void populateTodo(){ //KAn byta ut denna mot updateTodoview() sen när jag inte vill ha hårdkodat
         todoOrganizer.add();
         todoOrganizer.add();
@@ -501,9 +503,9 @@ public class ControllerCalendar implements Initializable, Listener {
     }
 
     @FXML
-    public void editEventPressed(IPlanable ip){
+    public void editEventPressed(int id){
         editPage.toFront();
-        populateExtendedEvent(ip);
+        populateExtendedEvent(id);
     }
 
     @FXML
@@ -521,7 +523,7 @@ public class ControllerCalendar implements Initializable, Listener {
             checkEditInput();
             LocalDateTime from = LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), fromHour, fromMinute);
             LocalDateTime to = LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), toHour, toMinute);
-            facade.editEvent(Integer.valueOf(idLabel.getText()), editTitle.getText(), editLocation.getText(), editDesc.getText(), to, from);
+            facade.editEvent(Integer.valueOf(idLabel.getText()), editTitle.getText(), editLocation.getText(), editDesc.getText(), from, to);
 
         }
         editPage.toBack();
@@ -545,17 +547,18 @@ public class ControllerCalendar implements Initializable, Listener {
         facade.deleteEvent(Integer.valueOf(idLabel.getText()));
     }
 
-    public void populateExtendedEvent(IPlanable ip){
-        System.out.println(ip.getInfo().get(9));
-        editTitle.setText(ip.getInfo().get(0));
-        editDate.setValue(LocalDate.ofYearDay(Integer.valueOf(ip.getInfo().get(4)),Integer.valueOf(ip.getInfo().get(5))));
-        editFromHourTime.setValue(ip.getInfo().get(6));
-        editFromMinuteTime.setValue(ip.getInfo().get(7));
-        editToHourTime.setValue(ip.getInfo().get(8));
-        editToMinuteTime.setValue(ip.getInfo().get(9));
-        editDesc.setText(ip.getInfo().get(3));
-        editLocation.setText(ip.getInfo().get(2));
-        idLabel.setText(ip.getInfo().get(1));
+    public void populateExtendedEvent(int id){
+        LocalDateTime eventStarttime = facade.getEventStarttime(id);
+        LocalDateTime eventEndtime = facade.getEventEndtime(id);
+        editTitle.setText(facade.getEventTitle(id));
+        editDate.setValue(facade.getEventStarttime(id).toLocalDate());
+        editFromHourTime.setValue(String.valueOf(eventStarttime.getHour()));
+        editFromMinuteTime.setValue(String.valueOf(eventStarttime.getMinute()));
+        editToHourTime.setValue(String.valueOf(eventEndtime.getHour()));
+        editToMinuteTime.setValue(String.valueOf(eventEndtime.getMinute()));
+        editDesc.setText(facade.getEventDesc(id));
+        editLocation.setText(facade.getEventLocation(id));
+        idLabel.setText(String.valueOf(id));
     }
 
     public LocalDateTime copyMasterdate(){

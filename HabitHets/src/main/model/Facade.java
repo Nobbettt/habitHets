@@ -32,11 +32,6 @@ public class Facade {
         return eventOrganizer.getEventOfId(id);
     }
 
-    public String getEventTitle(int id){
-        Event event = eventOrganizer.getEventOfId(id);
-        return event.getTitle();
-    }
-
     public String getEventLocation(int id){
         Event event = eventOrganizer.getEventOfId(id);
         return event.getLocation();
@@ -145,10 +140,6 @@ public class Facade {
         }
     }
 
-    public void createNote(String s, LocalDateTime ldt){
-        noteOrganizer.addNote(s, ldt);
-    }
-
     public void updateNote (String s, LocalDateTime ldt){
         if (noteOnDay(ldt)){
             noteOrganizer.getNoteDate(ldt).setDescription(s);
@@ -167,6 +158,14 @@ public class Facade {
 
     public void editEvent(int id, String title, String location, String desc, LocalDateTime from, LocalDateTime to){
         eventOrganizer.editEvent(id, title, location, desc, from, to);
+    }
+
+    public String getEventTitle(int id){
+        return eventOrganizer.getEventOfId(id).getTitle();
+    }
+
+    public String getEventStarttimeString(int id){
+        return eventOrganizer.getEventOfId(id).timeString();
     }
 
 }

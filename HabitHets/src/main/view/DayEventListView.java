@@ -63,8 +63,8 @@ public class DayEventListView extends StackPane {
         for (int id : facade.getAllIdsOfDay(ldt))
             if (this.ldt.getDayOfYear() == ldt.getDayOfYear()) {
                 i++;
-                AnchorPane a = new EventView(facade.getEventFromID(id));
-                a.setTranslateY((Integer.valueOf(facade.getEventFromID(id).getInfo().get(6)) * 120) + (Integer.valueOf(facade.getEventFromID(id).getInfo().get(7)) * 2)); //todo WTF
+                AnchorPane a = new EventView((id));
+                a.setTranslateY((Integer.valueOf(facade.getEventStarttime(id).getHour()) * 120) + (Integer.valueOf(facade.getEventStarttime(id).getHour()) * 2)); //todo WTF
                 double height = calculateLenght(id) * 2;
                 a.setPrefHeight(height);
                 double width = this.vBoxWidth/facade.calculateWidth(ldt,id);
