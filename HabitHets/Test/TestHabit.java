@@ -1,6 +1,5 @@
 import main.model.DoneHabit;
 import main.model.Habit;
-import main.model.HabitOrganizer;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,145 +8,213 @@ import java.util.Stack;
 
 public class TestHabit {
 
-    HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
 
 
+    /**
+     * A test-method for getStreak() in Habit.
+     * By adding yesterday's and today's habit
+     * in the doneHabit-list the test can check
+     * if the streak increases to 2.
+     */
     @Test
-    public void testAddHabit(){
-        Assert.assertEquals(0, habitOrganizer.getHabitList().size());
-        habitOrganizer.add();
-        habitOrganizer.add();
-        Assert.assertEquals(2, habitOrganizer.getHabitList().size());
-        Assert.assertEquals(0, habitOrganizer.getHabitList().get(0).getId());
-        Assert.assertEquals(1, habitOrganizer.getHabitList().get(1).getId());
-    }
-
-    @Test
-    public void testRemoveHabit(){
-        habitOrganizer.add();
-        habitOrganizer.add();
-        habitOrganizer.remove(1);
-        Assert.assertEquals(1, habitOrganizer.getHabitList().size());
-        Assert.assertEquals(0, habitOrganizer.getHabitList().get(0).getId());
-    }
-
-
-   @Test
-   public void testTitle(){
-      Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());
-        Assert.assertEquals("testHabit",habit.getTitle());
-        habit.setTitle("k");
-        Assert.assertEquals("k",habit.getTitle());
-    }
-
-
-    @Test
-    public void  testGetStreak(){
-        Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());
+    public void getStreak() {
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         habit.getDoneHabits().add(new DoneHabit(LocalDate.now().minusDays(1)));
         habit.getDoneHabits().add(new DoneHabit(LocalDate.now()));
-        Assert.assertEquals(2,habit.getStreak());
+        Assert.assertEquals(2, habit.getStreak());
+    }
 
+
+    /**
+     * A test-method for getStreak() in Habit. This test
+     * checks if the streak is broken when a habit is
+     * missed to get ched one day. By adding today's habit
+     * and the two days from now's habit
+     * in the doneHabit-list, the test can check
+     * if the streak gets broken. Since today's habit
+     * is checked the streak is set to 1.
+     */
+    @Test
+    public void getBrokenStreak(){
         //testing if streak is broken
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         habit.getDoneHabits().add(new DoneHabit(LocalDate.now().minusDays(2)));
         habit.getDoneHabits().add(new DoneHabit(LocalDate.now()));
         Assert.assertEquals(1,habit.getStreak());
     }
 
 
+    /**
+     * A test-method for onClickHabit in Habit.
+     * The method tests a habit, that was checked yesterday,
+     * and then someone pushes the button, gets checked today as well.
+     */
     @Test
-    public void testOnClickHabit(){
-        Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());
+    public void pressedButtonMakesAHabitChecked() {
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         habit.getDoneHabits().add(new DoneHabit(LocalDate.now().minusDays(1)));
-        Assert.assertEquals(1,habit.getDoneHabits().size());
         habit.onClickHabit();
-        Assert.assertEquals(2,habit.getDoneHabits().size());
+        Assert.assertEquals(2, habit.getDoneHabits().size());
         Assert.assertEquals(true, habit.isCheckedToday());
+    }
 
+
+    /**
+     * A test-method for onClickHabit in Habit.
+     * A habit, that was checked yesterday,
+     * and then someone pushes the button today.
+     * Then someone press the button once again.
+     * The test checks that the habit the gets unchecked.
+     */
+    @Test
+    public void pressedButtonMakesAHabitUnchecked() {
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
+        habit.getDoneHabits().add(new DoneHabit(LocalDate.now().minusDays(1)));
+        habit.onClickHabit();
         habit.onClickHabit();
         Assert.assertEquals(1,habit.getDoneHabits().size());
         Assert.assertEquals(false, habit.isCheckedToday());
     }
 
 
-
+    /**
+     * A test-method for isCheckedToday in Habit.
+     * When a habit is unchecked, and the someone pushes the checked-button,
+     * the methods tests if it is checked today
+     */
     @Test
-    public void testIsCheckedToday() {
-        //When a habit is unchecked, and the someone pushes the checked-button, the methos tests if it is checked today
+    public void isCheckedToday() {
         Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         habit.onClickHabit();
         boolean testValue = habit.isCheckedToday();
         Assert.assertEquals(true, testValue);
+    }
 
-        //A checked habit gets unchecked, the method checks if the stack is empty
+    /**
+     * A test-method for isCheckedToday in Habit.
+     * A checked habit gets unchecked, the method checks if the stack is empty.
+     */
+    @Test
+    public void notCheckedToday() {
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         habit.onClickHabit();
-        Assert.assertEquals(false,habit.isCheckedToday());
+        habit.onClickHabit();
+        Assert.assertEquals(false, habit.isCheckedToday());
+    }
 
-        //missmatch dates returns false
+
+    /**
+     * A test-method for isCheckedToday in Habit.
+     * The test checks if miss-matched dates returns false.
+     */
+    @Test
+    public void checkedTodayWrongData(){
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         DoneHabit dh = new DoneHabit();
         dh.setDate(LocalDate.now().minusDays(1));
         habit.getDoneHabits().push(dh);
         Assert.assertEquals(false, habit.isCheckedToday());
-
     }
 
 
+    /**
+     * A test-method for isCheckedYesterday in Habit.
+     * Tests if a habit was checked yesterday
+     */
     @Test
-    public void testIsCheckedYesterday(){
+    public void isCheckedYesterday() {
         Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         boolean testValue = habit.isCheckedYesterday();
         Assert.assertEquals(false, testValue);
 
 
-        //test if checked yesterday
         DoneHabit dh = new DoneHabit();
         dh.setDate(LocalDate.now().minusDays(1));
         habit.getDoneHabits().push(dh);
         System.out.println(habit.getDoneHabits().peek().getDate());
         System.out.println(habit.getDoneHabits().get(0).getDate());
         Assert.assertEquals(true, habit.isCheckedYesterday());
+    }
 
 
-        //test if checked today will return false in method
-        DoneHabit dh2 = new DoneHabit();
-        dh2.setDate(LocalDate.now().minusDays(2));
-        habit.getDoneHabits().push(dh2);
+    /**
+     * A test-method for isCheckedYesterday in Habit.
+     * Tests if checked today will return false in method.
+     */
+    @Test
+    public void notCheckedTodayInYesterdayMethod(){
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
+        DoneHabit dh = new DoneHabit();
+        dh.setDate(LocalDate.now().minusDays(2));
+        habit.getDoneHabits().push(dh);
         Assert.assertEquals(false, habit.isCheckedYesterday());
+    }
 
-
-        //test if checked 2 days ago will return false in method
-        DoneHabit dh3 = new DoneHabit();
-        dh3.setDate(LocalDate.now());
-        habit.getDoneHabits().push(dh3);
+    /**
+     * A test-method for isCheckedYesterday in Habit.
+     * Tests if checked 2 days ago will return false in method.
+     */
+    @Test
+    public void notChecked2DaysAgo(){
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
+        DoneHabit dh = new DoneHabit();
+        dh.setDate(LocalDate.now());
+        habit.getDoneHabits().push(dh);
         Assert.assertEquals(false, habit.isCheckedYesterday());
     }
 
 
-
+    /**
+     * A test-method for bestStreak in Habit.
+     * Tests if the setter is working.
+     */
     @Test
-    public void testBestStreak(){
-        Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());
+    public void bestStreakSetter() {
+        Habit habit = new Habit(1, "testHabit", new Stack(), 6, "blue", LocalDate.now());
         habit.bestStreak();
-        Assert.assertEquals(6,habit.getBestStreak());
-
-        //testing setter
+        Assert.assertEquals(6, habit.getBestStreak());
         habit.setBestStreak(10);
-        Assert.assertEquals(10,habit.getBestStreak());
+        Assert.assertEquals(10, habit.getBestStreak());
+    }
 
 
-        //checking a habit yet another day and test if best streak updates
+    /**
+     * A test-method for bestStreak in Habit.
+     * A test that is checking if a habit
+     * that gets checked yet another day the best streak updates.
+     */
+    @Test
+    public void updateBestStreak() {
         Stack<DoneHabit> history = new Stack<>();
         history.add(new DoneHabit(LocalDate.now().minusDays(3)));
         history.add(new DoneHabit(LocalDate.now().minusDays(2)));
         history.add(new DoneHabit(LocalDate.now().minusDays(1)));
-        System.out.println(history.get(history.size()-1).getDate());
-        Habit habit2 = new Habit(1,"testHabit", history,3,"blue",LocalDate.now());
-        habit2.getDoneHabits().add(new DoneHabit());
-        habit2.bestStreak();
-        Assert.assertEquals(4,habit2.getBestStreak());
+        Habit habit = new Habit(1,"testHabit", history,3,"blue",LocalDate.now());
+        habit.getDoneHabits().add(new DoneHabit());
+        habit.bestStreak();
+        Assert.assertEquals(4,habit.getBestStreak());
     }
 
 
+
+    /**
+     * A test-method for getTitle() in Habit.
+     * The test checks that a title can get reached
+     * and also set if needed to.
+     */
+    @Test
+    public void getTitle(){
+        Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());
+        Assert.assertEquals("testHabit",habit.getTitle());
+        habit.setTitle("k");
+        Assert.assertEquals("k",habit.getTitle());
+    }
+
+    /**
+     * A test-method for getColor() in Habit.
+     * The test checks that a color can get reached
+     * and also set if needed to.
+     */
     @Test
     public void testColor(){
         Habit habit = new Habit(1,"testHabit", new Stack(),6,"blue",LocalDate.now());

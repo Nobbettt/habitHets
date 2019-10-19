@@ -55,10 +55,3 @@
     -fx-text-fill: #ff0000;
 }
 
-.addbtn {
-    -fx-background-color: #555;
-}
-.addbtn:hover{
-    -fx-cursor: hand;
-    -fx-opacity: .8;
-}

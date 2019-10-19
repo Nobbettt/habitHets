@@ -23,7 +23,7 @@ public class HabitOrganizer implements IHandler{
     }
 
     /**
-     * This method controlls if an object is created.
+     * This method controls if an object is created.
      * This makes sure that there may only be one instance
      * at the time (singleton-pattern). If there already exists an
      * instance, another one will not be created. If there in not,
