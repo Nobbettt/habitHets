@@ -76,4 +76,21 @@ public class HabitOrganizer implements IHandler{
         habitList.add(Factory.createHabit(title, new Stack(),0,color,LocalDate.now()));
     }
 
+    public Habit getHabitFromId(int id){
+        for (Habit habit : getHabitList()){
+            if (habit.getId() == id){
+                return habit;
+            }
+        }
+        return null;
+    }
+
+    public List<Integer> getAllHabitIDs(){
+        List<Integer> ids = new ArrayList<>();
+        for (Habit habit : getHabitList()){
+            ids.add(habit.getId());
+        }
+        return ids;
+    }
+
 }

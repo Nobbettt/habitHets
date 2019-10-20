@@ -12,7 +12,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-import main.model.*;
+import main.model.Facade;
+import main.model.HabitOrganizer;
+import main.model.Listener;
+import main.model.TodoOrganizer;
 import main.view.*;
 
 import java.net.URL;
@@ -336,7 +339,7 @@ public class ControllerCalendar implements Initializable, Listener {
 
     // TODO: 2019-10-19  
     private void populateHabit(){
-        handler.add();
+        /*handler.add();
         handler.add();
         handler.getHabitList().get(0).setTitle("elintina");
         handler.getHabitList().get(0).setBestStreak(4);
@@ -345,7 +348,8 @@ public class ControllerCalendar implements Initializable, Listener {
         handler.getHabitList().get(1).setTitle("nobbhelge");
         handler.getHabitList().get(1).setColor("#47BCAD");
         handler.getHabitList().get(1).setBestStreak(7);
-        habitView.updateHabitView(handler.getHabitList());
+        */
+        habitView.updateHabitView(facade.getAllHabitIds());
     }
 
     @FXML
@@ -401,11 +405,13 @@ public class ControllerCalendar implements Initializable, Listener {
 
     // TODO: 2019-10-19  
     private void populateTodo(){ //KAn byta ut denna mot updateTodoview() sen när jag inte vill ha hårdkodat
+        /*
         todoOrganizer.add();
         todoOrganizer.add();
         todoOrganizer.add();
         todoOrganizer.doneTodoRemove(todoOrganizer.getTodoList().get(0).getId());
         todoOrganizer.getTodoList().get(1).setTitle("Hej");
+        */
         todoView.updateTodoView();
 
 

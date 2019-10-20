@@ -13,6 +13,8 @@ public class Facade {
     private Calender calender = Calender.getInstant();
     private EventOrganizer eventOrganizer = EventOrganizer.getInstant();
     private NoteOrganizer noteOrganizer = NoteOrganizer.getInstance();
+    private TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
+    private HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
 
     public List<Day> getWeekFromDate(LocalDateTime localDateTime) {
         return calender.getWeekFromLDT(localDateTime);
@@ -167,5 +169,78 @@ public class Facade {
     public String getEventStarttimeString(int id){
         return eventOrganizer.getEventOfId(id).timeString();
     }
+
+    public void createNewTodo(String title){
+        todoOrganizer.addTodo(title);
+    }
+
+    public String getDoneTodoTitle(int id){
+        return todoOrganizer.getDoneTodoOfId(id).getTitle();
+    }
+
+    public String getTodoTitle(int id){
+        return todoOrganizer.getTodoOfId(id).getTitle();
+    }
+
+    public void moveBackTodo(int id){
+        todoOrganizer.moveBackDoneTodo(id);
+    }
+
+    public void removeTodo(int id){
+        todoOrganizer.remove(id);
+    }
+
+    public void removeDoneTodo(int id){
+        todoOrganizer.doneTodoRemove(id);
+    }
+
+    public List<Integer> getTodoIds(){
+        return todoOrganizer.getTodoIds();
+    }
+
+    public List<Integer> getDoneTodoIds(){
+        return todoOrganizer.getDoneTodoIds();
+    }
+
+    public void createHabit(String title, String color){
+        habitOrganizer.addHabit(title, color);
+    }
+
+    public void habitClicked(int id){
+        habitOrganizer.getHabitFromId(id).onClickHabit();
+    }
+
+    public void removeHabit(int id){
+        habitOrganizer.remove(id);
+    }
+
+    public String getHabitTitle(int id){
+        return habitOrganizer.getHabitFromId(id).getTitle();
+    }
+
+    public int getBestStreak(int id){
+        return habitOrganizer.getHabitFromId(id).getBestStreak();
+    }
+
+    public int getStreak(int id){
+        return habitOrganizer.getHabitFromId(id).getStreak();
+    }
+
+    public boolean habitIsCheckedToday(int id){
+        return habitOrganizer.getHabitFromId(id).isCheckedToday();
+    }
+    public String getHabitColor(int id){
+        return habitOrganizer.getHabitFromId(id).getColor();
+    }
+
+    public void updateHabitTitle(int id, String title){
+        habitOrganizer.getHabitFromId(id).setTitle(title);
+    }
+
+    public void updateHabitColor(int id, String color){
+        habitOrganizer.getHabitFromId(id).setColor(color);
+    }
+
+    public List<Integer> getAllHabitIds(){ return habitOrganizer.getAllHabitIDs(); }
 
 }

@@ -110,6 +110,42 @@ public class TodoOrganizer implements IHandler {
         return doneTodoList;
     }
 
+    public List<Integer> getTodoIds(){
+        List<Integer> ids = new ArrayList<>();
+        for (Todo todo : getTodoList()){
+            ids.add(todo.getId());
+        }
+        return ids;
+    }
+
+    public List<Integer> getDoneTodoIds(){
+        List<Integer> ids = new ArrayList<>();
+        for (Todo todo : getDoneTodoList()){
+            ids.add(todo.getId());
+        }
+        return ids;
+    }
+
+
+
+    public Todo getTodoOfId(int id){
+        for (Todo todo : getTodoList()){
+            if (todo.getId() == id){
+                return todo;
+            }
+        }
+        return null;
+    }
+
+    public Todo getDoneTodoOfId(int id){
+        for (Todo todo : getDoneTodoList()){
+            if (todo.getId() == id){
+                return todo;
+            }
+        }
+        return null;
+    }
+
     /**
      * When you have completed a todoo, it goes from todolist to doneTodolist. This method
      * checks that the doneTodolist only have the five most recent completed todos.
