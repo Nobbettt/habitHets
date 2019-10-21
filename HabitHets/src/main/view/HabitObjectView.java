@@ -29,7 +29,7 @@ class HabitObjectView extends AnchorPane {
 
 
 
-    public HabitObjectView(Habit habit) {
+    public HabitObjectView(int id) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/habitElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -40,7 +40,7 @@ class HabitObjectView extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        this.habitView = habitView;
+        this.id = id;
         this.facade = new Facade();
     }
 
@@ -60,13 +60,12 @@ class HabitObjectView extends AnchorPane {
     @FXML
     private void deleteHabit(){
         facade.removeHabit(id);
-        habitView.updateHabitView(facade.getAllHabitIds());
+        notifyListener(Integer.toString(id));
     }
 
     @FXML
     private void editHabit(){
-        notifyListener(Integer.toString(habit.getId()));
-        //habitView.edit(this);
+        notifyListener(Integer.toString(id));
     }
 
     void updateElementView(int id) {

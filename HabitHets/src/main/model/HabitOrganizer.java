@@ -74,7 +74,7 @@ public class HabitOrganizer implements IHandler{
 
     }
 
-    void addHabit(String title, String color) {
+    public void addHabit(String title, String color) {
         habitList.add(Factory.createHabit(title, new Stack(),0,color,LocalDate.now()));
         notifyListener();
     }

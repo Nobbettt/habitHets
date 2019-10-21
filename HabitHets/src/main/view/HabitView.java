@@ -27,6 +27,7 @@ public class HabitView extends AnchorPane implements ViewListener {
     @FXML private AnchorPane titleBackground;
     @FXML private Label collapsedTitle;
     @FXML private Label habitModifyTypeLabel;
+    @FXML private Label idLbl;
     private List<HabitObjectView> habitsList;
     private HabitObjectView editing;
     Facade facade;
@@ -71,16 +72,21 @@ public class HabitView extends AnchorPane implements ViewListener {
 
 
     public void edit(String msg){
-        habit = handler.getHabitById(msg);
+        for (HabitObjectView habitObjectView : habitsList){
+            if (habitObjectView.getHabitID() == Integer.valueOf(msg)){
+                editing = habitObjectView;
+            }
+        }
         newHabit.setVisible(true);
         newHabit.toFront();
         setVisibilityAdd(false);
         create.toBack();
         setVisibilityEdit(true);
         save.toFront();
-        title.setText(facade.getHabitTitle(habitObjectView.getHabitID()));
-        java.awt.Color tmpC = java.awt.Color.decode(facade.getHabitColor(habitObjectView.getHabitID()));
-        Color c = Color.valueOf(facade.getHabitColor(habitObjectView.getHabitID()));
+        title.setText(facade.getHabitTitle(Integer.valueOf(msg)));
+        idLbl.setText(msg);
+        //java.awt.Color tmpC = java.awt.Color.decode(facade.getHabitColor(editing.getHabitID()));
+        Color c = Color.valueOf(facade.getHabitColor(Integer.valueOf(msg)));
         colorPicker.setValue(c);
         habitModifyTypeLabel.setText("Edit Habit");
 
@@ -111,9 +117,9 @@ public class HabitView extends AnchorPane implements ViewListener {
     private void save(){
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
-            facade.updateHabitTitle(editing.getHabitID(),title.getText());
-            facade.updateHabitColor(editing.getHabitID(), toHexString(colorPicker.getValue()));
-            editing.updateElementView(editing.getHabitID());
+            facade.updateHabitTitle(Integer.valueOf(idLbl.getText()),title.getText());
+            facade.updateHabitColor(Integer.valueOf(idLbl.getText()), toHexString(colorPicker.getValue()));
+            editing.updateElementView(Integer.valueOf(idLbl.getText()));
         }
         title.clear();
         colorPicker.setValue(Color.WHITE);
@@ -153,7 +159,8 @@ public class HabitView extends AnchorPane implements ViewListener {
     public void updateHabitView(List<Integer> ids) {
         vBox.getChildren().clear();
         for (Integer id: ids){
-            HabitObjectView habitObjectView = new HabitObjectView(this);
+            HabitObjectView habitObjectView = new HabitObjectView(id);
+            habitObjectView.addListener(this);
             vBox.getChildren().add(habitObjectView);
             habitObjectView.updateElementView(id);
             habitsList.add(habitObjectView);

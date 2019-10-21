@@ -367,7 +367,6 @@ public class ControllerCalendar implements Initializable, Listener {
         handler.getHabitList().get(1).setBestStreak(7);
         */
         habitView.updateHabitView(facade.getAllHabitIds());
-        habitView.updateHabitView();
     }
 
     /**
@@ -460,7 +459,7 @@ public class ControllerCalendar implements Initializable, Listener {
     }
 
     private void updateHabitView(){
-        habitView.updateHabitView();
+        habitView.updateHabitView(facade.getAllHabitIds());
     }
 
     @Override

@@ -31,6 +31,7 @@ public class TestHabitOrganizer {
     @Test
     public void addHabit(){
         Assert.assertEquals(0, habitOrganizer.getHabitList().size());
+
         habitOrganizer.addHabit("sova", "red");
         habitOrganizer.addHabit("träna", "blue");
         habitOrganizer.addHabit("äta", "pink");

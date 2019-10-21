@@ -19,6 +19,11 @@
             <VBox fx:id="vBox" prefHeight="270.0" prefWidth="100.0" style="-fx-background-color: #999;" />
          </content>
       </ScrollPane>
+      <AnchorPane fx:id="titleBackground" prefHeight="50.0" prefWidth="53.0" styleClass="habitLabel" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="collapsedTitle" prefHeight="52.0" prefWidth="72.0" styleClass="collapsedTitle" text="H" />
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="newHabit" maxWidth="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #999;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <Label fx:id="habitModifyTypeLabel" layoutX="47.0" layoutY="26.0" prefHeight="23.0" prefWidth="115.0" styleClass="newHabit" text="New Habit" />
@@ -36,11 +41,7 @@
                   </ImageView>
                </graphic></Button>
             <Button fx:id="save" layoutX="138.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="40.0" styleClass="save-btn" stylesheets="@css/habit-style.css" text="Save" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="titleBackground" prefHeight="50.0" prefWidth="53.0" styleClass="habitLabel" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label fx:id="collapsedTitle" prefHeight="52.0" prefWidth="72.0" styleClass="collapsedTitle" text="H" />
+            <Label fx:id="idLbl" disable="true" opacity="0.0" text="Label" visible="false" />
          </children>
       </AnchorPane>
    </children>
