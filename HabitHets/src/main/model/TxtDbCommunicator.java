@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public class TxtDbCommunicator {
+class TxtDbCommunicator {
 
     static String readFile(String file) {
         String text = "";
@@ -15,8 +15,8 @@ public class TxtDbCommunicator {
             scanner = new Scanner( new File("C:\\Users\\norbe\\Documents\\habitHets\\HabitHets\\src\\main\\model\\"+file) );
             while (scanner.hasNextLine()) {
                 text = scanner.useDelimiter("\\A").next();
-                scanner.close();
             }
+            scanner.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
