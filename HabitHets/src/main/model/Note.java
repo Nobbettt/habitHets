@@ -2,7 +2,7 @@ package main.model;
 
 import java.time.LocalDate;
 
-public class Note{
+public class Note {
     private int id;
     private String description;
     private LocalDate day;
@@ -41,9 +41,6 @@ public class Note{
         this.day = day;
     }
 
-    public void onNoteClick(){
-
-    }
 }
 
 

@@ -20,6 +20,7 @@ public class HabitOrganizer implements IHandler{
      */
     private HabitOrganizer() {
         habitList = new ArrayList<>();
+        getDb();
     }
 
     /**
@@ -102,4 +103,26 @@ public class HabitOrganizer implements IHandler{
         return null;
     }
 
+    private void getDb() {
+        String todoTxt = TxtDbCommunicator.readFile("habit");
+        if(!todoTxt.isEmpty()) {
+            String[] objects = todoTxt.split(";");
+            for (String obj : objects) {
+                String[] attr = obj.split(",");
+                Stack<DoneHabit> doneHabits = formatDoneHabits(attr[5]);
+                Habit h = new Habit(Integer.parseInt(attr[0]), attr[1], doneHabits, Integer.parseInt(attr[2]), attr[3], LocalDate.parse(attr[4]));
+                habitList.add(h);
+            }
+        }
+    }
+
+    private Stack<DoneHabit> formatDoneHabits(String raw) {
+        Stack<DoneHabit> doneHabits = new Stack<>();
+        String[] doneArr = raw.split("=");
+        for (String done : doneArr) {
+            LocalDate tmpLd = LocalDate.parse(done);
+            doneHabits.add(new DoneHabit(tmpLd));
+        }
+        return doneHabits;
+    }
 }

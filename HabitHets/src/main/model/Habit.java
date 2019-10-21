@@ -1,6 +1,5 @@
 package main.model;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +37,9 @@ public class Habit {
         this.dateRecord = dateRecord;
     }
 
+    public LocalDate getDateRecord() {
+        return dateRecord;
+    }
 
     public int getId(){
         return id;

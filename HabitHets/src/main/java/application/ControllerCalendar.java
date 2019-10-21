@@ -351,7 +351,7 @@ public class ControllerCalendar implements Initializable, Listener {
         fitItem(mainPane, todoPane, 70, 0, 0, -1);
     }
 
-    private void populateHabit(){
+    private void populateHabit(){/*
         handler.add();
         handler.add();
         handler.getHabitList().get(0).setTitle("elintina");
@@ -360,7 +360,7 @@ public class ControllerCalendar implements Initializable, Listener {
         handler.getHabitList().get(0).setColor("#47BCAD");
         handler.getHabitList().get(1).setTitle("nobbhelge");
         handler.getHabitList().get(1).setColor("#47BCAD");
-        handler.getHabitList().get(1).setBestStreak(7);
+        handler.getHabitList().get(1).setBestStreak(7);*/
         habitView.updateHabitView();
     }
 
