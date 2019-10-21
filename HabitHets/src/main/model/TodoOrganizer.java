@@ -48,14 +48,12 @@ public class TodoOrganizer implements IHandler {
     public void add() {
         Todo todo = Factory.createTodo("testTodo");
         todoList.add(todo);
-        updateDbAdd(todo, "Todo");
         notifyListener();
     }
 
     public void addTodo(String title) {
         Todo todo = Factory.createTodo(title);
         todoList.add(todo);
-        updateDbAdd(todo, "Todo");
         notifyListener();
     }
 
@@ -73,7 +71,6 @@ public class TodoOrganizer implements IHandler {
         for (Todo todo: todoList){
             if(todo.getId() == id){
                 todoList.remove(todo);
-                updateDbRemove(id, "todo");
                 notifyListener();
                 return;
             }
@@ -96,8 +93,6 @@ public class TodoOrganizer implements IHandler {
                 doneTodoList.add(todo);
                 doneTodoList();
                 todoList.remove(todo);
-                updateDbRemove(id, "todo");
-                updateDbAdd(todo, "TodoDone");
                 notifyListener();
                 return;
             }
@@ -124,7 +119,6 @@ public class TodoOrganizer implements IHandler {
             for (int a=0; a<limit ;a++){
                 doneTodoList.remove(0);
                 int id = doneTodoList.get(0).getId();
-                updateDbRemove(id, "todo");
                 notifyListener();
             }
         }
@@ -146,15 +140,12 @@ public class TodoOrganizer implements IHandler {
     public void moveBackDoneTodo(int id) {
         for (int i = 0; i < doneTodoList.size(); i++) {
             if (doneTodoList.get(i).getId() == id) {
-                updateDbRemove(id, "todoDone");
-                updateDbAdd(doneTodoList.get(i), "todo");
                 doneTodoList.remove(i);
                 notifyListener();
                 return;
             }
         }
     }
-    // Nytt med DB -->
 
     private void getDb() {
         String todoTxt = TxtDbCommunicator.readFile("todo");
@@ -175,28 +166,5 @@ public class TodoOrganizer implements IHandler {
             }
         }
     }
-
-    private String removeObjectFromList(int id, String[] objects) {
-        StringBuilder newString = new StringBuilder();
-        for (String obj : objects) {
-            String[] objAttr = obj.split(",");
-            if(id != Integer.parseInt(objAttr[0])) {
-                newString.append(objAttr[0]).append(",").append(objAttr[1]).append(";");
-            }
-        }
-        System.out.println(newString);
-        return newString.toString();
-    }
-
-    private void updateDbAdd(Todo todo, String file) {
-        String newTxt = TxtDbCommunicator.readFile(file);
-        newTxt = newTxt+todo.getId()+","+todo.getTitle()+";";
-        TxtDbCommunicator.writeFile(file, newTxt);
-    }
-
-    private void updateDbRemove(int id, String file) {
-        String[] array = TxtDbCommunicator.readFile(file).split(";");
-        String newTxt = removeObjectFromList(id, array);
-        TxtDbCommunicator.writeFile(file, newTxt);
-    }
 }
+
