@@ -16,7 +16,7 @@ public class NoteOrganizer implements IHandler {
 
     private NoteOrganizer(){
         notesList = new ArrayList<>();
-       // getDb();
+        getDb();
     }
 
     /**
@@ -81,17 +81,19 @@ public class NoteOrganizer implements IHandler {
         notesList.add(Factory.createNote(s, date));
         return notesList.get(notesList.size() - 1);
     }
-/*
+
     private void getDb() {
         String noteTxt = TxtDbCommunicator.readFile("note");
         if(!noteTxt.isEmpty()) {
             String[] notes = noteTxt.split(";");
-            for (String note : notes) {
-                String[] attr = note.split(",");
-                note.add(new Note(attr[1], Integer.parseInt(attr[0])));
+            for (String noteString : notes) {
+                String[] attr = noteString.split(",");
+                Note note = new Note(Integer.parseInt(attr[0]), attr[1], LocalDate.parse(attr[2]));
+                notesList.add(note);
+                System.out.println(notesList.size());
             }
         }
-    }*/
+    }
 }
 
 

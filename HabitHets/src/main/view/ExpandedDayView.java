@@ -10,7 +10,6 @@ import javafx.scene.layout.StackPane;
 import main.model.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -69,10 +68,11 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         dayGrid.add(new HourColumnView(), 0, 0);
         dayEvents = new DayEventListView(Calender.getInstant().getDayFromLDT(LocalDateTime.now()));
         dayGrid.add(dayEvents, 1, 0);
+
     }
 
     @FXML
-    private void notehandle() {
+    private void notehandle() {/*
         if(note == null){
             String noteString = noteField.getText();
             LocalDate d = day.getLdt().toLocalDate();
@@ -80,7 +80,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         } else{
             note.setDescription(noteField.getText());
             note.setDay(day.getLdt().toLocalDate());
-        }
+        }*/
     }
 }
 

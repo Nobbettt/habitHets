@@ -1,5 +1,6 @@
 package main.model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Stack;
 
@@ -8,7 +9,7 @@ public class SaveOnShutDown {
         saveTodo();
         saveDoneTodo();
         saveHabit();
-        //saveNote();
+        saveNote();
     }
 
     private static void saveTodo() {
@@ -37,6 +38,7 @@ public class SaveOnShutDown {
         List<Habit> habitList = HabitOrganizer.getInstant().getHabitList();
         StringBuilder txt = new StringBuilder();
         for(Habit habit : habitList) {
+            System.out.println(habit.getTitle());
             txt.append(habit.getId()).append(",");
             txt.append(habit.getTitle()).append(",");
             txt.append(habit.getBestStreak()).append(",");
@@ -51,10 +53,23 @@ public class SaveOnShutDown {
         for (DoneHabit doneHabit : stack) {
             txt.append(doneHabit.getDate().toString()).append("=");
         }
+        if(stack.isEmpty()) {
+            txt.append("=");
+        }
         return txt.toString();
     }
 
     private static void saveNote() {
-        // id,title;
+        // id,title,2019-10-21;
+        List<Note> noteList = NoteOrganizer.getInstance().getNotes();
+        StringBuilder txt = new StringBuilder();
+        for(Note note : noteList) {
+            if(note.getDescription() != null) {
+                txt.append(note.getId()).append(",");
+                txt.append(note.getDescription()).append(",");
+                txt.append(LocalDate.parse(note.getDay().toString())).append(";");
+            }
+        }
+        TxtDbCommunicator.writeFile("note", txt.toString());
     }
 }
