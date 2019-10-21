@@ -2,14 +2,13 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import main.model.CalendarAble;
-import main.model.Month;
+import main.model.Facade;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class YearView extends AnchorPane implements ViewAble {
     @FXML private ScrollPane yearScroll;
     @FXML private GridPane yearGrid;
     private List<MonthView> months = new ArrayList(); //guess its gonna be something like this.... :/ todo
-    List<MonthInYear> monthInYears = new ArrayList<>();
+    private List<MonthInYear> monthInYears = new ArrayList<>();
 
     public YearView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/year.fxml"));
@@ -44,10 +43,11 @@ public class YearView extends AnchorPane implements ViewAble {
     }
 
     @Override
-    public void updateView(List<? extends CalendarAble> months) {
+    public void updateView(List<LocalDateTime> months) {
+        Facade f = new Facade();
         for(int i=0; i< monthInYears.size(); i++){
-            Month m = (Month) months.get(i);
-            monthInYears.get(i).updateView(m.getDays(), m.getString());
+            LocalDateTime l = months.get(i);
+            monthInYears.get(i).updateView(f.getLdtMonthFromDate(l), f.getMonthString(months.get(i)));
         }
         /*
         for(MonthView month : months) {

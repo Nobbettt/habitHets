@@ -6,25 +6,22 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import main.model.Day;
-import main.model.Event;
-import main.model.EventOrganizer;
-import main.model.Interval;
+import main.model.Facade;
 
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DayEventListView extends StackPane {
+class DayEventListView extends StackPane {
     private VBox vBox;
     private List<HBox> hBoxList;
     private Line tl;
     private double hHeight;
     private double vBoxWidth;
-    private Day day;
+    private LocalDateTime ldt;
 
-    public DayEventListView(Day day) {
-        this.day = day;
+    DayEventListView(LocalDateTime ldt) {
+        this.ldt = ldt;
         hBoxList = new ArrayList<>();
         vBox = new VBox();
         for (int i = 0; i < 10; i++) {
@@ -52,89 +49,62 @@ public class DayEventListView extends StackPane {
         hHeight = new HourView().getPrefHeight();
     }
 
-    public void updateDay(Day day, double vBoxWidth) {
+    void updateDay(LocalDateTime ldt, double vBoxWidth) {
+        Facade facade = new Facade();
         this.vBoxWidth = vBoxWidth;
-        this.day = day;
+        System.out.println(vBoxWidth);
+        this.ldt = ldt;
         for (HBox hBox : hBoxList) {
             hBox.getChildren().clear();
         }
         int i = 0;
         int overlap = 0;
-        for (Event event : EventOrganizer.getInstant().getEventsOfDay(day.getLdt())) {
-            if (this.day.getLdt().getDayOfYear() == day.getLdt().getDayOfYear()) {
+        //for (Event event : EventOrganizer.getInstant().getEventsOfDay(day.getLdt())) {
+        for (int id : facade.getAllIdsOfDay(ldt))
+            if (this.ldt.getDayOfYear() == ldt.getDayOfYear()) {
                 i++;
-                AnchorPane a = new EventView(event);
-                a.setTranslateY((event.getStartTime().getHour() * 120) + event.getStartTime().getMinute()*2); //todo WTF
-                double height = calculateLenght(event)*2;
+                AnchorPane a = new EventView((id));
+                a.setTranslateY((Integer.valueOf(facade.getEventStarttime(id).getHour()) * 120) + (Integer.valueOf(facade.getEventStarttime(id).getMinute())) * 2); //todo WTF
+                double height = calculateLenght(id) * 2;
                 a.setPrefHeight(height);
-                a.setPrefWidth(calculateWidth(event));
-                if (calculateTranslateX(event) != 0) {
+                double width = this.vBoxWidth/facade.calculateWidth(ldt,id);
+                a.setPrefWidth((width));
+                if (calculateTranslateX(id) != 0) {
                     if (overlap == 3) {
-                        a.setTranslateX(calculateTranslateX(event) * 3);
+                        a.setTranslateX(calculateTranslateX(id) * 3);
                     } else if (overlap == 2) {
-                        a.setTranslateX(calculateTranslateX(event) * 2);
+                        a.setTranslateX(calculateTranslateX(id) * 2);
                     } else if (overlap == 1) {
-                        a.setTranslateX(calculateTranslateX(event));
+                        a.setTranslateX(calculateTranslateX(id));
                     }
                     overlap++;
                 }
                 hBoxList.get(i - 1).getChildren().add(a);
             }
-        }
     }
 
-    public void updateTimeline(int hour, int minute) {
+    void updateTimeline(int hour, int minute) {
         double timeHeight = 0;
         if (hour < 12) {
-            timeHeight = (12-hour)* hHeight;
-            timeHeight -= hHeight-(minute*2);
+            timeHeight = (12 - hour) * hHeight;
+            timeHeight -= hHeight - (minute * 2);
             timeHeight *= -1;
         } else {
-            timeHeight = (hour - 12)*hHeight;
-            timeHeight += (minute*2);
+            timeHeight = (hour - 12) * hHeight;
+            timeHeight += (minute * 2);
         }
         tl.setTranslateY(timeHeight);
     }
 
-    private double calculateLenght(Event event) {
-        long valueMinute = ChronoUnit.MINUTES.between(event.getStartTime(),event.getEndTime());
-        return (valueMinute);
+    private double calculateLenght(int id) {
+        Facade facade = new Facade();
+        return facade.getLength(id);
+
     }
 
-    private double calculateWidth(Event event) {
-        double i = 0;
-        List<Event> overlaps = new ArrayList<>();
-        List<Event> overlaps2 = new ArrayList<>();
-        List<Event> events = EventOrganizer.getInstant().getEventsOfDay(getDay().getLdt());
-        Interval interval = new Interval(event.getStartTime(), true, event.getEndTime(), true);
-        for (Event tmpEvent : events) {
-            Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
-            if (interval.overlaps(tmpInterval)) {
-                i++;
-                if (!overlaps.contains(tmpEvent) && !tmpEvent.equals(event)) {
-                    overlaps.add(tmpEvent);
-                }
-            }
-        }
-        for (Event event1 : overlaps) {
-            Interval interval1 = new Interval(event1.getStartTime(), true, event1.getEndTime(), true);
-            for (Event event2 : events) {
-                Interval interval2 = new Interval(event2.getStartTime(), true, event2.getEndTime(), true);
-                if (interval1.overlaps(interval2) && event2 != event1 && event2 != event) {
-                    i++;
-                    if (!overlaps2.contains(event2) && !event2.equals(event1)) {
-                        overlaps2.add(event2);
-                    }
-                }
-            }
-        }
-        events.add(event);
-        //double vboxWidth = getVboxWidth();
-        return vBoxWidth / i;
-    }
-
-    private double calculateTranslateX(Event event) {
-        double x = calculateWidth(event);
+    private double calculateTranslateX(int id) {
+        Facade facade = new Facade();
+        double x = vBoxWidth/facade.calculateWidth(ldt,id);
         if (x == vBoxWidth) {
             return 0;
         } else {
@@ -142,19 +112,7 @@ public class DayEventListView extends StackPane {
         }
     }
 
-    private double amountOfOverlaps(Event event) {
-        int i = 0;
-        Interval interval = new Interval(event.getStartTime(), true, event.getEndTime(), true);
-        for (Event tmpEvent : EventOrganizer.getInstant().getEventsOfDay(getDay().getLdt())) {
-            Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
-            if (interval.overlaps(tmpInterval)) {
-                i++;
-            }
-        }
-        return i;
-    }
-
-    private Day getDay() {
-        return day;
+    private LocalDateTime getDay() {
+        return ldt;
     }
 }

@@ -1,4 +1,5 @@
 package main.model;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,10 @@ import java.util.List;
 
 public class NoteOrganizer implements IHandler {
 
-    public static NoteOrganizer instant;
-    public static List<Note> notesList;
+    private static NoteOrganizer instant;
+    private static List<Note> notesList;
 
-    private NoteOrganizer(){
+    private NoteOrganizer() {
         notesList = new ArrayList<>();
     }
 
@@ -23,17 +24,17 @@ public class NoteOrganizer implements IHandler {
      * If there is not, an instant will be created.
      */
 
-    public static NoteOrganizer getInstance(){
-        if(instant == null) {
+    public static NoteOrganizer getInstance() {
+        if (instant == null) {
             instant = new NoteOrganizer();
             return instant;
 
-        }else {
+        } else {
             return instant;
         }
     }
 
-    public List<Note> getNotes(){
+    public List<Note> getNotes() {
         return notesList;
     }
 
@@ -48,12 +49,13 @@ public class NoteOrganizer implements IHandler {
 
     /**
      * Method that removes a Note from a list of Notes, using the id set when creating a Note from Factory.
+     *
      * @param id, which is how we locate which note to remove.
      */
     @Override
     public void remove(int id) {
-        for (Note note : notesList){
-            if (note.getId() == id){
+        for (Note note : notesList) {
+            if (note.getId() == id) {
                 notesList.remove(note);
                 return;
             }
@@ -63,23 +65,23 @@ public class NoteOrganizer implements IHandler {
 
     /**
      * Method to locate which date a Note has, in order to place a Note in it's corresponding day.
+     *
      * @param d, is the day on which we would like to inspect if there is a Note affiliated with that date.
      * @return
      */
-    public Note getNoteDate(LocalDateTime d){
-            for(Note n : notesList){
-                if(n.getDay().getDayOfYear() == d.getDayOfYear() && n.getDay().getYear() == d.getYear()){
-                    return n;
-                }
+    Note getNoteDate(LocalDateTime d) {
+        for (Note n : notesList) {
+            if (n.getDay().getDayOfYear() == d.getDayOfYear() && n.getDay().getYear() == d.getYear()) {
+                return n;
+            }
         }
         return null;
     }
 
-    public Note addNote (String s, LocalDateTime date){
+    void addNote(String s, LocalDateTime date) {
 
-            notesList.add(Factory.createNote(s, date));
-            return notesList.get(notesList.size() - 1);
-        }
+        notesList.add(Factory.createNote(s, date));
     }
+}
 
 

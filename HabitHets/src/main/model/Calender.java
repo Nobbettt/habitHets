@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class Calender {
     private static Calender instant;
-    protected static List<Year> years;
+    private static List<Year> years;
 
     private Calender() {
         int yearsBack = 2;
@@ -25,7 +25,7 @@ public class Calender {
         }
     }
 
-    public List<Year> getYears(int yearsBack, int yearsForward) {
+    private List<Year> getYears(int yearsBack, int yearsForward) {
         List<Year> tmpYears = new ArrayList<>();
         for (int i = -yearsBack; i <yearsForward; i++){
             Year y = new Year(LocalDateTime.now().getYear()+i);
@@ -34,7 +34,7 @@ public class Calender {
         return tmpYears;
     }
 
-    public List<Year> getYears() {
+    private List<Year> getYears() {
         return years;
     }
 
@@ -47,7 +47,7 @@ public class Calender {
         return null;
     }
 
-    public List<Day> getWeekFromLDT(LocalDateTime ldt){
+    List<Day> getWeekFromLDT(LocalDateTime ldt){
         List<Day> weekList = new ArrayList<>();
 
         /*The two lines below make it so that the list returns a week from MON-SUN, if we want SUN - SAT remove
@@ -70,13 +70,13 @@ public class Calender {
         return toMonth.getDayFromLDT(ldt);
     }
 
-    public List<Month> getYearFromLDT(LocalDateTime ldt) {
+    List<Month> getYearFromLDT(LocalDateTime ldt) {
         Year y = getYear(ldt.getYear());
         List<Month> months = y.getMonths();
         return months;
     }
 
-    public Month getMonth(LocalDateTime localDateTime){
+    Month getMonth(LocalDateTime localDateTime){
         List<Month> months = getYearFromLDT(localDateTime);
         return months.get(localDateTime.getMonthValue()-1);
     }

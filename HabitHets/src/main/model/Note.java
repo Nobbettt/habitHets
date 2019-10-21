@@ -1,7 +1,5 @@
 package main.model;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 
 public class Note{
@@ -9,17 +7,17 @@ public class Note{
     private String description;
     private LocalDateTime day;
 
-    public Note(int id, String Description, LocalDateTime day) {
+    Note(int id, String Description, LocalDateTime day) {
         this.description = description;
         this.day = day;
         this.id = id;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    void setDescription(String description) {
         this.description = description;
     }
 

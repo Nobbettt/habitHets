@@ -7,8 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import main.model.Todo;
-import main.model.TodoOrganizer;
+import main.model.Facade;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,14 +18,17 @@ public class TodoView extends AnchorPane {
     @FXML private AnchorPane todoList;
     @FXML private Button addTodo;
     @FXML private VBox vboxtodo;
-    @FXML public VBox vboxdonetodo;
-    @FXML public AnchorPane newTodo;
+    @FXML
+    private VBox vboxdonetodo;
+    @FXML
+    private AnchorPane newTodo;
     @FXML public Button closeNewTodo;
     @FXML public Button saveNewTodo;
-    @FXML public TextField todoTitle;
+    @FXML
+    private TextField todoTitle;
     @FXML private ScrollPane todoScrollpane;
     @FXML private ScrollPane doneTodoScrollpane;
-    TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
+    Facade facade;
 
 
 
@@ -45,6 +47,7 @@ public class TodoView extends AnchorPane {
         todoScrollpane.setFitToHeight(true);
         doneTodoScrollpane.setFitToWidth(true);
         doneTodoScrollpane.setFitToHeight(true);
+        this.facade = new Facade();
 
 
     }
@@ -60,7 +63,7 @@ public class TodoView extends AnchorPane {
         newTodo.setVisible(false);
         newTodo.toBack();
         if (todoTitle.getText() != null && !todoTitle.getText().isEmpty()){
-            todoOrganizer.addTodo(todoTitle.getText());
+            facade.createNewTodo(todoTitle.getText());
             todoTitle.clear();
 
         }
@@ -90,12 +93,12 @@ public class TodoView extends AnchorPane {
     public void updateTodoView( ) {
         vboxtodo.getChildren().clear();
         vboxdonetodo.getChildren().clear();
-        for (Todo todo : todoOrganizer.getTodoList()) {
-            TodoElementView todoElement = new TodoElementView(todo);
+        for (int id : facade.getTodoIds()) {
+            TodoElementView todoElement = new TodoElementView(id);
             vboxtodo.getChildren().add(todoElement);
         }
-        for (Todo todo : TodoOrganizer.getInstant().getDoneTodoList()) {
-            TodoDoneElementView todoDoneElement = new TodoDoneElementView(todo);
+        for (int id : facade.getDoneTodoIds()) {
+            TodoDoneElementView todoDoneElement = new TodoDoneElementView(id);
             //todoDoneElement.getChildren().get(1).setVisible(false);
             vboxdonetodo.getChildren().add(todoDoneElement);
             //todoDoneElement.getCb().setSelected(true);
@@ -107,7 +110,7 @@ public class TodoView extends AnchorPane {
             if (c.isSelected()) {
                 //todoOrganizer.doneTodoRemove(td.todo.getId());
                 vboxtodo.getChildren().remove(td);
-                TodoDoneElementView tdd=new TodoDoneElementView(td.todo);
+                TodoDoneElementView tdd = new TodoDoneElementView(td.id);
                 vboxdonetodo.getChildren().add(tdd);
 
             }

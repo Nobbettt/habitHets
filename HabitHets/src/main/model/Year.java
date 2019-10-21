@@ -22,7 +22,7 @@ public class Year implements CalendarAble {
         return tmpMonths;
     }
 
-    public List<Month> getMonths() {
+    List<Month> getMonths() {
         return months;
     }
 
@@ -45,7 +45,7 @@ public class Year implements CalendarAble {
         return null;
     }
 
-    public Month getMonthFromLDT(LocalDateTime ldt){
+    Month getMonthFromLDT(LocalDateTime ldt){
         for (Month month : getMonths()){
             if (month.getDays().get(0).getLdt().getMonthValue() == ldt.getMonthValue()){
                 return month;
@@ -57,5 +57,10 @@ public class Year implements CalendarAble {
 
     public String getString() {
         return year.toString();
+    }
+
+    @Override
+    public LocalDateTime getLocalDateTime() {
+        return months.get(0).days.get(0).getLdt();
     }
 }

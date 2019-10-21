@@ -10,8 +10,8 @@ public class Interval {
     private final boolean inclusiveStart;
     private final boolean inclusiveEnd;
 
-    public Interval(LocalDateTime start, boolean inclusiveStart,
-                    LocalDateTime end, boolean inclusiveEnd) {
+    Interval(LocalDateTime start, boolean inclusiveStart,
+             LocalDateTime end, boolean inclusiveEnd) {
 
         this.start = start;
         this.end = end;
@@ -20,7 +20,7 @@ public class Interval {
         this.inclusiveEnd = inclusiveEnd;
     }
 
-    public boolean overlaps(Interval other) {
+    boolean overlaps(Interval other) {
 
         // intervals share at least one point in time
         if(    ( this.start.equals(other.getEnd())
@@ -63,19 +63,19 @@ public class Interval {
 
     }
 
-    public LocalDateTime getStart() {
+    private LocalDateTime getStart() {
         return start;
     }
 
-    public LocalDateTime getEnd() {
+    private LocalDateTime getEnd() {
         return end;
     }
 
-    public boolean isInclusiveStart() {
+    private boolean isInclusiveStart() {
         return inclusiveStart;
     }
 
-    public boolean isInclusiveEnd() {
+    private boolean isInclusiveEnd() {
         return inclusiveEnd;
     }
 }
