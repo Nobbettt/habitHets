@@ -10,7 +10,7 @@ import java.util.Stack;
  */
 public class HabitOrganizer implements IHandler{
 
-    public static HabitOrganizer instant;
+    private static HabitOrganizer instant;
     private static List<Habit> habitList;
 
 
@@ -125,4 +125,21 @@ public class HabitOrganizer implements IHandler{
         }
         return doneHabits;
     }
+    Habit getHabitFromId(int id){
+        for (Habit habit : getHabitList()){
+            if (habit.getId() == id){
+                return habit;
+            }
+        }
+        return null;
+    }
+
+    List<Integer> getAllHabitIDs(){
+        List<Integer> ids = new ArrayList<>();
+        for (Habit habit : getHabitList()){
+            ids.add(habit.getId());
+        }
+        return ids;
+    }
+
 }

@@ -18,6 +18,9 @@ public class TodoOrganizer implements IHandler {
      * The constructor of TodoOrganizer sets the list of todos and doneTodos.
      */
     public TodoOrganizer() {
+
+
+    private TodoOrganizer() {
         todoList = new ArrayList<>();
         doneTodoList = new ArrayList<>();
         getDb();
@@ -51,9 +54,8 @@ public class TodoOrganizer implements IHandler {
         notifyListener();
     }
 
-    public void addTodo(String title) {
-        Todo todo = Factory.createTodo(title);
-        todoList.add(todo);
+    void addTodo(String title) {
+        todoList.add(Factory.createTodo(title));
         notifyListener();
     }
 
@@ -108,6 +110,42 @@ public class TodoOrganizer implements IHandler {
         return doneTodoList;
     }
 
+    List<Integer> getTodoIds(){
+        List<Integer> ids = new ArrayList<>();
+        for (Todo todo : getTodoList()){
+            ids.add(todo.getId());
+        }
+        return ids;
+    }
+
+    List<Integer> getDoneTodoIds(){
+        List<Integer> ids = new ArrayList<>();
+        for (Todo todo : getDoneTodoList()){
+            ids.add(todo.getId());
+        }
+        return ids;
+    }
+
+
+
+    Todo getTodoOfId(int id){
+        for (Todo todo : getTodoList()){
+            if (todo.getId() == id){
+                return todo;
+            }
+        }
+        return null;
+    }
+
+    Todo getDoneTodoOfId(int id){
+        for (Todo todo : getDoneTodoList()){
+            if (todo.getId() == id){
+                return todo;
+            }
+        }
+        return null;
+    }
+
     /**
      * When you have completed a todoo, it goes from todolist to doneTodolist. This method
      * checks that the doneTodolist only have the five most recent completed todos.
@@ -137,7 +175,7 @@ public class TodoOrganizer implements IHandler {
             l.actOnUpdate();
     }
 
-    public void moveBackDoneTodo(int id) {
+    void moveBackDoneTodo(int id) {
         for (int i = 0; i < doneTodoList.size(); i++) {
             if (doneTodoList.get(i).getId() == id) {
                 doneTodoList.remove(i);

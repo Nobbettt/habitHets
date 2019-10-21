@@ -4,8 +4,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class HourColumnView extends VBox {
-    public HourColumnView() {
+class HourColumnView extends VBox {
+    HourColumnView() {
         for(int i = 0; i < 24; i++) {
             AnchorPane block = new AnchorPane();
             this.getStylesheets().add(getClass().getResource("../resources/css/day-style.css").toExternalForm());

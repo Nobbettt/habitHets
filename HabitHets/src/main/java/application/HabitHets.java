@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.model.SaveOnShutDown;
 
-public class Main extends Application {
+public class HabitHets extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../../resources/window.fxml"));

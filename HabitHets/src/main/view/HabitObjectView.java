@@ -6,8 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import main.model.Habit;
-import main.model.HabitOrganizer;
+import main.model.Facade;
 
 
 import java.io.IOException;
@@ -15,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HabitObjectView extends AnchorPane {
+class HabitObjectView extends AnchorPane {
 
-    private Habit habit;
-    HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
+    private int id;
+    Facade facade;
 
     @FXML private Label streakLabel;
     @FXML private Label bestStreakLabel;
@@ -30,7 +29,7 @@ public class HabitObjectView extends AnchorPane {
 
 
 
-    public HabitObjectView(Habit habit) {
+    public HabitObjectView(int id) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/habitElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -41,64 +40,65 @@ public class HabitObjectView extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        this.habit = habit;
+        this.id = id;
+        this.facade = new Facade();
     }
 
 
-    public Habit getHabit() {
-        return habit;
+    int getHabitID() {
+        return id;
     }
 
 
     @FXML
     private void checkHabit(){
-        habit.onClickHabit();
+        facade.habitClicked(id);
         updateStreaks();
         setColor();
     }
 
     @FXML
     private void deleteHabit(){
-        habitOrganizer.remove(habit.getId());
-        //habitView.updateHabitView();
+        facade.removeHabit(id);
+        notifyListener(Integer.toString(id));
     }
 
     @FXML
     private void editHabit(){
-        notifyListener(Integer.toString(habit.getId()));
-        //habitView.edit(this);
+        notifyListener(Integer.toString(id));
     }
 
-    public void updateElementView() {
-        title.setText(habit.getTitle());
+    void updateElementView(int id) {
+        this.id = id;
+        title.setText(facade.getHabitTitle(id));
         updateStreaks();
         setColor();
     }
 
     private void updateStreaks() {
-        Integer streak = habit.getStreak();
-        Integer bestStreak = habit.getBestStreak();
+        Integer streak = facade.getStreak(id);
+        Integer bestStreak = facade.getBestStreak(id);
         streakLabel.setText(streak.toString());
         bestStreakLabel.setText(bestStreak.toString());
     }
 
     private void setColor() {
-        if (habit.isCheckedToday()){
-            color.setStyle("-fx-background-color: " + habit.getColor() + "; -fx-border-color: "+habit.getColor());
+        if (facade.habitIsCheckedToday(id)){
+            color.setStyle("-fx-background-color: " + facade.getHabitColor(id) + "; -fx-border-color: "+ facade.getHabitColor(id));
         }else{
-            color.setStyle("-fx-background-color: #fff; -fx-border-color: "+habit.getColor());
+            color.setStyle("-fx-background-color: #fff; -fx-border-color: "+ facade.getHabitColor(id));
         }
     }
 
 
-    public void hideHabits(){
+    void hideHabits(){
         habitGrid.setVisible(false);
         title.setVisible(false);
         this.setPrefHeight(40);
         habitGrid.setPrefHeight(0);
     }
 
-    public void showHabits(){
+    void showHabits(){
         habitGrid.setVisible(true);
         title.setVisible(true);
         this.setPrefHeight(100);

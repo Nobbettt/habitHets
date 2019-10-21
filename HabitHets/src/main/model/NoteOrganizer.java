@@ -1,6 +1,8 @@
 package main.model;
 
 import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +13,10 @@ import java.util.List;
 
 public class NoteOrganizer implements IHandler {
 
-    public static NoteOrganizer instant;
-    public static List<Note> notesList;
+    private static NoteOrganizer instant;
+    private static List<Note> notesList;
 
-    private NoteOrganizer(){
+    private NoteOrganizer() {
         notesList = new ArrayList<>();
         getDb();
     }
@@ -25,17 +27,17 @@ public class NoteOrganizer implements IHandler {
      * If there is not, an instant will be created.
      */
 
-    public static NoteOrganizer getInstance(){
-        if(instant == null) {
+    public static NoteOrganizer getInstance() {
+        if (instant == null) {
             instant = new NoteOrganizer();
             return instant;
 
-        }else {
+        } else {
             return instant;
         }
     }
 
-    public List<Note> getNotes(){
+    public List<Note> getNotes() {
         return notesList;
     }
 
@@ -54,8 +56,8 @@ public class NoteOrganizer implements IHandler {
      */
     @Override
     public void remove(int id) {
-        for (Note note : notesList){
-            if (note.getId() == id){
+        for (Note note : notesList) {
+            if (note.getId() == id) {
                 notesList.remove(note);
                 return;
             }
@@ -93,6 +95,11 @@ public class NoteOrganizer implements IHandler {
                 System.out.println(notesList.size());
             }
         }
+    }
+}
+    void addNote(String s, LocalDateTime date) {
+
+        notesList.add(Factory.createNote(s, date));
     }
 }
 

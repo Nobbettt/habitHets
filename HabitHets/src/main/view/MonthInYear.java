@@ -8,22 +8,21 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import main.model.CalendarAble;
-import main.model.Day;
 
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonthInYear extends AnchorPane  {
+class MonthInYear extends AnchorPane  {
 
     @FXML private GridPane gridPane;
     @FXML private Label monthLabel;
     List<Label> weekdays = new ArrayList<>();
     List<Label> days = new ArrayList<>();
 
-    public MonthInYear() {
+    MonthInYear() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/monthInYear.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -39,18 +38,18 @@ public class MonthInYear extends AnchorPane  {
 
 
 
-    public void updateView(List<? extends CalendarAble> months, String monthName) {
-        Day firstDay = (Day)months.get(0);
-        int k = firstDay.getLdt().getDayOfWeek().getValue()-1;
+    void updateView(List<LocalDateTime> list, String monthName) {
+        LocalDateTime firstDay = list.get(0);
+        int k = firstDay.getDayOfWeek().getValue()-1;
         int dc = 0;
         monthLabel.setText(monthName);
         for (int e=0; e<k; e++){
             days.get(e).setText(" ");
         }
         for (int i = k; i < days.size(); i++){
-            if (dc< months.size()){
-                Day tmpDay = (Day)months.get(dc);
-                Integer dayNb = tmpDay.getLdt().getDayOfMonth();
+            if (dc< list.size()){
+                LocalDateTime tmpDay = list.get(dc);
+                Integer dayNb = tmpDay.getDayOfMonth();
                 days.get(i).setText(dayNb.toString());
                 dc++;
             }

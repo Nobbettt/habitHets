@@ -1,6 +1,7 @@
 package main.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Note {
     private int id;
@@ -8,16 +9,17 @@ public class Note {
     private LocalDate day;
 
     public Note(int id, String Description, LocalDate day) {
+    Note(int id, String Description, LocalDateTime day) {
         this.description = description;
         this.day = day;
         this.id = id;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    void setDescription(String description) {
         this.description = description;
     }
 

@@ -44,39 +44,47 @@ public class Event {
         return title;
     }
 
-    public String getLocation() {
+    String getLocation() {
         return location;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    private String getColor() {
-        return color;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
+    void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+    }
+
+    void setLocation(String location) {
+        this.location = location;
+    }
+
+    void setDescription(String description) {
+        this.description = description;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    private void setColor(String color) {
-        this.color = color;
+    String timeString() {
+        String hour;
+        String minute;
+        if (startTime.getHour() < 10) {
+            hour = "0" + startTime.getHour();
+        } else {
+            hour = "" + startTime.getHour();
+        }
+        if (startTime.getMinute() < 10) {
+            minute = "0" + startTime.getMinute();
+        } else {
+            minute = "" + startTime.getMinute();
+        }
+        return hour + ":" + minute;
     }
 }

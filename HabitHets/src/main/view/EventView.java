@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import main.java.application.ControllerCalendar;
-import main.model.Event;
+import main.model.Facade;
 
 import java.io.IOException;
 
@@ -14,48 +14,30 @@ public class EventView extends AnchorPane {
     private Label titleLabel;
     @FXML
     private Label timeLabel;
-    Event event;
+    private int id;
     ControllerCalendar controllerCalendar;
+    Facade facade;
 
-    public EventView(Event event) {
+    EventView(int id) {
+        this.id = id;
+        facade = new Facade();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/event.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
-        this.event = event;
 
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        titleLabel.setText(event.getTitle());
-        timeLabel.setText(eventTimeString());
+        titleLabel.setText(facade.getEventTitle(id));
+        timeLabel.setText(facade.getEventStarttimeString(id));
         controllerCalendar = ControllerCalendar.instance;
-    }
-
-    private String eventTimeString() {
-        String hour;
-        String minute;
-        if (event.getStartTime().getHour() < 10) {
-            hour = "0" + event.getStartTime().getHour();
-        } else {
-            hour = Integer.toString(event.getStartTime().getHour());
-        }
-        if (event.getStartTime().getMinute() < 10) {
-            minute = "0" + event.getStartTime().getMinute();
-        } else {
-            minute = Integer.toString(event.getStartTime().getMinute());
-        }
-        return hour + ":" + minute;
     }
 
     @FXML
     public void editEventClicked(){
-        if (event != null) {
-            controllerCalendar.editEventPressed(event);
-        } else {
-            System.out.println("FUUUUCK");
-        }
+        controllerCalendar.editEventPressed(id);
+
     }
 }

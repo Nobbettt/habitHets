@@ -15,13 +15,13 @@ public class Day implements CalendarAble {
         return ldt;
     }
 
-    public int getYearNbr(){
+    int getYearNbr(){
         return ldt.getYear();
     }
 
     public int getMonthNbr() {return ldt.getMonthValue();}
 
-    public int getWeekNr(){
+    int getWeekNr(){
         Calendar javaCal = new GregorianCalendar();
         javaCal.set(getLdt().getYear(), getLdt().getMonthValue(), getLdt().getDayOfMonth());
         return javaCal.get(Calendar.WEEK_OF_YEAR);
@@ -29,6 +29,11 @@ public class Day implements CalendarAble {
 
     public String getString() {
         return "" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "";
+    }
+
+    @Override
+    public LocalDateTime getLocalDateTime() {
+        return ldt;
     }
 
     public String getWeekDayString() {
