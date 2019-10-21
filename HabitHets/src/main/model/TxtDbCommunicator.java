@@ -24,6 +24,7 @@ public class TxtDbCommunicator {
     }
 
     static void writeFile(String file, String newTxt) {
+
         try {
             Files.write( Paths.get("C:\\Users\\norbe\\Documents\\habitHets\\HabitHets\\src\\main\\model\\"+file), newTxt.getBytes());
         } catch (IOException e) {
