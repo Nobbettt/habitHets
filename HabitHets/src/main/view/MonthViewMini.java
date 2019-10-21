@@ -32,7 +32,7 @@ public class MonthViewMini extends StackPane implements ViewAble {
         setupMonth();
     }
 
-    public void setupMonth() {
+    private void setupMonth() {
 
         monthdays = new ArrayList<>();
         weeknb = new ArrayList<>();

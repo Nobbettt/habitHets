@@ -12,7 +12,7 @@ import main.model.Facade;
 import java.io.IOException;
 
 
-public class HabitObjectView extends AnchorPane {
+class HabitObjectView extends AnchorPane {
 
     private int id;
     Facade facade;
@@ -27,7 +27,7 @@ public class HabitObjectView extends AnchorPane {
     private HabitView habitView;
 
 
-    public HabitObjectView(HabitView habitView) {
+    HabitObjectView(HabitView habitView) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/habitElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -43,7 +43,7 @@ public class HabitObjectView extends AnchorPane {
     }
 
 
-    public int getHabitID() {
+    int getHabitID() {
         return id;
     }
 
@@ -66,7 +66,7 @@ public class HabitObjectView extends AnchorPane {
         habitView.edit(this);
     }
 
-    public void updateElementView(int id) {
+    void updateElementView(int id) {
         this.id = id;
         title.setText(facade.getHabitTitle(id));
         updateStreaks();
@@ -89,14 +89,14 @@ public class HabitObjectView extends AnchorPane {
     }
 
 
-    public void hideHabits(){
+    void hideHabits(){
         habitGrid.setVisible(false);
         title.setVisible(false);
         this.setPrefHeight(40);
         habitGrid.setPrefHeight(0);
     }
 
-    public void showHabits(){
+    void showHabits(){
         habitGrid.setVisible(true);
         title.setVisible(true);
         this.setPrefHeight(100);

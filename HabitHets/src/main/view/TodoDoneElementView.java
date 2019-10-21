@@ -13,12 +13,12 @@ import java.util.List;
 public class TodoDoneElementView extends AnchorPane  {
 
     Facade facade;
-    int id;
+    private int id;
 
 
 
 
-    public TodoDoneElementView(int id) {
+    TodoDoneElementView(int id) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/todoDoneElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

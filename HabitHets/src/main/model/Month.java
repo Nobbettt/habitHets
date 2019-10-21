@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Month implements CalendarAble {
     List<Day> days;
-    int monthNb;
+    private int monthNb;
 
 
     public Month(int year, int monthNb) {
@@ -17,7 +17,7 @@ public class Month implements CalendarAble {
     }
 
 
-    public List<Day> getDays(int year, int monthNb){
+    private List<Day> getDays(int year, int monthNb){
         LocalDateTime ldt = LocalDateTime.of(year, monthNb,1,0,0);
         List<Day> tmpDays = new ArrayList<>();
         while (ldt.getMonthValue() == monthNb){
@@ -32,14 +32,14 @@ public class Month implements CalendarAble {
         return days;
     }
 
-    public int getFirstWeek(){
+    int getFirstWeek(){
         Calendar javaCal = new GregorianCalendar();
         LocalDateTime firstDay = getDays().get(0).getLdt();
         javaCal.set(firstDay.getYear(), firstDay.getMonthValue(), 1);
         return javaCal.get(Calendar.WEEK_OF_YEAR);
     }
 
-    public int getLastWeek(){
+    int getLastWeek(){
         Calendar javaCal = new GregorianCalendar();
         int nbrDays = getDays().size() -1;
         LocalDateTime lastDay = getDays().get(nbrDays).getLdt();
@@ -47,7 +47,7 @@ public class Month implements CalendarAble {
         return javaCal.get(Calendar.WEEK_OF_YEAR);
     }
 
-    public Day getFirstDayInWeek(int week){
+    Day getFirstDayInWeek(int week){
         for (Day day : getDays()){
             if (day.getWeekNr() == week){
                 return day;
@@ -57,7 +57,7 @@ public class Month implements CalendarAble {
         return null;
     }
 
-    public Day getDayFromLDT(LocalDateTime ldt){
+    Day getDayFromLDT(LocalDateTime ldt){
         for (Day day : getDays()){
             if (day.getLdt().getDayOfMonth() == ldt.getDayOfMonth()){
                 return day;

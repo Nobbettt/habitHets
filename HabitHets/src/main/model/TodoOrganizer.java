@@ -11,7 +11,7 @@ import java.util.List;
 public class TodoOrganizer implements IHandler {
 
 
-    public static TodoOrganizer instant;
+    private static TodoOrganizer instant;
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
 
@@ -21,7 +21,7 @@ public class TodoOrganizer implements IHandler {
      */
 
 
-    public TodoOrganizer() {
+    private TodoOrganizer() {
         todoList = new ArrayList<>();
         doneTodoList = new ArrayList<>();
     }
@@ -54,7 +54,7 @@ public class TodoOrganizer implements IHandler {
 
     }
 
-    public void addTodo(String title) {
+    void addTodo(String title) {
         todoList.add(Factory.createTodo(title));
         notifyListener();
 
@@ -110,7 +110,7 @@ public class TodoOrganizer implements IHandler {
         return doneTodoList;
     }
 
-    public List<Integer> getTodoIds(){
+    List<Integer> getTodoIds(){
         List<Integer> ids = new ArrayList<>();
         for (Todo todo : getTodoList()){
             ids.add(todo.getId());
@@ -118,7 +118,7 @@ public class TodoOrganizer implements IHandler {
         return ids;
     }
 
-    public List<Integer> getDoneTodoIds(){
+    List<Integer> getDoneTodoIds(){
         List<Integer> ids = new ArrayList<>();
         for (Todo todo : getDoneTodoList()){
             ids.add(todo.getId());
@@ -128,7 +128,7 @@ public class TodoOrganizer implements IHandler {
 
 
 
-    public Todo getTodoOfId(int id){
+    Todo getTodoOfId(int id){
         for (Todo todo : getTodoList()){
             if (todo.getId() == id){
                 return todo;
@@ -137,7 +137,7 @@ public class TodoOrganizer implements IHandler {
         return null;
     }
 
-    public Todo getDoneTodoOfId(int id){
+    Todo getDoneTodoOfId(int id){
         for (Todo todo : getDoneTodoList()){
             if (todo.getId() == id){
                 return todo;
@@ -174,7 +174,7 @@ public class TodoOrganizer implements IHandler {
             l.actOnUpdate();
     }
 
-    public void moveBackDoneTodo(int id) {
+    void moveBackDoneTodo(int id) {
         for (int i = 0; i < doneTodoList.size(); i++) {
             if (doneTodoList.get(i).getId() == id) {
                 doneTodoList.remove(i);

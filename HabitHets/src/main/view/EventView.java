@@ -14,11 +14,11 @@ public class EventView extends AnchorPane {
     private Label titleLabel;
     @FXML
     private Label timeLabel;
-    int id;
+    private int id;
     ControllerCalendar controllerCalendar;
     Facade facade;
 
-    public EventView(int id) {
+    EventView(int id) {
         this.id = id;
         facade = new Facade();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/event.fxml"));
@@ -37,8 +37,7 @@ public class EventView extends AnchorPane {
 
     @FXML
     public void editEventClicked(){
-        System.out.println(controllerCalendar.toString());
-            controllerCalendar.editEventPressed(id);
+        controllerCalendar.editEventPressed(id);
 
     }
 }

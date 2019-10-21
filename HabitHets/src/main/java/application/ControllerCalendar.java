@@ -72,7 +72,7 @@ public class ControllerCalendar implements Initializable, Listener {
     private ExpandedDayView expandedDayView;
     private MonthView monthView;
     private Timeline timeLineCaller;
-    public ViewAble currentView;
+    private ViewAble currentView;
     private LocalDateTime timeNow;
     private LocalDateTime masterDateTime;
     private Facade facade;
@@ -102,7 +102,7 @@ public class ControllerCalendar implements Initializable, Listener {
     /**
      * function is called every min to update timeline in GUI
      */
-    public void updateTimeline() {
+    private void updateTimeline() {
         timeNow = LocalDateTime.now();
         currentView.updateTimeLine(timeNow.getHour(), timeNow.getMinute());
     }
@@ -190,7 +190,7 @@ public class ControllerCalendar implements Initializable, Listener {
         if(currentView == expandedDayView) {
             headLbl = facade.getDayFromDate(masterDateTime).get(0).getWeekDayString();
         } else if(currentView == weekView) {
-            Integer weekNb = facade.getDayFromDate(masterDateTime).get(0).getWeekNr();
+            Integer weekNb = facade.getWeekFromLdt(masterDateTime);
             headLbl = "Week " + weekNb.toString();
         } else if(currentView == monthView) {
             Integer yearNb = masterDateTime.getYear();
@@ -484,16 +484,25 @@ public class ControllerCalendar implements Initializable, Listener {
         c.setEditable(true);
         if (isHour) {
             for (int i = 0; i < 24; i++) {
-                a.add("" + i);
+                if (i < 10) {
+                    a.add("0" + i);
+                } else {
+                    a.add("" + i);
+                }
             }
         }
         else {
-            for (int i = 0; i < 60; i++) {
-                a.add("" + i);
+            for (int i = 0; i < 12; i++) {
+                if (i*5 < 10) {
+                    a.add("0" + i * 5);
+                } else {
+                    a.add("" + i*5);
+                }
             }
         }
         c.getItems().addAll(a);
-        c.getSelectionModel().selectNext();
+        c.setVisibleRowCount(12);
+        c.getSelectionModel().selectFirst();
 
     }
 
@@ -553,7 +562,7 @@ public class ControllerCalendar implements Initializable, Listener {
         facade.deleteEvent(Integer.valueOf(idLabel.getText()));
     }
 
-    public void populateExtendedEvent(int id){
+    private void populateExtendedEvent(int id){
         LocalDateTime eventStarttime = facade.getEventStarttime(id);
         LocalDateTime eventEndtime = facade.getEventEndtime(id);
         editTitle.setText(facade.getEventTitle(id));
@@ -567,7 +576,7 @@ public class ControllerCalendar implements Initializable, Listener {
         idLabel.setText(String.valueOf(id));
     }
 
-    public LocalDateTime copyMasterdate(){
+    private LocalDateTime copyMasterdate(){
         return LocalDateTime.of(masterDateTime.getYear(), masterDateTime.getMonthValue(), masterDateTime.getDayOfMonth(), masterDateTime.getHour(), masterDateTime.getMinute());
     }
 

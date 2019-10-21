@@ -1,8 +1,6 @@
 package main.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Event {
     private int id;
@@ -46,36 +44,28 @@ public class Event {
         return title;
     }
 
-    public String getLocation() {
+    String getLocation() {
         return location;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    private String getColor() {
-        return color;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
+    void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
-    public void setLocation(String location) {
+    void setLocation(String location) {
         this.location = location;
     }
 
-    public void setDescription(String description) {
+    void setDescription(String description) {
         this.description = description;
-    }
-
-    private void setColor(String color) {
-        this.color = color;
     }
 
     public void setTitle(String title) {

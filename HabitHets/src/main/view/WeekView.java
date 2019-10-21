@@ -27,7 +27,7 @@ public class WeekView extends StackPane implements ViewAble {
     @FXML private Label weekDay7;
     private List<Label> weekDays;
     private List<LocalDateTime> week;
-    public List<DayEventListView> weekDayEvents;
+    private List<DayEventListView> weekDayEvents;
     Facade facade;
 
     public WeekView() {

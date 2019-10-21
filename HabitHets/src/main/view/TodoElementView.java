@@ -15,7 +15,7 @@ public class TodoElementView extends AnchorPane  {
     Facade facade;
     public int id;
 
-    public TodoElementView(int id) {
+    TodoElementView(int id) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/todoElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -34,7 +34,7 @@ public class TodoElementView extends AnchorPane  {
 
     List<CheckBox> cb = new ArrayList<>();
 
-    public CheckBox getCb() {
+    CheckBox getCb() {
         return cb.get(0);
     }
 

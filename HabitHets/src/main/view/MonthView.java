@@ -21,7 +21,6 @@ public class MonthView extends StackPane implements ViewAble {
     @FXML private ScrollPane scrollPane;
     private List<Label> monthdays;
     private List<Label> weeknb;
-    private List<Label> weekday;
 
     public MonthView(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/month.fxml"));
@@ -35,10 +34,9 @@ public class MonthView extends StackPane implements ViewAble {
               setupMonth();
     }
 
-     public void setupMonth() {
+     private void setupMonth() {
          monthdays = new ArrayList<>();
          weeknb = new ArrayList<>();
-         weekday = new ArrayList<>();
          for(int i = 1; i < 7; i++){
              for(int j = 0; j < 8; j++){
                  AnchorPane a = new AnchorPane();
@@ -79,17 +77,16 @@ public class MonthView extends StackPane implements ViewAble {
         Facade f = new Facade();
 
         List<LocalDateTime> prevMonth = f.getLdtMonthFromDate(firstday.minusMonths(1));
-        int lastDayPrevMonth = prevMonth.size()-1;
+        int lastDayPrevMonth  = prevMonth.get(prevMonth.size()-1).getDayOfMonth();
+
         for(int l = k; 0 <= l; l--){
-            LocalDateTime tmpDay = prevMonth.get(lastDayPrevMonth);
-            Integer daynb = firstday.getDayOfMonth();
-            monthdays.get(l).setText(daynb.toString());
+            monthdays.get(l).setText(String.valueOf(lastDayPrevMonth+2));
             monthdays.get(l).setStyle("-fx-opacity: .5");
             lastDayPrevMonth--;
         }
 
         int j = 0;
-        for(int i = k; i< monthdays.size(); i++){
+        for(int i = k-1; i< monthdays.size(); i++){
             if(j < ldtList.size()){
                 LocalDateTime tmpDay = ldtList.get(j);
                 Integer daynb = tmpDay.getDayOfMonth();
@@ -104,7 +101,7 @@ public class MonthView extends StackPane implements ViewAble {
 
         List<LocalDateTime> nextMonth = f.getLdtMonthFromDate(firstday.plusMonths(1));
         int firstDayNextMonth = 0;
-        for(int l = ldtList.size()+k; l < monthdays.size(); l++){
+        for(int l = ldtList.size()+k-1; l < monthdays.size(); l++){
             LocalDateTime tmpDay = nextMonth.get(firstDayNextMonth);
             Integer daynb = tmpDay.getDayOfMonth();
             monthdays.get(l).setText(daynb.toString());

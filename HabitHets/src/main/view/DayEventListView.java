@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DayEventListView extends StackPane {
+class DayEventListView extends StackPane {
     private VBox vBox;
     private List<HBox> hBoxList;
     private Line tl;
@@ -20,7 +20,7 @@ public class DayEventListView extends StackPane {
     private double vBoxWidth;
     private LocalDateTime ldt;
 
-    public DayEventListView(LocalDateTime ldt) {
+    DayEventListView(LocalDateTime ldt) {
         this.ldt = ldt;
         hBoxList = new ArrayList<>();
         vBox = new VBox();
@@ -49,7 +49,7 @@ public class DayEventListView extends StackPane {
         hHeight = new HourView().getPrefHeight();
     }
 
-    public void updateDay(LocalDateTime ldt, double vBoxWidth) {
+    void updateDay(LocalDateTime ldt, double vBoxWidth) {
         Facade facade = new Facade();
         this.vBoxWidth = vBoxWidth;
         System.out.println(vBoxWidth);
@@ -83,7 +83,7 @@ public class DayEventListView extends StackPane {
             }
     }
 
-    public void updateTimeline(int hour, int minute) {
+    void updateTimeline(int hour, int minute) {
         double timeHeight = 0;
         if (hour < 12) {
             timeHeight = (12 - hour) * hHeight;

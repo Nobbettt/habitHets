@@ -10,7 +10,7 @@ import java.util.Stack;
  */
 public class HabitOrganizer implements IHandler{
 
-    public static HabitOrganizer instant;
+    private static HabitOrganizer instant;
     private static List<Habit> habitList;
 
 
@@ -72,11 +72,11 @@ public class HabitOrganizer implements IHandler{
 
     }
 
-    public void addHabit(String title, String color) {
+    void addHabit(String title, String color) {
         habitList.add(Factory.createHabit(title, new Stack(),0,color,LocalDate.now()));
     }
 
-    public Habit getHabitFromId(int id){
+    Habit getHabitFromId(int id){
         for (Habit habit : getHabitList()){
             if (habit.getId() == id){
                 return habit;
@@ -85,7 +85,7 @@ public class HabitOrganizer implements IHandler{
         return null;
     }
 
-    public List<Integer> getAllHabitIDs(){
+    List<Integer> getAllHabitIDs(){
         List<Integer> ids = new ArrayList<>();
         for (Habit habit : getHabitList()){
             ids.add(habit.getId());

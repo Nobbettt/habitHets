@@ -1,5 +1,5 @@
 import javafx.application.Application;
-import main.java.application.Main;
+import main.java.application.HabitHets;
 import org.junit.Test;
 
 public class CalendarControllerTest {
@@ -13,7 +13,7 @@ public class CalendarControllerTest {
 
     @Test
     public void testTimeLine() {
-        Application instance = new Main();
+        Application instance = new HabitHets();
 
         /*
         cc.updateTimeline();

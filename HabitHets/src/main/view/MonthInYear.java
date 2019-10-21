@@ -15,14 +15,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonthInYear extends AnchorPane  {
+class MonthInYear extends AnchorPane  {
 
     @FXML private GridPane gridPane;
     @FXML private Label monthLabel;
     List<Label> weekdays = new ArrayList<>();
     List<Label> days = new ArrayList<>();
 
-    public MonthInYear() {
+    MonthInYear() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/monthInYear.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -38,7 +38,7 @@ public class MonthInYear extends AnchorPane  {
 
 
 
-    public void updateView(List<LocalDateTime> list, String monthName) {
+    void updateView(List<LocalDateTime> list, String monthName) {
         LocalDateTime firstDay = list.get(0);
         int k = firstDay.getDayOfWeek().getValue()-1;
         int dc = 0;

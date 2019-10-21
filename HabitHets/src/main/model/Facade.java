@@ -30,7 +30,7 @@ public class Facade {
         return calender.getMonth(ldt);
     }
 
-    public Event getEventFromID(int id){
+    private Event getEventFromID(int id){
         return eventOrganizer.getEventOfId(id);
     }
 
@@ -59,8 +59,7 @@ public class Facade {
     }
 
     public long getLength(int id){
-        long valueMinute = ChronoUnit.MINUTES.between(eventOrganizer.getEventOfId(id).getStartTime(), eventOrganizer.getEventOfId(id).getEndTime());
-        return (valueMinute);
+        return (ChronoUnit.MINUTES.between(eventOrganizer.getEventOfId(id).getStartTime(), eventOrganizer.getEventOfId(id).getEndTime()));
     }
 
     public double calculateWidth(LocalDateTime dateTime, int id) {
@@ -134,11 +133,7 @@ public class Facade {
     }
 
     public boolean noteOnDay(LocalDateTime ldt){
-        if (noteOrganizer.getNoteDate(ldt) != null){
-            return true;
-        } else {
-            return false;
-        }
+        return noteOrganizer.getNoteDate(ldt) != null;
     }
 
     public void updateNote (String s, LocalDateTime ldt){

@@ -70,7 +70,7 @@ public class HabitView extends AnchorPane {
     }
 
 
-    public void edit(HabitObjectView habitObjectView){
+    void edit(HabitObjectView habitObjectView){
         newHabit.setVisible(true);
         newHabit.toFront();
         setVisibilityAdd(false);
@@ -79,7 +79,7 @@ public class HabitView extends AnchorPane {
         save.toFront();
         title.setText(facade.getHabitTitle(habitObjectView.getHabitID()));
         java.awt.Color tmpC = java.awt.Color.decode(facade.getHabitColor(habitObjectView.getHabitID()));
-        Color c = Color.rgb(tmpC.getRed(),tmpC.getGreen(),tmpC.getBlue());
+        Color c = Color.valueOf(facade.getHabitColor(habitObjectView.getHabitID()));
         colorPicker.setValue(c);
         editing = habitObjectView;
         habitModifyTypeLabel.setText("Edit Habit");
@@ -100,7 +100,7 @@ public class HabitView extends AnchorPane {
     private void create(){
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
-            facade.createHabit(title.getText(), colorToString(colorPicker.getValue()));
+            facade.createHabit(title.getText(), toHexString(colorPicker.getValue()));
             updateHabitView(facade.getAllHabitIds());
         }
         title.clear();
@@ -112,18 +112,11 @@ public class HabitView extends AnchorPane {
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
             facade.updateHabitTitle(editing.getHabitID(),title.getText());
-            facade.updateHabitColor(editing.getHabitID(), colorToString(colorPicker.getValue()));
+            facade.updateHabitColor(editing.getHabitID(), toHexString(colorPicker.getValue()));
             editing.updateElementView(editing.getHabitID());
         }
         title.clear();
         colorPicker.setValue(Color.WHITE);
-    }
-
-    private String colorToString(Color color){
-        return String.format("#%02X%02X%02X",
-                ((int)color.getRed())*255,
-                ((int)color.getGreen())*255,
-                ((int)color.getBlue())*255);
     }
 
     @FXML
@@ -154,9 +147,6 @@ public class HabitView extends AnchorPane {
         isExpanded = true;
     }
 
-
-    //List<CheckBox> checkboxes = new ArrayList<>();
-
     public void updateHabitView(List<Integer> ids) {
         vBox.getChildren().clear();
         for (Integer id: ids){
@@ -166,6 +156,16 @@ public class HabitView extends AnchorPane {
             habitsList.add(habitObjectView);
          //   hide();
         }
+    }
+
+    private String format(double val) {
+        String in = Integer.toHexString((int) Math.round(val * 255));
+        return in.length() == 1 ? "0" + in : in;
+    }
+
+    private String toHexString(Color value) {
+        return "#" + (format(value.getRed()) + format(value.getGreen()) + format(value.getBlue()) + format(value.getOpacity()))
+                .toUpperCase();
     }
 
 

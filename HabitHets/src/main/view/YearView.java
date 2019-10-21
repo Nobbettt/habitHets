@@ -16,7 +16,7 @@ public class YearView extends AnchorPane implements ViewAble {
     @FXML private ScrollPane yearScroll;
     @FXML private GridPane yearGrid;
     private List<MonthView> months = new ArrayList(); //guess its gonna be something like this.... :/ todo
-    List<MonthInYear> monthInYears = new ArrayList<>();
+    private List<MonthInYear> monthInYears = new ArrayList<>();
 
     public YearView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/year.fxml"));
