@@ -1,5 +1,6 @@
 package main.model;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,16 +67,16 @@ public class NoteOrganizer implements IHandler {
      * @param d, is the day on which we would like to inspect if there is a Note affiliated with that date.
      * @return
      */
-    public Note getNoteDate(LocalDateTime d){
+    public Note getNoteDate(LocalDate d){
             for(Note n : notesList){
-                if(n.getDay().getDayOfYear() == d.getDayOfYear() && n.getDay().getYear() == d.getYear()){
+                if(n.getDay().equals(d)){
                     return n;
                 }
         }
         return null;
     }
 
-    public Note addNote (String s, LocalDateTime date){
+    public Note addNote (String s, LocalDate date){
 
             notesList.add(Factory.createNote(s, date));
             return notesList.get(notesList.size() - 1);

@@ -1,15 +1,13 @@
 package main.model;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Note{
     private int id;
     private String description;
-    private LocalDateTime day;
+    private LocalDate day;
 
-    public Note(int id, String Description, LocalDateTime day) {
+    public Note(int id, String Description, LocalDate day) {
         this.description = description;
         this.day = day;
         this.id = id;
@@ -31,7 +29,7 @@ public class Note{
         return description;
     }
 
-    public LocalDateTime getDay() {
+    public LocalDate getDay() {
         return day;
     }
 
@@ -39,7 +37,7 @@ public class Note{
         this.id = id;
     }
 
-    public void setDay(LocalDateTime day) {
+    public void setDay(LocalDate day) {
         this.day = day;
     }
 

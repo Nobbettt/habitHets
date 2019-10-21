@@ -2,12 +2,15 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import main.model.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -43,7 +46,7 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         weekDayLbl.setText(weekday);
         day = (Day) days.get(0);
         dayEvents.updateDay(day, dayGrid.getCellBounds(1,0).getWidth());
-        note = noteOrganizer.getNoteDate(day.getLdt());
+        note = noteOrganizer.getNoteDate(day.getLdt().toLocalDate());
         noteField.clear();
         if(note != null){
             noteField.setText(note.getDescription());
@@ -66,19 +69,17 @@ public class ExpandedDayView extends StackPane implements ViewAble{
         dayGrid.add(new HourColumnView(), 0, 0);
         dayEvents = new DayEventListView(Calender.getInstant().getDayFromLDT(LocalDateTime.now()));
         dayGrid.add(dayEvents, 1, 0);
-
     }
 
     @FXML
     private void notehandle() {
-        System.out.println("gg");
         if(note == null){
             String noteString = noteField.getText();
-            LocalDateTime d = day.getLdt();
+            LocalDate d = day.getLdt().toLocalDate();
             note = noteOrganizer.addNote(noteString, d);
         } else{
             note.setDescription(noteField.getText());
-            note.setDay(day.getLdt());
+            note.setDay(day.getLdt().toLocalDate());
         }
     }
 }
