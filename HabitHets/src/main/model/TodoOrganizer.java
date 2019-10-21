@@ -14,8 +14,6 @@ import java.util.Scanner;
  */
 
 public class TodoOrganizer implements IHandler {
-
-
     public static TodoOrganizer instant;
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
@@ -153,9 +151,9 @@ public class TodoOrganizer implements IHandler {
     public void moveBackDoneTodo(int id) {
         for (int i = 0; i < doneTodoList.size(); i++) {
             if (doneTodoList.get(i).getId() == id) {
-                doneTodoList.remove(i);
                 updateDbRemove(id, "todoDone");
-                updateDbAdd(doneTodoList.get(i), "TodoDone");
+                updateDbAdd(doneTodoList.get(i), "todo");
+                doneTodoList.remove(i);
                 notifyListener();
                 return;
             }
