@@ -86,7 +86,7 @@ public class EventOrganizer implements IHandler {
             if (event.getId() == id){
                 return event;
             } else {
-                System.out.println("NO SUCH EVENT");
+                System.out.println("" + event.getTitle() +"NO SUCH EVENT");
             }
         }
         return null;

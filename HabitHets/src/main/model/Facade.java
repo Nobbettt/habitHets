@@ -91,7 +91,6 @@ public class Facade {
             }
         }
         events.add(getEventFromID(id));
-        //double vboxWidth = getVboxWidth();
         return i;
     }
 
