@@ -93,8 +93,8 @@ public class Calender {
 
     public List<LocalDateTime> getLdtWeekFromLdt(LocalDateTime ldt){
         List<LocalDateTime> list = new ArrayList<>();
-        for (LocalDateTime day : getLdtWeekFromLdt(ldt)){
-            list.add(day);
+        for (Day day : getWeekFromLDT(ldt)){
+            list.add(day.getLdt());
         }
         return list;
     }
