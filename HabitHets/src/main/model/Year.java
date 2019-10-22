@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Year implements CalendarAble {
+public class Year{
     private List<Month> months;
     private Integer year;
     public Year(int year) {
@@ -49,8 +49,4 @@ public class Year implements CalendarAble {
         return year.toString();
     }
 
-    @Override
-    public LocalDateTime getLocalDateTime() {
-        return months.get(0).days.get(0).getLdt();
-    }
 }

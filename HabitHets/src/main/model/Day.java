@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Day implements CalendarAble {
+public class Day {
     private LocalDateTime ldt;
 
     public Day(LocalDateTime ldt) {
@@ -29,11 +29,6 @@ public class Day implements CalendarAble {
 
     public String getString() {
         return "" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "";
-    }
-
-    @Override
-    public LocalDateTime getLocalDateTime() {
-        return ldt;
     }
 
     public String getWeekDayString() {

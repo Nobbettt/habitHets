@@ -20,7 +20,7 @@ public class TestWeek {
     public void testGetWeekFromLdt(){
         Facade facade = new Facade();
         LocalDateTime testTime = LocalDateTime.now();
-        List<Day> dayList = facade.getWeekFromDate(testTime);
+        List<Day> dayList = Calender.getInstant().getWeekFromLDT(testTime);
         Assert.assertEquals(7, dayList.size());
         Assert.assertEquals("MONDAY", dayList.get(0).getLdt().getDayOfWeek().toString());
         Assert.assertEquals("Day{ldt=2019-10-6}", dayList.get(dayList.size()-1).getString());
@@ -31,7 +31,7 @@ public class TestWeek {
     public void testGetWeekFromLdtBeforeNewYear(){
         Facade facade = new Facade();
         LocalDateTime testTime = LocalDateTime.of(2019,12,30,00,00);
-        List<Day> dayList = facade.getWeekFromDate(testTime);
+        List<Day> dayList = Calender.getInstant().getWeekFromLDT(testTime);
         Assert.assertEquals(7, dayList.size());
         Assert.assertEquals("MONDAY", dayList.get(0).getLdt().getDayOfWeek().toString());
         Assert.assertEquals("Day{ldt=2019-12-30}", dayList.get(0).getString());
@@ -42,7 +42,7 @@ public class TestWeek {
     public void testGetWeekFromLdtAfterNewYear() {
         Facade facade = new Facade();
         LocalDateTime testTime = LocalDateTime.of(2021, 1, 2, 00, 00);
-        List<Day> dayList = facade.getWeekFromDate(testTime);
+        List<Day> dayList = Calender.getInstant().getWeekFromLDT(testTime);
         Assert.assertEquals(7, dayList.size());
         Assert.assertEquals("MONDAY", dayList.get(0).getLdt().getDayOfWeek().toString());
         Assert.assertEquals("Day{ldt=2020-12-28}", dayList.get(0).getString());

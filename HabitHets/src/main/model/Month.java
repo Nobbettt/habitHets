@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Month implements CalendarAble {
+public class Month{
     List<Day> days;
     private int monthNb;
 
@@ -96,10 +96,5 @@ public class Month implements CalendarAble {
             default:
                 return "Bitch month";
         }
-    }
-
-    @Override
-    public LocalDateTime getLocalDateTime() {
-        return days.get(0).getLdt();
     }
 }

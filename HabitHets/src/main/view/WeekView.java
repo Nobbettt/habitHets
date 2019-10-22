@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import main.model.Facade;
+import main.model.Calender;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -30,12 +30,7 @@ public class WeekView extends StackPane implements ViewAble {
     private List<DayEventListView> weekDayEvents;
 
     public WeekView() {
-        Facade facade = new Facade();
-        List<LocalDateTime> week = new ArrayList<>();
-        this.week = week;
-        for (LocalDateTime localDateTime : facade.getLdtWeekFromDate(LocalDateTime.now())){
-            week.add(localDateTime);
-        }
+        this.week = Calender.getInstant().getLdtWeekFromLdt(LocalDateTime.now());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/week.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -53,7 +48,7 @@ public class WeekView extends StackPane implements ViewAble {
      */
     @Override
     public void updateView(List<LocalDateTime> week) {
-
+        this.week = week;
         for(int i = 0; i < 7; i++) {
             LocalDateTime tmpDay = week.get(i);
             String weekday = "" + week.get(i).getDayOfMonth() + "/" + week.get(i).getMonthValue(); //week.get(i)....getWeekdayfunction()

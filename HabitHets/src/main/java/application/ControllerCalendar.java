@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
+import main.model.Calender;
 import main.model.Facade;
 import main.model.Listener;
 import main.view.*;
@@ -74,6 +75,7 @@ public class ControllerCalendar implements Initializable, Listener {
     private LocalDateTime timeNow;
     private LocalDateTime masterDateTime;
     private Facade facade;
+    private Calender calender;
     public static ControllerCalendar instance;
 
     private TodoView todoView;
@@ -81,6 +83,7 @@ public class ControllerCalendar implements Initializable, Listener {
     public ControllerCalendar() {
         masterDateTime = LocalDateTime.now();
         facade = new Facade();
+        calender = Calender.getInstant();
         yearView = new YearView();
         weekView = new WeekView();
         habitView = new HabitView();
@@ -146,13 +149,13 @@ public class ControllerCalendar implements Initializable, Listener {
             calendarData.add(copyMasterdate());
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.minusWeeks(1);
-            calendarData = facade.getLdtWeekFromDate(masterDateTime);
+            calendarData = calender.getLdtWeekFromLdt(masterDateTime);
         } else if(currentView == monthView) {
             masterDateTime = masterDateTime.minusMonths(1);
-            calendarData = facade.getLdtMonthFromDate(masterDateTime);
+            calendarData = calender.getLdtMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.minusYears(1);
-            calendarData = facade.getLdtYearFromDate(masterDateTime);
+            calendarData = calender.getLdtYearFromDate(masterDateTime);
         }
         currentView.updateView(calendarData);
         updateHeadLbl();
@@ -163,11 +166,11 @@ public class ControllerCalendar implements Initializable, Listener {
         if(currentView == expandedDayView) {
             calendarData.add(copyMasterdate());
         } else if(currentView == weekView) {
-            calendarData = facade.getLdtWeekFromDate(masterDateTime);
+            calendarData = calender.getLdtWeekFromLdt(masterDateTime);
         } else if(currentView == monthView) {
-            calendarData = facade.getLdtMonthFromDate(masterDateTime);
+            calendarData = calender.getLdtMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
-            calendarData = facade.getLdtYearFromDate(masterDateTime);
+            calendarData = calender.getLdtYearFromDate(masterDateTime);
         }
         currentView.updateView(calendarData);
     }
@@ -184,13 +187,13 @@ public class ControllerCalendar implements Initializable, Listener {
             calendarData.add(copyMasterdate());
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.plusWeeks(1);
-            calendarData = facade.getLdtWeekFromDate(masterDateTime);
+            calendarData = calender.getLdtWeekFromLdt(masterDateTime);
         } else if(currentView == monthView) {
             masterDateTime = masterDateTime.plusMonths(1);
-            calendarData = facade.getLdtMonthFromDate(masterDateTime);
+            calendarData = calender.getLdtMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.plusYears(1);
-            calendarData = facade.getLdtYearFromDate(masterDateTime);
+            calendarData = calender.getLdtYearFromDate(masterDateTime);
         }
         currentView.updateView(calendarData);
         updateHeadLbl();
@@ -203,13 +206,13 @@ public class ControllerCalendar implements Initializable, Listener {
     private void updateHeadLbl() {
         String headLbl = "";
         if(currentView == expandedDayView) {
-            headLbl = facade.getDayFromDate(masterDateTime).get(0).getWeekDayString();
+            headLbl = calender.getDayFromDate(masterDateTime).get(0).getWeekDayString();
         } else if(currentView == weekView) {
-            Integer weekNb = facade.getWeekFromLdt(masterDateTime);
+            Integer weekNb = calender.getWeekFromLdt(masterDateTime);
             headLbl = "Week " + weekNb.toString();
         } else if(currentView == monthView) {
             Integer yearNb = masterDateTime.getYear();
-            headLbl = facade.getMonth(masterDateTime).getString() + " " + yearNb;
+            headLbl = calender.getMonthString(masterDateTime) + " " + yearNb;
         } else if(currentView == yearView) {
             Integer yearNb = masterDateTime.getYear();
             headLbl = yearNb.toString();
@@ -260,7 +263,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderWeek() {
         currentView = weekView;
-        weekView.updateView(facade.getLdtWeekFromDate(copyMasterdate()));
+        weekView.updateView(calender.getLdtWeekFromLdt(copyMasterdate()));
         renderCalendar(weekView);
     }
 
@@ -281,7 +284,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderMonth(){
         currentView = monthView;
-        monthView.updateView(facade.getLdtMonthFromDate(copyMasterdate()));
+        monthView.updateView(calender.getLdtMonthFromDate(copyMasterdate()));
         renderCalendar(monthView);
     }
 
@@ -302,7 +305,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderYear() {
         currentView = yearView;
-        yearView.updateView(facade.getLdtYearFromDate(copyMasterdate()));
+        yearView.updateView(calender.getLdtYearFromDate(copyMasterdate()));
         renderCalendar(yearView);
     }
 

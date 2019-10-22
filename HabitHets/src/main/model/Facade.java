@@ -1,71 +1,17 @@
 package main.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalField;
-import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class Facade {
-    private Calender calender = Calender.getInstant();
     private EventOrganizer eventOrganizer = EventOrganizer.getInstant();
     private NoteOrganizer noteOrganizer = NoteOrganizer.getInstance();
     private TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
     private HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
 
-    public List<Day> getWeekFromDate(LocalDateTime localDateTime) {
-        return calender.getWeekFromLDT(localDateTime);
-    }
-
-    public List<Day> getDayFromDate(LocalDateTime localDateTime) {
-        List<Day> singleDayList = new ArrayList();
-        singleDayList.add(calender.getDayFromLDT(localDateTime));
-        return singleDayList;
-    }
-
-    public Month getMonth (LocalDateTime ldt){
-        return calender.getMonth(ldt);
-    }
-
-    public int getWeekFromLdt(LocalDateTime ldt){
-        LocalDate date = ldt.toLocalDate();
-        TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
-        return date.get(woy);
-    }
-
-    public List<LocalDateTime> getLdtMonthFromDate(LocalDateTime localDateTime) {
-        List<LocalDateTime> list = new ArrayList<>();
-        for (Day day : calender.getMonth(localDateTime).getDays()){
-            list.add(day.getLdt());
-        }
-        return list;
-    }
-
-    public List<LocalDateTime> getLdtWeekFromDate(LocalDateTime localDateTime){
-        List<LocalDateTime> list = new ArrayList<>();
-        for (Day day : calender.getWeekFromLDT(localDateTime)){
-            list.add(day.getLdt());
-        }
-        return list;
-    }
-
-    public List<LocalDateTime> getLdtYearFromDate(LocalDateTime localDateTime){
-        List<LocalDateTime> list = new ArrayList<>();
-        for (Month month : calender.getYearFromLDT(localDateTime)){
-            list.add(month.getLocalDateTime());
-        }
-        return list;
-    }
-
-    public String getMonthString(LocalDateTime ltd){
-        Month m = calender.getMonth(ltd);
-        return m.getString();
-    }
-
-    public double calculateWidth(LocalDateTime dateTime, int id) {
+    public double calculateOverlaps(LocalDateTime dateTime, int id) {
         double i = 0;
         List<Event> overlaps = new ArrayList<>();
         List<Event> overlaps2 = new ArrayList<>();
