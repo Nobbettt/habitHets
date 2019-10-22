@@ -129,18 +129,18 @@ public class Facade {
     }
 
     public String getNoteTextFromLdt(LocalDateTime ldt){
-        return noteOrganizer.getNoteDate(ldt).getDescription();
+        return noteOrganizer.getNoteDate(ldt.toLocalDate()).getDescription();
     }
 
     public boolean noteOnDay(LocalDateTime ldt){
-        return noteOrganizer.getNoteDate(ldt) != null;
+        return noteOrganizer.getNoteDate(ldt.toLocalDate()) != null;
     }
 
     public void updateNote (String s, LocalDateTime ldt){
         if (noteOnDay(ldt)){
-            noteOrganizer.getNoteDate(ldt).setDescription(s);
+            noteOrganizer.getNoteDate(ldt.toLocalDate()).setDescription(s);
         } else {
-            noteOrganizer.addNote(s, ldt);
+            noteOrganizer.addNote(s, ldt.toLocalDate());
         }
     }
 

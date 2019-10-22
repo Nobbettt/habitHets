@@ -2,9 +2,6 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -12,7 +9,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import main.model.Facade;
-
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -55,9 +51,6 @@ public class ExpandedDayView extends StackPane implements ViewAble {
         weekDayLbl.setText(weekday);
         day = days.get(0);
         dayEvents.updateDay(day, dayGrid.getCellBounds(1, 0).getWidth());
-        day = (Day) days.get(0);
-        dayEvents.updateDay(day, dayGrid.getCellBounds(1,0).getWidth());
-        note = noteOrganizer.getNoteDate(day.getLdt().toLocalDate());
         noteField.clear();
         if (f.noteOnDay(day)) {
             noteField.setText(f.getNoteTextFromLdt(day));

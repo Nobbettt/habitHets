@@ -1,8 +1,6 @@
 package main.model;
 
 import java.time.LocalDate;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,12 +76,12 @@ public class NoteOrganizer implements IHandler {
         }
         return null;
     }
-
+/*
     public Note addNote (String s, LocalDate date){
         notesList.add(Factory.createNote(s, date));
         return notesList.get(notesList.size() - 1);
     }
-
+*/
     private void getDb() {
         String noteTxt = TxtDbCommunicator.readFile("note");
         if(!noteTxt.isEmpty()) {
@@ -96,8 +94,8 @@ public class NoteOrganizer implements IHandler {
             }
         }
     }
-}
-    void addNote(String s, LocalDateTime date) {
+
+    void addNote(String s, LocalDate date) {
 
         notesList.add(Factory.createNote(s, date));
     }

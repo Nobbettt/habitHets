@@ -17,9 +17,6 @@ public class TodoOrganizer implements IHandler {
     /**
      * The constructor of TodoOrganizer sets the list of todos and doneTodos.
      */
-    public TodoOrganizer() {
-
-
     private TodoOrganizer() {
         todoList = new ArrayList<>();
         doneTodoList = new ArrayList<>();
