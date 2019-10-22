@@ -28,6 +28,11 @@ public class Event {
         this.title = title;
     }
 
+
+    public String getColor() {
+        return color;
+    }
+
     public int getId() {
         return id;
     }

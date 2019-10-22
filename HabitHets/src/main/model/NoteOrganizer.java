@@ -69,19 +69,14 @@ public class NoteOrganizer implements IHandler {
      * @return
      */
     public Note getNoteDate(LocalDate d){
-            for(Note n : notesList){
-                if(n.getDay().equals(d)){
-                    return n;
-                }
+        for(Note n : notesList){
+            if(n.getDay().equals(d)){
+                return n;
+            }
         }
         return null;
     }
-/*
-    public Note addNote (String s, LocalDate date){
-        notesList.add(Factory.createNote(s, date));
-        return notesList.get(notesList.size() - 1);
-    }
-*/
+
     private void getDb() {
         String noteTxt = TxtDbCommunicator.readFile("note");
         if(!noteTxt.isEmpty()) {
@@ -90,15 +85,11 @@ public class NoteOrganizer implements IHandler {
                 String[] attr = noteString.split(",");
                 Note note = new Note(Integer.parseInt(attr[0]), attr[1], LocalDate.parse(attr[2]));
                 notesList.add(note);
-                System.out.println(notesList.size());
             }
         }
     }
 
     void addNote(String s, LocalDate date) {
-
         notesList.add(Factory.createNote(s, date));
     }
 }
-
-

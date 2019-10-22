@@ -1,6 +1,7 @@
 package main.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class EventOrganizer implements IHandler {
 
     private EventOrganizer() {
         eventList = new ArrayList<>();
+        getDb();
     }
 
     public static EventOrganizer getInstant() {
@@ -87,5 +89,22 @@ public class EventOrganizer implements IHandler {
             }
         }
         return ids;
+    }
+
+    private void getDb() {
+        String eventTxt = TxtDbCommunicator.readFile("event");
+        if(!eventTxt.isEmpty()) {
+            String[] events = eventTxt.split(";");
+            for (String eventString : events) {
+                String[] attr = eventString.split(",");
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+                LocalDateTime startTime = LocalDateTime.parse(attr[1], formatter);
+                LocalDateTime endTime = LocalDateTime.parse(attr[2], formatter);
+
+                Event event = new Event(Integer.parseInt(attr[0]), LocalDateTime.parse(startTime.toString(),formatter), LocalDateTime.parse(endTime.toString(), formatter), attr[3], attr[4], attr[5], attr[6]);
+                eventList.add(event);
+            }
+        }
     }
 }

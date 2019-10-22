@@ -1,6 +1,7 @@
 package main.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Stack;
 
@@ -10,6 +11,7 @@ public class SaveOnShutDown {
         saveDoneTodo();
         saveHabit();
         saveNote();
+        saveEvent();
     }
 
     private static void saveTodo() {
@@ -71,5 +73,26 @@ public class SaveOnShutDown {
             }
         }
         TxtDbCommunicator.writeFile("note", txt.toString());
+    }
+
+    private static void saveEvent() {
+        // id,2019-10-22T05:00:25,2019-10-22T05:00:25,Title thing,Location thing,Description thing,#47bcad
+        List<Event> eventList = EventOrganizer.getInstant().getEventList();
+        StringBuilder txt = new StringBuilder();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        for(Event event : eventList) {
+            if (event.getDescription() != null) {
+                txt.append(event.getId()).append(",");
+                String startTime = formatter.format(event.getStartTime());
+                txt.append(startTime).append(",");
+                String endTime = formatter.format(event.getEndTime());
+                txt.append(endTime).append(",");
+                txt.append(event.getTitle()).append(",");
+                txt.append(event.getLocation()).append(",");
+                txt.append(event.getDescription()).append(",");
+                txt.append(event.getColor()).append(";");
+            }
+        }
+        TxtDbCommunicator.writeFile("event", txt.toString());
     }
 }
