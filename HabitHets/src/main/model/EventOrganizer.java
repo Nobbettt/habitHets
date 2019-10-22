@@ -1,39 +1,32 @@
 package main.model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventOrganizer implements IHandler {
-
     private static EventOrganizer instant;
     private static List<Event> eventList;
 
     private EventOrganizer() {
         eventList = new ArrayList<>();
-        getDb();
     }
 
     public static EventOrganizer getInstant() {
         if (instant == null) {
-
             instant = new EventOrganizer();
             return instant;
-
         } else {
             return instant;
         }
     }
 
-
-    @Override
-    public void add() { //todo
-
+    public static void addEvent(LocalDateTime ldt, Integer startHour, Integer startMinute, Integer endHour, Integer endMinute, String title, String location, String desc){
+        eventList.add(Factory.createAdvEvent(ldt.withHour(startHour).withMinute(startMinute), ldt.withHour(endHour).withMinute(endMinute), title, location, desc, null));
     }
 
-    void addEvent(LocalDateTime ldt, Integer startHour, Integer startMinute, Integer endHour, Integer endMinute, String title, String location, String desc){
-        eventList.add(Factory.createAdvEvent(ldt.withHour(startHour).withMinute(startMinute), ldt.withHour(endHour).withMinute(endMinute), title, location, desc, null));
+    static void setEventList(List<Event> eventList) {
+        EventOrganizer.eventList = eventList;
     }
 
     @Override
@@ -44,10 +37,9 @@ public class EventOrganizer implements IHandler {
                 return;
             }
         }
-        System.out.println("The ID: '" + id + "' does not exist");
     }
 
-    void editEvent(int id, String title, String location, String desc, LocalDateTime startTime, LocalDateTime endTime){
+    static void editEvent(int id, String title, String location, String desc, LocalDateTime startTime, LocalDateTime endTime){
         Event eventToEdit = getEventOfId(id);
         eventToEdit.setTitle(title);
         eventToEdit.setLocation(location);
@@ -56,11 +48,11 @@ public class EventOrganizer implements IHandler {
         eventToEdit.setEndTime(endTime);
     }
 
-    public List<Event> getEventList() {
+    public static List<Event> getEventList() {
         return eventList;
     }
 
-    List<Event> getEventsOfDay(LocalDateTime ldt){
+    static List<Event> getEventsOfDay(LocalDateTime ldt){
         List<Event> eventList = new ArrayList<>();
         for (Event event : getEventList()){
             if (event.getStartTime().getYear() == ldt.getYear() && event.getStartTime().getDayOfYear() == ldt.getDayOfYear()){
@@ -70,18 +62,16 @@ public class EventOrganizer implements IHandler {
         return eventList;
     }
 
-    Event getEventOfId(int id){
+    static Event getEventOfId(int id){
         for (Event event : eventList){
             if (event.getId() == id){
                 return event;
-            } else {
-                System.out.println("" + event.getTitle() +"NO SUCH EVENT");
             }
         }
         return null;
     }
 
-    List<Integer> getAllIDsOfDay(LocalDateTime ldt){
+    static List<Integer> getAllIDsOfDay(LocalDateTime ldt){
         List<Integer> ids = new ArrayList<>();
         for (Event event : eventList){
             if (event.getStartTime().getYear() == ldt.getYear() && event.getStartTime().getDayOfYear() == ldt.getDayOfYear()) {
@@ -89,22 +79,5 @@ public class EventOrganizer implements IHandler {
             }
         }
         return ids;
-    }
-
-    private void getDb() {
-        String eventTxt = TxtDbCommunicator.readFile("event");
-        if(!eventTxt.isEmpty()) {
-            String[] events = eventTxt.split(";");
-            for (String eventString : events) {
-                String[] attr = eventString.split(",");
-
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-                LocalDateTime startTime = LocalDateTime.parse(attr[1], formatter);
-                LocalDateTime endTime = LocalDateTime.parse(attr[2], formatter);
-
-                Event event = new Event(Integer.parseInt(attr[0]), LocalDateTime.parse(startTime.toString(),formatter), LocalDateTime.parse(endTime.toString(), formatter), attr[3], attr[4], attr[5], attr[6]);
-                eventList.add(event);
-            }
-        }
     }
 }

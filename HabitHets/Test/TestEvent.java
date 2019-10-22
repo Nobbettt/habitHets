@@ -8,10 +8,10 @@ public class TestEvent {
     @Test
     public void testEventId(){
         EventOrganizer eventOrganizer = EventOrganizer.getInstant();
-        eventOrganizer.add();
-        eventOrganizer.add();
-        eventOrganizer.add();
-        eventOrganizer.add();
+        eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
+        eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
+        eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
+        eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertEquals(4, eventOrganizer.getEventList().size());
         Assert.assertEquals(0, eventOrganizer.getEventList().get(0).getId());
         Assert.assertEquals(1, eventOrganizer.getEventList().get(1).getId());
@@ -23,7 +23,7 @@ public class TestEvent {
     @Test
     public void testEventModifiers(){
         EventOrganizer eventOrganizer = EventOrganizer.getInstant();
-        eventOrganizer.add();
+        eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertEquals(0, eventOrganizer.getEventList().get(0).getId());
         eventOrganizer.getEventList().get(0).getId();
         Assert.assertEquals("TestEvent", eventOrganizer.getEventList().get(0).getTitle());
@@ -35,9 +35,9 @@ public class TestEvent {
     @Test
     public void testAddRemove(){
         EventOrganizer eventOrganizer = EventOrganizer.getInstant();
-        eventOrganizer.add();
+        eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertEquals(1, eventOrganizer.getEventList().size());
-        eventOrganizer.add();
+        eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertEquals(2, eventOrganizer.getEventList().size());
         eventOrganizer.remove(0);
         Assert.assertEquals(1, eventOrganizer.getEventList().size());
@@ -49,7 +49,7 @@ public class TestEvent {
     @Test
     public void testTime(){
         EventOrganizer eventOrganizer = EventOrganizer.getInstant();
-        eventOrganizer.add();
+        eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertTrue((eventOrganizer.getEventList().get(0).getStartTime().isAfter(LocalDateTime.now())));
         Assert.assertTrue((eventOrganizer.getEventList().get(0).getEndTime().isBefore(LocalDateTime.now().plusHours(1))));
     }

@@ -10,13 +10,11 @@ import java.util.List;
  */
 
 public class NoteOrganizer implements IHandler {
-
     private static NoteOrganizer instant;
     private static List<Note> notesList;
 
     private NoteOrganizer() {
         notesList = new ArrayList<>();
-        getDb();
     }
 
     /**
@@ -24,7 +22,6 @@ public class NoteOrganizer implements IHandler {
      * If there is an instant, another one will not be created.
      * If there is not, an instant will be created.
      */
-
     public static NoteOrganizer getInstance() {
         if (instant == null) {
             instant = new NoteOrganizer();
@@ -35,18 +32,10 @@ public class NoteOrganizer implements IHandler {
         }
     }
 
-    public List<Note> getNotes() {
+    public static List<Note> getNotes() {
         return notesList;
     }
 
-    /**
-     * Method that adds a Note to a list of Notes, using a Factory pattern.
-     * Will later be made to get input from database, but for now uses fixed values for testing purposes.
-     */
-    @Override
-    public void add() {
-        //Get input from database
-    }
 
     /**
      * Method that removes a Note from a list of Notes, using the id set when creating a Note from Factory.
@@ -60,7 +49,6 @@ public class NoteOrganizer implements IHandler {
                 return;
             }
         }
-        System.out.println("The ID: '" + id + "' does not exist");
     }
 
     /**
@@ -68,7 +56,7 @@ public class NoteOrganizer implements IHandler {
      * @param d, is the day on which we would like to inspect if there is a Note affiliated with that date.
      * @return
      */
-    public Note getNoteDate(LocalDate d){
+    static Note getNoteDate(LocalDate d){
         for(Note n : notesList){
             if(n.getDay().equals(d)){
                 return n;
@@ -77,19 +65,15 @@ public class NoteOrganizer implements IHandler {
         return null;
     }
 
-    private void getDb() {
-        String noteTxt = TxtDbCommunicator.readFile("note");
-        if(!noteTxt.isEmpty()) {
-            String[] notes = noteTxt.split(";");
-            for (String noteString : notes) {
-                String[] attr = noteString.split(",");
-                Note note = new Note(Integer.parseInt(attr[0]), attr[1], LocalDate.parse(attr[2]));
-                notesList.add(note);
-            }
-        }
+    static void setNotesList(List<Note> notesList) {
+        NoteOrganizer.notesList = notesList;
     }
 
-    void addNote(String s, LocalDate date) {
+    /**
+     * Method that adds a Note to a list of Notes, using a Factory pattern.
+     * Will later be made to get input from database, but for now uses fixed values for testing purposes.
+     */
+    public static void addNote(String s, LocalDate date) {
         notesList.add(Factory.createNote(s, date));
     }
 }

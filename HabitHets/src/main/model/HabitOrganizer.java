@@ -9,10 +9,8 @@ import java.util.Stack;
  *This class handles logic that has to do with more than one habit.
  */
 public class HabitOrganizer implements IHandler{
-
     private static HabitOrganizer instant;
     private static List<Habit> habitList;
-
 
     /**
      * Constructor of HabitOrganizer that creates
@@ -20,9 +18,11 @@ public class HabitOrganizer implements IHandler{
      */
     private HabitOrganizer() {
         habitList = new ArrayList<>();
-        getDb();
     }
 
+    static void setHabitList(List<Habit> list) {
+        HabitOrganizer.habitList = list;
+    }
     /**
      * This method controls if an object is created.
      * This makes sure that there may only be one instance
@@ -39,23 +39,8 @@ public class HabitOrganizer implements IHandler{
 
     }
 
-    public List<Habit> getHabitList() {
+    public static List<Habit> getHabitList() {
         return habitList;
-    }
-
-
-    /**
-     * This method adds habits by calling Factory class.
-     */
-    @Override
-    public void add() {
-        Stack s = new Stack();
-        s.add(new DoneHabit(LocalDate.now().minusDays(3)));
-        s.add(new DoneHabit(LocalDate.now().minusDays(2)));
-        s.add(new DoneHabit(LocalDate.now().minusDays(1)));
-        s.add(new DoneHabit(LocalDate.now()));
-        habitList.add(Factory.createHabit("testHabit", s,0,"white",LocalDate.now()));
-        notifyListener();
     }
 
     /**
@@ -75,25 +60,28 @@ public class HabitOrganizer implements IHandler{
 
     }
 
-    public void addHabit(String title, String color) {
+    /**
+     * This method adds habits by calling Factory class.
+     */
+    public static void addHabit(String title, String color) {
         habitList.add(Factory.createHabit(title, new Stack(),0,color,LocalDate.now()));
         notifyListener();
     }
 
-    private List<Listener> listeners = new ArrayList<>();
+    private static List<Listener> listeners = new ArrayList<>();
 
 
-    public void addListener(Listener l){
+    public static void addListener(Listener l){
         listeners.add(l);
 
     }
 
-    private void notifyListener(){
+    private static void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();
     }
 
-    public Habit getHabitById(String msg) {
+    public static Habit getHabitById(String msg) {
         int id = Integer.valueOf(msg);
         for (Habit h : habitList) {
             if(h.getId() == id) {
@@ -103,29 +91,7 @@ public class HabitOrganizer implements IHandler{
         return null;
     }
 
-    private void getDb() {
-        String todoTxt = TxtDbCommunicator.readFile("habit");
-        if(!todoTxt.isEmpty()) {
-            String[] objects = todoTxt.split(";");
-            for (String obj : objects) {
-                String[] attr = obj.split(",");
-                Stack<DoneHabit> doneHabits = formatDoneHabits(attr[5]);
-                Habit h = new Habit(Integer.parseInt(attr[0]), attr[1], doneHabits, Integer.parseInt(attr[2]), attr[3], LocalDate.parse(attr[4]));
-                habitList.add(h);
-            }
-        }
-    }
-
-    private Stack<DoneHabit> formatDoneHabits(String raw) {
-        Stack<DoneHabit> doneHabits = new Stack<>();
-        String[] doneArr = raw.split("=");
-        for (String done : doneArr) {
-            LocalDate tmpLd = LocalDate.parse(done);
-            doneHabits.add(new DoneHabit(tmpLd));
-        }
-        return doneHabits;
-    }
-    Habit getHabitFromId(int id){
+    static Habit getHabitFromId(int id){
         for (Habit habit : getHabitList()){
             if (habit.getId() == id){
                 return habit;
@@ -134,12 +100,11 @@ public class HabitOrganizer implements IHandler{
         return null;
     }
 
-    List<Integer> getAllHabitIDs(){
+    static List<Integer> getAllHabitIDs(){
         List<Integer> ids = new ArrayList<>();
         for (Habit habit : getHabitList()){
             ids.add(habit.getId());
         }
         return ids;
     }
-
 }

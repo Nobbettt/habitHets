@@ -12,10 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-import main.model.Facade;
-import main.model.HabitOrganizer;
-import main.model.Listener;
-import main.model.TodoOrganizer;
+import main.model.*;
 import main.view.*;
 
 import java.net.URL;
@@ -83,6 +80,9 @@ public class ControllerCalendar implements Initializable, Listener {
     private TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
 
     public ControllerCalendar() {
+        // to change -->
+        TxtDbCommunicator.importDb();
+
         masterDateTime = LocalDateTime.now();
         facade = new Facade();
         yearView = new YearView();

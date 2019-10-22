@@ -20,7 +20,14 @@ public class TodoOrganizer implements IHandler {
     private TodoOrganizer() {
         todoList = new ArrayList<>();
         doneTodoList = new ArrayList<>();
-        getDb();
+    }
+
+    static void setTodoList(List<Todo> todoList) {
+        TodoOrganizer.todoList = todoList;
+    }
+
+    static void setDoneTodoList(List<Todo> doneTodoList) {
+        TodoOrganizer.doneTodoList = doneTodoList;
     }
 
     /**
@@ -39,19 +46,12 @@ public class TodoOrganizer implements IHandler {
         }
     }
 
+
     /**
      * This method creates a new toddoo. You have to enter the todoo's title, the todoo get it's id from the factory class
      * where the todoo object is made.
      */
-
-    @Override
-    public void add() {
-        Todo todo = Factory.createTodo("testTodo");
-        todoList.add(todo);
-        notifyListener();
-    }
-
-    void addTodo(String title) {
+    public static void addTodo(String title) {
         todoList.add(Factory.createTodo(title));
         notifyListener();
     }
@@ -73,7 +73,7 @@ public class TodoOrganizer implements IHandler {
                 notifyListener();
                 return;
             }
-        } System.out.println("The ID " +id + " does not exist.");
+        }
     }
 
     /**
@@ -85,8 +85,7 @@ public class TodoOrganizer implements IHandler {
      * If the id does not exist you get an error message.     *
      * @param id
      */
-
-    public void doneTodoRemove(int id){ // to remove a todoo when you have completed the task
+    public static void doneTodoRemove(int id){ // to remove a todoo when you have completed the task
         for (Todo todo: todoList){
             if(todo.getId() == id){
                 doneTodoList.add(todo);
@@ -95,19 +94,18 @@ public class TodoOrganizer implements IHandler {
                 notifyListener();
                 return;
             }
-        } System.out.println("The ID " +id + " does not exist.");
+        }
     }
 
-
-    public List<Todo> getTodoList() {
+    public static List<Todo> getTodoList() {
         return todoList;
     }
 
-    public List<Todo> getDoneTodoList() {
+    public static List<Todo> getDoneTodoList() {
         return doneTodoList;
     }
 
-    List<Integer> getTodoIds(){
+    static List<Integer> getTodoIds(){
         List<Integer> ids = new ArrayList<>();
         for (Todo todo : getTodoList()){
             ids.add(todo.getId());
@@ -115,7 +113,7 @@ public class TodoOrganizer implements IHandler {
         return ids;
     }
 
-    List<Integer> getDoneTodoIds(){
+    static List<Integer> getDoneTodoIds(){
         List<Integer> ids = new ArrayList<>();
         for (Todo todo : getDoneTodoList()){
             ids.add(todo.getId());
@@ -125,7 +123,7 @@ public class TodoOrganizer implements IHandler {
 
 
 
-    Todo getTodoOfId(int id){
+    static Todo getTodoOfId(int id){
         for (Todo todo : getTodoList()){
             if (todo.getId() == id){
                 return todo;
@@ -134,7 +132,7 @@ public class TodoOrganizer implements IHandler {
         return null;
     }
 
-    Todo getDoneTodoOfId(int id){
+    static Todo getDoneTodoOfId(int id){
         for (Todo todo : getDoneTodoList()){
             if (todo.getId() == id){
                 return todo;
@@ -147,8 +145,7 @@ public class TodoOrganizer implements IHandler {
      * When you have completed a todoo, it goes from todolist to doneTodolist. This method
      * checks that the doneTodolist only have the five most recent completed todos.
      */
-
-    private void doneTodoList(){
+    private static void doneTodoList(){
         if (doneTodoList.size()>5){
             int limit = doneTodoList.size()-5;
             for (int a=0; a<limit ;a++){
@@ -159,45 +156,25 @@ public class TodoOrganizer implements IHandler {
         }
     }
 
-    private List<Listener> listeners = new ArrayList<>();
+    private static List<Listener> listeners = new ArrayList<>();
 
 
-    public void addListener(Listener l){
+    public static void addListener(Listener l){
         listeners.add(l);
 
     }
 
-    private void notifyListener(){
+    private static void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();
     }
 
-    void moveBackDoneTodo(int id) {
+    static void moveBackDoneTodo(int id) {
         for (int i = 0; i < doneTodoList.size(); i++) {
             if (doneTodoList.get(i).getId() == id) {
                 doneTodoList.remove(i);
                 notifyListener();
                 return;
-            }
-        }
-    }
-
-    private void getDb() {
-        String todoTxt = TxtDbCommunicator.readFile("todo");
-        if(!todoTxt.isEmpty()) {
-            String[] todos = todoTxt.split(";");
-            for (String todo : todos) {
-                String[] todoAttr = todo.split(",");
-                todoList.add(new Todo(todoAttr[1], Integer.parseInt(todoAttr[0])));
-            }
-        }
-
-        String doneTodoTxt = TxtDbCommunicator.readFile("todoDone");
-        if(!doneTodoTxt.isEmpty()) {
-            String[] doneTodos = doneTodoTxt.split(";");
-            for (String doneTodo : doneTodos) {
-                String[] doneTodoAttr = doneTodo.split(",");
-                doneTodoList.add(new Todo(doneTodoAttr[1], Integer.parseInt(doneTodoAttr[0])));
             }
         }
     }

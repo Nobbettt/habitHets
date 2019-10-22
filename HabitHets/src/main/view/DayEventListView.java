@@ -52,7 +52,6 @@ class DayEventListView extends StackPane {
     void updateDay(LocalDateTime ldt, double vBoxWidth) {
         Facade facade = new Facade();
         this.vBoxWidth = vBoxWidth;
-        System.out.println(vBoxWidth);
         this.ldt = ldt;
         for (HBox hBox : hBoxList) {
             hBox.getChildren().clear();

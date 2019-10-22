@@ -16,6 +16,7 @@ public class Facade {
     private TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
     private HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
 
+
     public List<Day> getWeekFromDate(LocalDateTime localDateTime) {
         return calender.getWeekFromLDT(localDateTime);
     }

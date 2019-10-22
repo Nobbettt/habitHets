@@ -5,42 +5,47 @@ import java.time.LocalDateTime;
 import java.util.Stack;
 
 public class Factory {
-    //private static int id = 0;
+    private static int todoIdCount = 0;
+    private static int habitIdCount = 0;
+    private static int eventIdCount = 0;
+    private static int noteIdCount = 0;
+
+    public static void setTodoIdCount(int todoIdCount) {
+        Factory.todoIdCount = todoIdCount;
+    }
+
+    public static void setHabitIdCount(int habitIdCount) {
+        Factory.habitIdCount = habitIdCount;
+    }
+
+    public static void setEventIdCount(int eventIdCount) {
+        Factory.eventIdCount = eventIdCount;
+    }
+
+    public static void setNoteIdCount(int noteIdCount) {
+        Factory.noteIdCount = noteIdCount;
+    }
 
     public static Event createAdvEvent(LocalDateTime start, LocalDateTime end, String title, String location, String desc, String color){
-        System.out.println("------"+start.toString()+"----------");
-        int idDb = getId();
-        Event createdAdvEvent = new Event(idDb,start, end, title,location,desc,color);
+        eventIdCount++;
+        Event createdAdvEvent = new Event(eventIdCount,start, end, title,location,desc,color);
         return createdAdvEvent;
     }
     public static Note createNote(String description, LocalDate day){
-        int idDb = getId();
-        Note createdNote = new Note(idDb, description, day);
+        noteIdCount++;
+        Note createdNote = new Note(noteIdCount, description, day);
         return createdNote;
     }
 
     public static Todo createTodo(String title){
-        int idDb = getId();
-        Todo createTodo = new Todo(title,idDb);
+        todoIdCount++;
+        Todo createTodo = new Todo(title,todoIdCount);
         return createTodo;
     }
 
     public static Habit createHabit( String title, Stack doneHabits, int bestStreak, String color,LocalDate dateRecord){
-        int idDb = getId();
-        Habit createHabit = new Habit(idDb,title,doneHabits,bestStreak,color, dateRecord);
+        habitIdCount++;
+        Habit createHabit = new Habit(habitIdCount,title,doneHabits,bestStreak,color, dateRecord);
         return createHabit;
-    }
-
-    private static int getId() {
-        int idDb = 0;
-        idDb = Integer.parseInt(TxtDbCommunicator.readFile("idCount"));
-        idDb++;
-        updateId(idDb);
-        return idDb;
-    }
-
-    private static void updateId(int id) {
-        String newTxt = Integer.toString(id);
-        TxtDbCommunicator.writeFile("idCount", newTxt);
     }
 }

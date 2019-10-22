@@ -11,8 +11,8 @@ public class TestTodo {
     @Test
     public void testTodoAdd(){
         TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
-        todoOrganizer.add();
-        todoOrganizer.add();
+        todoOrganizer.addTodo("Undvika todo 2");
+        todoOrganizer.addTodo("Säga hej till Tina");
         Assert.assertEquals(2, todoOrganizer.getTodoList().size());
         Assert.assertEquals("testTodo", todoOrganizer.getTodoList().get(0).getTitle() );
         Assert.assertEquals(0, todoOrganizer.getTodoList().get(0).getId());
@@ -28,8 +28,8 @@ public class TestTodo {
     @Test
     public void testTodoUpdateSubject(){
         TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
-        todoOrganizer.add();
-        todoOrganizer.add();
+        todoOrganizer.addTodo("Undvika todo 2");
+        todoOrganizer.addTodo("Säga hej till Tina");
         Assert.assertEquals("testTodo", todoOrganizer.getTodoList().get(0).getTitle() );
         todoOrganizer.getTodoList().get(0).setTitle("Städa");
         Assert.assertEquals("Städa", todoOrganizer.getTodoList().get(0).getTitle() );
@@ -43,8 +43,8 @@ public class TestTodo {
     @Test
     public void testTodoRemove() {
         TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
-        todoOrganizer.add();
-        todoOrganizer.add();
+        todoOrganizer.addTodo("Undvika todo 2");
+        todoOrganizer.addTodo("Säga hej till Tina");
         Assert.assertEquals(2, todoOrganizer.getTodoList().size());
         todoOrganizer.getTodoList().get(0).setTitle("Städa");
         Assert.assertEquals("Städa", todoOrganizer.getTodoList().get(0).getTitle() );
@@ -63,7 +63,7 @@ public class TestTodo {
     public void testLengthOfDoneTodoList() {
         TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
         for (int a =0; a<8 ;a++){
-            todoOrganizer.add();
+            todoOrganizer.addTodo("Undvika todo 2");
             todoOrganizer.getTodoList().get(a).setTitle(""+a+"");
         }
         for (int r=0; r<7; r++){
@@ -86,8 +86,8 @@ public class TestTodo {
     @Test
     public void deleteTodo(){
         TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
-        todoOrganizer.add();
-        todoOrganizer.add();
+        todoOrganizer.addTodo("Undvika todo 2");
+        todoOrganizer.addTodo("Säga hej till Tina");
         Assert.assertEquals(2, todoOrganizer.getTodoList().size());
         todoOrganizer.remove(todoOrganizer.getTodoList().get(0).getId());
         Assert.assertEquals(1, todoOrganizer.getTodoList().size());

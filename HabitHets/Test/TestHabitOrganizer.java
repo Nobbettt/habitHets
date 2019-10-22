@@ -15,8 +15,8 @@ public class TestHabitOrganizer {
     @Test
     public void add(){
         Assert.assertEquals(0, habitOrganizer.getHabitList().size());
-        habitOrganizer.add();
-        habitOrganizer.add();
+        habitOrganizer.addHabit("test", "red");
+        habitOrganizer.addHabit("test2", "red");
         Assert.assertEquals(2, habitOrganizer.getHabitList().size());
         Assert.assertEquals(1, habitOrganizer.getHabitList().get(1).getId());
     }
@@ -49,8 +49,8 @@ public class TestHabitOrganizer {
      */
     @Test
     public void removeHabit(){
-        habitOrganizer.add();
-        habitOrganizer.add();
+        habitOrganizer.addHabit("test", "blue");
+        habitOrganizer.addHabit("test", "pink");
         habitOrganizer.remove(1);
         Assert.assertEquals(1, habitOrganizer.getHabitList().size());
         Assert.assertEquals(0, habitOrganizer.getHabitList().get(0).getId());
