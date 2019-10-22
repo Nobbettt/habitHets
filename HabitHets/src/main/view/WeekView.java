@@ -28,10 +28,9 @@ public class WeekView extends StackPane implements ViewAble {
     private List<Label> weekDays;
     private List<LocalDateTime> week;
     private List<DayEventListView> weekDayEvents;
-    Facade facade;
 
     public WeekView() {
-        facade = new Facade();
+        Facade facade = new Facade();
         List<LocalDateTime> week = new ArrayList<>();
         this.week = week;
         for (LocalDateTime localDateTime : facade.getLdtWeekFromDate(LocalDateTime.now())){

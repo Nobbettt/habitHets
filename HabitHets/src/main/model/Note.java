@@ -1,15 +1,13 @@
 package main.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Note {
     private int id;
     private String description;
     private LocalDate day;
 
-    public Note(int id, String Description, LocalDate day) {
-    Note(int id, String Description, LocalDateTime day) {
+    Note(int id, String description, LocalDate day) {
         this.description = description;
         this.day = day;
         this.id = id;
@@ -25,10 +23,6 @@ public class Note {
 
     public int getId(){
         return id;
-    }
-
-    public String setDescription(){
-        return description;
     }
 
     public LocalDate getDay() {

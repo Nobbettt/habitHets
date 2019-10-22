@@ -13,9 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import main.model.Facade;
-import main.model.HabitOrganizer;
 import main.model.Listener;
-import main.model.TodoOrganizer;
 import main.view.*;
 
 import java.net.URL;
@@ -78,9 +76,7 @@ public class ControllerCalendar implements Initializable, Listener {
     private Facade facade;
     public static ControllerCalendar instance;
 
-    private HabitOrganizer handler = HabitOrganizer.getInstant();
     private TodoView todoView;
-    private TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
 
     public ControllerCalendar() {
         masterDateTime = LocalDateTime.now();
@@ -102,6 +98,7 @@ public class ControllerCalendar implements Initializable, Listener {
     /**
      * function is called every min to update timeline in GUI
      */
+
     private void updateTimeline() {
         timeNow = LocalDateTime.now();
         currentView.updateTimeLine(timeNow.getHour(), timeNow.getMinute());
@@ -116,8 +113,8 @@ public class ControllerCalendar implements Initializable, Listener {
 
         setupCalender();
         setupTodo();
-        todoOrganizer.addListener(this);
-        handler.addListener(this);
+        facade.addHabitListener(this);
+        facade.addTodoListener(this);
 
         todoPane.getChildren().add(todoView);
         populateTodo();
@@ -140,6 +137,7 @@ public class ControllerCalendar implements Initializable, Listener {
     /**
      * on click this methods moves the represented time unit back in time depending on the current view.
      */
+
     @FXML
     private void prevClick() {
         List<LocalDateTime> calendarData = new ArrayList<>();
@@ -160,9 +158,24 @@ public class ControllerCalendar implements Initializable, Listener {
         updateHeadLbl();
     }
 
+    private void updateCurrentView(){
+        List<LocalDateTime> calendarData = new ArrayList<>();
+        if(currentView == expandedDayView) {
+            calendarData.add(copyMasterdate());
+        } else if(currentView == weekView) {
+            calendarData = facade.getLdtWeekFromDate(masterDateTime);
+        } else if(currentView == monthView) {
+            calendarData = facade.getLdtMonthFromDate(masterDateTime);
+        } else if(currentView == yearView) {
+            calendarData = facade.getLdtYearFromDate(masterDateTime);
+        }
+        currentView.updateView(calendarData);
+    }
+
     /**
      * on click this methods moves the represented time unit forward in time depending on the current view.
      */
+
     @FXML
     private void nextClick() {
         List<LocalDateTime> calendarData = new ArrayList<>();
@@ -186,6 +199,7 @@ public class ControllerCalendar implements Initializable, Listener {
     /**
      * Updates the main label between the arrow buttons in the navigation bar depending on view/ time-unit and masterDateTime (the date that is visible on screen)
      */
+
     private void updateHeadLbl() {
         String headLbl = "";
         if(currentView == expandedDayView) {
@@ -207,6 +221,7 @@ public class ControllerCalendar implements Initializable, Listener {
     /**
      * On click method for day button, responsible for changing the calendar view to desired time unit
      */
+
     @FXML
     private void showCalendarDayClick() {
         renderDay();
@@ -219,6 +234,7 @@ public class ControllerCalendar implements Initializable, Listener {
      * Updates child view, in this case expandedDayView with day info
      * Changes the calendar view to single day view
      */
+
     private void renderDay() {
         List<LocalDateTime> list = new ArrayList<>();
         list.add(copyMasterdate());
@@ -354,17 +370,7 @@ public class ControllerCalendar implements Initializable, Listener {
         fitItem(mainPane, todoPane, 70, 0, 0, -1);
     }
 
-    private void populateHabit(){/*
-        handler.add();
-        handler.add();
-        handler.getHabitList().get(0).setTitle("elintina");
-        handler.getHabitList().get(0).setBestStreak(4);
-        //handler.getHabitList().get(0).onClickHabit();
-        handler.getHabitList().get(0).setColor("#47BCAD");
-        handler.getHabitList().get(1).setTitle("nobbhelge");
-        handler.getHabitList().get(1).setColor("#47BCAD");
-        handler.getHabitList().get(1).setBestStreak(7);
-        */
+    private void populateHabit(){
         habitView.updateHabitView(facade.getAllHabitIds());
     }
 
@@ -494,6 +500,7 @@ public class ControllerCalendar implements Initializable, Listener {
             resetAllField();
             creationPage.toBack();
         }
+        updateCurrentView();
     }
 
     private void checkCreationInput(){
@@ -581,6 +588,7 @@ public class ControllerCalendar implements Initializable, Listener {
             facade.editEvent(Integer.valueOf(idLabel.getText()), editTitle.getText(), editLocation.getText(), editDesc.getText(), from, to);
 
         }
+        updateCurrentView();
         editPage.toBack();
     }
 
@@ -600,6 +608,7 @@ public class ControllerCalendar implements Initializable, Listener {
     private void deleteEventPressed(){
         editPage.toBack();
         facade.deleteEvent(Integer.valueOf(idLabel.getText()));
+        updateCurrentView();
     }
 
     private void populateExtendedEvent(int id){

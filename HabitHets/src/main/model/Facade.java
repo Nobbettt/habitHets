@@ -30,36 +30,39 @@ public class Facade {
         return calender.getMonth(ldt);
     }
 
-    private Event getEventFromID(int id){
-        return eventOrganizer.getEventOfId(id);
+    public int getWeekFromLdt(LocalDateTime ldt){
+        LocalDate date = ldt.toLocalDate();
+        TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+        return date.get(woy);
     }
 
-    public String getEventLocation(int id){
-        Event event = eventOrganizer.getEventOfId(id);
-        return event.getLocation();
+    public List<LocalDateTime> getLdtMonthFromDate(LocalDateTime localDateTime) {
+        List<LocalDateTime> list = new ArrayList<>();
+        for (Day day : calender.getMonth(localDateTime).getDays()){
+            list.add(day.getLdt());
+        }
+        return list;
     }
 
-    public String getEventDesc(int id){
-        Event event = eventOrganizer.getEventOfId(id);
-        return event.getDescription();
+    public List<LocalDateTime> getLdtWeekFromDate(LocalDateTime localDateTime){
+        List<LocalDateTime> list = new ArrayList<>();
+        for (Day day : calender.getWeekFromLDT(localDateTime)){
+            list.add(day.getLdt());
+        }
+        return list;
     }
 
-    public LocalDateTime getEventStarttime(int id){
-        Event event = eventOrganizer.getEventOfId(id);
-        return event.getStartTime();
+    public List<LocalDateTime> getLdtYearFromDate(LocalDateTime localDateTime){
+        List<LocalDateTime> list = new ArrayList<>();
+        for (Month month : calender.getYearFromLDT(localDateTime)){
+            list.add(month.getLocalDateTime());
+        }
+        return list;
     }
 
-    public LocalDateTime getEventEndtime(int id){
-        Event event = eventOrganizer.getEventOfId(id);
-        return event.getEndTime();
-    }
-
-    public List<Integer> getAllIdsOfDay(LocalDateTime ltd){
-        return eventOrganizer.getAllIDsOfDay(ltd);
-    }
-
-    public long getLength(int id){
-        return (ChronoUnit.MINUTES.between(eventOrganizer.getEventOfId(id).getStartTime(), eventOrganizer.getEventOfId(id).getEndTime()));
+    public String getMonthString(LocalDateTime ltd){
+        Month m = calender.getMonth(ltd);
+        return m.getString();
     }
 
     public double calculateWidth(LocalDateTime dateTime, int id) {
@@ -93,55 +96,24 @@ public class Facade {
         return i;
     }
 
-    public int getWeekFromLdt(LocalDateTime ldt){
-        LocalDate date = ldt.toLocalDate();
-        TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
-        return date.get(woy);
-    }
-
-    public List<LocalDateTime> getLdtMonthFromDate(LocalDateTime localDateTime) {
-        List<LocalDateTime> list = new ArrayList<>();
-        for (Day day : calender.getMonth(localDateTime).getDays()){
-            list.add(day.getLdt());
-        }
-        return list;
-    }
-    
-    public List<LocalDateTime> getLdtWeekFromDate(LocalDateTime localDateTime){
-        List<LocalDateTime> list = new ArrayList<>();
-        for (Day day : calender.getWeekFromLDT(localDateTime)){
-            list.add(day.getLdt());
-        }
-        return list;
-    }
-
-    public List<LocalDateTime> getLdtYearFromDate(LocalDateTime localDateTime){
-        List<LocalDateTime> list = new ArrayList<>();
-        for (Month month : calender.getYearFromLDT(localDateTime)){
-            list.add(month.getLocalDateTime());
-        }
-        return list;
-    }
-
-    public String getMonthString(LocalDateTime ltd){
-        Month m = calender.getMonth(ltd);
-        return m.getString();
-    }
-
     public String getNoteTextFromLdt(LocalDateTime ldt){
-        return noteOrganizer.getNoteDate(ldt).getDescription();
+        return noteOrganizer.getNoteDate(ldt.toLocalDate()).getDescription();
     }
 
     public boolean noteOnDay(LocalDateTime ldt){
-        return noteOrganizer.getNoteDate(ldt) != null;
+        return noteOrganizer.isNoteOnDay(ldt);
     }
 
     public void updateNote (String s, LocalDateTime ldt){
         if (noteOnDay(ldt)){
-            noteOrganizer.getNoteDate(ldt).setDescription(s);
+            noteOrganizer.getNoteDate(ldt.toLocalDate()).setDescription(s);
         } else {
-            noteOrganizer.addNote(s, ldt);
+            noteOrganizer.addNote(s, ldt.toLocalDate());
         }
+    }
+
+    public long getLength(int id){
+        return (ChronoUnit.MINUTES.between(eventOrganizer.getEventOfId(id).getStartTime(), eventOrganizer.getEventOfId(id).getEndTime()));
     }
 
     public void createEvent(LocalDateTime ldt, int fH, int fM, int tH, int tM, String title, String location, String description){
@@ -162,6 +134,34 @@ public class Facade {
 
     public String getEventStarttimeString(int id){
         return eventOrganizer.getEventOfId(id).timeString();
+    }
+
+    private Event getEventFromID(int id){
+        return eventOrganizer.getEventOfId(id);
+    }
+
+    public String getEventLocation(int id){
+        Event event = eventOrganizer.getEventOfId(id);
+        return event.getLocation();
+    }
+
+    public String getEventDesc(int id){
+        Event event = eventOrganizer.getEventOfId(id);
+        return event.getDescription();
+    }
+
+    public LocalDateTime getEventStarttime(int id){
+        Event event = eventOrganizer.getEventOfId(id);
+        return event.getStartTime();
+    }
+
+    public LocalDateTime getEventEndtime(int id){
+        Event event = eventOrganizer.getEventOfId(id);
+        return event.getEndTime();
+    }
+
+    public List<Integer> getAllIdsOfDay(LocalDateTime ltd){
+        return eventOrganizer.getAllIDsOfDay(ltd);
     }
 
     public void createNewTodo(String title){
@@ -208,6 +208,14 @@ public class Facade {
         habitOrganizer.remove(id);
     }
 
+    public boolean habitExist(String msg){
+        if (habitOrganizer.getHabitById(msg) != null){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
     public String getHabitTitle(int id){
         return habitOrganizer.getHabitFromId(id).getTitle();
     }
@@ -223,6 +231,7 @@ public class Facade {
     public boolean habitIsCheckedToday(int id){
         return habitOrganizer.getHabitFromId(id).isCheckedToday();
     }
+
     public String getHabitColor(int id){
         return habitOrganizer.getHabitFromId(id).getColor();
     }
@@ -237,4 +246,11 @@ public class Facade {
 
     public List<Integer> getAllHabitIds(){ return habitOrganizer.getAllHabitIDs(); }
 
+    public void addTodoListener(Listener l){
+        todoOrganizer.addListener(l);
+    }
+
+    public void addHabitListener(Listener l){
+        habitOrganizer.addListener(l);
+    }
 }

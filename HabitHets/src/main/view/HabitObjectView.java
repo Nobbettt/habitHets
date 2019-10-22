@@ -17,7 +17,7 @@ import java.util.List;
 class HabitObjectView extends AnchorPane {
 
     private int id;
-    Facade facade;
+    private Facade facade;
 
     @FXML private Label streakLabel;
     @FXML private Label bestStreakLabel;

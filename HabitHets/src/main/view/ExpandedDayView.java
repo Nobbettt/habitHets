@@ -6,9 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import main.model.Facade;
@@ -32,6 +29,7 @@ public class ExpandedDayView extends StackPane implements ViewAble {
     private Button saveNoteButton;
     private DayEventListView dayEvents;
     private LocalDateTime day;
+    private Facade facade;
 
 
     public ExpandedDayView() {
@@ -43,6 +41,7 @@ public class ExpandedDayView extends StackPane implements ViewAble {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        this.facade = new Facade();
         setupDayView();
 
 
@@ -50,17 +49,14 @@ public class ExpandedDayView extends StackPane implements ViewAble {
 
     @Override
     public void updateView(List<LocalDateTime> days) {
-        Facade f = new Facade();
         String weekday = "" + days.get(0).getDayOfMonth() + "/" + days.get(0).getMonthValue();//week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
         day = days.get(0);
         dayEvents.updateDay(day, dayGrid.getCellBounds(1, 0).getWidth());
-        day = (Day) days.get(0);
-        dayEvents.updateDay(day, dayGrid.getCellBounds(1,0).getWidth());
-        note = noteOrganizer.getNoteDate(day.getLdt().toLocalDate());
-        noteField.clear();
-        if (f.noteOnDay(day)) {
-            noteField.setText(f.getNoteTextFromLdt(day));
+        if (facade.noteOnDay(day)) {
+            noteField.setText(facade.getNoteTextFromLdt(day));
+        } else {
+            noteField.clear();
         }
     }
 
@@ -85,8 +81,7 @@ public class ExpandedDayView extends StackPane implements ViewAble {
 
     @FXML
     private void notehandle() {
-        Facade f = new Facade();
-        f.updateNote(noteField.getText(), day);
+        facade.updateNote(noteField.getText(), day);
     }
 
 }

@@ -35,16 +35,6 @@ public class Year implements CalendarAble {
         return null;
     }
 
-    public Day getDayWithWeek(int week){
-        for (Month month : getMonths()){
-            if (month.getFirstWeek() < week && month.getLastWeek() >= week){
-                return month.getFirstDayInWeek(week);
-            }
-        }
-        System.out.println("NO SUCH WEEK");
-        return null;
-    }
-
     Month getMonthFromLDT(LocalDateTime ldt){
         for (Month month : getMonths()){
             if (month.getDays().get(0).getLdt().getMonthValue() == ldt.getMonthValue()){

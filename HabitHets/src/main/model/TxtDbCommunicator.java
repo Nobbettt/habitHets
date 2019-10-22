@@ -12,7 +12,7 @@ public class TxtDbCommunicator {
         String text = "";
         Scanner scanner;
         try {
-            scanner = new Scanner( new File("C:\\Users\\norbe\\Documents\\habitHets\\HabitHets\\src\\main\\model\\"+file) );
+            scanner = new Scanner( new File("/Users/oscarhelgesson/Desktop/ubersenaste/HabitHets/src/main/model/"+file) );
             while (scanner.hasNextLine()) {
                 text = scanner.useDelimiter("\\A").next();
             }
@@ -26,7 +26,7 @@ public class TxtDbCommunicator {
     static void writeFile(String file, String newTxt) {
 
         try {
-            Files.write( Paths.get("C:\\Users\\norbe\\Documents\\habitHets\\HabitHets\\src\\main\\model\\"+file), newTxt.getBytes());
+            Files.write( Paths.get("/Users/oscarhelgesson/Desktop/ubersenaste/HabitHets/src/main/model/"+file), newTxt.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }

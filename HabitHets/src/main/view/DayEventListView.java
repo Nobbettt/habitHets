@@ -1,6 +1,5 @@
 package main.view;
 
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -59,12 +58,11 @@ class DayEventListView extends StackPane {
         }
         int i = 0;
         int overlap = 0;
-        //for (Event event : EventOrganizer.getInstant().getEventsOfDay(day.getLdt())) {
         for (int id : facade.getAllIdsOfDay(ldt))
             if (this.ldt.getDayOfYear() == ldt.getDayOfYear()) {
                 i++;
-                AnchorPane a = new EventView((id));
-                a.setTranslateY((Integer.valueOf(facade.getEventStarttime(id).getHour()) * 120) + (Integer.valueOf(facade.getEventStarttime(id).getMinute())) * 2); //todo WTF
+                EventView a = new EventView((id));
+                a.setTranslateY((facade.getEventStarttime(id).getHour() * 120) + (facade.getEventStarttime(id).getMinute()) * 2); //todo WTF
                 double height = calculateLenght(id) * 2;
                 a.setPrefHeight(height);
                 double width = this.vBoxWidth/facade.calculateWidth(ldt,id);
@@ -110,9 +108,5 @@ class DayEventListView extends StackPane {
         } else {
             return x;
         }
-    }
-
-    private LocalDateTime getDay() {
-        return ldt;
     }
 }

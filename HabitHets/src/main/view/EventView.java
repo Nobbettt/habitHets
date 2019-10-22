@@ -8,6 +8,8 @@ import main.java.application.ControllerCalendar;
 import main.model.Facade;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventView extends AnchorPane {
     @FXML
@@ -15,8 +17,9 @@ public class EventView extends AnchorPane {
     @FXML
     private Label timeLabel;
     private int id;
-    ControllerCalendar controllerCalendar;
-    Facade facade;
+    private ControllerCalendar controllerCalendar;
+    private Facade facade;
+    private List<ViewListener> listeners = new ArrayList<>();
 
     EventView(int id) {
         this.id = id;
@@ -39,5 +42,15 @@ public class EventView extends AnchorPane {
     public void editEventClicked(){
         controllerCalendar.editEventPressed(id);
 
+    }
+
+    public void addListener(ViewListener l){
+        listeners.add(l);
+
+    }
+
+    private void notifyListener(String msg){
+        for (ViewListener l : listeners)
+            l.actOnUpdate(msg);
     }
 }
