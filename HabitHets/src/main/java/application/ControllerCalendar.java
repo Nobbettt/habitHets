@@ -90,9 +90,6 @@ public class ControllerCalendar implements Initializable, Listener {
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
         instance = this;
-
-        updateTimeline();
-
         todoView = new TodoView();
         monthView = new MonthView();
 
@@ -109,33 +106,80 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // timeLine setup stuff
+        setupTimeline();
+        setupCalender();
+        setupTodo();
+        setupHabit();
+        setUpChoiceBoxes();
+
+        renderWeek();
+        updateTimeline();
+    }
+
+    private void setupTimeline(){
         timeLineCaller = new Timeline(new KeyFrame(Duration.seconds(60), event -> updateTimeline()));
         timeLineCaller.setCycleCount(Timeline.INDEFINITE);
         timeLineCaller.play();
+    }
 
-        setupCalender();
-        setupTodo();
+    /**
+     * Is called upon application start
+     * Attaches the habit view to application window
+     */
+    private void setupHabit() {
+        habitPane = new AnchorPane();
+        mainPane.getChildren().add(habitPane);
+        habitPane.setPrefWidth(200);
+        habitPane.setMinWidth(200);
+        habitPane.setMaxWidth(200);
+
+        toggleHabitBtn.toFront();
+        double centerY = getCenterHeightOfMainGrid();
+        toggleHabitBtn.setTranslateY(centerY);
+
+        fitItem(mainPane, toggleHabitBtn, -1, -1, -1, 200);
+        fitItem(mainPane, habitPane, 70, -1, 0, 0);
         facade.addHabitListener(this);
-        facade.addTodoListener(this);
+
+        habitPane.getChildren().add(habitView);
+        fitItem(habitPane, habitView, 0, 0, 0, 0);
+
+        habitView.updateHabitView(facade.getAllHabitIds());
+
+    }
+
+    /**
+     * Is called upon application start
+     * Attaches the to do view to application window
+     */
+    private void setupTodo() {
+        todoPane = new AnchorPane();
+        mainPane.getChildren().add(todoPane);
+        todoPane.setPrefWidth(200);
+        fitItem(mainPane, todoPane, 70, 0, 0, -1);
 
         todoPane.getChildren().add(todoView);
-        populateTodo();
-        renderDay();
 
+        todoView.updateTodoView();
 
-        renderWeek();
+        facade.addTodoListener(this);
+    }
 
+    /**
+     * Is called upon application start
+     * Attaches the calendar view to application window
+     */
+    private void setupCalender() {
+        calendarPane = new AnchorPane();
+        mainPane.getChildren().add(calendarPane);
+        fitItem(mainPane, calendarPane, 70, 200, 0, 200);
+        addButton.toFront();
         AnchorPane ap = new AnchorPane();
         calendarPane.getChildren().add(ap);
 
-        setupHabit();
-        habitPane.getChildren().add(habitView);
-        fitItem(habitPane, habitView, 0, 0, 0, 0);
-        populateHabit();
         setAsMarkedInNavBar(weekBtn);
-        setUpChoiceBoxes();
     }
+
 
     /**
      * on click this methods moves the represented time unit back in time depending on the current view.
@@ -161,6 +205,9 @@ public class ControllerCalendar implements Initializable, Listener {
         updateHeadLbl();
     }
 
+    /**
+     * This method updates the current view that is shown to the user
+     */
     private void updateCurrentView(){
         List<LocalDateTime> calendarData = new ArrayList<>();
         if(currentView == expandedDayView) {
@@ -323,36 +370,6 @@ public class ControllerCalendar implements Initializable, Listener {
     }
 
     /**
-     * Is called upon application start
-     * Attaches the calendar view to application window
-     */
-    private void setupCalender() {
-        calendarPane = new AnchorPane();
-        mainPane.getChildren().add(calendarPane);
-        fitItem(mainPane, calendarPane, 70, 200, 0, 200);
-        addButton.toFront();
-    }
-
-    /**
-     * Is called upon application start
-     * Attaches the habit view to application window
-     */
-    private void setupHabit() {
-        habitPane = new AnchorPane();
-        mainPane.getChildren().add(habitPane);
-        habitPane.setPrefWidth(200);
-        habitPane.setMinWidth(200);
-        habitPane.setMaxWidth(200);
-
-        toggleHabitBtn.toFront();
-        double centerY = getCenterHeightOfMainGrid();
-        toggleHabitBtn.setTranslateY(centerY);
-
-        fitItem(mainPane, toggleHabitBtn, -1, -1, -1, 200);
-        fitItem(mainPane, habitPane, 70, -1, 0, 0);
-    }
-
-    /**
      * Is used to calculate center y-value of calender view
      * Needed to calculate y-position of the habit toggle button
      */
@@ -360,21 +377,6 @@ public class ControllerCalendar implements Initializable, Listener {
         double centerY = mainPane.getBoundsInLocal().getHeight()/2;
         centerY += navbarGrid.getPrefHeight();
         return centerY;
-    }
-
-    /**
-     * Is called upon application start
-     * Attaches the to do view to application window
-     */
-    private void setupTodo() {
-        todoPane = new AnchorPane();
-        mainPane.getChildren().add(todoPane);
-        todoPane.setPrefWidth(200);
-        fitItem(mainPane, todoPane, 70, 0, 0, -1);
-    }
-
-    private void populateHabit(){
-        habitView.updateHabitView(facade.getAllHabitIds());
     }
 
     /**
@@ -446,19 +448,6 @@ public class ControllerCalendar implements Initializable, Listener {
         if (left != -1) {
             AnchorPane.setLeftAnchor(child, left);
         }
-    }
-
-    private void populateTodo(){ //KAn byta ut denna mot updateTodoview() sen när jag inte vill ha hårdkodat
-        /*
-        todoOrganizer.add();
-        todoOrganizer.add();
-        todoOrganizer.add();
-        todoOrganizer.doneTodoRemove(todoOrganizer.getTodoList().get(0).getId());
-        todoOrganizer.getTodoList().get(1).setTitle("Hej");
-        */
-        todoView.updateTodoView();
-
-
     }
 
     private void updateTodoView(){

@@ -2,8 +2,6 @@ package main.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Month{
@@ -30,31 +28,6 @@ public class Month{
 
     public List<Day> getDays() {
         return days;
-    }
-
-    int getFirstWeek(){
-        Calendar javaCal = new GregorianCalendar();
-        LocalDateTime firstDay = getDays().get(0).getLdt();
-        javaCal.set(firstDay.getYear(), firstDay.getMonthValue(), 1);
-        return javaCal.get(Calendar.WEEK_OF_YEAR);
-    }
-
-    int getLastWeek(){
-        Calendar javaCal = new GregorianCalendar();
-        int nbrDays = getDays().size() -1;
-        LocalDateTime lastDay = getDays().get(nbrDays).getLdt();
-        javaCal.set(lastDay.getYear(), lastDay.getMonthValue(), lastDay.getDayOfMonth());
-        return javaCal.get(Calendar.WEEK_OF_YEAR);
-    }
-
-    Day getFirstDayInWeek(int week){
-        for (Day day : getDays()){
-            if (day.getWeekNr() == week){
-                return day;
-            }
-        }
-        System.out.println("THAT WEEK DOESN'T EXIST");
-        return null;
     }
 
     Day getDayFromLDT(LocalDateTime ldt){
@@ -94,7 +67,7 @@ public class Month{
             case 12:
                 return "December";
             default:
-                return "Bitch month";
+                return "Default month";
         }
     }
 }
