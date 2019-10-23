@@ -30,7 +30,7 @@
             <VBox fx:id="vboxtodo" prefHeight="407.0" prefWidth="196.0" style="-fx-background-color: #999;" />
          </content>
       </ScrollPane>
-      <ScrollPane fx:id="doneTodoScrollpane" hbarPolicy="NEVER" layoutX="8.0" layoutY="520.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #999;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <ScrollPane fx:id="doneTodoScrollpane" hbarPolicy="NEVER" layoutX="8.0" layoutY="520.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #999999;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <content>
             <VBox fx:id="vboxdonetodo" maxWidth="300.0" minWidth="100.0" prefWidth="204.0" style="-fx-background-color: #999;" />
          </content>

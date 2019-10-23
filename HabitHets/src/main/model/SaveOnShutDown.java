@@ -41,7 +41,6 @@ public class SaveOnShutDown {
         List<Habit> habitList = HabitOrganizer.getInstant().getHabitList();
         StringBuilder txt = new StringBuilder();
         for(Habit habit : habitList) {
-            System.out.println(habit.getTitle());
             txt.append(habit.getId()).append("<//>");
             txt.append(habit.getTitle()).append("<//>");
             txt.append(habit.getBestStreak()).append("<//>");

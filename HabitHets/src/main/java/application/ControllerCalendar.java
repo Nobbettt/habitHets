@@ -3,6 +3,7 @@ package main.java.application;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
@@ -360,6 +361,26 @@ public class ControllerCalendar implements Initializable, Listener {
         return centerY;
     }
 
+    @FXML
+    public void mouseTrapCreateEvent(Event event){
+        event.consume();
+    }
+
+    @FXML
+    public void mouseTrapEditEvent(Event event){
+        event.consume();
+    }
+
+    @FXML
+    public void closeCreateEvent() {
+        resetAllField();
+        creationPage.toBack();
+    }
+
+    @FXML
+    public void closeEditEvent() {
+        editPage.toBack();
+    }
     /**
      * Click function for the habit toggle button
      * Collapses and extends the habit view and stretches the calendar view accordingly

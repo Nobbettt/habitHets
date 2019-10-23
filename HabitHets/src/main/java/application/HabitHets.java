@@ -22,7 +22,6 @@ public class HabitHets extends Application {
         launch(args);
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
-                System.out.println("In shutdown hook");
                 SaveOnShutDown.saveAll();
             }
         }, "Shutdown-thread"));
