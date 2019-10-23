@@ -14,7 +14,7 @@ import java.util.Stack;
 
 public class TxtDbCommunicator {
 
-    static String readFile(String file) {
+    public static String readFile(String file) {
         String text = "";
         Scanner scanner;
         try {
@@ -29,7 +29,7 @@ public class TxtDbCommunicator {
         return text;
     }
 
-    static void writeFile(String file, String newTxt) {
+    public static void writeFile(String file, String newTxt) {
         try {
             Files.write( Paths.get("HabitHets/src/main/model/db/"+file), newTxt.getBytes());
         } catch (IOException e) {
@@ -47,7 +47,8 @@ public class TxtDbCommunicator {
         Factory.setTodoIdCount(highestId);
     }
 
-    private static void getDbEvent() {
+    // ALLT SKA VARA PRIVATE NEDANFÖR -->
+    public static void getDbEvent() {
         int highestId = 0;
 
         String eventTxt = TxtDbCommunicator.readFile("event");
@@ -70,7 +71,7 @@ public class TxtDbCommunicator {
         }
     }
 
-    private static void getDbNote() {
+    public static void getDbNote() {
         int highestId = 0;
         String noteTxt = TxtDbCommunicator.readFile("note");
         if(!noteTxt.isEmpty()) {
@@ -89,7 +90,7 @@ public class TxtDbCommunicator {
         }
     }
 
-    private static void getDbHabit() {
+    public static void getDbHabit() {
         int highestId = 0;
         String todoTxt = TxtDbCommunicator.readFile("habit");
         if(!todoTxt.isEmpty()) {
@@ -109,7 +110,7 @@ public class TxtDbCommunicator {
         }
     }
 
-    private static Stack<DoneHabit> formatDoneHabits(String raw) {
+    public static Stack<DoneHabit> formatDoneHabits(String raw) {
         Stack<DoneHabit> doneHabits = new Stack<>();
         String[] doneArr = raw.split("=");
         for (String done : doneArr) {
@@ -119,7 +120,7 @@ public class TxtDbCommunicator {
         return doneHabits;
     }
 
-    private static int getDbTodo(int highestId) {
+    public static int getDbTodo(int highestId) {
         String todoTxt = TxtDbCommunicator.readFile("todo");
         if (!todoTxt.isEmpty()) {
             List<Todo> tmpList = new ArrayList<>();
@@ -137,7 +138,7 @@ public class TxtDbCommunicator {
         return highestId;
     }
 
-    private static int getDbTodoDone(int highestId) {
+    public static int getDbTodoDone(int highestId) {
         String doneTodoTxt = TxtDbCommunicator.readFile("todoDone");
         if(!doneTodoTxt.isEmpty()) {
             List<Todo> tmpList = new ArrayList<>();
