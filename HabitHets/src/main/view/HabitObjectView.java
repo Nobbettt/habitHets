@@ -86,7 +86,7 @@ class HabitObjectView extends AnchorPane {
         if (facade.habitIsCheckedToday(id)){
             color.setStyle("-fx-background-color: " + facade.getHabitColor(id) + "; -fx-border-color: "+ facade.getHabitColor(id));
         }else{
-            color.setStyle("-fx-background-color: #fff; -fx-border-color: "+ facade.getHabitColor(id));
+            color.setStyle("-fx-background-color: #999; -fx-border-color: "+ facade.getHabitColor(id));
         }
     }
 
