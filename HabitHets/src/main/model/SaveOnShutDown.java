@@ -19,8 +19,8 @@ public class SaveOnShutDown {
         List<Todo> todoList = TodoOrganizer.getInstant().getTodoList();
         StringBuilder txt = new StringBuilder();
         for(Todo todo : todoList) {
-            txt.append(todo.getId()).append(",");
-            txt.append(todo.getTitle()).append(";");
+            txt.append(todo.getId()).append("<//>");
+            txt.append(todo.getTitle()).append("<end>");
         }
         TxtDbCommunicator.writeFile("todo", txt.toString());
     }
@@ -30,7 +30,8 @@ public class SaveOnShutDown {
         List<Todo> doneTodoList = TodoOrganizer.getInstant().getDoneTodoList();
         StringBuilder txt = new StringBuilder();
         for(Todo todo : doneTodoList) {
-            txt.append(todo.getId()).append(",").append(todo.getTitle()).append(";");
+            txt.append(todo.getId()).append("<//>");
+            txt.append(todo.getTitle()).append("<end>");
         }
         TxtDbCommunicator.writeFile("todoDone", txt.toString());
     }
@@ -41,12 +42,12 @@ public class SaveOnShutDown {
         StringBuilder txt = new StringBuilder();
         for(Habit habit : habitList) {
             System.out.println(habit.getTitle());
-            txt.append(habit.getId()).append(",");
-            txt.append(habit.getTitle()).append(",");
-            txt.append(habit.getBestStreak()).append(",");
-            txt.append(habit.getColor()).append(",");
-            txt.append(habit.getDateRecord().toString()).append(",");
-            txt.append(formatDoneHabits(habit.getDoneHabits())).append(";");
+            txt.append(habit.getId()).append("<//>");
+            txt.append(habit.getTitle()).append("<//>");
+            txt.append(habit.getBestStreak()).append("<//>");
+            txt.append(habit.getColor()).append("<//>");
+            txt.append(habit.getDateRecord().toString()).append("<//>");
+            txt.append(formatDoneHabits(habit.getDoneHabits())).append("<end>");
         }
         TxtDbCommunicator.writeFile("habit", txt.toString());
     }
@@ -67,9 +68,9 @@ public class SaveOnShutDown {
         StringBuilder txt = new StringBuilder();
         for(Note note : noteList) {
             if(note.getDescription() != null) {
-                txt.append(note.getId()).append(",");
-                txt.append(note.getDescription()).append(",");
-                txt.append(LocalDate.parse(note.getDay().toString())).append(";");
+                txt.append(note.getId()).append("<//>");
+                txt.append(note.getDescription()).append("<//>");
+                txt.append(LocalDate.parse(note.getDay().toString())).append("<end>");
             }
         }
         TxtDbCommunicator.writeFile("note", txt.toString());
@@ -82,15 +83,15 @@ public class SaveOnShutDown {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         for(Event event : eventList) {
             if (event.getDescription() != null) {
-                txt.append(event.getId()).append(",");
+                txt.append(event.getId()).append("<//>");
                 String startTime = formatter.format(event.getStartTime());
-                txt.append(startTime).append(",");
+                txt.append(startTime).append("<//>");
                 String endTime = formatter.format(event.getEndTime());
-                txt.append(endTime).append(",");
-                txt.append(event.getTitle()).append(",");
-                txt.append(event.getLocation()).append(",");
-                txt.append(event.getDescription()).append(",");
-                txt.append(event.getColor()).append(";");
+                txt.append(endTime).append("<//>");
+                txt.append(event.getTitle()).append("<//>");
+                txt.append(event.getLocation()).append("<//>");
+                txt.append(event.getDescription()).append("<//>");
+                txt.append(event.getColor()).append("<end>");
             }
         }
         TxtDbCommunicator.writeFile("event", txt.toString());

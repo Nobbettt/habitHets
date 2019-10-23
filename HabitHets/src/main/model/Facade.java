@@ -224,6 +224,7 @@ public class Facade {
     public boolean habitIsCheckedToday(int id){
         return habitOrganizer.getHabitFromId(id).isCheckedToday();
     }
+
     public String getHabitColor(int id){
         return habitOrganizer.getHabitFromId(id).getColor();
     }

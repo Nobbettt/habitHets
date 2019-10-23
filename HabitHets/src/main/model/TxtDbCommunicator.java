@@ -53,9 +53,9 @@ public class TxtDbCommunicator {
         String eventTxt = TxtDbCommunicator.readFile("event");
         if(!eventTxt.isEmpty()) {
             List<Event> tmpList = new ArrayList();
-            String[] events = eventTxt.split(";");
+            String[] events = eventTxt.split("<end>");
             for (String eventString : events) {
-                String[] attr = eventString.split(",");
+                String[] attr = eventString.split("<//>");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
                 LocalDateTime startTime = LocalDateTime.parse(attr[1], formatter);
                 LocalDateTime endTime = LocalDateTime.parse(attr[2], formatter);
@@ -75,9 +75,9 @@ public class TxtDbCommunicator {
         String noteTxt = TxtDbCommunicator.readFile("note");
         if(!noteTxt.isEmpty()) {
             List<Note> tmpList = new ArrayList<>();
-            String[] notes = noteTxt.split(";");
+            String[] notes = noteTxt.split("<end>");
             for (String noteString : notes) {
-                String[] attr = noteString.split(",");
+                String[] attr = noteString.split("<//>");
                 Note note = new Note(Integer.parseInt(attr[0]), attr[1], LocalDate.parse(attr[2]));
                 tmpList.add(note);
                 if(highestId < note.getId()) {
@@ -94,9 +94,9 @@ public class TxtDbCommunicator {
         String todoTxt = TxtDbCommunicator.readFile("habit");
         if(!todoTxt.isEmpty()) {
             List<Habit> tmpList = new ArrayList<>();
-            String[] objects = todoTxt.split(";");
+            String[] objects = todoTxt.split("<end>");
             for (String obj : objects) {
-                String[] attr = obj.split(",");
+                String[] attr = obj.split("<//>");
                 Stack<DoneHabit> doneHabits = formatDoneHabits(attr[5]);
                 Habit h = new Habit(Integer.parseInt(attr[0]), attr[1], doneHabits, Integer.parseInt(attr[2]), attr[3], LocalDate.parse(attr[4]));
                 tmpList.add(h);
@@ -123,9 +123,9 @@ public class TxtDbCommunicator {
         String todoTxt = TxtDbCommunicator.readFile("todo");
         if (!todoTxt.isEmpty()) {
             List<Todo> tmpList = new ArrayList<>();
-            String[] todos = todoTxt.split(";");
+            String[] todos = todoTxt.split("<end>");
             for (String todo : todos) {
-                String[] todoAttr = todo.split(",");
+                String[] todoAttr = todo.split("<//>");
                 Todo t = new Todo(todoAttr[1], Integer.parseInt(todoAttr[0]));
                 tmpList.add(t);
                 if(highestId < t.getId()) {
@@ -141,10 +141,10 @@ public class TxtDbCommunicator {
         String doneTodoTxt = TxtDbCommunicator.readFile("todoDone");
         if(!doneTodoTxt.isEmpty()) {
             List<Todo> tmpList = new ArrayList<>();
-            String[] doneTodos = doneTodoTxt.split(";");
+            String[] doneTodos = doneTodoTxt.split("<end>");
             for (String doneTodo : doneTodos) {
-                String[] doneTodoAttr = doneTodo.split(",");
-                Todo t = new Todo(doneTodos[1], Integer.parseInt(doneTodos[0]));
+                String[] doneTodoAttr = doneTodo.split("<//>");
+                Todo t = new Todo(doneTodoAttr[1], Integer.parseInt(doneTodoAttr[0]));
                 tmpList.add(t);
                 if(highestId < t.getId()) {
                     highestId = t.getId();
