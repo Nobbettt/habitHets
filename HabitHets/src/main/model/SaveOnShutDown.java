@@ -67,7 +67,7 @@ public class SaveOnShutDown {
         List<Note> noteList = NoteOrganizer.getInstance().getNotes();
         StringBuilder txt = new StringBuilder();
         for(Note note : noteList) {
-            if(note.getDescription() != null) {
+            if(note.getDescription() != null && !note.getDescription().isEmpty()) {
                 txt.append(note.getId()).append("<//>");
                 txt.append(note.getDescription()).append("<//>");
                 txt.append(LocalDate.parse(note.getDay().toString())).append("<end>");

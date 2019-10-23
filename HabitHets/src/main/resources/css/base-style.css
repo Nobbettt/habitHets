@@ -54,4 +54,7 @@
     -fx-opacity: .8;
     -fx-text-fill: #ff0000;
 }
+.overlay {
+    -fx-background-color: #666666CC;
+}
 
