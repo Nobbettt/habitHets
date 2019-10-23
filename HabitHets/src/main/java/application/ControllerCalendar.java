@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable, Listener {
+    public static ControllerCalendar instance;
     @FXML private AnchorPane mainPane;
     @FXML private Label currentValueLbl;
     @FXML private AnchorPane creationPage;
@@ -61,7 +62,6 @@ public class ControllerCalendar implements Initializable, Listener {
     @FXML private ComboBox<String> editToMinuteTime;
     @FXML private Button deleteButton;
     @FXML private Label idLabel;
-
     private AnchorPane calendarPane;
     private AnchorPane habitPane;
     private YearView yearView;
@@ -76,8 +76,6 @@ public class ControllerCalendar implements Initializable, Listener {
     private LocalDateTime masterDateTime;
     private Facade facade;
     private Calender calender;
-    public static ControllerCalendar instance;
-
     private TodoView todoView;
 
     public ControllerCalendar() {
@@ -187,21 +185,16 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     private void prevClick() {
-        List<LocalDateTime> calendarData = new ArrayList<>();
         if(currentView == expandedDayView) {
             masterDateTime = masterDateTime.minusDays(1);
-            calendarData.add(copyMasterdate());
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.minusWeeks(1);
-            calendarData = calender.getLdtWeekFromLdt(masterDateTime);
         } else if(currentView == monthView) {
             masterDateTime = masterDateTime.minusMonths(1);
-            calendarData = calender.getLdtMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.minusYears(1);
-            calendarData = calender.getLdtYearFromDate(masterDateTime);
         }
-        currentView.updateView(calendarData);
+        currentView.updateView(masterDateTime);
         updateHeadLbl();
     }
 
@@ -209,17 +202,7 @@ public class ControllerCalendar implements Initializable, Listener {
      * This method updates the current view that is shown to the user
      */
     private void updateCurrentView(){
-        List<LocalDateTime> calendarData = new ArrayList<>();
-        if(currentView == expandedDayView) {
-            calendarData.add(copyMasterdate());
-        } else if(currentView == weekView) {
-            calendarData = calender.getLdtWeekFromLdt(masterDateTime);
-        } else if(currentView == monthView) {
-            calendarData = calender.getLdtMonthFromDate(masterDateTime);
-        } else if(currentView == yearView) {
-            calendarData = calender.getLdtYearFromDate(masterDateTime);
-        }
-        currentView.updateView(calendarData);
+        currentView.updateView(masterDateTime);
     }
 
     /**
@@ -228,21 +211,16 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     private void nextClick() {
-        List<LocalDateTime> calendarData = new ArrayList<>();
         if(currentView == expandedDayView) {
             masterDateTime = masterDateTime.plusDays(1);
-            calendarData.add(copyMasterdate());
         } else if(currentView == weekView) {
             masterDateTime = masterDateTime.plusWeeks(1);
-            calendarData = calender.getLdtWeekFromLdt(masterDateTime);
         } else if(currentView == monthView) {
             masterDateTime = masterDateTime.plusMonths(1);
-            calendarData = calender.getLdtMonthFromDate(masterDateTime);
         } else if(currentView == yearView) {
             masterDateTime = masterDateTime.plusYears(1);
-            calendarData = calender.getLdtYearFromDate(masterDateTime);
         }
-        currentView.updateView(calendarData);
+        currentView.updateView(masterDateTime);
         updateHeadLbl();
     }
 
@@ -253,16 +231,13 @@ public class ControllerCalendar implements Initializable, Listener {
     private void updateHeadLbl() {
         String headLbl = "";
         if(currentView == expandedDayView) {
-            headLbl = calender.getDayFromDate(masterDateTime).get(0).getWeekDayString();
+            headLbl = calender.getWeekdayString(masterDateTime);
         } else if(currentView == weekView) {
-            Integer weekNb = calender.getWeekFromLdt(masterDateTime);
-            headLbl = "Week " + weekNb.toString();
+            headLbl = "Week " + calender.getWeekFromLdt(masterDateTime);
         } else if(currentView == monthView) {
-            Integer yearNb = masterDateTime.getYear();
-            headLbl = calender.getMonthString(masterDateTime) + " " + yearNb;
+            headLbl = calender.getMonthString(masterDateTime) + " " + masterDateTime.getYear();
         } else if(currentView == yearView) {
-            Integer yearNb = masterDateTime.getYear();
-            headLbl = yearNb.toString();
+            headLbl = String.valueOf(masterDateTime.getYear());
         }
 
         currentValueLbl.setText(headLbl);
@@ -289,7 +264,7 @@ public class ControllerCalendar implements Initializable, Listener {
         List<LocalDateTime> list = new ArrayList<>();
         list.add(copyMasterdate());
         currentView = expandedDayView;
-        expandedDayView.updateView(list);
+        expandedDayView.updateView(masterDateTime);
         renderCalendar(expandedDayView);
     }
 
@@ -310,7 +285,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderWeek() {
         currentView = weekView;
-        weekView.updateView(calender.getLdtWeekFromLdt(copyMasterdate()));
+        weekView.updateView(masterDateTime);
         renderCalendar(weekView);
     }
 
@@ -331,7 +306,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderMonth(){
         currentView = monthView;
-        monthView.updateView(calender.getLdtMonthFromDate(copyMasterdate()));
+        monthView.updateView(masterDateTime);
         renderCalendar(monthView);
     }
 
@@ -352,7 +327,7 @@ public class ControllerCalendar implements Initializable, Listener {
      */
     private void renderYear() {
         currentView = yearView;
-        yearView.updateView(calender.getLdtYearFromDate(copyMasterdate()));
+        yearView.updateView(masterDateTime);
         renderCalendar(yearView);
     }
 

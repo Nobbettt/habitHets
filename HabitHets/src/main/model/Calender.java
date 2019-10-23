@@ -120,10 +120,8 @@ public class Calender {
 
     }
 
-    public List<Day> getDayFromDate(LocalDateTime localDateTime) {
-        List<Day> singleDayList = new ArrayList();
-        singleDayList.add(getDayFromLDT(localDateTime));
-        return singleDayList;
+    public String getWeekdayString(LocalDateTime localDateTime){
+        return getDayFromLDT(localDateTime).getWeekDayString();
     }
 
 }

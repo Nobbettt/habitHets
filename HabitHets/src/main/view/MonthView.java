@@ -20,6 +20,7 @@ public class MonthView extends StackPane implements ViewAble {
     @FXML private ScrollPane scrollPane;
     private List<Label> monthdays;
     private List<Label> weeknb;
+    private Calender calender;
 
     public MonthView(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/month.fxml"));
@@ -31,6 +32,7 @@ public class MonthView extends StackPane implements ViewAble {
                   throw new RuntimeException(exception);
                }
               setupMonth();
+              this.calender = Calender.getInstant();
     }
 
      private void setupMonth() {
@@ -57,8 +59,8 @@ public class MonthView extends StackPane implements ViewAble {
      }
 
     @Override
-    public void updateView(List<LocalDateTime> month) {
-        updateMonthView(month);
+    public void updateView(LocalDateTime currentDay) {
+        updateMonthView(calender.getLdtMonthFromDate(currentDay));
 
     }
 
@@ -95,7 +97,7 @@ public class MonthView extends StackPane implements ViewAble {
 
         }
 
-        List<LocalDateTime> nextMonth = Calender.getInstant().getLdtMonthFromDate(firstday.plusMonths(1));
+        List<LocalDateTime> nextMonth = calender.getLdtMonthFromDate(firstday.plusMonths(1));
         int firstDayNextMonth = 0;
         for(int l = ldtList.size()+k-1; l < monthdays.size(); l++){
             LocalDateTime tmpDay = nextMonth.get(firstDayNextMonth);

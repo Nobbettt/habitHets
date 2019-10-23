@@ -28,9 +28,10 @@ public class WeekView extends StackPane implements ViewAble {
     private List<Label> weekDays;
     private List<LocalDateTime> week;
     private List<DayEventListView> weekDayEvents;
+    private Calender calender;
 
     public WeekView() {
-        this.week = Calender.getInstant().getLdtWeekFromLdt(LocalDateTime.now());
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/week.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -39,16 +40,19 @@ public class WeekView extends StackPane implements ViewAble {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+        this.calender = Calender.getInstant();
+        this.week = calender.getLdtWeekFromLdt(LocalDateTime.now());
         setUpWeek();
     }
 
     /**
      * Updated the week view and its content given a week list containing 7 day objects
-     * @param week
+     * @param currentDay
      */
     @Override
-    public void updateView(List<LocalDateTime> week) {
-        this.week = week;
+    public void updateView(LocalDateTime currentDay) {
+        this.week = calender.getLdtWeekFromLdt(currentDay);
         for(int i = 0; i < 7; i++) {
             LocalDateTime tmpDay = week.get(i);
             String weekday = "" + week.get(i).getDayOfMonth() + "/" + week.get(i).getMonthValue(); //week.get(i)....getWeekdayfunction()

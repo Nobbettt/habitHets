@@ -13,7 +13,6 @@ import main.model.Facade;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ExpandedDayView extends StackPane implements ViewAble {
 
@@ -48,10 +47,10 @@ public class ExpandedDayView extends StackPane implements ViewAble {
     }
 
     @Override
-    public void updateView(List<LocalDateTime> days) {
-        String weekday = "" + days.get(0).getDayOfMonth() + "/" + days.get(0).getMonthValue();//week.get(i)....getWeekdayfunction()
+    public void updateView(LocalDateTime currentDay) {
+        String weekday = "" + currentDay.getDayOfMonth() + "/" + currentDay.getMonthValue();//week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
-        day = days.get(0);
+        day = currentDay;
         dayEvents.updateDay(day, dayGrid.getCellBounds(1, 0).getWidth());
         if (facade.noteOnDay(day)) {
             noteField.setText(facade.getNoteTextFromLdt(day));
