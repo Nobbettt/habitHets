@@ -7,7 +7,7 @@ public class Note {
     private String description;
     private LocalDate day;
 
-    public Note(int id, String Description, LocalDate day) {
+    Note(int id, String description, LocalDate day) {
         this.description = description;
         this.day = day;
         this.id = id;
@@ -23,10 +23,6 @@ public class Note {
 
     public int getId(){
         return id;
-    }
-
-    public String setDescription(){
-        return description;
     }
 
     public LocalDate getDay() {

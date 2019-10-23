@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Year implements CalendarAble {
+public class Year{
     private List<Month> months;
     private Integer year;
     public Year(int year) {
@@ -35,16 +35,6 @@ public class Year implements CalendarAble {
         return null;
     }
 
-    public Day getDayWithWeek(int week){
-        for (Month month : getMonths()){
-            if (month.getFirstWeek() < week && month.getLastWeek() >= week){
-                return month.getFirstDayInWeek(week);
-            }
-        }
-        System.out.println("NO SUCH WEEK");
-        return null;
-    }
-
     Month getMonthFromLDT(LocalDateTime ldt){
         for (Month month : getMonths()){
             if (month.getDays().get(0).getLdt().getMonthValue() == ldt.getMonthValue()){
@@ -59,8 +49,4 @@ public class Year implements CalendarAble {
         return year.toString();
     }
 
-    @Override
-    public LocalDateTime getLocalDateTime() {
-        return months.get(0).days.get(0).getLdt();
-    }
 }

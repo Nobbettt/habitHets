@@ -19,8 +19,7 @@ class MonthInYear extends AnchorPane  {
 
     @FXML private GridPane gridPane;
     @FXML private Label monthLabel;
-    List<Label> weekdays = new ArrayList<>();
-    List<Label> days = new ArrayList<>();
+    private List<Label> days = new ArrayList<>();
 
     MonthInYear() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/monthInYear.fxml"));

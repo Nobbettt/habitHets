@@ -56,13 +56,22 @@ public class NoteOrganizer implements IHandler {
      * @param d, is the day on which we would like to inspect if there is a Note affiliated with that date.
      * @return
      */
-    static Note getNoteDate(LocalDate d){
-        for(Note n : notesList){
-            if(n.getDay().equals(d)){
-                return n;
-            }
+    public Note getNoteDate(LocalDate d){
+            for(Note n : notesList){
+                if(n.getDay().getYear() == d.getYear() && n.getDay().getDayOfYear() == d.getDayOfYear()){
+                    return n;
+                }
         }
         return null;
+    }
+
+    public boolean isNoteOnDay(LocalDateTime ldt){
+        for (Note note : notesList){
+            if (note.getDay().getYear() == ldt.getYear() && note.getDay().getDayOfYear() == ldt.getDayOfYear()){
+                return true;
+            }
+        }
+        return false;
     }
 
     static void setNotesList(List<Note> notesList) {

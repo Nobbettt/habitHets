@@ -28,7 +28,7 @@ public class TodoView extends AnchorPane {
     private TextField todoTitle;
     @FXML private ScrollPane todoScrollpane;
     @FXML private ScrollPane doneTodoScrollpane;
-    Facade facade;
+    private Facade facade;
 
 
 
@@ -110,7 +110,7 @@ public class TodoView extends AnchorPane {
             if (c.isSelected()) {
                 //todoOrganizer.doneTodoRemove(td.todo.getId());
                 vboxtodo.getChildren().remove(td);
-                TodoDoneElementView tdd = new TodoDoneElementView(td.id);
+                TodoDoneElementView tdd = new TodoDoneElementView(td.getTodoID());
                 vboxdonetodo.getChildren().add(tdd);
 
             }

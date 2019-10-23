@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import main.model.Facade;
+import main.model.Calender;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -43,11 +43,10 @@ public class YearView extends AnchorPane implements ViewAble {
     }
 
     @Override
-    public void updateView(List<LocalDateTime> months) {
-        Facade f = new Facade();
+    public void updateView(LocalDateTime currentDay) {
         for(int i=0; i< monthInYears.size(); i++){
-            LocalDateTime l = months.get(i);
-            monthInYears.get(i).updateView(f.getLdtMonthFromDate(l), f.getMonthString(months.get(i)));
+            LocalDateTime l = Calender.getInstant().getLdtYearFromDate(currentDay).get(i);
+            monthInYears.get(i).updateView(Calender.getInstant().getLdtMonthFromDate(l), Calender.getInstant().getMonthString(l));
         }
         /*
         for(MonthView month : months) {

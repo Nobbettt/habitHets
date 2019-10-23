@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TodoDoneElementView extends AnchorPane  {
 
-    Facade facade;
+    private Facade facade;
     private int id;
 
 

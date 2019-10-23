@@ -2,17 +2,16 @@ package main.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import main.model.Facade;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ExpandedDayView extends StackPane implements ViewAble {
 
@@ -28,6 +27,7 @@ public class ExpandedDayView extends StackPane implements ViewAble {
     private Button saveNoteButton;
     private DayEventListView dayEvents;
     private LocalDateTime day;
+    private Facade facade;
 
 
     public ExpandedDayView() {
@@ -39,21 +39,22 @@ public class ExpandedDayView extends StackPane implements ViewAble {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        this.facade = new Facade();
         setupDayView();
 
 
     }
 
     @Override
-    public void updateView(List<LocalDateTime> days) {
-        Facade f = new Facade();
-        String weekday = "" + days.get(0).getDayOfMonth() + "/" + days.get(0).getMonthValue();//week.get(i)....getWeekdayfunction()
+    public void updateView(LocalDateTime currentDay) {
+        String weekday = "" + currentDay.getDayOfMonth() + "/" + currentDay.getMonthValue();//week.get(i)....getWeekdayfunction()
         weekDayLbl.setText(weekday);
-        day = days.get(0);
+        day = currentDay;
         dayEvents.updateDay(day, dayGrid.getCellBounds(1, 0).getWidth());
-        noteField.clear();
-        if (f.noteOnDay(day)) {
-            noteField.setText(f.getNoteTextFromLdt(day));
+        if (facade.noteOnDay(day)) {
+            noteField.setText(facade.getNoteTextFromLdt(day));
+        } else {
+            noteField.clear();
         }
     }
 
@@ -78,8 +79,7 @@ public class ExpandedDayView extends StackPane implements ViewAble {
 
     @FXML
     private void notehandle() {
-        Facade f = new Facade();
-        f.updateNote(noteField.getText(), day);
+        facade.updateNote(noteField.getText(), day);
     }
 
 }

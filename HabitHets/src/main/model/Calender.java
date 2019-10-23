@@ -1,8 +1,12 @@
 package main.model;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 public class Calender {
     private static Calender instant;
@@ -47,7 +51,7 @@ public class Calender {
         return null;
     }
 
-    List<Day> getWeekFromLDT(LocalDateTime ldt){
+    public List<Day> getWeekFromLDT(LocalDateTime ldt){
         List<Day> weekList = new ArrayList<>();
 
         /*The two lines below make it so that the list returns a week from MON-SUN, if we want SUN - SAT remove
@@ -76,9 +80,48 @@ public class Calender {
         return months;
     }
 
-    Month getMonth(LocalDateTime localDateTime){
+    public Month getMonth(LocalDateTime localDateTime){
         List<Month> months = getYearFromLDT(localDateTime);
         return months.get(localDateTime.getMonthValue()-1);
+    }
+
+    public int getWeekFromLdt(LocalDateTime ldt){
+        LocalDate date = ldt.toLocalDate();
+        TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+        return date.get(woy);
+    }
+
+    public List<LocalDateTime> getLdtWeekFromLdt(LocalDateTime ldt){
+        List<LocalDateTime> list = new ArrayList<>();
+        for (Day day : getWeekFromLDT(ldt)){
+            list.add(day.getLdt());
+        }
+        return list;
+    }
+
+    public List<LocalDateTime> getLdtMonthFromDate(LocalDateTime localDateTime) {
+        List<LocalDateTime> list = new ArrayList<>();
+        for (Day day : getMonth(localDateTime).getDays()){
+            list.add(day.getLdt());
+        }
+        return list;
+    }
+
+    public List<LocalDateTime> getLdtYearFromDate(LocalDateTime localDateTime){
+        List<LocalDateTime> list = new ArrayList<>();
+        for (Month month : getYearFromLDT(localDateTime)){
+            list.add(month.getDays().get(0).getLdt());
+        }
+        return list;
+    }
+
+    public String getMonthString(LocalDateTime ltd){
+        return getMonth(ltd).getString();
+
+    }
+
+    public String getWeekdayString(LocalDateTime localDateTime){
+        return getDayFromLDT(localDateTime).getWeekDayString();
     }
 
 }

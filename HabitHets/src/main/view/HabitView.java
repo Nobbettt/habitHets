@@ -30,7 +30,7 @@ public class HabitView extends AnchorPane implements ViewListener {
     @FXML private Label idLbl;
     private List<HabitObjectView> habitsList;
     private HabitObjectView editing;
-    Facade facade;
+    private Facade facade;
 
     private boolean isExpanded;
 
@@ -72,33 +72,38 @@ public class HabitView extends AnchorPane implements ViewListener {
 
 
     public void edit(String msg){
-        for (HabitObjectView habitObjectView : habitsList){
-            if (habitObjectView.getHabitID() == Integer.valueOf(msg)){
-                editing = habitObjectView;
+        if(facade.habitExist(msg)) {
+            for (HabitObjectView habitObjectView : habitsList) {
+                if (habitObjectView.getHabitID() == Integer.valueOf(msg)) {
+                    editing = habitObjectView;
+                }
             }
+            newHabit.setVisible(true);
+            newHabit.toFront();
+            setVisibilityAdd(false);
+            create.toBack();
+            setVisibilityEdit(true);
+            save.toFront();
+            title.setText(facade.getHabitTitle(Integer.valueOf(msg)));
+            idLbl.setText(msg);
+            //java.awt.Color tmpC = java.awt.Color.decode(facade.getHabitColor(editing.getHabitID()));
+            Color c = Color.valueOf(facade.getHabitColor(Integer.valueOf(msg)));
+            colorPicker.setValue(c);
+            habitModifyTypeLabel.setText("Edit Habit");
         }
-        newHabit.setVisible(true);
-        newHabit.toFront();
-        setVisibilityAdd(false);
-        create.toBack();
-        setVisibilityEdit(true);
-        save.toFront();
-        title.setText(facade.getHabitTitle(Integer.valueOf(msg)));
-        idLbl.setText(msg);
-        //java.awt.Color tmpC = java.awt.Color.decode(facade.getHabitColor(editing.getHabitID()));
-        Color c = Color.valueOf(facade.getHabitColor(Integer.valueOf(msg)));
-        colorPicker.setValue(c);
-        habitModifyTypeLabel.setText("Edit Habit");
 
     }
 
     @FXML
     private void addNewHabit(){
+        title.clear();
+        colorPicker.setValue(Color.FIREBRICK);
+        habitModifyTypeLabel.setText("Add Habit");
+        setVisibilityEdit(false);
+        setVisibilityAdd(true);
         newHabit.setVisible(true);
         newHabit.toFront();
-        setVisibilityEdit(false);
         save.toBack();
-        setVisibilityAdd(true);
         create.toFront();
     }
 
