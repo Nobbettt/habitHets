@@ -24,8 +24,6 @@ public class HabitView extends AnchorPane implements ViewListener {
     @FXML private Button save;
     @FXML private Button addHabit;
     @FXML private Label generalTitle;
-    @FXML private AnchorPane titleBackground;
-    @FXML private Label collapsedTitle;
     @FXML private Label habitModifyTypeLabel;
     @FXML private Label idLbl;
     private List<HabitObjectView> habitsList;
@@ -141,9 +139,8 @@ public class HabitView extends AnchorPane implements ViewListener {
             h.hideHabits();
         }
         addHabit.setVisible(false);
-        generalTitle.setVisible(false);
-        titleBackground.setVisible(true);
-        collapsedTitle.setVisible(true);
+        generalTitle.setText("H");
+        generalTitle.setStyle("-fx-padding: 0 0 0 0");
         isExpanded = false;
     }
 
@@ -152,9 +149,8 @@ public class HabitView extends AnchorPane implements ViewListener {
             h.showHabits();
         }
         addHabit.setVisible(true);
-        generalTitle.setVisible(true);
-        titleBackground.setVisible(false);
-        collapsedTitle.setVisible(false);
+        generalTitle.setText("Habit");
+        generalTitle.setStyle("-fx-padding: 0 30 0 0");
         isExpanded = true;
     }
 

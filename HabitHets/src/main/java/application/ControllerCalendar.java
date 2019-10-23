@@ -5,16 +5,17 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Screen;
 import javafx.util.Duration;
 import main.model.Calender;
 import main.model.Facade;
 import main.model.Listener;
+import main.model.TxtDbCommunicator;
 import main.view.*;
 
 import java.net.URL;
@@ -62,6 +63,9 @@ public class ControllerCalendar implements Initializable, Listener {
     @FXML private ComboBox<String> editToMinuteTime;
     @FXML private Button deleteButton;
     @FXML private Label idLabel;
+    @FXML private AnchorPane eventCreatePane;
+    @FXML private AnchorPane eventEditPane;
+
     private AnchorPane calendarPane;
     private AnchorPane habitPane;
     private YearView yearView;
@@ -93,7 +97,6 @@ public class ControllerCalendar implements Initializable, Listener {
         instance = this;
         todoView = new TodoView();
         monthView = new MonthView();
-
     }
 
     /**
@@ -444,9 +447,9 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     private void addButtonClick(){
-        creationPage.toFront();
         dateChooser.setValue(LocalDate.now());
         titleField.setText("New Event");
+        displayPopUps(creationPage, eventCreatePane);
     }
 
     @FXML
@@ -471,6 +474,17 @@ public class ControllerCalendar implements Initializable, Listener {
             creationPage.toBack();
         }
         updateCurrentView();
+    }
+
+    private void displayPopUps(AnchorPane bkgPane, AnchorPane pane) {
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        double centerX = screenBounds.getWidth()/2;
+        centerX -= (pane.getPrefWidth()/2);
+        double centerY = screenBounds.getHeight()/2;
+        centerY -= (pane.getPrefHeight()/2);
+        pane.setLayoutX(centerX);
+        pane.setLayoutY(centerY);
+        bkgPane.toFront();
     }
 
     private void checkCreationInput(){
@@ -536,8 +550,8 @@ public class ControllerCalendar implements Initializable, Listener {
 
     @FXML
     public void editEventPressed(int id){
-        editPage.toFront();
         populateExtendedEvent(id);
+        displayPopUps(editPage, eventEditPane);
     }
 
     @FXML
