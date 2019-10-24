@@ -37,8 +37,9 @@ public class Calender {
      */
 
     private List<Year> getYears(int yearsBack, int yearsForward) {
+    public List<Year> getYears(int yearsBack, int yearsForward) {
         List<Year> tmpYears = new ArrayList<>();
-        for (int i = -yearsBack; i <yearsForward; i++){
+        for (int i = -yearsBack; i <= yearsForward; i++){
             Year y = new Year(LocalDateTime.now().getYear()+i);
             tmpYears.add(y);
         }
@@ -71,11 +72,6 @@ public class Calender {
 
     public List<Day> getWeekFromLDT(LocalDateTime ldt){
         List<Day> weekList = new ArrayList<>();
-
-        /**
-         * The two lines below make it so that the list returns a week from MON-SUN, if we want SUN - SAT remove
-        the -1 from the line exactly below. Remove these two lines completely if you just want 7 consecutive Day objects.
-         */
 
         int dayInWeek = ldt.getDayOfWeek().getValue()-1;
         LocalDateTime firstDayInWeek = ldt.minusDays(dayInWeek);

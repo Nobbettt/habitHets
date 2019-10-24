@@ -77,7 +77,7 @@ public class Event {
         this.title = title;
     }
 
-    String timeString() {
+    public String timeString() {
         String hour;
         String minute;
         if (startTime.getHour() < 10) {

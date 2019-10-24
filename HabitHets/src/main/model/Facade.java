@@ -21,7 +21,7 @@ public class Facade {
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
             if (interval.overlaps(tmpInterval)) {
                 i++;
-                if (!overlaps.contains(tmpEvent) && !tmpEvent.equals(getEventFromID(id))) {
+                if (!overlaps.contains(tmpEvent) && !tmpEvent.equals(eventOrganizer.getEventOfId(id))) {
                     overlaps.add(tmpEvent);
                 }
             }
@@ -30,7 +30,7 @@ public class Facade {
             Interval interval1 = new Interval(event1.getStartTime(), true, event1.getEndTime(), true);
             for (Event event2 : events) {
                 Interval interval2 = new Interval(event2.getStartTime(), true, event2.getEndTime(), true);
-                if (interval1.overlaps(interval2) && event2 != event1 && event2 != getEventFromID(id)) {
+                if (interval1.overlaps(interval2) && event2 != event1 && event2 != eventOrganizer.getEventOfId(id)) {
                     i++;
                     if (!overlaps2.contains(event2) && !event2.equals(event1)) {
                         overlaps2.add(event2);
@@ -38,7 +38,7 @@ public class Facade {
                 }
             }
         }
-        events.add(getEventFromID(id));
+        events.add(eventOrganizer.getEventOfId(id));
         return i;
     }
 
@@ -80,10 +80,6 @@ public class Facade {
 
     public String getEventStarttimeString(int id){
         return eventOrganizer.getEventOfId(id).timeString();
-    }
-
-    private Event getEventFromID(int id){
-        return eventOrganizer.getEventOfId(id);
     }
 
     public String getEventLocation(int id){
@@ -154,8 +150,8 @@ public class Facade {
         habitOrganizer.remove(id);
     }
 
-    public boolean habitExist(String msg){
-        if (habitOrganizer.getHabitById(msg) != null){
+    public boolean habitExist(String id){
+        if (habitOrganizer.getHabitById(id) != null){
             return true;
         } else{
             return false;
