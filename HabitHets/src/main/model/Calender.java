@@ -113,7 +113,6 @@ public class Calender {
     }
 
     /**
-     *
      * @param localDateTime a date
      * @return which month a given date is in
      */
@@ -138,7 +137,6 @@ public class Calender {
      * @param ldt a date
      * @return a list of dates in a week.
      */
-
     public List<LocalDateTime> getLdtWeekFromLdt(LocalDateTime ldt){
         List<LocalDateTime> list = new ArrayList<>();
         for (Day day : getWeekFromLDT(ldt)){
@@ -165,7 +163,6 @@ public class Calender {
      * @param localDateTime a date
      * @return A list of a year containing all the months.
      */
-
     public List<LocalDateTime> getLdtYearFromDate(LocalDateTime localDateTime){
         List<LocalDateTime> list = new ArrayList<>();
         for (Month month : getYearFromLDT(localDateTime)){
@@ -189,7 +186,6 @@ public class Calender {
      * @param localDateTime a date
      * @return a week value as string
      */
-
     public String getWeekdayString(LocalDateTime localDateTime){
         return getDayFromLDT(localDateTime).getWeekDayString();
     }
