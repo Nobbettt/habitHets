@@ -14,6 +14,12 @@ import java.util.Stack;
 
 public class TxtDbCommunicator {
 
+    /**
+     * Function reads txt file given a filename from the model/db folder
+     * Returns the whole content of the file in form of a sting
+     * @param file
+     * @return
+     */
     public static String readFile(String file) {
         String text = "";
         Scanner scanner;
@@ -29,6 +35,12 @@ public class TxtDbCommunicator {
         return text;
     }
 
+    /**
+     * Function creates a new txt file (overwrites a existing file if name already taken)
+     * Sets the new files content to newTxt string parameter
+     * @param file
+     * @param newTxt
+     */
     public static void writeFile(String file, String newTxt) {
         try {
             Files.write( Paths.get("HabitHets/src/main/model/db/"+file), newTxt.getBytes());
@@ -37,6 +49,10 @@ public class TxtDbCommunicator {
         }
     }
 
+    /**
+     * This function is the access point to this static class.
+     * On call this function initiates all the getDb(...) functions
+     */
     public static void importDb() {
         getDbEvent();
         getDbNote();
@@ -48,9 +64,16 @@ public class TxtDbCommunicator {
     }
 
     // ALLT SKA VARA PRIVATE NEDANFÖR -->
+
+    /**
+     * This function reads the event.txt file -->
+     * Divides the string up to separate objects -->
+     * Pareses its string attribute to the correct format -->
+     * Creates local Events and adds them to the EventOrganizers List of Events.
+     * Keeps track of the highest ID attribute and updates the Factory classes local eventIdCount variable.
+     */
     public static void getDbEvent() {
         int highestId = 0;
-
         String eventTxt = TxtDbCommunicator.readFile("event");
         if(!eventTxt.isEmpty()) {
             List<Event> tmpList = new ArrayList();
@@ -71,6 +94,13 @@ public class TxtDbCommunicator {
         }
     }
 
+    /**
+     * This function reads the note.txt file -->
+     * Divides the string up to separate objects -->
+     * Pareses its string attribute to the correct format -->
+     * Creates local Notes and adds them to the NoteOrganizers List of Notes.
+     * Keeps track of the highest ID attribute and updates the Factory classes local noteIdCount variable.
+     */
     public static void getDbNote() {
         int highestId = 0;
         String noteTxt = TxtDbCommunicator.readFile("note");
@@ -90,6 +120,13 @@ public class TxtDbCommunicator {
         }
     }
 
+    /**
+     * This function reads the habit.txt file -->
+     * Divides the string up to separate objects -->
+     * Pareses its string attribute to the correct format -->
+     * Creates local Habit and adds them to the HabitOrganizers List of Habit.
+     * Keeps track of the highest ID attribute and updates the Factory classes local habitIdCount variable.
+     */
     public static void getDbHabit() {
         int highestId = 0;
         String todoTxt = TxtDbCommunicator.readFile("habit");
@@ -110,6 +147,11 @@ public class TxtDbCommunicator {
         }
     }
 
+    /**
+     * Is used by getDbHabit to parse a string (array) of LocalDateTimes to a Stack of DoneHabits
+     * @param raw
+     * @return
+     */
     public static Stack<DoneHabit> formatDoneHabits(String raw) {
         Stack<DoneHabit> doneHabits = new Stack<>();
         String[] doneArr = raw.split("=");
@@ -120,6 +162,13 @@ public class TxtDbCommunicator {
         return doneHabits;
     }
 
+    /**
+     * This function reads the todo.txt file -->
+     * Divides the string up to separate objects -->
+     * Pareses its string attribute to the correct format -->
+     * Creates local Todos and adds them to the TodoOrganizers List of Todo.
+     * Keeps track of the highest ID attribute and updates the Factory classes local todoIdCount variable.
+     */
     public static int getDbTodo(int highestId) {
         String todoTxt = TxtDbCommunicator.readFile("todo");
         if (!todoTxt.isEmpty()) {
@@ -138,6 +187,13 @@ public class TxtDbCommunicator {
         return highestId;
     }
 
+    /**
+     * This function reads the todoDone.txt file -->
+     * Divides the string up to separate objects -->
+     * Pareses its string attribute to the correct format -->
+     * Creates local Todos and adds them to the TodoOrganizers List of todoDone.
+     * Keeps track of the highest ID attribute and updates the Factory classes local todoIdCount variable.
+     */
     public static int getDbTodoDone(int highestId) {
         String doneTodoTxt = TxtDbCommunicator.readFile("todoDone");
         if(!doneTodoTxt.isEmpty()) {
