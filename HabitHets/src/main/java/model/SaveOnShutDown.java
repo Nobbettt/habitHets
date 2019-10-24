@@ -1,11 +1,34 @@
 package model;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Stack;
 
 public class SaveOnShutDown {
+
+    /**
+     * Function creates a new txt file (overwrites a existing file if name already taken)
+     * Sets the new files content to newTxt string parameter
+     * @param file
+     * @param newTxt
+     */
+    public static void writeFile(String file, String newTxt) {
+
+        Path currentRelativePath = Paths.get("");
+        String relativePath = currentRelativePath.toAbsolutePath().toString();
+
+        try {
+            Files.write( Paths.get(relativePath + "/src/main/java/model/db/"+file), newTxt.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static final String[] conflicts = {"<end>", "<//>"};
     /**
      * Access function to save all the objects (Todos, DoneTodos, Habits, Notes, Events) on shutdown.
@@ -32,7 +55,7 @@ public class SaveOnShutDown {
             String cleanTitle = removeConflicts(todo.getTitle());
             txt.append(cleanTitle).append("<end>");
         }
-        TxtDbCommunicator.writeFile("todo", txt.toString());
+        writeFile("todo", txt.toString());
     }
 
     /**
@@ -49,7 +72,7 @@ public class SaveOnShutDown {
             String cleanTitle = removeConflicts(todo.getTitle());
             txt.append(cleanTitle).append("<end>");
         }
-        TxtDbCommunicator.writeFile("todoDone", txt.toString());
+        writeFile("todoDone", txt.toString());
     }
 
     /**
@@ -71,7 +94,7 @@ public class SaveOnShutDown {
             txt.append(habit.getDateRecord().toString()).append("<//>");
             txt.append(formatDoneHabits(habit.getDoneHabits())).append("<end>");
         }
-        TxtDbCommunicator.writeFile("habit", txt.toString());
+        writeFile("habit", txt.toString());
     }
 
     /**
@@ -105,7 +128,7 @@ public class SaveOnShutDown {
                 txt.append(LocalDate.parse(note.getDay().toString())).append("<end>");
             }
         }
-        TxtDbCommunicator.writeFile("note", txt.toString());
+        writeFile("note", txt.toString());
     }
 
     /**
@@ -135,7 +158,7 @@ public class SaveOnShutDown {
                 txt.append(cleanColor).append("<end>");
             }
         }
-        TxtDbCommunicator.writeFile("event", txt.toString());
+        writeFile("event", txt.toString());
     }
 
     /**

@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import application.ControllerCalendar;
+import Controller.ControllerCalendar;
 import model.Facade;
 
 import java.io.IOException;

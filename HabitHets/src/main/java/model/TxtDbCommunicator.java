@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,10 +22,14 @@ public class TxtDbCommunicator {
      * @return
      */
     public static String readFile(String file) {
+
+        Path currentRelativePath = Paths.get("");
+        String relativePath = currentRelativePath.toAbsolutePath().toString();
+
         String text = "";
         Scanner scanner;
         try {
-            scanner = new Scanner( new File("HabitHets/HabitHets/src/main/java/model/db/"+file) );
+            scanner = new Scanner( new File(relativePath + "/src/main/java/model/db/"+file) );
             while (scanner.hasNextLine()) {
                 text = scanner.useDelimiter("\\A").next();
             }
@@ -35,19 +40,6 @@ public class TxtDbCommunicator {
         return text;
     }
 
-    /**
-     * Function creates a new txt file (overwrites a existing file if name already taken)
-     * Sets the new files content to newTxt string parameter
-     * @param file
-     * @param newTxt
-     */
-    public static void writeFile(String file, String newTxt) {
-        try {
-            Files.write( Paths.get("HabitHets/HabitHets/src/main/java/model/db"+file), newTxt.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * This function is the access point to this static class.

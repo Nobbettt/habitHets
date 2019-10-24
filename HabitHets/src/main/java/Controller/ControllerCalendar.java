@@ -1,4 +1,4 @@
-package application;
+package Controller;
 
 
 import javafx.animation.KeyFrame;
@@ -90,7 +90,7 @@ public class ControllerCalendar implements Initializable, Listener {
 
     public ControllerCalendar() {
         // to change -->
-        //TxtDbCommunicator.importDb();
+        TxtDbCommunicator.importDb();
 
         masterDateTime = LocalDateTime.now();
         facade = new Facade();
