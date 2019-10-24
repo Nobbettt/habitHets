@@ -6,6 +6,7 @@ import java.util.List;
 public class Year{
     private List<Month> months;
     private Integer year;
+
     public Year(int year) {
         this.months = getMonths(year);
         this.year = year;
@@ -22,7 +23,7 @@ public class Year{
         return tmpMonths;
     }
 
-    List<Month> getMonths() {
+    public List<Month> getMonths() {
         return months;
     }
 
@@ -35,13 +36,12 @@ public class Year{
         return null;
     }
 
-    Month getMonthFromLDT(LocalDateTime ldt){
+    public Month getMonthFromLDT(LocalDateTime ldt){
         for (Month month : getMonths()){
             if (month.getDays().get(0).getLdt().getMonthValue() == ldt.getMonthValue()){
                 return month;
             }
         }
-        System.out.println("THERE IS NO SUCH MONTH");
         return null;
     }
 

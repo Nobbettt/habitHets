@@ -30,13 +30,12 @@ public class Month{
         return days;
     }
 
-    Day getDayFromLDT(LocalDateTime ldt){
+    public Day getDayFromLDT(LocalDateTime ldt){
         for (Day day : getDays()){
-            if (day.getLdt().getDayOfMonth() == ldt.getDayOfMonth()){
+            if (day.getLdt().getDayOfMonth() == ldt.getDayOfMonth() && day.getMonthNbr() == ldt.getMonthValue() && day.getLdt().getYear() == ldt.getYear()){
                 return day;
             }
         }
-        System.out.println("THERE IS NO SUCH DAY");
         return null;
     }
 

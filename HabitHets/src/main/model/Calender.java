@@ -29,9 +29,9 @@ public class Calender {
         }
     }
 
-    private List<Year> getYears(int yearsBack, int yearsForward) {
+    public List<Year> getYears(int yearsBack, int yearsForward) {
         List<Year> tmpYears = new ArrayList<>();
-        for (int i = -yearsBack; i <yearsForward; i++){
+        for (int i = -yearsBack; i <= yearsForward; i++){
             Year y = new Year(LocalDateTime.now().getYear()+i);
             tmpYears.add(y);
         }

@@ -80,4 +80,12 @@ public class EventOrganizer implements IHandler {
         }
         return ids;
     }
+
+    public static List<Integer> getAllIds(){
+        List<Integer> ids = new ArrayList<>();
+        for (Event event : eventList){
+            ids.add(event.getId());
+        }
+        return ids;
+    }
 }
