@@ -145,8 +145,10 @@ public class SaveOnShutDown {
      * @return
      */
     public static String removeConflicts(String str) {
-        for (String conflict : conflicts) {
-            str = checkString(str, conflict);
+        if (str != null && !str.isEmpty()) {
+            for (String conflict : conflicts) {
+                str = checkString(str, conflict);
+            }
         }
         return str;
     }

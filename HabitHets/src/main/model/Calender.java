@@ -36,7 +36,6 @@ public class Calender {
      * @return
      */
 
-    private List<Year> getYears(int yearsBack, int yearsForward) {
     public List<Year> getYears(int yearsBack, int yearsForward) {
         List<Year> tmpYears = new ArrayList<>();
         for (int i = -yearsBack; i <= yearsForward; i++){
@@ -112,7 +111,7 @@ public class Calender {
      * @param localDateTime a date
      * @return which month a given date is in
      */
-    Month getMonth(LocalDateTime localDateTime){
+    public Month getMonth(LocalDateTime localDateTime){
         List<Month> months = getYearFromLDT(localDateTime);
         return months.get(localDateTime.getMonthValue()-1);
     }
