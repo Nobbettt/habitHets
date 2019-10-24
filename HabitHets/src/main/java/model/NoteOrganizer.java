@@ -1,4 +1,6 @@
 package model;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +11,10 @@ import java.util.List;
  */
 
 public class NoteOrganizer implements IHandler {
+    private static NoteOrganizer instant;
+    private static List<Note> notesList;
 
-    public static NoteOrganizer instant;
-    public static List<Note> notesList;
-
-    private NoteOrganizer(){
+    private NoteOrganizer() {
         notesList = new ArrayList<>();
     }
 
@@ -22,29 +23,20 @@ public class NoteOrganizer implements IHandler {
      * If there is an instant, another one will not be created.
      * If there is not, an instant will be created.
      */
-
-    public static NoteOrganizer getInstance(){
-        if(instant == null) {
+    public static NoteOrganizer getInstance() {
+        if (instant == null) {
             instant = new NoteOrganizer();
             return instant;
 
-        }else {
+        } else {
             return instant;
         }
     }
 
-    public List<Note> getNotes(){
+    public static List<Note> getNotes() {
         return notesList;
     }
 
-    /**
-     * Method that adds a Note to a list of Notes, using a Factory pattern.
-     * Will later be made to get input from database, but for now uses fixed values for testing purposes.
-     */
-    @Override
-    public void add() {
-        //Get input from database
-    }
 
     /**
      * Method that removes a Note from a list of Notes, using the id set when creating a Note from Factory.
@@ -52,13 +44,12 @@ public class NoteOrganizer implements IHandler {
      */
     @Override
     public void remove(int id) {
-        for (Note note : notesList){
-            if (note.getId() == id){
+        for (Note note : notesList) {
+            if (note.getId() == id) {
                 notesList.remove(note);
                 return;
             }
         }
-        System.out.println("The ID: '" + id + "' does not exist");
     }
 
     /**
@@ -66,20 +57,39 @@ public class NoteOrganizer implements IHandler {
      * @param d, is the day on which we would like to inspect if there is a Note affiliated with that date.
      * @return
      */
-    public Note getNoteDate(LocalDateTime d){
+    public Note getNoteDate(LocalDate d){
             for(Note n : notesList){
-                if(n.getDay().getDayOfYear() == d.getDayOfYear() && n.getDay().getYear() == d.getYear()){
+                if(n.getDay().getYear() == d.getYear() && n.getDay().getDayOfYear() == d.getDayOfYear()){
                     return n;
                 }
         }
         return null;
     }
 
-    public Note addNote (String s, LocalDateTime date){
+    /**
+     * A method which returns whether or not there is a note on a given date. Used to not get NullPointerException when giving back a note for a date.
+     * @param ldt a date
+     * @return true if there is a note on the given date
+     */
 
-            notesList.add(Factory.createNote(s, date));
-            return notesList.get(notesList.size() - 1);
+    public boolean isNoteOnDay(LocalDateTime ldt){
+        for (Note note : notesList){
+            if (note.getDay().getYear() == ldt.getYear() && note.getDay().getDayOfYear() == ldt.getDayOfYear()){
+                return true;
+            }
         }
+        return false;
     }
 
+    public static void setNotesList(List<Note> notesList) {
+        NoteOrganizer.notesList = notesList;
+    }
 
+    /**
+     * Method that adds a Note to a list of Notes, using a Factory pattern.
+     * Will later be made to get input from database, but for now uses fixed values for testing purposes.
+     */
+    public static void addNote(String s, LocalDate date) {
+        notesList.add(Factory.createNote(s, date));
+    }
+}

@@ -9,8 +9,6 @@ import java.util.List;
  */
 
 public class TodoOrganizer implements IHandler {
-
-
     public static TodoOrganizer instant;
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
@@ -19,11 +17,17 @@ public class TodoOrganizer implements IHandler {
     /**
      * The constructor of TodoOrganizer sets the list of todos and doneTodos.
      */
-
-
-    public TodoOrganizer() {
+    private TodoOrganizer() {
         todoList = new ArrayList<>();
         doneTodoList = new ArrayList<>();
+    }
+
+    public static void setTodoList(List<Todo> todoList) {
+        TodoOrganizer.todoList = todoList;
+    }
+
+    static void setDoneTodoList(List<Todo> doneTodoList) {
+        TodoOrganizer.doneTodoList = doneTodoList;
     }
 
     /**
@@ -42,22 +46,14 @@ public class TodoOrganizer implements IHandler {
         }
     }
 
+
     /**
      * This method creates a new toddoo. You have to enter the todoo's title, the todoo get it's id from the factory class
      * where the todoo object is made.
      */
-
-    @Override
-    public void add() {
-        todoList.add(Factory.createTodo("testTodo"));
-        notifyListener();
-
-    }
-
-    public void addTodo(String title) {
+    public static void addTodo(String title) {
         todoList.add(Factory.createTodo(title));
         notifyListener();
-
     }
 
     /**
@@ -77,7 +73,7 @@ public class TodoOrganizer implements IHandler {
                 notifyListener();
                 return;
             }
-        } System.out.println("The ID " +id + " does not exist.");
+        }
     }
 
     /**
@@ -89,8 +85,7 @@ public class TodoOrganizer implements IHandler {
      * If the id does not exist you get an error message.     *
      * @param id
      */
-
-    public void doneTodoRemove(int id){ // to remove a todoo when you have completed the task
+    public static void doneTodoRemove(int id){ // to remove a todoo when you have completed the task
         for (Todo todo: todoList){
             if(todo.getId() == id){
                 doneTodoList.add(todo);
@@ -99,46 +94,82 @@ public class TodoOrganizer implements IHandler {
                 notifyListener();
                 return;
             }
-        } System.out.println("The ID " +id + " does not exist.");
+        }
     }
 
-    public List<Todo> getTodoList() {
+    public static List<Todo> getTodoList() {
         return todoList;
     }
 
-    public List<Todo> getDoneTodoList() {
+    public static List<Todo> getDoneTodoList() {
         return doneTodoList;
+    }
+
+    static List<Integer> getTodoIds(){
+        List<Integer> ids = new ArrayList<>();
+        for (Todo todo : getTodoList()){
+            ids.add(todo.getId());
+        }
+        return ids;
+    }
+
+    static List<Integer> getDoneTodoIds(){
+        List<Integer> ids = new ArrayList<>();
+        for (Todo todo : getDoneTodoList()){
+            ids.add(todo.getId());
+        }
+        return ids;
+    }
+
+
+
+    static Todo getTodoOfId(int id){
+        for (Todo todo : getTodoList()){
+            if (todo.getId() == id){
+                return todo;
+            }
+        }
+        return null;
+    }
+
+    static Todo getDoneTodoOfId(int id){
+        for (Todo todo : getDoneTodoList()){
+            if (todo.getId() == id){
+                return todo;
+            }
+        }
+        return null;
     }
 
     /**
      * When you have completed a todoo, it goes from todolist to doneTodolist. This method
      * checks that the doneTodolist only have the five most recent completed todos.
      */
-
-    private void doneTodoList(){
+    private static void doneTodoList(){
         if (doneTodoList.size()>5){
             int limit = doneTodoList.size()-5;
             for (int a=0; a<limit ;a++){
                 doneTodoList.remove(0);
+                int id = doneTodoList.get(0).getId();
                 notifyListener();
             }
         }
     }
 
-    private List<Listener> listeners = new ArrayList<>();
+    private static List<Listener> listeners = new ArrayList<>();
 
 
-    public void addListener(Listener l){
+    public static void addListener(Listener l){
         listeners.add(l);
 
     }
 
-    private void notifyListener(){
+    private static void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();
     }
 
-    public void moveBackDoneTodo(int id) {
+    static void moveBackDoneTodo(int id) {
         for (int i = 0; i < doneTodoList.size(); i++) {
             if (doneTodoList.get(i).getId() == id) {
                 doneTodoList.remove(i);
@@ -148,3 +179,4 @@ public class TodoOrganizer implements IHandler {
         }
     }
 }
+

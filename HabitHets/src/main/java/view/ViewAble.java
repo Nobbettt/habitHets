@@ -1,10 +1,8 @@
 package view;
 
-import model.CalendarAble;
-
-import java.util.List;
+import java.time.LocalDateTime;
 
 public interface ViewAble {
-    void updateView(List<? extends CalendarAble> variable);
+    void updateView(LocalDateTime variable);
     void updateTimeLine(int hour, int minute);
 }

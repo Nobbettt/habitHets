@@ -1,10 +1,8 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Event implements IPlanable{
+public class Event {
     private int id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -30,6 +28,11 @@ public class Event implements IPlanable{
         this.title = title;
     }
 
+
+    public String getColor() {
+        return color;
+    }
+
     public int getId() {
         return id;
     }
@@ -46,57 +49,47 @@ public class Event implements IPlanable{
         return title;
     }
 
-    public String getLocation() {
+    String getLocation() {
         return location;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    private String getColor() {
-        return color;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
+    void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
-    public void setLocation(String location) {
+    void setLocation(String location) {
         this.location = location;
     }
 
-    public void setDescription(String description) {
+    void setDescription(String description) {
         this.description = description;
     }
 
-    private void setColor(String color) {
-        this.color = color;
-    }
-
-    @Override
-    public List<String> getInfo() {
-        List<String> info = new ArrayList<>();
-        info.add(title); //0
-        info.add(Integer.toString(id)); //1
-        info.add(location); //2
-        info.add(description); //3
-        info.add(Integer.toString(startTime.getYear()));//4
-        info.add(Integer.toString(startTime.getDayOfYear()));//5
-        info.add(Integer.toString(startTime.getHour()));//6
-        info.add(Integer.toString(startTime.getMinute()));//7
-        info.add(Integer.toString(endTime.getHour())); //8
-        info.add(Integer.toString(endTime.getMinute()));//9
-
-        return info;
-    }
-
-    @Override
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String timeString() {
+        String hour;
+        String minute;
+        if (startTime.getHour() < 10) {
+            hour = "0" + startTime.getHour();
+        } else {
+            hour = "" + startTime.getHour();
+        }
+        if (startTime.getMinute() < 10) {
+            minute = "0" + startTime.getMinute();
+        } else {
+            minute = "" + startTime.getMinute();
+        }
+        return hour + ":" + minute;
     }
 }

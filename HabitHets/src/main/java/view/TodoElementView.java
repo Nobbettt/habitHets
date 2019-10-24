@@ -4,8 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;
-import model.Todo;
-import model.TodoOrganizer;
+import model.Facade;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,10 +12,10 @@ import java.util.List;
 
 public class TodoElementView extends AnchorPane  {
 
-    Todo todo;
-    TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
+    private Facade facade;
+    private int id;
 
-    public TodoElementView(Todo todo) {
+    TodoElementView(int id) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/todoElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -27,20 +26,25 @@ public class TodoElementView extends AnchorPane  {
                 IOException exception) {
             throw new RuntimeException(exception);
         }
-         this.todo = todo;
+        this.id = id;
+        this.facade = new Facade();
         setUpTodo();
 
     }
 
+    int getTodoID(){
+        return id;
+    }
+
     List<CheckBox> cb = new ArrayList<>();
 
-    public CheckBox getCb() {
+    CheckBox getCb() {
         return cb.get(0);
     }
 
     private void setUpTodo(){
         CheckBox c = (CheckBox)getChildren().get(0);
-        c.setText(todo.getTitle());
+        c.setText(facade.getTodoTitle(id));
         c.setStyle("-fx-font-size: 15");
         cb.add(c);
     }
@@ -51,17 +55,14 @@ public class TodoElementView extends AnchorPane  {
     private void remove(){
         for (CheckBox c : cb){
             if (c.isSelected()){
-                todoOrganizer.doneTodoRemove(todo.getId());
+                facade.removeDoneTodo(id);
             }
         }
     }
 
     @FXML
     private void deleteTodo(){
-        todoOrganizer.remove(todo.getId());
+        facade.removeTodo(id);
     }
-
-
-
 
 }

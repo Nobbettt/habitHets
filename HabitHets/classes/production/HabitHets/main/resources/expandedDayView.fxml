@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #595959;" stylesheets="@css/day-style.css" type="StackPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #595959;">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="238.0" style="-fx-background-color: #595959;">
+               <children>
+                  <AnchorPane layoutY="24.0" prefHeight="100.0" prefWidth="175.0" style="-fx-background-color: #595959;" styleClass="day-head" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="weekDayLbl" alignment="CENTER" layoutX="74.0" layoutY="42.0" style="-fx-background-color: #595959;" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <styleClass>
+                              <String fx:value="day-weekday-lbl" />
+                              <String fx:value="day-border-left-right" />
+                           </styleClass></Label>
+                     </children>
+                  </AnchorPane>
+                  <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="40.0" layoutY="130.0" prefHeight="298.0" prefWidth="255.0" style="-fx-background-color: #595959;" styleClass="day-scroll-pane" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                     <content>
+                        <GridPane fx:id="dayGrid" prefHeight="2400.0" prefWidth="146.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="45.0" prefWidth="45.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="2400.0" prefHeight="2400.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="338.0" style="-fx-background-color: #595959;">
+               <children>
+                  <TextArea fx:id="noteField" layoutX="109.0" layoutY="66.0" onKeyPressed="#notehandle" opacity="0.8" prefHeight="200.0" prefWidth="200.0" promptText="Write your notes here" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></TextArea>
+                  <Button fx:id="saveNoteButton" layoutX="189.0" layoutY="303.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="44.0" style="-fx-background-color: GREY;" styleClass="addbtn" stylesheets="@css/base-style.css" text="+" textFill="RED" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="54.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Arial" size="27.0" />
+                     </font></Button>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</fx:root>

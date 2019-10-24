@@ -2,13 +2,11 @@ package model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Month implements CalendarAble {
+public class Month{
     List<Day> days;
-    int monthNb;
+    private int monthNb;
 
 
     public Month(int year, int monthNb) {
@@ -17,7 +15,7 @@ public class Month implements CalendarAble {
     }
 
 
-    public List<Day> getDays(int year, int monthNb){
+    private List<Day> getDays(int year, int monthNb){
         LocalDateTime ldt = LocalDateTime.of(year, monthNb,1,0,0);
         List<Day> tmpDays = new ArrayList<>();
         while (ldt.getMonthValue() == monthNb){
@@ -32,38 +30,12 @@ public class Month implements CalendarAble {
         return days;
     }
 
-    public int getFirstWeek(){
-        Calendar javaCal = new GregorianCalendar();
-        LocalDateTime firstDay = getDays().get(0).getLdt();
-        javaCal.set(firstDay.getYear(), firstDay.getMonthValue(), 1);
-        return javaCal.get(Calendar.WEEK_OF_YEAR);
-    }
-
-    public int getLastWeek(){
-        Calendar javaCal = new GregorianCalendar();
-        int nbrDays = getDays().size() -1;
-        LocalDateTime lastDay = getDays().get(nbrDays).getLdt();
-        javaCal.set(lastDay.getYear(), lastDay.getMonthValue(), lastDay.getDayOfMonth());
-        return javaCal.get(Calendar.WEEK_OF_YEAR);
-    }
-
-    public Day getFirstDayInWeek(int week){
-        for (Day day : getDays()){
-            if (day.getWeekNr() == week){
-                return day;
-            }
-        }
-        System.out.println("THAT WEEK DOESN'T EXIST");
-        return null;
-    }
-
     public Day getDayFromLDT(LocalDateTime ldt){
         for (Day day : getDays()){
-            if (day.getLdt().getDayOfMonth() == ldt.getDayOfMonth()){
+            if (day.getLdt().getDayOfMonth() == ldt.getDayOfMonth() && day.getMonthNbr() == ldt.getMonthValue() && day.getLdt().getYear() == ldt.getYear()){
                 return day;
             }
         }
-        System.out.println("THERE IS NO SUCH DAY");
         return null;
     }
 
@@ -94,7 +66,7 @@ public class Month implements CalendarAble {
             case 12:
                 return "December";
             default:
-                return "Bitch month";
+                return "Default month";
         }
     }
 }

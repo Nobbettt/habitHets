@@ -8,11 +8,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import model.Facade;
-import model.CalendarAble;
-import model.Day;
+import model.Calender;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +20,9 @@ public class MonthView extends StackPane implements ViewAble {
     @FXML private ScrollPane scrollPane;
     private List<Label> monthdays;
     private List<Label> weeknb;
-    private List<Label> weekday;
-    public MonthView(){
+    private Calender calender;
+
+    public MonthView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/month.fxml"));
               fxmlLoader.setRoot(this);
               fxmlLoader.setController(this);
@@ -32,18 +32,18 @@ public class MonthView extends StackPane implements ViewAble {
                   throw new RuntimeException(exception);
                }
               setupMonth();
+              this.calender = Calender.getInstant();
     }
 
-     public void setupMonth() {
+     private void setupMonth() {
          monthdays = new ArrayList<>();
          weeknb = new ArrayList<>();
-         weekday = new ArrayList<>();
          for(int i = 1; i < 7; i++){
              for(int j = 0; j < 8; j++){
                  AnchorPane a = new AnchorPane();
                  Label l = new Label(" ");
                  a.getChildren().add(l);
-
+                 l.setStyle("-fx-font-size: 16px");
                  if(j == 0){
                      l.setTextFill(Color.valueOf("#FF4500"));
                      weeknb.add(l);
@@ -59,8 +59,9 @@ public class MonthView extends StackPane implements ViewAble {
      }
 
     @Override
-    public void updateView(List<? extends CalendarAble> month) {
-        updateMonthView((List<Day>) month);
+    public void updateView(LocalDateTime currentDay) {
+        updateMonthView(calender.getLdtMonthFromDate(currentDay));
+
     }
 
     @Override
@@ -68,28 +69,25 @@ public class MonthView extends StackPane implements ViewAble {
 
     }
 
-    private void updateMonthView(List<Day> month) {
-        Day firstday = month.get(0);
-        int k = firstday.getLdt().getDayOfWeek().getValue();
+    private void updateMonthView(List<LocalDateTime> ldtList) {
 
+        LocalDateTime firstday = ldtList.get(0);
+        int k = firstday.getDayOfWeek().getValue();
 
-        Facade a = new Facade();
+        List<LocalDateTime> prevMonth = Calender.getInstant().getLdtMonthFromDate(firstday.minusMonths(1));
+        int lastDayPrevMonth  = prevMonth.get(prevMonth.size()-1).getDayOfMonth();
 
-        List<Day> prevMonth = a.getMonthFromDate(firstday.getLdt().minusMonths(1));
-        int lastDayPrevMonth = prevMonth.size()-1;
         for(int l = k; 0 <= l; l--){
-            Day tmpDay = prevMonth.get(lastDayPrevMonth);
-            Integer daynb = tmpDay.getLdt().getDayOfMonth();
-            monthdays.get(l).setText(daynb.toString());
+            monthdays.get(l).setText(String.valueOf(lastDayPrevMonth+2));
             monthdays.get(l).setStyle("-fx-opacity: .5");
             lastDayPrevMonth--;
         }
 
         int j = 0;
-        for(int i = k; i< monthdays.size(); i++){
-            if(j < month.size()){
-                Day tmpDay = month.get(j);
-                Integer daynb = tmpDay.getLdt().getDayOfMonth();
+        for(int i = k-1; i< monthdays.size(); i++){
+            if(j < ldtList.size()){
+                LocalDateTime tmpDay = ldtList.get(j);
+                Integer daynb = tmpDay.getDayOfMonth();
                 monthdays.get(i).setText(daynb.toString());
                 monthdays.get(i).setStyle("-fx-opacity: 1");
                 j++;
@@ -99,21 +97,20 @@ public class MonthView extends StackPane implements ViewAble {
 
         }
 
-        List<Day> nextMonth = a.getMonthFromDate(firstday.getLdt().plusMonths(1));
+        List<LocalDateTime> nextMonth = calender.getLdtMonthFromDate(firstday.plusMonths(1));
         int firstDayNextMonth = 0;
-        for(int l = month.size()+k; l < monthdays.size(); l++){
-            Day tmpDay = nextMonth.get(firstDayNextMonth);
-            Integer daynb = tmpDay.getLdt().getDayOfMonth();
+        for(int l = ldtList.size()+k-1; l < monthdays.size(); l++){
+            LocalDateTime tmpDay = nextMonth.get(firstDayNextMonth);
+            Integer daynb = tmpDay.getDayOfMonth();
             monthdays.get(l).setText(daynb.toString());
             monthdays.get(l).setStyle("-fx-opacity: .5");
             firstDayNextMonth++;
         }
 
-        int w = month.get(0).getWeekNr()-4;
+        int w = Calender.getInstant().getWeekFromLdt(ldtList.get(0));
         for(Label l : weeknb){
             l.setText("" + w++);
         }
-
     }
-    }
+}
 

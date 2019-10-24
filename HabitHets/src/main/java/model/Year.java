@@ -3,9 +3,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Year implements CalendarAble {
+public class Year{
     private List<Month> months;
     private Integer year;
+
     public Year(int year) {
         this.months = getMonths(year);
         this.year = year;
@@ -35,27 +36,17 @@ public class Year implements CalendarAble {
         return null;
     }
 
-    public Day getDayWithWeek(int week){
-        for (Month month : getMonths()){
-            if (month.getFirstWeek() < week && month.getLastWeek() >= week){
-                return month.getFirstDayInWeek(week);
-            }
-        }
-        System.out.println("NO SUCH WEEK");
-        return null;
-    }
-
     public Month getMonthFromLDT(LocalDateTime ldt){
         for (Month month : getMonths()){
             if (month.getDays().get(0).getLdt().getMonthValue() == ldt.getMonthValue()){
                 return month;
             }
         }
-        System.out.println("THERE IS NO SUCH MONTH");
         return null;
     }
 
     public String getString() {
         return year.toString();
     }
+
 }

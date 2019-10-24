@@ -5,9 +5,9 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class HourView extends AnchorPane {
+class HourView extends AnchorPane {
 
-    public HourView() {
+    HourView() {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/hour.fxml"));
         fxmlLoader.setRoot(this);

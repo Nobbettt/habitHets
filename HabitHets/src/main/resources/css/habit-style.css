@@ -24,8 +24,8 @@
 
 
 .button-check {
-    -fx-border-width: 2px;
-    -fx-border-radius: 100px;
+    -fx-border-width: 3px;
+    -fx-border-radius: 50px;
     -fx-background-radius: 100px;
 }
 .button-check:hover {
@@ -46,7 +46,7 @@
 .letters{
     -fx-alignment: center_right;
     -fx-font-weight: normal;
-    -fx-font-size: 12 px;
+    -fx-font-size: 14px;
 }
 
 .title{
@@ -62,12 +62,15 @@
 }
 
 
-.editButton:hover {
+.editButton:hover, .habitBtn:hover {
     -fx-cursor: hand;
     -fx-opacity: .5;
-    -fx-background-color: #0000ff;
 }
 
+.habitBtn {
+    -fx-background-color: transparent;
+    -fx-border-width: 0px;
+}
 .save-btn{
     -fx-background-color: transparent;
     -fx-border-color: #fff;
@@ -77,11 +80,17 @@
     -fx-border-radius: 3px;
     -fx-text-fill: #fff;
 }
-
-.save-btn:hover {
+.save-btn:hover, .add-habit-btn:hover {
     -fx-cursor: hand;
-    -fx-opacity: .8;
-
+    -fx-opacity: .5;
 }
-
-
+.add-habit-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: #fff;
+    -fx-border-width: 3px;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 0;
+    -fx-border-radius: 5px;
+    -fx-text-fill: #fff;
+}

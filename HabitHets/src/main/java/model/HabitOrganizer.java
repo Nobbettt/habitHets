@@ -9,10 +9,8 @@ import java.util.Stack;
  *This class handles logic that has to do with more than one habit.
  */
 public class HabitOrganizer implements IHandler{
-
-    public static HabitOrganizer instant;
+    private static HabitOrganizer instant;
     private static List<Habit> habitList;
-
 
     /**
      * Constructor of HabitOrganizer that creates
@@ -22,8 +20,11 @@ public class HabitOrganizer implements IHandler{
         habitList = new ArrayList<>();
     }
 
+    static void setHabitList(List<Habit> list) {
+        HabitOrganizer.habitList = list;
+    }
     /**
-     * This method controlls if an object is created.
+     * This method controls if an object is created.
      * This makes sure that there may only be one instance
      * at the time (singleton-pattern). If there already exists an
      * instance, another one will not be created. If there in not,
@@ -38,23 +39,8 @@ public class HabitOrganizer implements IHandler{
 
     }
 
-    public List<Habit> getHabitList() {
+    public static List<Habit> getHabitList() {
         return habitList;
-    }
-
-
-    /**
-     * This method adds habits by calling Factory class.
-     */
-    @Override
-    public void add() {
-        Stack s = new Stack();
-        s.add(new DoneHabit(LocalDate.now().minusDays(3)));
-        s.add(new DoneHabit(LocalDate.now().minusDays(2)));
-        s.add(new DoneHabit(LocalDate.now().minusDays(1)));
-        s.add(new DoneHabit(LocalDate.now()));
-        habitList.add(Factory.createHabit("testHabit", s,0,"white",LocalDate.now()));
-        notifyListener();
     }
 
     /**
@@ -74,25 +60,28 @@ public class HabitOrganizer implements IHandler{
 
     }
 
-    public void addHabit(String title, String color) {
+    /**
+     * This method adds habits by calling Factory class.
+     */
+    public static void addHabit(String title, String color) {
         habitList.add(Factory.createHabit(title, new Stack(),0,color,LocalDate.now()));
         notifyListener();
     }
 
-    private List<Listener> listeners = new ArrayList<>();
+    private static List<Listener> listeners = new ArrayList<>();
 
 
-    public void addListener(Listener l){
+    public static void addListener(Listener l){
         listeners.add(l);
 
     }
 
-    private void notifyListener(){
+    private static void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();
     }
 
-    public Habit getHabitById(String msg) {
+    public static Habit getHabitById(String msg) {
         int id = Integer.valueOf(msg);
         for (Habit h : habitList) {
             if(h.getId() == id) {
@@ -102,4 +91,20 @@ public class HabitOrganizer implements IHandler{
         return null;
     }
 
+    static Habit getHabitFromId(int id){
+        for (Habit habit : getHabitList()){
+            if (habit.getId() == id){
+                return habit;
+            }
+        }
+        return null;
+    }
+
+    static List<Integer> getAllHabitIDs(){
+        List<Integer> ids = new ArrayList<>();
+        for (Habit habit : getHabitList()){
+            ids.add(habit.getId());
+        }
+        return ids;
+    }
 }

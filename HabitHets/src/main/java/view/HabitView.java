@@ -7,8 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import model.Habit;
-import model.HabitOrganizer;
+import model.Facade;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import java.util.List;
 
 public class HabitView extends AnchorPane implements ViewListener {
 
-    private HabitOrganizer handler = HabitOrganizer.getInstant();
     @FXML private VBox vBox;
     @FXML private ScrollPane scrollPane;
     @FXML private AnchorPane newHabit;
@@ -26,13 +24,13 @@ public class HabitView extends AnchorPane implements ViewListener {
     @FXML private Button save;
     @FXML private Button addHabit;
     @FXML private Label generalTitle;
-    @FXML private AnchorPane titleBackground;
-    @FXML private Label collapsedTitle;
     @FXML private Label habitModifyTypeLabel;
+    @FXML private Label idLbl;
     private List<HabitObjectView> habitsList;
-    private Habit habit;
+    private HabitObjectView editing;
+    private Facade facade;
+
     private boolean isExpanded;
-    private HabitObjectView hov;
 
 
     public HabitView() {
@@ -51,7 +49,7 @@ public class HabitView extends AnchorPane implements ViewListener {
         scrollPane.setFitToHeight(true);
         habitsList = new ArrayList<>();
         isExpanded = true;
-
+        this.facade = new Facade();
     }
 
 
@@ -72,28 +70,38 @@ public class HabitView extends AnchorPane implements ViewListener {
 
 
     public void edit(String msg){
-        habit = handler.getHabitById(msg);
-        newHabit.setVisible(true);
-        newHabit.toFront();
-        setVisibilityAdd(false);
-        create.toBack();
-        setVisibilityEdit(true);
-        save.toFront();
-        title.setText(habit.getTitle());
-        java.awt.Color tmpC = java.awt.Color.decode(habit.getColor());
-        Color c = Color.rgb(tmpC.getRed(),tmpC.getGreen(),tmpC.getBlue());
-        colorPicker.setValue(c);
-        habitModifyTypeLabel.setText("Edit Habit");
+        if(facade.habitExist(msg)) {
+            for (HabitObjectView habitObjectView : habitsList) {
+                if (habitObjectView.getHabitID() == Integer.valueOf(msg)) {
+                    editing = habitObjectView;
+                }
+            }
+            newHabit.setVisible(true);
+            newHabit.toFront();
+            setVisibilityAdd(false);
+            create.toBack();
+            setVisibilityEdit(true);
+            save.toFront();
+            title.setText(facade.getHabitTitle(Integer.valueOf(msg)));
+            idLbl.setText(msg);
+            //java.awt.Color tmpC = java.awt.Color.decode(facade.getHabitColor(editing.getHabitID()));
+            Color c = Color.valueOf(facade.getHabitColor(Integer.valueOf(msg)));
+            colorPicker.setValue(c);
+            habitModifyTypeLabel.setText("Edit Habit");
+        }
 
     }
 
     @FXML
     private void addNewHabit(){
+        title.clear();
+        colorPicker.setValue(Color.FIREBRICK);
+        habitModifyTypeLabel.setText("Add Habit");
+        setVisibilityEdit(false);
+        setVisibilityAdd(true);
         newHabit.setVisible(true);
         newHabit.toFront();
-        setVisibilityEdit(false);
         save.toBack();
-        setVisibilityAdd(true);
         create.toFront();
     }
 
@@ -101,10 +109,8 @@ public class HabitView extends AnchorPane implements ViewListener {
     private void create(){
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
-            handler.addHabit(title.getText(), colorToString(colorPicker.getValue()));
-            List<Habit> newHabit = new ArrayList<>();
-            newHabit.add(handler.getHabitList().get(handler.getHabitList().size()-1));
-            updateHabitView();
+            facade.createHabit(title.getText(), toHexString(colorPicker.getValue()));
+            updateHabitView(facade.getAllHabitIds());
         }
         title.clear();
         colorPicker.setValue(Color.WHITE);
@@ -114,23 +120,12 @@ public class HabitView extends AnchorPane implements ViewListener {
     private void save(){
         closeNewHabitWindow();
         if(title.getText() != null && !title.getText().isEmpty()){
-            habit.setTitle(title.getText());
-            habit.setColor(colorToString(colorPicker.getValue()));
-            for (HabitObjectView h : habitsList) {
-                if(h.getHabit().getId() == habit.getId()) {
-                    h.updateElementView();
-                }
-            }
+            facade.updateHabitTitle(Integer.valueOf(idLbl.getText()),title.getText());
+            facade.updateHabitColor(Integer.valueOf(idLbl.getText()), toHexString(colorPicker.getValue()));
+            editing.updateElementView(Integer.valueOf(idLbl.getText()));
         }
         title.clear();
         colorPicker.setValue(Color.WHITE);
-    }
-
-    private String colorToString(Color color){
-        return String.format("#%02X%02X%02X",
-                ((int)color.getRed())*255,
-                ((int)color.getGreen())*255,
-                ((int)color.getBlue())*255);
     }
 
     @FXML
@@ -144,9 +139,8 @@ public class HabitView extends AnchorPane implements ViewListener {
             h.hideHabits();
         }
         addHabit.setVisible(false);
-        generalTitle.setVisible(false);
-        titleBackground.setVisible(true);
-        collapsedTitle.setVisible(true);
+        generalTitle.setText("H");
+        generalTitle.setStyle("-fx-padding: 0 0 0 0");
         isExpanded = false;
     }
 
@@ -155,31 +149,39 @@ public class HabitView extends AnchorPane implements ViewListener {
             h.showHabits();
         }
         addHabit.setVisible(true);
-        generalTitle.setVisible(true);
-        titleBackground.setVisible(false);
-        collapsedTitle.setVisible(false);
+        generalTitle.setText("Habit");
+        generalTitle.setStyle("-fx-padding: 0 30 0 0");
         isExpanded = true;
     }
 
 
     //List<CheckBox> checkboxes = new ArrayList<>();
 
-    public void updateHabitView() {
+    public void updateHabitView(List<Integer> ids) {
         vBox.getChildren().clear();
-        for (Habit habit: handler.getHabitList()){
-            HabitObjectView habitObjectView = new HabitObjectView(habit);
+        for (Integer id: ids){
+            HabitObjectView habitObjectView = new HabitObjectView(id);
             habitObjectView.addListener(this);
             vBox.getChildren().add(habitObjectView);
-            habitObjectView.updateElementView();
+            habitObjectView.updateElementView(id);
             habitsList.add(habitObjectView);
          //   hide();
         }
+    }
+
+    private String format(double val) {
+        String in = Integer.toHexString((int) Math.round(val * 255));
+        return in.length() == 1 ? "0" + in : in;
+    }
+
+    private String toHexString(Color value) {
+        return "#" + (format(value.getRed()) + format(value.getGreen()) + format(value.getBlue()) + format(value.getOpacity()))
+                .toUpperCase();
     }
 
 
     @Override
     public void actOnUpdate(String msg) {
         edit(msg);
-        System.out.println("Test");
     }
 }

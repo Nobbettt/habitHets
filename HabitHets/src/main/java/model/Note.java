@@ -1,13 +1,25 @@
 package model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-public class Note{
+/**
+ * This class defines what a note is and all the variables a note needs.
+ */
+public class Note {
     private int id;
     private String description;
-    private LocalDateTime day;
+    private LocalDate day;
 
-    public Note(int id, String Description, LocalDateTime day) {
+    /**
+     * This is the only constructor of the Note class.
+     * It contains all of the instance variables. This makes
+     * sure that there is no need of adding exceptions to the class
+     * methods. (Exceptions that handles if a variable is not set).
+     * @param id
+     * @param description
+     * @param day
+     */
+    Note(int id, String description, LocalDate day) {
         this.description = description;
         this.day = day;
         this.id = id;
@@ -25,11 +37,7 @@ public class Note{
         return id;
     }
 
-    public String setDescription(){
-        return description;
-    }
-
-    public LocalDateTime getDay() {
+    public LocalDate getDay() {
         return day;
     }
 
@@ -37,13 +45,10 @@ public class Note{
         this.id = id;
     }
 
-    public void setDay(LocalDateTime day) {
+    public void setDay(LocalDate day) {
         this.day = day;
     }
 
-    public void onNoteClick(){
-
-    }
 }
 
 

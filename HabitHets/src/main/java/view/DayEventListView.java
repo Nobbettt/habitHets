@@ -1,19 +1,17 @@
 package view;
 
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import model.Facade;
-import model.Event;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DayEventListView extends StackPane {
+class DayEventListView extends StackPane {
     private VBox vBox;
     private List<HBox> hBoxList;
     private Line tl;
@@ -21,7 +19,7 @@ public class DayEventListView extends StackPane {
     private double vBoxWidth;
     private LocalDateTime ldt;
 
-    public DayEventListView(LocalDateTime ldt) {
+    DayEventListView(LocalDateTime ldt) {
         this.ldt = ldt;
         hBoxList = new ArrayList<>();
         vBox = new VBox();
@@ -50,26 +48,23 @@ public class DayEventListView extends StackPane {
         hHeight = new HourView().getPrefHeight();
     }
 
-    public void updateDay(LocalDateTime ldt, double vBoxWidth) {
+    void updateDay(LocalDateTime ldt, double vBoxWidth) {
         Facade facade = new Facade();
         this.vBoxWidth = vBoxWidth;
-        System.out.println(vBoxWidth);
         this.ldt = ldt;
         for (HBox hBox : hBoxList) {
             hBox.getChildren().clear();
         }
         int i = 0;
         int overlap = 0;
-        //for (Event event : EventOrganizer.getInstant().getEventsOfDay(day.getLdt())) {
         for (int id : facade.getAllIdsOfDay(ldt))
             if (this.ldt.getDayOfYear() == ldt.getDayOfYear()) {
                 i++;
-                AnchorPane a = new EventView(facade.getEventFromID(id));
-                a.setTranslateY((Integer.valueOf(facade.getEventFromID(id).getInfo().get(6)) * 120) + (Integer.valueOf(facade.getEventFromID(id).getInfo().get(7)) * 2)); //todo WTF
+                EventView a = new EventView((id));
+                a.setTranslateY((facade.getEventStarttime(id).getHour() * 120) + (facade.getEventStarttime(id).getMinute()) * 2); //todo WTF
                 double height = calculateLenght(id) * 2;
                 a.setPrefHeight(height);
-                double width = (vBoxWidth)/facade.calculateWidth(ldt,id);
-                System.out.println("asdadsasdaa" + width);
+                double width = this.vBoxWidth/facade.calculateOverlaps(ldt,id);
                 a.setPrefWidth((width));
                 if (calculateTranslateX(id) != 0) {
                     if (overlap == 3) {
@@ -85,7 +80,7 @@ public class DayEventListView extends StackPane {
             }
     }
 
-    public void updateTimeline(int hour, int minute) {
+    void updateTimeline(int hour, int minute) {
         double timeHeight = 0;
         if (hour < 12) {
             timeHeight = (12 - hour) * hHeight;
@@ -106,15 +101,11 @@ public class DayEventListView extends StackPane {
 
     private double calculateTranslateX(int id) {
         Facade facade = new Facade();
-        double x = vBoxWidth/facade.calculateWidth(ldt,id);
+        double x = vBoxWidth/facade.calculateOverlaps(ldt,id);
         if (x == vBoxWidth) {
             return 0;
         } else {
             return x;
         }
-    }
-
-    private LocalDateTime getDay() {
-        return ldt;
     }
 }

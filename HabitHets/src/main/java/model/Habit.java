@@ -37,6 +37,9 @@ public class Habit {
         this.dateRecord = dateRecord;
     }
 
+    public LocalDate getDateRecord() {
+        return dateRecord;
+    }
 
     public int getId(){
         return id;
@@ -96,7 +99,6 @@ public class Habit {
         }
 
         for(int i = doneHabits.size()-1; i >= 0; i--){
-            System.out.println(doneHabits.get(i).getDate());
             if(doneHabits.get(i).getDate().equals(date)) {
                 streak++;
             } else {
@@ -158,7 +160,6 @@ public class Habit {
     public boolean isCheckedYesterday() {
         if (doneHabits.size() > 0) {
             LocalDate lastCheck = doneHabits.get(doneHabits.size()-1).getDate();
-            System.out.println("sist:"+ lastCheck);
             return LocalDate.now().minusDays(1).equals(lastCheck);
         }
         return false;
@@ -171,7 +172,6 @@ public class Habit {
      * best streak.
      */
     public void bestStreak() {
-        System.out.println(getStreak());
         if(getStreak() > bestStreak){
             bestStreak = getStreak();
             dateRecord = LocalDate.now();
@@ -187,6 +187,10 @@ public class Habit {
 
     }
 
+    /**
+     * This method launches a nuclear attack on china
+     * USE WITH CARE!
+     */
     private void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();

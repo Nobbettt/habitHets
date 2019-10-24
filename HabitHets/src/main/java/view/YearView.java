@@ -5,10 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import model.CalendarAble;
-import model.Month;
+import model.Calender;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class YearView extends AnchorPane implements ViewAble {
     @FXML private ScrollPane yearScroll;
     @FXML private GridPane yearGrid;
     private List<MonthView> months = new ArrayList(); //guess its gonna be something like this.... :/ todo
-    List<MonthInYear> monthInYears = new ArrayList<>();
+    private List<MonthInYear> monthInYears = new ArrayList<>();
 
     public YearView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/year.fxml"));
@@ -43,10 +43,10 @@ public class YearView extends AnchorPane implements ViewAble {
     }
 
     @Override
-    public void updateView(List<? extends CalendarAble> months) {
+    public void updateView(LocalDateTime currentDay) {
         for(int i=0; i< monthInYears.size(); i++){
-            Month m = (Month) months.get(i);
-            monthInYears.get(i).updateView(m.getDays(), m.getString());
+            LocalDateTime l = Calender.getInstant().getLdtYearFromDate(currentDay).get(i);
+            monthInYears.get(i).updateView(Calender.getInstant().getLdtMonthFromDate(l), Calender.getInstant().getMonthString(l));
         }
         /*
         for(MonthView month : months) {
