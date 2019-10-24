@@ -21,7 +21,7 @@
             <AnchorPane fx:id="eventCreatePane" layoutX="207.0" layoutY="142.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#mouseTrapCreateEvent" prefHeight="480.0" prefWidth="400.0" styleClass="event-container">
                <children>
                   <Label alignment="CENTER_RIGHT" layoutX="65.0" layoutY="183.0" prefHeight="30.0" prefWidth="80.0" styleClass="event-list-title" text="Location:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="220.0" />
-                  <TextField fx:id="titleField" layoutX="129.0" layoutY="41.0" prefHeight="30.0" prefWidth="277.0" promptText="What...?" styleClass="event-list-title" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
+                  <TextField fx:id="titleField" layoutX="129.0" layoutY="41.0" prefHeight="30.0" prefWidth="277.0" promptText="What...?" styleClass="event-inputs" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
                   <Label alignment="CENTER_RIGHT" layoutX="86.0" layoutY="46.0" prefHeight="30.0" prefWidth="80.0" styleClass="event-list-title" text="Title:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="60.0" />
                   <DatePicker fx:id="dateChooser" layoutX="129.0" layoutY="86.0" prefHeight="30.0" prefWidth="277.0" promptText="When...?" styleClass="event-inputs" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="110.0" />
                   <TextField fx:id="LocationField" layoutX="129.0" layoutY="179.0" prefHeight="27.0" prefWidth="277.0" promptText="Where...?" styleClass="event-inputs" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="220.0" />
