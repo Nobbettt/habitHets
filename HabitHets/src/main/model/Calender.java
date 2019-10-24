@@ -29,6 +29,13 @@ public class Calender {
         }
     }
 
+    /**
+     * Adds years to a list of years that the calendar will hold.
+     * @param yearsBack Is one year backwards.
+     * @param yearsForward Is one yaer forward.
+     * @return
+     */
+
     private List<Year> getYears(int yearsBack, int yearsForward) {
         List<Year> tmpYears = new ArrayList<>();
         for (int i = -yearsBack; i <yearsForward; i++){
@@ -38,6 +45,11 @@ public class Calender {
         return tmpYears;
     }
 
+
+    /**
+     *
+     * @return The list of years.
+     */
     private List<Year> getYears() {
         return years;
     }
@@ -51,11 +63,19 @@ public class Calender {
         return null;
     }
 
+    /**
+     * Method that gives a back a week (+6 days) of dates from a given date.
+     * @param ldt is a date.
+     * @return the week that a given date is in.
+     */
+
     public List<Day> getWeekFromLDT(LocalDateTime ldt){
         List<Day> weekList = new ArrayList<>();
 
-        /*The two lines below make it so that the list returns a week from MON-SUN, if we want SUN - SAT remove
-        the -1 from the line exactly below. Remove these to lines completely if you just want 7 consecutive Day objects. */
+        /**
+         * The two lines below make it so that the list returns a week from MON-SUN, if we want SUN - SAT remove
+        the -1 from the line exactly below. Remove these two lines completely if you just want 7 consecutive Day objects.
+         */
 
         int dayInWeek = ldt.getDayOfWeek().getValue()-1;
         LocalDateTime firstDayInWeek = ldt.minusDays(dayInWeek);
@@ -68,11 +88,23 @@ public class Calender {
         return weekList;
     }
 
+    /**
+     * A method that takes in a date and return which day that date is.
+     * @param ldt a date
+     * @return which day the given date is.
+     */
+
     public Day getDayFromLDT(LocalDateTime ldt){
         Year toYear = getYear(ldt.getYear());
         Month toMonth = toYear.getMonthFromLDT(ldt);
         return toMonth.getDayFromLDT(ldt);
     }
+
+    /**
+     * A method that gives back the year a given date is in.
+     * @param ldt a date
+     * @return the year the given date is in.
+     */
 
     List<Month> getYearFromLDT(LocalDateTime ldt) {
         Year y = getYear(ldt.getYear());
@@ -80,16 +112,32 @@ public class Calender {
         return months;
     }
 
-    public Month getMonth(LocalDateTime localDateTime){
+    /**
+     *
+     * @param localDateTime a date
+     * @return which month a given date is in
+     */
+    Month getMonth(LocalDateTime localDateTime){
         List<Month> months = getYearFromLDT(localDateTime);
         return months.get(localDateTime.getMonthValue()-1);
     }
 
+    /**
+     *
+     * @param ldt a date
+     * @return what week the given date is in
+     */
     public int getWeekFromLdt(LocalDateTime ldt){
         LocalDate date = ldt.toLocalDate();
         TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
         return date.get(woy);
     }
+
+    /**
+     * A method that takes in a date and adds it to a week.
+     * @param ldt a date
+     * @return a list of dates in a week.
+     */
 
     public List<LocalDateTime> getLdtWeekFromLdt(LocalDateTime ldt){
         List<LocalDateTime> list = new ArrayList<>();
@@ -99,6 +147,11 @@ public class Calender {
         return list;
     }
 
+    /**
+     * A method that puts the days of a month in the month.
+     * @param localDateTime a date
+     * @return a list of a month containing given the dates in that month.
+     */
     public List<LocalDateTime> getLdtMonthFromDate(LocalDateTime localDateTime) {
         List<LocalDateTime> list = new ArrayList<>();
         for (Day day : getMonth(localDateTime).getDays()){
@@ -106,6 +159,12 @@ public class Calender {
         }
         return list;
     }
+
+    /**
+     * A method that given all the days of a year adds these to a year.
+     * @param localDateTime a date
+     * @return A list of a year containing all the months.
+     */
 
     public List<LocalDateTime> getLdtYearFromDate(LocalDateTime localDateTime){
         List<LocalDateTime> list = new ArrayList<>();
@@ -115,10 +174,21 @@ public class Calender {
         return list;
     }
 
+    /**
+     *
+     * @param ltd a date
+     * @return The month value as a string
+     */
     public String getMonthString(LocalDateTime ltd){
         return getMonth(ltd).getString();
 
     }
+
+    /**
+     *
+     * @param localDateTime a date
+     * @return a week value as string
+     */
 
     public String getWeekdayString(LocalDateTime localDateTime){
         return getDayFromLDT(localDateTime).getWeekDayString();

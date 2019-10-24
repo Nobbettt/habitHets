@@ -66,6 +66,12 @@ public class NoteOrganizer implements IHandler {
         return null;
     }
 
+    /**
+     * A method which returns whether or not there is a note on a given date. Used to not get NullPointerException when giving back a note for a date.
+     * @param ldt a date
+     * @return true if there is a note on the given date
+     */
+
     public boolean isNoteOnDay(LocalDateTime ldt){
         for (Note note : notesList){
             if (note.getDay().getYear() == ldt.getYear() && note.getDay().getDayOfYear() == ldt.getDayOfYear()){
