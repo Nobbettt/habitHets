@@ -81,7 +81,7 @@ public class NoteOrganizer implements IHandler {
         return false;
     }
 
-    static void setNotesList(List<Note> notesList) {
+    public static void setNotesList(List<Note> notesList) {
         NoteOrganizer.notesList = notesList;
     }
 
