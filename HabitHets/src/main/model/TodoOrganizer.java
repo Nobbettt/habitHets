@@ -22,7 +22,7 @@ public class TodoOrganizer implements IHandler {
         doneTodoList = new ArrayList<>();
     }
 
-    static void setTodoList(List<Todo> todoList) {
+    public static void setTodoList(List<Todo> todoList) {
         TodoOrganizer.todoList = todoList;
     }
 

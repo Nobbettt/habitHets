@@ -22,7 +22,7 @@ public class MonthView extends StackPane implements ViewAble {
     private List<Label> weeknb;
     private Calender calender;
 
-    public MonthView(){
+    public MonthView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/month.fxml"));
               fxmlLoader.setRoot(this);
               fxmlLoader.setController(this);
@@ -43,7 +43,7 @@ public class MonthView extends StackPane implements ViewAble {
                  AnchorPane a = new AnchorPane();
                  Label l = new Label(" ");
                  a.getChildren().add(l);
-
+                 l.setStyle("-fx-font-size: 16px");
                  if(j == 0){
                      l.setTextFill(Color.valueOf("#FF4500"));
                      weeknb.add(l);
@@ -111,7 +111,6 @@ public class MonthView extends StackPane implements ViewAble {
         for(Label l : weeknb){
             l.setText("" + w++);
         }
-
     }
 }
 

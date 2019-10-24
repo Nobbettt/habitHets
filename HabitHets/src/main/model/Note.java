@@ -13,7 +13,7 @@ public class Note {
         this.id = id;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 

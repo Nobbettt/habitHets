@@ -187,6 +187,10 @@ public class Habit {
 
     }
 
+    /**
+     * This method launches a nuclear attack on china
+     * USE WITH CARE!
+     */
     private void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();

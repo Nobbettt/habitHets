@@ -50,6 +50,7 @@ public class SaveOnShutDown {
         }
         TxtDbCommunicator.writeFile("habit", txt.toString());
     }
+
     private static String formatDoneHabits(Stack<DoneHabit> stack) {
         StringBuilder txt = new StringBuilder();
         for (DoneHabit doneHabit : stack) {

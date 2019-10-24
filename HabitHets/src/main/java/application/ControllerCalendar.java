@@ -83,6 +83,11 @@ public class ControllerCalendar implements Initializable, Listener {
     private Calender calender;
     private TodoView todoView;
 
+    /**
+     * A constructor for the class that sets all the needed attributes as well as imports all the
+     * data stored from previous runs
+     */
+
     public ControllerCalendar() {
         // to change -->
         TxtDbCommunicator.importDb();
@@ -101,13 +106,19 @@ public class ControllerCalendar implements Initializable, Listener {
     }
 
     /**
-     * function is called every min to update timeline in GUI
+     * A method is called every min to update the timeline in GUI
      */
 
     private void updateTimeline() {
         timeNow = LocalDateTime.now();
         currentView.updateTimeLine(timeNow.getHour(), timeNow.getMinute());
     }
+
+    /**
+     * A method that is called when the program starts up, it is implemented since the class implements initializeable
+     * @param url
+     * @param resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -120,6 +131,10 @@ public class ControllerCalendar implements Initializable, Listener {
         renderWeek();
         updateTimeline();
     }
+
+    /**
+     * Sets up all things needed in order for the timeline to properly work
+     */
 
     private void setupTimeline(){
         timeLineCaller = new Timeline(new KeyFrame(Duration.seconds(60), event -> updateTimeline()));
@@ -361,15 +376,29 @@ public class ControllerCalendar implements Initializable, Listener {
         return centerY;
     }
 
+    /**
+     * A fxml method that prevents the user from shutting down the create-event pop-up screen by consuming the click
+     * @param event the event that the mousetrap protects
+     */
+
     @FXML
     public void mouseTrapCreateEvent(Event event){
         event.consume();
     }
 
+    /**
+     * A fxml method that prevents the user from shutting down the edit-event pop-up screen by consuming the click
+     * @param event the event that the mousetrap protects
+     */
+
     @FXML
     public void mouseTrapEditEvent(Event event){
         event.consume();
     }
+
+    /**
+     * A fxml method that is called when the create-event pop-up shall be closed
+     */
 
     @FXML
     public void closeCreateEvent() {
@@ -377,14 +406,20 @@ public class ControllerCalendar implements Initializable, Listener {
         creationPage.toBack();
     }
 
+    /**
+     * A fxml method that is called when the edit-event pop-up shall be closed
+     */
+
     @FXML
     public void closeEditEvent() {
         editPage.toBack();
     }
+
     /**
      * Click function for the habit toggle button
      * Collapses and extends the habit view and stretches the calendar view accordingly
      */
+
     @FXML
     private void toggleHabitClick() {
         double widthValue;
@@ -452,19 +487,36 @@ public class ControllerCalendar implements Initializable, Listener {
         }
     }
 
+    /**
+     * Updates the TodoView, it is called from the actOnUpdate that is implemented from the Listener interface
+     */
     private void updateTodoView(){
         todoView.updateTodoView();
     }
 
+    /**
+     * Updates the HabitView, it is called from the actOnUpdate that is implemented from the Listener interface
+     */
+
     private void updateHabitView(){
         habitView.updateHabitView(facade.getAllHabitIds());
     }
+
+    /**
+     * A method that is implemented from the Listener interface, when something this class listens to notifies its
+     * listeners this method will be called
+     */
 
     @Override
     public void actOnUpdate() {
         updateTodoView();
         updateHabitView();
     }
+
+    /**
+     * A fxml method that is called when the button that enables the user to add events is called,
+     * it resets the value of the datePicker, sets a temporary title to "New Event" and centers the popup
+     */
 
     @FXML
     private void addButtonClick(){
@@ -473,11 +525,20 @@ public class ControllerCalendar implements Initializable, Listener {
         displayPopUps(creationPage, eventCreatePane);
     }
 
+    /**
+     * Closes the pop-up where the user creates a new event and returns back to the previous screen
+     */
+
     @FXML
     private void closeButtonClick(){
         resetAllField();
         creationPage.toBack();
     }
+
+    /**
+     * when the "create" button is clicked in the creation page of a new event is pressed, this method collects what
+     * input the user has given and sends it to the facade where it creates this new event
+     */
 
     @FXML
     private void createButtonClick(){
@@ -497,6 +558,12 @@ public class ControllerCalendar implements Initializable, Listener {
         updateCurrentView();
     }
 
+    /**
+     * Calculates the center of the window to attach the pop-up at that center
+     * @param bkgPane a pane to be centered
+     * @param pane a pane to be centered
+     */
+
     private void displayPopUps(AnchorPane bkgPane, AnchorPane pane) {
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         double centerX = screenBounds.getWidth()/2;
@@ -507,6 +574,11 @@ public class ControllerCalendar implements Initializable, Listener {
         pane.setLayoutY(centerY);
         bkgPane.toFront();
     }
+
+    /**
+     * Makes sure that input the user has given is correct, if it isn't it corrects it in order to make sure no errors
+     * will occur
+     */
 
     private void checkCreationInput(){
         if (titleField.getText() == null){
