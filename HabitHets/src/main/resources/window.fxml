@@ -34,7 +34,7 @@
                   </Button>
                   <Label alignment="CENTER_RIGHT" layoutX="87.0" layoutY="91.0" prefHeight="30.0" prefWidth="80.0" styleClass="event-list-title" text="Date:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="110.0" />
                   <Label alignment="CENTER_RIGHT" layoutX="86.0" layoutY="137.0" prefHeight="30.0" prefWidth="80.0" styleClass="event-list-title" text="Time:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="170.0" />
-                  <Label alignment="CENTER_RIGHT" layoutX="44.0" layoutY="225.0" prefHeight="17.0" prefWidth="75.0" styleClass="event-list-title" text="Description:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="270.0" />
+                  <Label alignment="CENTER_RIGHT" layoutX="44.0" layoutY="225.0" prefHeight="30.0" prefWidth="80.0" styleClass="event-list-title" text="Description:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="270.0" />
                   <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonClick" styleClass="event-btn-close" text="X" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <ComboBox fx:id="fromHourTime" editable="true" layoutX="130.0" layoutY="133.0" prefHeight="27.0" prefWidth="60.0" styleClass="event-inputs" visibleRowCount="12" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="170.0" />
                   <ComboBox fx:id="fromMinuteTime" editable="true" layoutX="198.0" layoutY="133.0" prefHeight="27.0" prefWidth="60.0" styleClass="event-inputs" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="170.0" />
