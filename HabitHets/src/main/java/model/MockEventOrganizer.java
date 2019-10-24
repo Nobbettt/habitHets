@@ -4,17 +4,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventOrganizer implements IHandler {
-    private static EventOrganizer instant;
+public class MockEventOrganizer implements IHandler {
+    private static MockEventOrganizer instant;
     private static List<Event> eventList;
 
-    private EventOrganizer() {
+    private MockEventOrganizer() {
         eventList = new ArrayList<>();
     }
 
-    static EventOrganizer getInstant() {
+    static MockEventOrganizer getInstant() {
         if (instant == null) {
-            instant = new EventOrganizer();
+            instant = new MockEventOrganizer();
             return instant;
         } else {
             return instant;
@@ -26,7 +26,7 @@ public class EventOrganizer implements IHandler {
     }
 
     static void setEventList(List<Event> eventList) {
-        EventOrganizer.eventList = eventList;
+        MockEventOrganizer.eventList = eventList;
     }
 
     @Override

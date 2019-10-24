@@ -1,4 +1,5 @@
-import model.Year;
+package model.calendar;
+
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,5 +1,5 @@
-import model.DoneHabit;
-import model.Habit;
+package model;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -131,8 +131,6 @@ public class TestHabit {
         DoneHabit dh = new DoneHabit();
         dh.setDate(LocalDate.now().minusDays(1));
         habit.getDoneHabits().push(dh);
-        System.out.println(habit.getDoneHabits().peek().getDate());
-        System.out.println(habit.getDoneHabits().get(0).getDate());
         Assert.assertEquals(true, habit.isCheckedYesterday());
     }
 

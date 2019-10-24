@@ -52,7 +52,7 @@
          </children>
       </GridPane>
       <Label fx:id="title" layoutX="33.0" layoutY="10.0" prefHeight="20.0" prefWidth="116.0" styleClass="title" text="title" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0" />
-      <Button fx:id="color" layoutX="8.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkHabit" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: blue;" styleClass="button-check" text="b" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="12.0" />
+      <Button fx:id="color" layoutX="8.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkHabit" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: blue;" styleClass="button-check" text="b" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="8.0" />
       <Button fx:id="deleteHabit" layoutX="152.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteHabit" prefHeight="15.0" prefWidth="15.0" styleClass="habitBtn" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">

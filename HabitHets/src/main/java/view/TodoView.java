@@ -18,14 +18,11 @@ public class TodoView extends AnchorPane {
     @FXML private AnchorPane todoList;
     @FXML private Button addTodo;
     @FXML private VBox vboxtodo;
-    @FXML
-    private VBox vboxdonetodo;
-    @FXML
-    private AnchorPane newTodo;
+    @FXML private VBox vboxdonetodo;
+    @FXML private AnchorPane newTodo;
     @FXML public Button closeNewTodo;
     @FXML public Button saveNewTodo;
-    @FXML
-    private TextField todoTitle;
+    @FXML private TextField todoTitle;
     @FXML private ScrollPane todoScrollpane;
     @FXML private ScrollPane doneTodoScrollpane;
     private Facade facade;

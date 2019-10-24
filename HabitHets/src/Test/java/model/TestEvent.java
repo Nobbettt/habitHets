@@ -1,5 +1,5 @@
-import model.EventOrganizer;
-import model.Facade;
+package model;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class TestEvent {
     @Test
     public void testEventId(){
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
         clearEventlist();
         eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
@@ -24,7 +24,7 @@ public class TestEvent {
 
     @Test
     public void testEventModifiers(){
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
         clearEventlist();
         eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertEquals("Hej", eventOrganizer.getEventList().get(0).getTitle());
@@ -35,7 +35,7 @@ public class TestEvent {
 
     @Test
     public void testAddRemove(){
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
         clearEventlist();
         eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertEquals(1, eventOrganizer.getEventList().size());
@@ -49,7 +49,7 @@ public class TestEvent {
 
     @Test
     public void testTime(){
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
         clearEventlist();
         eventOrganizer.addEvent(LocalDateTime.of(2019,10,24,12,00), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertTrue((eventOrganizer.getEventList().get(0).getStartTime().isAfter(LocalDateTime.of(2019,10,9,12,00))));
@@ -58,17 +58,14 @@ public class TestEvent {
 
     @Test
     public void testTimestring(){
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
         clearEventlist();
-        eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "TestEvent", "M1212D", "String");
+        eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "model.TestEvent", "M1212D", "String");
         Assert.assertTrue(eventOrganizer.getEventList().get(0).timeString().equals("10:00"));
     }
 
     private void clearEventlist(){
-        Facade facade = new Facade();
-        EventOrganizer organizer = EventOrganizer.getInstant();
-        for (int id : facade.getAllIdsOfDay(LocalDateTime.now())){
-            organizer.remove(id);
-        }
+        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
+        eventOrganizer.getEventList().clear();
     }
 }

@@ -8,20 +8,20 @@ import java.util.Stack;
 /**
  *This class handles logic that has to do with more than one habit.
  */
-public class HabitOrganizer implements IHandler{
-    private static HabitOrganizer instant;
+public class MockHabitOrganizer implements IHandler{
+    private static MockHabitOrganizer instant;
     private static List<Habit> habitList;
 
     /**
      * Constructor of HabitOrganizer that creates
      * a list of habits
      */
-    private HabitOrganizer() {
+    private MockHabitOrganizer() {
         habitList = new ArrayList<>();
     }
 
     static void setHabitList(List<Habit> list) {
-        HabitOrganizer.habitList = list;
+        MockHabitOrganizer.habitList = list;
     }
     /**
      * This method controls if an object is created.
@@ -31,9 +31,9 @@ public class HabitOrganizer implements IHandler{
      * an instance will be created.
      * @return
      */
-    static HabitOrganizer getInstant() {
+    static MockHabitOrganizer getInstant() {
         if (instant == null) {
-            instant = new HabitOrganizer();
+            instant = new MockHabitOrganizer();
         }
         return instant;
 

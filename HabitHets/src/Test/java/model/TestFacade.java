@@ -1,4 +1,5 @@
-import model.*;
+package model;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class TestFacade {
-
+/*
     @Test
     public void getNoteAndEdit(){
         Facade f = new Facade();
@@ -314,5 +315,6 @@ public class TestFacade {
         organizer.getHabitList().clear();
 
     }
+    */
 
 }

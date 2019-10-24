@@ -21,7 +21,7 @@ public class TxtDbCommunicator {
      * @param file
      * @return
      */
-    public static String readFile(String file) {
+    private static String readFile(String file) {
 
         Path currentRelativePath = Paths.get("");
         String relativePath = currentRelativePath.toAbsolutePath().toString();
@@ -64,7 +64,7 @@ public class TxtDbCommunicator {
      * Creates local Events and adds them to the EventOrganizers List of Events.
      * Keeps track of the highest ID attribute and updates the Factory classes local eventIdCount variable.
      */
-    public static void getDbEvent() {
+    private static void getDbEvent() {
         int highestId = 0;
         String eventTxt = TxtDbCommunicator.readFile("event");
         if(!eventTxt.isEmpty()) {
@@ -93,7 +93,7 @@ public class TxtDbCommunicator {
      * Creates local Notes and adds them to the NoteOrganizers List of Notes.
      * Keeps track of the highest ID attribute and updates the Factory classes local noteIdCount variable.
      */
-    public static void getDbNote() {
+    private static void getDbNote() {
         int highestId = 0;
         String noteTxt = TxtDbCommunicator.readFile("note");
         if(!noteTxt.isEmpty()) {
@@ -119,7 +119,7 @@ public class TxtDbCommunicator {
      * Creates local Habit and adds them to the HabitOrganizers List of Habit.
      * Keeps track of the highest ID attribute and updates the Factory classes local habitIdCount variable.
      */
-    public static void getDbHabit() {
+    private static void getDbHabit() {
         int highestId = 0;
         String todoTxt = TxtDbCommunicator.readFile("habit");
         if(!todoTxt.isEmpty()) {
@@ -144,7 +144,7 @@ public class TxtDbCommunicator {
      * @param raw
      * @return
      */
-    public static Stack<DoneHabit> formatDoneHabits(String raw) {
+    private static Stack<DoneHabit> formatDoneHabits(String raw) {
         Stack<DoneHabit> doneHabits = new Stack<>();
         String[] doneArr = raw.split("=");
         for (String done : doneArr) {
@@ -161,7 +161,7 @@ public class TxtDbCommunicator {
      * Creates local Todos and adds them to the TodoOrganizers List of Todo.
      * Keeps track of the highest ID attribute and updates the Factory classes local todoIdCount variable.
      */
-    public static int getDbTodo(int highestId) {
+    private static int getDbTodo(int highestId) {
         String todoTxt = TxtDbCommunicator.readFile("todo");
         if (!todoTxt.isEmpty()) {
             List<Todo> tmpList = new ArrayList<>();
@@ -186,7 +186,7 @@ public class TxtDbCommunicator {
      * Creates local Todos and adds them to the TodoOrganizers List of todoDone.
      * Keeps track of the highest ID attribute and updates the Factory classes local todoIdCount variable.
      */
-    public static int getDbTodoDone(int highestId) {
+    private static int getDbTodoDone(int highestId) {
         String doneTodoTxt = TxtDbCommunicator.readFile("todoDone");
         if(!doneTodoTxt.isEmpty()) {
             List<Todo> tmpList = new ArrayList<>();

@@ -96,6 +96,7 @@ class HabitObjectView extends AnchorPane {
         title.setVisible(false);
         this.setPrefHeight(40);
         habitGrid.setPrefHeight(0);
+        deleteHabit.setVisible(false);
     }
 
     void showHabits(){
@@ -103,12 +104,13 @@ class HabitObjectView extends AnchorPane {
         title.setVisible(true);
         this.setPrefHeight(100);
         habitGrid.setPrefHeight(USE_COMPUTED_SIZE);
+        deleteHabit.setVisible(true);
     }
 
     private List<ViewListener> listeners = new ArrayList<>();
 
 
-    public void addListener(ViewListener l){
+    void addListener(ViewListener l){
         listeners.add(l);
 
     }

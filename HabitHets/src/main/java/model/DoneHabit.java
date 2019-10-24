@@ -2,13 +2,13 @@ package model;
 
 import java.time.LocalDate;
 
-public class DoneHabit {
+class DoneHabit {
     private LocalDate date;
 
     /**
      * checka i idag
      */
-    public DoneHabit() {
+    DoneHabit() {
         this.date = LocalDate.now();
     }
 
@@ -16,15 +16,15 @@ public class DoneHabit {
      * checka i en annan dag
      * @param date
      */
-    public DoneHabit(LocalDate date) {
+    DoneHabit(LocalDate date) {
         this.date = date;
     }
 
-    public LocalDate getDate() {
+    LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    void setDate(LocalDate date) {
         this.date = date;
     }
 }

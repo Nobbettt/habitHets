@@ -10,11 +10,11 @@ import java.util.List;
  * Therefore the Open-Closed principle is exerted.
  */
 
-public class NoteOrganizer implements IHandler {
-    private static NoteOrganizer instant;
+public class MockNoteOrganizer implements IHandler {
+    private static MockNoteOrganizer instant;
     private static List<Note> notesList;
 
-    private NoteOrganizer() {
+    private MockNoteOrganizer() {
         notesList = new ArrayList<>();
     }
 
@@ -23,9 +23,9 @@ public class NoteOrganizer implements IHandler {
      * If there is an instant, another one will not be created.
      * If there is not, an instant will be created.
      */
-    static NoteOrganizer getInstance() {
+    static MockNoteOrganizer getInstance() {
         if (instant == null) {
-            instant = new NoteOrganizer();
+            instant = new MockNoteOrganizer();
             return instant;
 
         } else {
@@ -82,7 +82,7 @@ public class NoteOrganizer implements IHandler {
     }
 
     static void setNotesList(List<Note> notesList) {
-        NoteOrganizer.notesList = notesList;
+        MockNoteOrganizer.notesList = notesList;
     }
 
     /**

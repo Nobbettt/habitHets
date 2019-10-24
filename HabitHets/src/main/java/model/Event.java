@@ -29,23 +29,23 @@ public class Event {
     }
 
 
-    public String getColor() {
+    String getColor() {
         return color;
     }
 
-    public int getId() {
+    int getId() {
         return id;
     }
 
-    public LocalDateTime getStartTime() {
+    LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
@@ -73,11 +73,11 @@ public class Event {
         this.description = description;
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
         this.title = title;
     }
 
-    public String timeString() {
+    String timeString() {
         String hour;
         String minute;
         if (startTime.getHour() < 10) {

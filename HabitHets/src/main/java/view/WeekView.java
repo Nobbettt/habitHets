@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import model.Calender;
+import model.calendar.Calender;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -92,13 +92,5 @@ public class WeekView extends StackPane implements ViewAble {
             weekGrid.add(dayEvents, i, 0);
             weekDayEvents.add(dayEvents);
         }
-    }
-
-    /**
-     * returns week list
-     * @return
-     */
-    public List<LocalDateTime> getWeek() {
-        return week;
     }
 }

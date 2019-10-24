@@ -1,4 +1,4 @@
-package model;
+package model.calendar;
 
 import java.time.LocalDateTime;
 
@@ -17,13 +17,13 @@ public class Day {
         return ldt.getYear();
     }
 
-    public int getMonthNbr() {return ldt.getMonthValue();}
+    int getMonthNbr() {return ldt.getMonthValue();}
 
     public String getString() {
         return "" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "";
     }
 
-    public String getWeekDayString() {
+    String getWeekDayString() {
         String string = "";
         switch (ldt.getDayOfWeek().getValue()) {
             case 1:

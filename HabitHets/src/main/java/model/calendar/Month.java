@@ -1,4 +1,4 @@
-package model;
+package model.calendar;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ public class Month{
     private int monthNb;
 
 
-    public Month(int year, int monthNb) {
+    Month(int year, int monthNb) {
         this.monthNb = monthNb;
         this.days = getDays(year, monthNb);
     }
@@ -26,11 +26,11 @@ public class Month{
         return tmpDays;
     }
 
-    public List<Day> getDays() {
+    List<Day> getDays() {
         return days;
     }
 
-    public Day getDayFromLDT(LocalDateTime ldt){
+    Day getDayFromLDT(LocalDateTime ldt){
         for (Day day : getDays()){
             if (day.getLdt().getDayOfMonth() == ldt.getDayOfMonth() && day.getMonthNbr() == ldt.getMonthValue() && day.getLdt().getYear() == ldt.getYear()){
                 return day;
@@ -39,7 +39,7 @@ public class Month{
         return null;
     }
 
-    public String getString() {
+    String getString() {
         switch (monthNb) {
             case 1:
                 return "January";

@@ -57,6 +57,7 @@ public class HabitView extends AnchorPane implements ViewListener {
     public boolean getIsExpanded() {
         return isExpanded;
     }
+
     public void setIsExpanded(boolean state) { isExpanded = state;}
 
 
@@ -69,7 +70,7 @@ public class HabitView extends AnchorPane implements ViewListener {
     }
 
 
-    public void edit(String msg){
+    private void edit(String msg){
         if(facade.habitExist(msg)) {
             for (HabitObjectView habitObjectView : habitsList) {
                 if (habitObjectView.getHabitID() == Integer.valueOf(msg)) {
@@ -144,7 +145,7 @@ public class HabitView extends AnchorPane implements ViewListener {
         isExpanded = false;
     }
 
-    public void visiable(){
+    public void visible(){
         for(HabitObjectView h : habitsList){
             h.showHabits();
         }
@@ -155,9 +156,7 @@ public class HabitView extends AnchorPane implements ViewListener {
     }
 
 
-    //List<CheckBox> checkboxes = new ArrayList<>();
-
-    public void updateHabitView(List<Integer> ids) {
+     public void updateHabitView(List<Integer> ids) {
         vBox.getChildren().clear();
         for (Integer id: ids){
             HabitObjectView habitObjectView = new HabitObjectView(id);
@@ -165,7 +164,6 @@ public class HabitView extends AnchorPane implements ViewListener {
             vBox.getChildren().add(habitObjectView);
             habitObjectView.updateElementView(id);
             habitsList.add(habitObjectView);
-         //   hide();
         }
     }
 

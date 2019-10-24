@@ -1,6 +1,6 @@
 package model;
 
-public interface IHandler {
+ interface IHandler {
     void remove(int id);
 
 }

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Stack;
 
-public class Factory {
+class Factory {
     private static int todoIdCount = 0;
     private static int habitIdCount = 0;
     private static int eventIdCount = 0;
@@ -15,7 +15,7 @@ public class Factory {
      * (Used by getDbTodo, getDbDoneTodo in TxtDbCommunicator)
      * @param todoIdCount
      */
-    public static void setTodoIdCount(int todoIdCount) {
+    static void setTodoIdCount(int todoIdCount) {
         Factory.todoIdCount = todoIdCount;
     }
 
@@ -24,7 +24,7 @@ public class Factory {
      * (Used by getDbHabit in TxtDbCommunicator)
      * @param habitIdCount
      */
-    public static void setHabitIdCount(int habitIdCount) {
+    static void setHabitIdCount(int habitIdCount) {
         Factory.habitIdCount = habitIdCount;
     }
 
@@ -33,7 +33,7 @@ public class Factory {
      * (Used by getDbEvent in TxtDbCommunicator)
      * @param eventIdCount
      */
-    public static void setEventIdCount(int eventIdCount) {
+    static void setEventIdCount(int eventIdCount) {
         Factory.eventIdCount = eventIdCount;
     }
 
@@ -42,7 +42,7 @@ public class Factory {
      * (Used by getDbNote in TxtDbCommunicator)
      * @param noteIdCount
      */
-    public static void setNoteIdCount(int noteIdCount) {
+    static void setNoteIdCount(int noteIdCount) {
         Factory.noteIdCount = noteIdCount;
     }
 
@@ -57,7 +57,7 @@ public class Factory {
      * @param color
      * @return
      */
-    public static Event createAdvEvent(LocalDateTime start, LocalDateTime end, String title, String location, String desc, String color){
+    static Event createAdvEvent(LocalDateTime start, LocalDateTime end, String title, String location, String desc, String color){
         eventIdCount++;
         Event createdAdvEvent = new Event(eventIdCount,start, end, title,location,desc,color);
         return createdAdvEvent;
@@ -70,7 +70,7 @@ public class Factory {
      * @param day
      * @return
      */
-    public static Note createNote(String description, LocalDate day){
+    static Note createNote(String description, LocalDate day){
         noteIdCount++;
         Note createdNote = new Note(noteIdCount, description, day);
         return createdNote;
@@ -82,7 +82,7 @@ public class Factory {
      * @param title
      * @return
      */
-    public static Todo createTodo(String title){
+    static Todo createTodo(String title){
         todoIdCount++;
         Todo createTodo = new Todo(title,todoIdCount);
         return createTodo;
@@ -98,7 +98,7 @@ public class Factory {
      * @param dateRecord
      * @return
      */
-    public static Habit createHabit( String title, Stack doneHabits, int bestStreak, String color,LocalDate dateRecord){
+    static Habit createHabit(String title, Stack doneHabits, int bestStreak, String color, LocalDate dateRecord){
         habitIdCount++;
         Habit createHabit = new Habit(habitIdCount,title,doneHabits,bestStreak,color, dateRecord);
         return createHabit;

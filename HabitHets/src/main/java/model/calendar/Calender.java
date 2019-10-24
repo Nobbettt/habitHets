@@ -1,4 +1,4 @@
-package model;
+package model.calendar;
 
 import java.time.LocalDate;
 import java.time.temporal.TemporalField;
@@ -36,7 +36,7 @@ public class Calender {
      * @return
      */
 
-    public List<Year> getYears(int yearsBack, int yearsForward) {
+    List<Year> getYears(int yearsBack, int yearsForward) {
         List<Year> tmpYears = new ArrayList<>();
         for (int i = -yearsBack; i <= yearsForward; i++){
             Year y = new Year(LocalDateTime.now().getYear()+i);
@@ -50,11 +50,12 @@ public class Calender {
      *
      * @return The list of years.
      */
+
     private List<Year> getYears() {
         return years;
     }
 
-    public Year getYear(int year){
+    Year getYear(int year){
         for (Year tmpYear: getYears()){
             if (tmpYear.getMonths().get(0).getDays().get(0).getYearNbr() == year){
                 return tmpYear;
@@ -69,7 +70,7 @@ public class Calender {
      * @return the week that a given date is in.
      */
 
-    public List<Day> getWeekFromLDT(LocalDateTime ldt){
+    List<Day> getWeekFromLDT(LocalDateTime ldt){
         List<Day> weekList = new ArrayList<>();
 
         int dayInWeek = ldt.getDayOfWeek().getValue()-1;
@@ -89,7 +90,7 @@ public class Calender {
      * @return which day the given date is.
      */
 
-    public Day getDayFromLDT(LocalDateTime ldt){
+    Day getDayFromLDT(LocalDateTime ldt){
         Year toYear = getYear(ldt.getYear());
         Month toMonth = toYear.getMonthFromLDT(ldt);
         return toMonth.getDayFromLDT(ldt);
@@ -111,7 +112,7 @@ public class Calender {
      * @param localDateTime a date
      * @return which month a given date is in
      */
-    public Month getMonth(LocalDateTime localDateTime){
+    Month getMonth(LocalDateTime localDateTime){
         List<Month> months = getYearFromLDT(localDateTime);
         return months.get(localDateTime.getMonthValue()-1);
     }

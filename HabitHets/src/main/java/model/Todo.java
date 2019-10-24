@@ -8,21 +8,21 @@ public class Todo {
     private String title;
     private int id;
 
-    public Todo(String title, int id) {
+    Todo(String title, int id) {
         this.title = title;
         this.id = id;
     }
 
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
         this.title = title;
     }
 
-    public int getId() {
+    int getId() {
         return id;
     }
 

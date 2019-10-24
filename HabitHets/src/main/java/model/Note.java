@@ -25,27 +25,27 @@ public class Note {
         this.id = id;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    void setDescription(String description) {
         this.description = description;
     }
 
-    public int getId(){
+    int getId(){
         return id;
     }
 
-    public LocalDate getDay() {
+    LocalDate getDay() {
         return day;
     }
 
-    public void setId(int id) {
+    void setId(int id) {
         this.id = id;
     }
 
-    public void setDay(LocalDate day) {
+    void setDay(LocalDate day) {
         this.day = day;
     }
 

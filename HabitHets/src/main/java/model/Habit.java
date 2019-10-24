@@ -37,7 +37,7 @@ public class Habit {
         this.dateRecord = dateRecord;
     }
 
-    public LocalDate getDateRecord() {
+    LocalDate getDateRecord() {
         return dateRecord;
     }
 
@@ -53,11 +53,11 @@ public class Habit {
         this.title = title;
     }
 
-    public int getBestStreak() {
+    int getBestStreak() {
         return bestStreak;
     }
 
-    public void setBestStreak(int bestStreak) {
+    void setBestStreak(int bestStreak) {
         this.bestStreak = bestStreak;
     }
 
@@ -69,7 +69,7 @@ public class Habit {
         this.color = color;
     }
 
-    public Stack<DoneHabit> getDoneHabits() {
+    Stack<DoneHabit> getDoneHabits() {
         return doneHabits;
     }
 
@@ -87,7 +87,7 @@ public class Habit {
      * @return
      */
 
-    public int getStreak() {
+    int getStreak() {
         int streak = 0;
         LocalDate date;
         if(isCheckedToday()) {
@@ -122,7 +122,7 @@ public class Habit {
      * a done-habit is added to the stack and bestStreak() is called
      * is case of an update.
      */
-    public void onClickHabit() {
+    void onClickHabit() {
         if(isCheckedToday()) {
             if(getStreak() == bestStreak && dateRecord.equals(LocalDate.now())) {
                 bestStreak--;
@@ -143,7 +143,7 @@ public class Habit {
      * by looking at the Stack and comparing it to today's date.
      * @return
      */
-    public boolean isCheckedToday() {
+    boolean isCheckedToday() {
         if (doneHabits.size() > 0) {
             LocalDate lastCheck = doneHabits.peek().getDate();
             return LocalDate.now().equals(lastCheck);
@@ -157,7 +157,7 @@ public class Habit {
      * by looking at the Stack and comparing it to yesterday's date.
      * @return
      */
-    public boolean isCheckedYesterday() {
+    boolean isCheckedYesterday() {
         if (doneHabits.size() > 0) {
             LocalDate lastCheck = doneHabits.get(doneHabits.size()-1).getDate();
             return LocalDate.now().minusDays(1).equals(lastCheck);
@@ -171,7 +171,7 @@ public class Habit {
      * and one want to check if it might be the new
      * best streak.
      */
-    public void bestStreak() {
+    void bestStreak() {
         if(getStreak() > bestStreak){
             bestStreak = getStreak();
             dateRecord = LocalDate.now();

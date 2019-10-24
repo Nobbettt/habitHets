@@ -43,14 +43,4 @@ public class EventView extends AnchorPane {
         controllerCalendar.editEventPressed(id);
 
     }
-
-    public void addListener(ViewListener l){
-        listeners.add(l);
-
-    }
-
-    private void notifyListener(String msg){
-        for (ViewListener l : listeners)
-            l.actOnUpdate(msg);
-    }
 }

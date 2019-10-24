@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
 import javafx.util.Duration;
-import model.Calender;
+import model.calendar.Calender;
 import model.Facade;
 import model.Listener;
 import model.TxtDbCommunicator;
@@ -149,15 +149,15 @@ public class ControllerCalendar implements Initializable, Listener {
     private void setupHabit() {
         habitPane = new AnchorPane();
         mainPane.getChildren().add(habitPane);
-        habitPane.setPrefWidth(200);
-        habitPane.setMinWidth(200);
-        habitPane.setMaxWidth(200);
+        habitPane.setPrefWidth(70);
+        habitPane.setMinWidth(70);
+        habitPane.setMaxWidth(70);
 
         toggleHabitBtn.toFront();
         double centerY = getCenterHeightOfMainGrid();
         toggleHabitBtn.setTranslateY(centerY);
 
-        fitItem(mainPane, toggleHabitBtn, -1, -1, -1, 200);
+        fitItem(mainPane, toggleHabitBtn, -1, -1, -1, 70);
         fitItem(mainPane, habitPane, 70, -1, 0, 0);
         facade.addHabitListener(this);
 
@@ -165,7 +165,8 @@ public class ControllerCalendar implements Initializable, Listener {
         fitItem(habitPane, habitView, 0, 0, 0, 0);
 
         habitView.updateHabitView(facade.getAllHabitIds());
-
+        habitView.hide();
+        toggleHabitBtn.setText(">");
     }
 
     /**
@@ -192,7 +193,7 @@ public class ControllerCalendar implements Initializable, Listener {
     private void setupCalender() {
         calendarPane = new AnchorPane();
         mainPane.getChildren().add(calendarPane);
-        fitItem(mainPane, calendarPane, 70, 200, 0, 200);
+        fitItem(mainPane, calendarPane, 70, 200, 0, 70);
         addButton.toFront();
         AnchorPane ap = new AnchorPane();
         calendarPane.getChildren().add(ap);
@@ -432,7 +433,7 @@ public class ControllerCalendar implements Initializable, Listener {
             widthValue = 200;
             toggleHabitBtn.setText("<");
             habitView.setIsExpanded(true);
-            habitView.visiable();
+            habitView.visible();
         }
 
         habitPane.setPrefWidth(widthValue);

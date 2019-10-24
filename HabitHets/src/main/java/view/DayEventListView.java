@@ -18,9 +18,11 @@ class DayEventListView extends StackPane {
     private double hHeight;
     private double vBoxWidth;
     private LocalDateTime ldt;
+    private Facade facade;
 
     DayEventListView(LocalDateTime ldt) {
         this.ldt = ldt;
+        this.facade = new Facade();
         hBoxList = new ArrayList<>();
         vBox = new VBox();
         for (int i = 0; i < 10; i++) {
@@ -49,7 +51,6 @@ class DayEventListView extends StackPane {
     }
 
     void updateDay(LocalDateTime ldt, double vBoxWidth) {
-        Facade facade = new Facade();
         this.vBoxWidth = vBoxWidth;
         this.ldt = ldt;
         for (HBox hBox : hBoxList) {
@@ -60,24 +61,33 @@ class DayEventListView extends StackPane {
         for (int id : facade.getAllIdsOfDay(ldt))
             if (this.ldt.getDayOfYear() == ldt.getDayOfYear()) {
                 i++;
-                EventView a = new EventView((id));
-                a.setTranslateY((facade.getEventStarttime(id).getHour() * 120) + (facade.getEventStarttime(id).getMinute()) * 2); //todo WTF
-                double height = calculateLenght(id) * 2;
-                a.setPrefHeight(height);
-                double width = this.vBoxWidth/facade.calculateOverlaps(ldt,id);
-                a.setPrefWidth((width));
-                if (calculateTranslateX(id) != 0) {
-                    if (overlap == 3) {
-                        a.setTranslateX(calculateTranslateX(id) * 3);
-                    } else if (overlap == 2) {
-                        a.setTranslateX(calculateTranslateX(id) * 2);
-                    } else if (overlap == 1) {
-                        a.setTranslateX(calculateTranslateX(id));
-                    }
-                    overlap++;
-                }
-                hBoxList.get(i - 1).getChildren().add(a);
+                EventView eventView = new EventView((id));
+                translateYEvent(eventView, id);
+                overlap = translateXEvent(id, eventView, overlap);
+                hBoxList.get(i - 1).getChildren().add(eventView);
             }
+    }
+
+    private void translateYEvent(EventView eventView, int id){
+        eventView.setTranslateY((facade.getEventStarttime(id).getHour() * 120) + (facade.getEventStarttime(id).getMinute()) * 2); //todo WTF
+        double height = calculateLenght(id) * 2;
+        eventView.setPrefHeight(height);
+        double width = this.vBoxWidth/facade.calculateOverlaps(ldt,id);
+        eventView.setPrefWidth((width));
+    }
+
+    private int translateXEvent(int id, EventView eventView, int overlap){
+        if (calculateTranslateX(id) != 0) {
+            if (overlap == 3) {
+                eventView.setTranslateX(calculateTranslateX(id) * 3);
+            } else if (overlap == 2) {
+                eventView.setTranslateX(calculateTranslateX(id) * 2);
+            } else if (overlap == 1) {
+                eventView.setTranslateX(calculateTranslateX(id));
+            }
+            overlap++;
+        }
+        return overlap;
     }
 
     void updateTimeline(int hour, int minute) {

@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import model.Calender;
+import model.calendar.Calender;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -15,7 +15,6 @@ import java.util.List;
 public class YearView extends AnchorPane implements ViewAble {
     @FXML private ScrollPane yearScroll;
     @FXML private GridPane yearGrid;
-    private List<MonthView> months = new ArrayList(); //guess its gonna be something like this.... :/ todo
     private List<MonthInYear> monthInYears = new ArrayList<>();
 
     public YearView() {
@@ -37,7 +36,6 @@ public class YearView extends AnchorPane implements ViewAble {
                 MonthInYear miy = new MonthInYear();
                 monthInYears.add(miy);
                 yearGrid.add(miy, j, i);
-                // months.add(month); add created month to list months which doesnt exist todo
             }
         }
     }
@@ -48,10 +46,6 @@ public class YearView extends AnchorPane implements ViewAble {
             LocalDateTime l = Calender.getInstant().getLdtYearFromDate(currentDay).get(i);
             monthInYears.get(i).updateView(Calender.getInstant().getLdtMonthFromDate(l), Calender.getInstant().getMonthString(l));
         }
-        /*
-        for(MonthView month : months) {
-            // update months with method implemented in monthView
-        }*/
 
     }
 

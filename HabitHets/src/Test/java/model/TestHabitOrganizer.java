@@ -1,9 +1,10 @@
-import model.HabitOrganizer;
+package model;
+
 import org.junit.Assert;
 import org.junit.Test;
 public class TestHabitOrganizer {
 
-    HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
+    MockHabitOrganizer habitOrganizer = MockHabitOrganizer.getInstant();
 
     /**
      * A test-method for Add() in HabitOrganizer.
