@@ -127,7 +127,6 @@ public class ControllerCalendar implements Initializable, Listener {
         setupTodo();
         setupHabit();
         setUpChoiceBoxes();
-
         renderWeek();
         updateTimeline();
     }

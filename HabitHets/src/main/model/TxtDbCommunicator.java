@@ -2,8 +2,6 @@ package main.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -33,20 +31,6 @@ public class TxtDbCommunicator {
             e.printStackTrace();
         }
         return text;
-    }
-
-    /**
-     * Function creates a new txt file (overwrites a existing file if name already taken)
-     * Sets the new files content to newTxt string parameter
-     * @param file
-     * @param newTxt
-     */
-    public static void writeFile(String file, String newTxt) {
-        try {
-            Files.write( Paths.get("HabitHets/src/main/model/db/"+file), newTxt.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
