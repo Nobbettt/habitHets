@@ -1,5 +1,3 @@
-import javafx.application.Application;
-import main.java.application.HabitHets;
 import main.model.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,7 +30,7 @@ public class TestTxtDbCommunicator {
 
     @Test
     public void testTimeLine() {
-        Application instance = new HabitHets();
+        //Application instance = new HabitHets();
 
         /*
         cc.updateTimeline();
