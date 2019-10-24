@@ -14,9 +14,10 @@ public class NoteTest{
     public void addNoteTest() {
         NoteOrganizer noteOrganizer = NoteOrganizer.getInstance();
         noteOrganizer.addNote("hej", LocalDate.now());
-        noteOrganizer.addNote("hej", LocalDate.now());
+        noteOrganizer.addNote("he", LocalDate.now());
         noteOrganizer.addNote("hej", LocalDate.now());
         Assert.assertEquals(3, noteOrganizer.getNotes().size());
+        Assert.assertEquals(noteOrganizer.getNotes().get(1).getDescription(), "he");
         Assert.assertEquals(1, noteOrganizer.getNotes().get(0).getId());
         Assert.assertEquals(2, noteOrganizer.getNotes().get(1).getId());
         Assert.assertEquals(3, noteOrganizer.getNotes().get(2).getId());
@@ -24,7 +25,7 @@ public class NoteTest{
 
 
     /**
-     * Test if the remove method works.
+     * Test if the remove method works. Also test the getters and setters.
      */
     @Test
     public void removeNoteTest(){
@@ -34,6 +35,11 @@ public class NoteTest{
         Assert.assertEquals(2,noteOrganizer.getNotes().size());
         noteOrganizer.remove(1);
         Assert.assertEquals(1,noteOrganizer.getNotes().size());
+        Assert.assertEquals(LocalDate.now(),noteOrganizer.getNotes().get(0).getDay());
+        noteOrganizer.getNotes().get(0).setId(4);
+        Assert.assertEquals(4, noteOrganizer.getNotes().get(0).getId());
+        noteOrganizer.getNotes().get(0).setDay(LocalDate.of(2019,1,1));
+        Assert.assertEquals(LocalDate.of(2019,1,1), noteOrganizer.getNotes().get(0).getDay());
     }
 
     @Test
