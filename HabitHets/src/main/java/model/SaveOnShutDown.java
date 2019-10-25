@@ -9,7 +9,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * Writes every object to txt files
+ */
 public class SaveOnShutDown {
+    private static final String[] conflicts = {"<end>", "<//>"};
 
     /**
      * Function creates a new txt file (overwrites a existing file if name already taken)
@@ -18,7 +22,6 @@ public class SaveOnShutDown {
      * @param newTxt
      */
     private static void writeFile(String file, String newTxt) {
-
         Path currentRelativePath = Paths.get("");
         String relativePath = currentRelativePath.toAbsolutePath().toString();
 
@@ -29,7 +32,6 @@ public class SaveOnShutDown {
         }
     }
 
-    private static final String[] conflicts = {"<end>", "<//>"};
     /**
      * Access function to save all the objects (Todos, DoneTodos, Habits, Notes, Events) on shutdown.
      */

@@ -4,10 +4,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Static class that counts number of overlaps given an id that used to find event
+ */
 class OverlapsCounter {
 
+    /**
+     * Function calculates
+     * @param dateTime
+     * @param id
+     * @return
+     */
     static double countOverlaps(LocalDateTime dateTime, int id) {
-
         double i = 0;
         List<Event> overlaps = new ArrayList<>();
         List<Event> overlaps2 = new ArrayList<>();

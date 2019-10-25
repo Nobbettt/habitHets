@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
  * This class is responsible for the time stamps in the left column, that can be found in the expanded day- and week view
  */
 class HourColumnView extends VBox {
+
     /**
      * Fills a container (VBox) with timestamp objects
      * Uses properties from the real hour vies object to mock its diemsions

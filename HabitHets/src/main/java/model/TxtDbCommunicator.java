@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
+/**
+ * Class reads content from txt files and creates objects from them
+ */
 public class TxtDbCommunicator {
 
     /**

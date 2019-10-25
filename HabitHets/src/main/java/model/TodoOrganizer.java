@@ -3,16 +3,14 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * This class contains methods and lists that affect a todoo.
  */
-
 public class TodoOrganizer implements IOrganizer {
     private static TodoOrganizer instant;
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
-
+    private static List<Listener> listeners = new ArrayList<>();
 
     /**
      * The constructor of TodoOrganizer sets the list of todos and doneTodos.
@@ -22,10 +20,18 @@ public class TodoOrganizer implements IOrganizer {
         doneTodoList = new ArrayList<>();
     }
 
+    /**
+     * Sets local todolist list to the receiving list parameter
+     * @param todoList
+     */
     static void setTodoList(List<Todo> todoList) {
         TodoOrganizer.todoList = todoList;
     }
 
+    /**
+     * Sets local doneTodoList list to the receiving list parameter
+     * @param doneTodoList
+     */
     static void setDoneTodoList(List<Todo> doneTodoList) {
         TodoOrganizer.doneTodoList = doneTodoList;
     }
@@ -35,7 +41,6 @@ public class TodoOrganizer implements IOrganizer {
      * If there is an instant, another one will not be created.
      * If there is not, an instant will be created.
      */
-
     public static TodoOrganizer getInstant() {
         if (instant == null) {
             instant = new TodoOrganizer();
@@ -64,7 +69,6 @@ public class TodoOrganizer implements IOrganizer {
      * that the id does not exist.
      * @param id
      */
-
     @Override
     public void remove(int id) {
         for (Todo todo: todoList){
@@ -97,14 +101,26 @@ public class TodoOrganizer implements IOrganizer {
         }
     }
 
+    /**
+     * Returns todolist
+     * @return
+     */
     static List<Todo> getTodoList() {
         return todoList;
     }
 
+    /**
+     * Returns doneTOdoList
+     * @return
+     */
     static List<Todo> getDoneTodoList() {
         return doneTodoList;
     }
 
+    /**
+     * Returns todo ids
+     * @return
+     */
     static List<Integer> getTodoIds(){
         List<Integer> ids = new ArrayList<>();
         for (Todo todo : getTodoList()){
@@ -113,6 +129,10 @@ public class TodoOrganizer implements IOrganizer {
         return ids;
     }
 
+    /**
+     * Returns donetodo ids
+     * @return
+     */
     static List<Integer> getDoneTodoIds(){
         List<Integer> ids = new ArrayList<>();
         for (Todo todo : getDoneTodoList()){
@@ -121,8 +141,11 @@ public class TodoOrganizer implements IOrganizer {
         return ids;
     }
 
-
-
+    /**
+     * Returns todo given an id
+     * @param id
+     * @return
+     */
     static Todo getTodoOfId(int id){
         for (Todo todo : getTodoList()){
             if (todo.getId() == id){
@@ -132,6 +155,11 @@ public class TodoOrganizer implements IOrganizer {
         return null;
     }
 
+    /**
+     * Returns doneTodo given an id
+     * @param id
+     * @return
+     */
     static Todo getDoneTodoOfId(int id){
         for (Todo todo : getDoneTodoList()){
             if (todo.getId() == id){
@@ -156,19 +184,26 @@ public class TodoOrganizer implements IOrganizer {
         }
     }
 
-    private static List<Listener> listeners = new ArrayList<>();
-
-
+    /**
+     * Adds listener to listeners list
+     * @param l
+     */
     static void addListener(Listener l){
         listeners.add(l);
-
     }
 
+    /**
+     * Notifies all listeners in listeners list
+     */
     private static void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();
     }
 
+    /**
+     * Moves a donetodo object back to list of todo's
+     * @param id
+     */
     static void moveBackDoneTodo(int id) {
         for (int i = 0; i < doneTodoList.size(); i++) {
             if (doneTodoList.get(i).getId() == id) {
