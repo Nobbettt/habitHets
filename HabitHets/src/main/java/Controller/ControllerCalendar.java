@@ -88,7 +88,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      */
 
     public ControllerCalendar() {
-        // to change -->
         TxtDbCommunicator.importDb();
 
         masterDateTime = LocalDateTime.now();
@@ -710,7 +709,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
             LocalDateTime to = LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), toHour, toMinute);
             checkEditInput();
             facade.editEvent(Integer.valueOf(idLabel.getText()), editTitle.getText(), editLocation.getText(), editDesc.getText(), from, to);
-
         }
         updateCurrentView();
         editPage.toBack();
