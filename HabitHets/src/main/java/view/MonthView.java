@@ -39,7 +39,7 @@ public class MonthView extends StackPane implements ViewAble {
             throw new RuntimeException(exception);
         }
         setupMonth();
-        this.calender = Calender.getInstance();
+        this.calender = new Calender();
     }
 
     /**
@@ -81,7 +81,7 @@ public class MonthView extends StackPane implements ViewAble {
         LocalDateTime firstday = ldtList.get(0);
         int firstDate = firstday.getDayOfWeek().getValue();
 
-        List<LocalDateTime> prevMonth = Calender.getInstance().getLdtMonthFromDate(firstday.minusMonths(1));
+        List<LocalDateTime> prevMonth = calender.getLdtMonthFromDate(firstday.minusMonths(1));
         int lastDayPrevMonth  = prevMonth.get(prevMonth.size()-1).getDayOfMonth();
 
         drawPreviousMonth(lastDayPrevMonth, firstDate);
@@ -157,7 +157,7 @@ public class MonthView extends StackPane implements ViewAble {
      * @param ldtList
      */
     private void drawWeekNbrs(List<LocalDateTime> ldtList) {
-        int w = Calender.getInstance().getWeekFromLdt(ldtList.get(0));
+        int w = calender.getWeekFromLdt(ldtList.get(0));
         for (Label l : weeknb) {
             l.setText("" + w++);
         }

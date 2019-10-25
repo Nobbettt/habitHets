@@ -94,7 +94,7 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
 
         masterDateTime = LocalDateTime.now();
         facade = new Facade();
-        calender = Calender.getInstance();
+        calender = new Calender();
         yearView = new YearView();
         weekView = new WeekView();
         habitView = new HabitView();

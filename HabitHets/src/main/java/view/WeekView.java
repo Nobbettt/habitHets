@@ -47,7 +47,7 @@ public class WeekView extends StackPane implements ViewAble {
             throw new RuntimeException(exception);
         }
 
-        this.calender = Calender.getInstance();
+        this.calender = new Calender();
         this.week = calender.getLdtWeekFromLdt(LocalDateTime.now());
         setUpWeek();
     }

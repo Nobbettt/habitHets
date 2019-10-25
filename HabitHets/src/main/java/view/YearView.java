@@ -19,6 +19,7 @@ public class YearView extends AnchorPane implements ViewAble {
     @FXML private ScrollPane yearScroll;
     @FXML private GridPane yearGrid;
     private List<MonthInYear> monthInYears = new ArrayList<>();
+    private Calender calender;
 
     /**
      * Imports fxml file and sets this class as the fx controller and root of the fxml file
@@ -34,6 +35,7 @@ public class YearView extends AnchorPane implements ViewAble {
             throw new RuntimeException(exception);
         }
         setUpYear();
+        calender = new Calender();
     }
 
     /**
@@ -58,8 +60,8 @@ public class YearView extends AnchorPane implements ViewAble {
     @Override
     public void updateView(LocalDateTime currentDay) {
         for(int i=0; i< monthInYears.size(); i++){
-            LocalDateTime l = Calender.getInstance().getLdtYearFromDate(currentDay).get(i);
-            monthInYears.get(i).updateView(Calender.getInstance().getLdtMonthFromDate(l), Calender.getInstance().getMonthString(l));
+            LocalDateTime l = calender.getLdtYearFromDate(currentDay).get(i);
+            monthInYears.get(i).updateView(calender.getLdtMonthFromDate(l), calender.getMonthString(l));
         }
     }
 
