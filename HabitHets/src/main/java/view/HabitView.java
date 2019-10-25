@@ -61,26 +61,44 @@ public class HabitView extends AnchorPane implements ViewListener {
         isExpanded = true;
     }
 
-
+    /**
+     * returns if the habit view is expanded or not
+     * @return
+     */
     public boolean getIsExpanded() {
         return isExpanded;
     }
 
+    /**
+     * Sets the local is expanded boolean variable to either false or true
+     * @param state
+     */
     public void setIsExpanded(boolean state) { isExpanded = state;}
 
+    /**
+     * Sets visibility of create new habit popup
+     * @param visibility
+     */
     private void setVisibilityAdd(Boolean visibility){
         create.setVisible(visibility);
     }
 
+    /**
+     * sets visibility of edit habit pane
+     * @param visibility
+     */
     private void setVisibilityEdit(Boolean visibility){
         save.setVisible(visibility);
     }
 
-
-    private void edit(String msg){
-        if(facade.habitExist(msg)) {
+    /**
+     *  Edits a habit object given a id
+     * @param id
+     */
+    private void edit(String id){
+        if(facade.habitExist(id)) {
             for (HabitObjectView habitObjectView : habitsList) {
-                if (habitObjectView.getHabitID() == Integer.valueOf(msg)) {
+                if (habitObjectView.getHabitID() == Integer.valueOf(id)) {
                     editing = habitObjectView;
                 }
             }
@@ -90,14 +108,17 @@ public class HabitView extends AnchorPane implements ViewListener {
             create.toBack();
             setVisibilityEdit(true);
             save.toFront();
-            title.setText(facade.getHabitTitle(Integer.valueOf(msg)));
-            idLbl.setText(msg);
-            Color c = Color.valueOf(facade.getHabitColor(Integer.valueOf(msg)));
+            title.setText(facade.getHabitTitle(Integer.valueOf(id)));
+            idLbl.setText(id);
+            Color c = Color.valueOf(facade.getHabitColor(Integer.valueOf(id)));
             colorPicker.setValue(c);
             habitModifyTypeLabel.setText("Edit Habit");
         }
     }
 
+    /**
+     * Pops up add new habit popup on click on "+" add button
+     */
     @FXML
     private void addNewHabit(){
         title.clear();
@@ -111,6 +132,9 @@ public class HabitView extends AnchorPane implements ViewListener {
         create.toFront();
     }
 
+    /**
+     * Creates a new Habit from inputs on button click on "create" button
+     */
     @FXML
     private void create(){
         closeNewHabitWindow();
@@ -122,6 +146,9 @@ public class HabitView extends AnchorPane implements ViewListener {
         colorPicker.setValue(Color.WHITE);
     }
 
+    /**
+     * Saves edited changes to a habit object on click on "edit" btn
+     */
     @FXML
     private void save(){
         closeNewHabitWindow();
@@ -134,12 +161,18 @@ public class HabitView extends AnchorPane implements ViewListener {
         colorPicker.setValue(Color.WHITE);
     }
 
+    /**
+     * Closes habit pop up on click on "close" button
+     */
     @FXML
     private void closeNewHabitWindow(){
         newHabit.setVisible(false);
         newHabit.toBack();
     }
 
+    /**
+     * Hides all habit elements on click on toggle button (collapse habit view)
+     */
     public void hide(){
         for(HabitObjectView h : habitsList){
             h.hideHabits();
@@ -150,6 +183,9 @@ public class HabitView extends AnchorPane implements ViewListener {
         isExpanded = false;
     }
 
+    /**
+     * Shows all habit elements on click on toggle button (expand habit view)
+     */
     public void visible(){
         for(HabitObjectView h : habitsList){
             h.showHabits();
@@ -160,6 +196,10 @@ public class HabitView extends AnchorPane implements ViewListener {
         isExpanded = true;
     }
 
+    /**
+     * Updates habit views containing habits on call
+     * @param ids
+     */
      public void updateHabitView(List<Integer> ids) {
         vBox.getChildren().clear();
         for (Integer id: ids){
@@ -171,16 +211,30 @@ public class HabitView extends AnchorPane implements ViewListener {
         }
     }
 
+    /**
+     * Helper method to toHexString to correctly format values
+     * @param val
+     * @return
+     */
     private String format(double val) {
         String in = Integer.toHexString((int) Math.round(val * 255));
         return in.length() == 1 ? "0" + in : in;
     }
 
+    /**
+     * Converts java Color object to hex color in String format
+     * @param value
+     * @return
+     */
     private String toHexString(Color value) {
         return "#" + (format(value.getRed()) + format(value.getGreen()) + format(value.getBlue()) + format(value.getOpacity()))
                 .toUpperCase();
     }
 
+    /**
+     * Updates view with help of listener listening to changes
+     * @param msg
+     */
     @Override
     public void actOnUpdate(String msg) {
         edit(msg);

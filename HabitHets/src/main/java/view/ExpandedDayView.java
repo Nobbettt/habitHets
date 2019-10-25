@@ -90,10 +90,12 @@ public class ExpandedDayView extends StackPane implements ViewAble {
 
     }
 
+    /**
+     * Updates note from text fields content
+     */
     @FXML
     private void notehandle() {
         facade.updateNote(noteField.getText(), day);
     }
-
 }
 

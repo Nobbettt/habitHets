@@ -65,6 +65,11 @@ class DayEventListView extends StackPane {
         hHeight = new HourView().getPrefHeight();
     }
 
+    /**
+     * Updates a days containing events
+     * @param ldt
+     * @param vBoxWidth
+     */
     void updateDay(LocalDateTime ldt, double vBoxWidth) {
         this.vBoxWidth = vBoxWidth;
         this.ldt = ldt;
@@ -83,6 +88,11 @@ class DayEventListView extends StackPane {
             }
     }
 
+    /**
+     * Sets an events dimensions given an id and eventView object
+     * @param eventView
+     * @param id
+     */
     private void translateYEvent(EventView eventView, int id){
         eventView.setTranslateY((facade.getEventStarttime(id).getHour() * 120) + (facade.getEventStarttime(id).getMinute()) * 2); //todo WTF
         double height = calculateLenght(id) * 2;
@@ -91,6 +101,13 @@ class DayEventListView extends StackPane {
         eventView.setPrefWidth((width));
     }
 
+    /**
+     * Checks how many overlaps a eventView has in the day view
+     * @param id
+     * @param eventView
+     * @param overlap
+     * @return
+     */
     private int translateXEvent(int id, EventView eventView, int overlap){
         if (calculateTranslateX(id) != 0) {
             if (overlap == 3) {
@@ -105,6 +122,11 @@ class DayEventListView extends StackPane {
         return overlap;
     }
 
+    /**
+     * Updates the time lines position given a hour and minute count
+     * @param hour
+     * @param minute
+     */
     void updateTimeline(int hour, int minute) {
         double timeHeight = 0;
         if (hour < 12) {
@@ -118,12 +140,21 @@ class DayEventListView extends StackPane {
         tl.setTranslateY(timeHeight);
     }
 
+    /**
+     * Calculates an events length given an id
+     * @param id
+     * @return
+     */
     private double calculateLenght(int id) {
         Facade facade = new Facade();
         return facade.getLength(id);
-
     }
 
+    /**
+     * Calculates an events width given an id
+     * @param id
+     * @return
+     */
     private double calculateTranslateX(int id) {
         Facade facade = new Facade();
         double x = vBoxWidth/facade.calculateOverlaps(ldt,id);

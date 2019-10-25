@@ -41,6 +41,11 @@ class MonthInYear extends AnchorPane  {
         setup();
     }
 
+    /**
+     * Update method called from year view to update the months content
+     * @param list
+     * @param monthName
+     */
     void updateView(List<LocalDateTime> list, String monthName) {
         LocalDateTime firstDay = list.get(0);
         int k = firstDay.getDayOfWeek().getValue()-1;
@@ -79,6 +84,11 @@ class MonthInYear extends AnchorPane  {
 
     }
 
+    /**
+     * Helper method that takes a parent and child node and fits the child to the parents width and height, (anchors it)
+     * @param parent
+     * @param child
+     */
     private void fitItem(AnchorPane parent, Node child) {
             setTopAnchor(child, 0.0);
             setRightAnchor(child, 0.0);

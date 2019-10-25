@@ -47,9 +47,11 @@ public class EventView extends AnchorPane {
         controllerCalendar = ControllerCalendar.instance;
     }
 
+    /**
+     * Is called upon click on event element and displays edit interface to user
+     */
     @FXML
     public void editEventClicked(){
         controllerCalendar.editEventPressed(id);
-
     }
 }

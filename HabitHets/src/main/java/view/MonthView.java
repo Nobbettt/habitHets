@@ -101,6 +101,11 @@ public class MonthView extends StackPane implements ViewAble {
         //nothing to see here, just a dumb function inherited from the ViewAble interface
     }
 
+    /**
+     * Fills the month views first days with days from the previous month
+     * @param lastDayPrevMonth
+     * @param firstDate
+     */
     private void drawPreviousMonth(int lastDayPrevMonth, int firstDate){
         for(int l = firstDate; 0 <= l; l--){
             monthdays.get(l).setText(String.valueOf(lastDayPrevMonth+2));
@@ -109,6 +114,11 @@ public class MonthView extends StackPane implements ViewAble {
         }
     }
 
+    /**
+     * Fills the month view with days from the given month
+     * @param ldtList
+     * @param firstDate
+     */
     private void drawCurrentMonth(List<LocalDateTime> ldtList, int firstDate){
         int j = 0;
         for(int i = firstDate-1; i< monthdays.size(); i++){
@@ -124,6 +134,11 @@ public class MonthView extends StackPane implements ViewAble {
         }
     }
 
+    /**
+     * Fills the month views last days with days from the next month
+     * @param ldtList
+     * @param firstDate
+     */
     private void drawNextMonth(List<LocalDateTime> ldtList, int firstDate){
         LocalDateTime firstday = ldtList.get(0);
         List<LocalDateTime> nextMonth = calender.getLdtMonthFromDate(firstday.plusMonths(1));
@@ -137,6 +152,10 @@ public class MonthView extends StackPane implements ViewAble {
         }
     }
 
+    /**
+     *  Fills the month view with week numbers
+     * @param ldtList
+     */
     private void drawWeekNbrs(List<LocalDateTime> ldtList) {
         int w = Calender.getInstance().getWeekFromLdt(ldtList.get(0));
         for (Label l : weeknb) {
