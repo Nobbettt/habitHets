@@ -54,8 +54,6 @@ public class TxtDbCommunicator {
         Factory.setTodoIdCount(highestId);
     }
 
-    // ALLT SKA VARA PRIVATE NEDANFÖR -->
-
     /**
      * This function reads the event.txt file -->
      * Divides the string up to separate objects -->

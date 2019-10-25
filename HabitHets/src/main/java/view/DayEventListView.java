@@ -109,11 +109,11 @@ class DayEventListView extends StackPane {
         double timeHeight = 0;
         if (hour < 12) {
             timeHeight = (12 - hour) * hHeight;
-            timeHeight -= (minute * 2);
+            timeHeight -= (minute * (hHeight/60));
             timeHeight *= -1;
         } else {
             timeHeight = (hour - 12) * hHeight;
-            timeHeight += (minute * 2);
+            timeHeight += (minute * (hHeight/60));
         }
         tl.setTranslateY(timeHeight);
     }
