@@ -328,6 +328,9 @@ public class TestFacade {
         Assert.assertEquals(1, HabitOrganizer.getHabitList().size());
     }
 
+    /**
+     * checks if a habit is removed correctly
+     */
     @Test
     public void removingAHabit(){
         Facade f = new Facade();
@@ -339,6 +342,9 @@ public class TestFacade {
         Assert.assertEquals(0, HabitOrganizer.getHabitList().size());
     }
 
+    /**
+     * checks if a certain habit exist
+     */
     @Test
     public void aHabitExist(){
         Facade f = new Facade();
@@ -349,6 +355,9 @@ public class TestFacade {
         Assert.assertTrue(f.habitExist(""+id));
     }
 
+    /**
+     * check if the right title is returned for a habit
+     */
     @Test
     public void getAHabtiTitle(){
         Facade f = new Facade();
@@ -358,6 +367,9 @@ public class TestFacade {
         Assert.assertEquals("HabitTitle",f.getHabitTitle(id));
     }
 
+    /**
+     * check if the right title is returned for a habit
+     */
     @Test
     public void getAHabtiColor(){
         Facade f = new Facade();
@@ -367,6 +379,9 @@ public class TestFacade {
         Assert.assertEquals(Color.BLACK.toString(),f.getHabitColor(id));
     }
 
+    /**
+     * check if the right streak is returned for a habit
+     */
     @Test
     public void getHabitStreak(){
         Facade f = new Facade();
@@ -378,6 +393,9 @@ public class TestFacade {
         Assert.assertEquals(1, f.getStreak(id));
     }
 
+    /**
+     * check if the right best streak is returned for a habit
+     */
     @Test
     public void getBestHabitStreak(){
         Facade f = new Facade();
@@ -391,6 +409,9 @@ public class TestFacade {
         Assert.assertEquals(1, f.getBestStreak(id));
     }
 
+    /**
+     * checks if habit is checked today for a certain habit
+     */
     @Test
     public void habitIsCheckedToday(){
         Facade f = new Facade();
@@ -403,6 +424,9 @@ public class TestFacade {
         Assert.assertTrue(f.habitIsCheckedToday(id));
     }
 
+    /**
+     * checks if a habits title is saved correctly after an edit
+     */
     @Test
     public void updatingAHabitTitle(){
         Facade f = new Facade();
@@ -414,6 +438,9 @@ public class TestFacade {
         Assert.assertEquals("NewHabitTitle", f.getHabitTitle(id));
     }
 
+    /**
+     * checks if a habits color is saved correctly after an edit
+     */
     @Test
     public void updatingAHabitColor(){
         Facade f = new Facade();
@@ -424,6 +451,4 @@ public class TestFacade {
         f.updateHabitColor(id, Color.CYAN.toString());
         Assert.assertEquals(Color.CYAN.toString(), f.getHabitColor(id));
     }
-
-
 }
