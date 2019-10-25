@@ -1,14 +1,13 @@
 package model;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class TestHabit {
-
-
 
     /**
      * A test-method for getStreak() in Habit.

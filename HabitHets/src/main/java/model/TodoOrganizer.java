@@ -137,7 +137,6 @@ public class TodoOrganizer implements IOrganizer {
             int limit = doneTodoList.size()-5;
             for (int a=0; a<limit ;a++){
                 doneTodoList.remove(0);
-                int id = doneTodoList.get(0).getId();
                 notifyListener();
             }
         }
@@ -159,6 +158,7 @@ public class TodoOrganizer implements IOrganizer {
     static void moveBackDoneTodo(int id) {
         for (int i = 0; i < doneTodoList.size(); i++) {
             if (doneTodoList.get(i).getId() == id) {
+                addTodo(getDoneTodoList().get(i).getTitle());
                 doneTodoList.remove(i);
                 notifyListener();
                 return;

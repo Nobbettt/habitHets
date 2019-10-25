@@ -1,7 +1,6 @@
 package model;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,6 +8,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NoteTest{
+    static NoteOrganizer noteOrganizer = new NoteOrganizer();
+    static List<Note> notes;
+
+
+    @BeforeClass
+    public static void setUp() {
+        TxtDbCommunicator.importDb();
+        notes = copyList();
+        noteOrganizer.setNotesList(new ArrayList<>());
+    }
+
+    @Before
+    public void clear(){
+        noteOrganizer.getNotes().clear();
+    }
+
+    @AfterClass
+    public static void resetClass(){
+        NoteOrganizer.setNotesList(notes);
+    }
+
+    private static List<Note> copyList(){
+        List<Note> tmpList = new ArrayList<>();
+        for (Note note : noteOrganizer.getNotes()){
+            tmpList.add(note);
+        }
+        return tmpList;
+    }
 
     /**
      * test if the add method works.
@@ -16,15 +43,12 @@ public class NoteTest{
     @Test
     public void addNoteTest() {
         clearList();
-        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("hej", LocalDate.now());
         noteOrganizer.addNote("he", LocalDate.now());
         noteOrganizer.addNote("hej", LocalDate.now());
         Assert.assertEquals(3, noteOrganizer.getNotes().size());
         Assert.assertEquals(noteOrganizer.getNotes().get(1).getDescription(), "he");
-        Assert.assertEquals(1, noteOrganizer.getNotes().get(0).getId());
-        Assert.assertEquals(2, noteOrganizer.getNotes().get(1).getId());
-        Assert.assertEquals(3, noteOrganizer.getNotes().get(2).getId());
+        resetList(notes);
     }
 
 
@@ -34,15 +58,16 @@ public class NoteTest{
     @Test
     public void removeNoteTest(){
         clearList();
-        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("hej",LocalDate.now());
         noteOrganizer.addNote("hej",LocalDate.now());
         Assert.assertEquals(2,noteOrganizer.getNotes().size());
-        noteOrganizer.remove(1);
+        int id = noteOrganizer.getNotes().get(1).getId();
+        noteOrganizer.remove(id);
         Assert.assertEquals(1,noteOrganizer.getNotes().size());
         Assert.assertEquals(LocalDate.now(),noteOrganizer.getNotes().get(0).getDay());
         noteOrganizer.getNotes().get(0).setDay(LocalDate.of(2019,1,1));
         Assert.assertEquals(LocalDate.of(2019,1,1), noteOrganizer.getNotes().get(0).getDay());
+        resetList(notes);
     }
 
     /**
@@ -52,10 +77,10 @@ public class NoteTest{
     @Test
     public void setDescriptionTest(){
         clearList();
-        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("hej", LocalDate.now());
         noteOrganizer.getNotes().get(0).setDescription("lol");
         Assert.assertEquals("lol",noteOrganizer.getNotes().get(0).getDescription());
+        resetList(notes);
     }
 
     /**
@@ -65,10 +90,10 @@ public class NoteTest{
     @Test
     public void testSetId(){
         clearList();
-        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("hej",LocalDate.now());
         noteOrganizer.getNotes().get(0).setId(4);
         Assert.assertEquals(4, noteOrganizer.getNotes().get(0).getId());
+        resetList(notes);
 
     }
 
@@ -78,9 +103,9 @@ public class NoteTest{
     @Test
     public void isNoteOnDayTest(){
         clearList();
-        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("hej", LocalDate.now());
         Assert.assertTrue(noteOrganizer.isNoteOnDay(LocalDateTime.now()));
+        resetList(notes);
     }
 
 
@@ -90,26 +115,17 @@ public class NoteTest{
     @Test
     public void getNoteDateTest(){
         clearList();
-        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("w",LocalDate.now());
         Assert.assertEquals(noteOrganizer.getNotes().get(0),noteOrganizer.getNoteDate(LocalDate.now()));
-    }
-
-    /**
-     * Test if the setNotesList method works.
-     */
-
-    @Test
-    public void setNotesListTest(){
-        clearList();
-        List<Note> notesList = new ArrayList<>();
-        NoteOrganizer noteOrganizer = new NoteOrganizer();
-        noteOrganizer.setNotesList(notesList);
+        resetList(notes);
     }
 
     private void clearList(){
-        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.getNotes().clear();
+    }
+
+    private void resetList(List<Note> noteList){
+        noteOrganizer.setNotesList(noteList);
     }
 }
 
