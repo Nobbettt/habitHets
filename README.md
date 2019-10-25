@@ -12,7 +12,7 @@ java 11, JavaFX, Maven and JUnit are required to run this program.
 
 ## Tests
 
-The tests are applied to test the different Classes fully (except for getters and setters). By testing scenarios and outcomes the tests has full coverage on all implemente logic.
+The tests are applied to test the different Classes fully (except for getters and setters). By testing scenarios and outcomes the tests has full coverage on all implemented logic.
 
 
 ## Built With
