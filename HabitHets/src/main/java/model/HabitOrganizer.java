@@ -34,12 +34,6 @@ class HabitOrganizer implements IOrganizer {
      * an instance will be created.
      * @return
      */
-    static HabitOrganizer getInstant() {
-        if (instant == null) {
-            instant = new HabitOrganizer();
-        }
-        return instant;
-    }
 
     static List<Habit> getHabitList() {
         return habitList;

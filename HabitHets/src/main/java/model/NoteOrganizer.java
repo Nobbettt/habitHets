@@ -11,22 +11,12 @@ import java.util.List;
  */
 class NoteOrganizer implements IOrganizer {
     private static List<Note> notesList;
-    private NoteOrganizer() {
-        notesList = new ArrayList<>();
-    }
 
     /**
      * Control if object is created, so that there may only be one at a time.
      * If there is an instant, another one will not be created.
      * If there is not, an instant will be created.
      */
-    static NoteOrganizer getInstance() {
-        if (instant == null) {
-            instant = new NoteOrganizer();
-            return instant;
-
-        } else {
-            return instant;
 
     NoteOrganizer() {
         if (notesList == null) {

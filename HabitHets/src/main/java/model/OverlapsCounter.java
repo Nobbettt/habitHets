@@ -25,7 +25,7 @@ class OverlapsCounter {
         overlaps2 = new ArrayList<>();
         interval = new Interval(EventOrganizer.getEventOfId(id).getStartTime(), true, EventOrganizer.getEventOfId(id).getEndTime(), true);
 
-        List<Event> events = EventOrganizer.getInstance().getEventsOfDay(dateTime);
+        List<Event> events = EventOrganizer.getEventsOfDay(dateTime);
 
         firstCheck(events, id);
         secondCheck(events, id);
