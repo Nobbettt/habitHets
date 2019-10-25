@@ -47,7 +47,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.3</version>
                 <configuration>
-                    <mainClass>application.Main</mainClass>
+                    <mainClass>application.HabitHets</mainClass>
                 </configuration>
             </plugin>
             <plugin>

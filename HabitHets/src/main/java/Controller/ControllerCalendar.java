@@ -130,7 +130,7 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
 
     private void setUpdateViewOnStart() {
         timeLineCaller = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateViewOnStart()));
-        timeLineCaller.setCycleCount(5);
+        timeLineCaller.setCycleCount(2);
         timeLineCaller.play();
     }
 

@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 import model.SaveOnShutDown;
 
 /**
- * Main Class of application
+ * HabitHets Class of application
  * extends javafx application and runs HabitHets as a java fx application through start method
  */
-public class Main extends Application {
+public class HabitHets extends Application {
 
     /**
      * Is inherited by Application
@@ -23,14 +23,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/window.fxml"));
-        primaryStage.setTitle("Main");
+        primaryStage.setTitle("HabitHets");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
     /**
-     * Main method for HabitHets application
+     * HabitHets method for HabitHets application
      * Includes a runtime shutDownHook that calls saveAll method in SaveOnShutDown class on shutdown
      * @param args
      */
