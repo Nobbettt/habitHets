@@ -5,12 +5,17 @@ import org.junit.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test if the logic in Todo and TodoOrganizer is working as expected
+ */
 public class TestTodo {
-
     static TodoOrganizer todoOrganizer = new TodoOrganizer();
     static List<Todo> todos;
     static List<Todo> doneTodos;
 
+    /**
+     * preparations for upcoming test
+     */
     @BeforeClass
     public static void setUp() {
         TxtDbCommunicator.importDb();
@@ -20,18 +25,28 @@ public class TestTodo {
         todoOrganizer.setDoneTodoList(new ArrayList<>());
     }
 
+    /**
+     * Clears tmp list
+     */
     @Before
     public void clear(){
         todoOrganizer.getTodoList().clear();
         todoOrganizer.getDoneTodoList().clear();
     }
 
+    /**
+     * Resets to real data
+     */
     @AfterClass
     public static void resetClass(){
         TodoOrganizer.setTodoList(todos);
         TodoOrganizer.setTodoList(doneTodos);
     }
 
+    /**
+     * creates a clone of the list to reset to real data
+     * @return
+     */
     private static List<Todo> copyTodoList(){
         List<Todo> tmpList = new ArrayList<>();
         for (Todo todo : todoOrganizer.getTodoList()){
@@ -40,6 +55,10 @@ public class TestTodo {
         return tmpList;
     }
 
+    /**
+     * creates a clone of the list to reset to real data
+     * @return
+     */
     private static List<Todo> copyDoneTodoList(){
         List<Todo> tmpList = new ArrayList<>();
         for (Todo todo : todoOrganizer.getDoneTodoList()){
@@ -51,21 +70,17 @@ public class TestTodo {
     /**
      * This Test checks that the add-method works the way it is suppose to do.
      */
-
     @Test
     public void testTodoAdd(){
         todoOrganizer.addTodo("Undvika todo 2");
         todoOrganizer.addTodo("Säga hej till Tina");
         Assert.assertEquals(2, todoOrganizer.getTodoList().size());
         Assert.assertEquals("Undvika todo 2", todoOrganizer.getTodoList().get(0).getTitle());
-
     }
-
 
     /**
      * This Test checks that you can change the title of the todoo.
      */
-
     @Test
     public void testTodoUpdateSubject(){
         todoOrganizer.addTodo("Undvika todo 2");
@@ -79,7 +94,6 @@ public class TestTodo {
     /**
      * This Test checks that when you complete a todoo that the todoo go from the todolist to donetodolist.
      */
-
     @Test
     public void testTodoRemove() {
         todoOrganizer.addTodo("Undvika todo 2");
@@ -98,7 +112,6 @@ public class TestTodo {
     /**
      * This Test checks that the length of the donetodolist never goes over the limit of 5.
      */
-
     @Test
     public void testLengthOfDoneTodoList(){
         for (int i = 0; i<7; i++){
@@ -114,8 +127,6 @@ public class TestTodo {
     /**
      * This Test checks that you remove a todoo without complete it.
      */
-
-
     @Test
     public void deleteTodo(){
         todoOrganizer.addTodo("Undvika todo 2");
@@ -125,6 +136,9 @@ public class TestTodo {
         Assert.assertEquals(1, todoOrganizer.getTodoList().size());
     }
 
+    /**
+     *  Checks if a todo is being saved and if it is being saved correctly
+     */
     @Test
     public void redoATodo(){
         todoOrganizer.addTodo("Hej");
@@ -136,7 +150,6 @@ public class TestTodo {
         todoOrganizer.moveBackDoneTodo(id2);
         Assert.assertEquals(1, todoOrganizer.getTodoList().size());
         Assert.assertEquals("Hej", todoOrganizer.getTodoList().get(0).getTitle());
-
     }
 
 }

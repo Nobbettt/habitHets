@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This test class test if the facade is communicating as expected between model and outside world
+ */
 public class TestFacade {
     static EventOrganizer eventOrganizer = new EventOrganizer();
     static NoteOrganizer noteOrganizer = new NoteOrganizer();
@@ -19,6 +22,9 @@ public class TestFacade {
     static List<Habit> habits;
     static List<Note> notes;
 
+    /**
+     * Function does preparations for upcoming test
+     */
     @BeforeClass
     public static void setUp() {
         TxtDbCommunicator.importDb();
@@ -35,6 +41,9 @@ public class TestFacade {
         todoOrganizer.setDoneTodoList(new ArrayList<>());
     }
 
+    /**
+     * clears list to enable tests
+     */
     @Before
     public void clear(){
         eventOrganizer.getEventList().clear();
@@ -44,6 +53,9 @@ public class TestFacade {
         todoOrganizer.getDoneTodoList().clear();
     }
 
+    /**
+     * resets lists to real data
+     */
     @AfterClass
     public static void resetClass(){
         EventOrganizer.setEventList(events);
@@ -53,6 +65,10 @@ public class TestFacade {
         TodoOrganizer.setDoneTodoList(doneTodos);
     }
 
+    /**
+     * Copies real list with data to reset it after the tests
+     * @return
+     */
     private static List<Event> copyEventList(){
         List<Event> tmpList = new ArrayList<>();
         for (Event event : eventOrganizer.getEventList()){
@@ -61,6 +77,10 @@ public class TestFacade {
         return tmpList;
     }
 
+    /**
+     * Copies real list with data to reset it after the tests
+     * @return
+     */
     private static List<Note> copyNoteList(){
         List<Note> tmpList = new ArrayList<>();
         for (Note note : noteOrganizer.getNotes()){
@@ -69,6 +89,10 @@ public class TestFacade {
         return tmpList;
     }
 
+    /**
+     * Copies real list with data to reset it after the tests
+     * @return
+     */
     private static List<Habit> copyHabitList(){
         List<Habit> tmpList = new ArrayList<>();
         for (Habit habit : habitOrganizer.getHabitList()){
@@ -77,6 +101,10 @@ public class TestFacade {
         return tmpList;
     }
 
+    /**
+     * Copies real list with data to reset it after the tests
+     * @return
+     */
     private static List<Todo> copyTodoList(){
         List<Todo> tmpList = new ArrayList<>();
         for (Todo todo : todoOrganizer.getTodoList()){
@@ -85,6 +113,10 @@ public class TestFacade {
         return tmpList;
     }
 
+    /**
+     * Copies real list with data to reset it after the tests
+     * @return
+     */
     private static List<Todo> copyDoneTodoList(){
         List<Todo> tmpList = new ArrayList<>();
         for (Todo todo : todoOrganizer.getDoneTodoList()){
@@ -93,6 +125,9 @@ public class TestFacade {
         return tmpList;
     }
 
+    /**
+     * Checks if notes are being saved correctly at creation and on edit
+     */
     @Test
     public void getNoteAndEdit(){
         Facade f = new Facade();
@@ -105,6 +140,9 @@ public class TestFacade {
 
     }
 
+    /**
+     * Tests if there is an overlap between events on the same day
+     */
     @Test
     public void testOverlaps(){
         Facade f = new Facade();
@@ -117,6 +155,9 @@ public class TestFacade {
         Assert.assertEquals("3.0", String.valueOf(f.countOverlaps(LocalDateTime.now(), id)));
     }
 
+    /**
+     * Test if an event get the expected length (in minutes) for the graphical representation
+     */
     @Test
     public void lenghtOfEvent(){
         Facade f = new Facade();
@@ -125,6 +166,9 @@ public class TestFacade {
         Assert.assertEquals(122,f.getLength(id));
     }
 
+    /**
+     * Test is an event is created and saved locally as expected
+     */
     @Test
     public void createAnEvent(){
         Facade f = new Facade();
@@ -143,6 +187,9 @@ public class TestFacade {
         Assert.assertTrue(eventOrganizer.getEventList().size() == 0);
     }
 
+    /**
+     * test if an events content is saved correctly efter an edit
+     */
     @Test
     public void editAnEvent(){
         Facade f = new Facade();
@@ -153,6 +200,9 @@ public class TestFacade {
         Assert.assertEquals("title2", f.getEventTitle(id));
     }
 
+    /**
+     * Checks if the right start time for an event i returned
+     */
     @Test
     public void getEventStarttime(){
         Facade f = new Facade();
@@ -161,6 +211,9 @@ public class TestFacade {
         Assert.assertEquals("12:12", f.getEventStarttimeString(id));
     }
 
+    /**
+     * Checks if the right location for a saved event is returned
+     */
     @Test
     public void getEventLocation(){
         Facade f = new Facade();
@@ -169,6 +222,9 @@ public class TestFacade {
         Assert.assertEquals("loc", f.getEventLocation(id));
     }
 
+    /**
+     * Checks if the right decription for a saved event is returned
+     */
     @Test
     public void getEventDescription(){
         Facade f = new Facade();
@@ -177,6 +233,9 @@ public class TestFacade {
         Assert.assertEquals("desc", f.getEventDesc(id));
     }
 
+    /**
+     * Checks if the right event start time for a saved event is returned
+     */
     @Test
     public void getEventStartTime(){
         Facade f = new Facade();
@@ -185,6 +244,9 @@ public class TestFacade {
         Assert.assertTrue(LocalDateTime.of(2019,12,31,12,12).equals(f.getEventStarttime(id)));
     }
 
+    /**
+     * Checks if the right end time for a saved event is returned
+     */
     @Test
     public void getEventEndTime(){
         Facade f = new Facade();
@@ -193,6 +255,9 @@ public class TestFacade {
         Assert.assertTrue(LocalDateTime.of(2019,12,31,14,14).equals(f.getEventEndtime(id)));
     }
 
+    /**
+     * Checks if and todo is saved correctly
+     */
     @Test
     public void creatingATodo(){
         Facade f = new Facade();
@@ -201,6 +266,9 @@ public class TestFacade {
         Assert.assertTrue(TodoOrganizer.getTodoList().size() == 1);
     }
 
+    /**
+     * Checks if the right title for a saved todo is returned
+     */
     @Test
     public void getATodoTitle(){
         Facade f = new Facade();
@@ -209,6 +277,9 @@ public class TestFacade {
         Assert.assertEquals("testTodo", f.getTodoTitle(id));
     }
 
+    /**
+     * Checks if the right title for a saved done todo is returned
+     */
     @Test
     public void getADoneTodoTitle(){
         Facade f = new Facade();
@@ -216,6 +287,9 @@ public class TestFacade {
         Assert.assertEquals("StringX", f.getDoneTodoTitle(100));
     }
 
+    /**
+     * Checks if an todo is actually removed
+     */
     @Test
     public void removingATodo(){
         Facade f = new Facade();
@@ -225,9 +299,11 @@ public class TestFacade {
         Assert.assertEquals(1, TodoOrganizer.getTodoList().size());
         f.removeTodo(id);
         Assert.assertEquals(0, TodoOrganizer.getTodoList().size());
-
     }
 
+    /**
+     * Checks if an done todo is actually removed
+     */
     @Test
     public void removingADoneTodo() {
         Facade f = new Facade();
@@ -241,6 +317,9 @@ public class TestFacade {
         Assert.assertEquals(1, todoOrganizer.getDoneTodoList().size());
     }
 
+    /**
+     * checks if an habit is created and saved locally as expected
+     */
     @Test
     public void creatingAHabit(){
         Facade f = new Facade();

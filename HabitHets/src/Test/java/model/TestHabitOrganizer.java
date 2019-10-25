@@ -5,11 +5,16 @@ import org.junit.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test if logic and data storing is working as expected in HabitOrganizer
+ */
 public class TestHabitOrganizer {
-
     static HabitOrganizer habitOrganizer = new HabitOrganizer();
     static List<Habit> events;
 
+    /**
+     * prepares test class for tests
+     */
     @BeforeClass
     public static void setUp() {
         TxtDbCommunicator.importDb();
@@ -17,16 +22,26 @@ public class TestHabitOrganizer {
         habitOrganizer.setHabitList(new ArrayList<>());
     }
 
+    /**
+     * clears list before test
+     */
     @Before
     public void clear(){
         habitOrganizer.getHabitList().clear();
     }
 
+    /**
+     * resets locally saved data to real data
+     */
     @AfterClass
     public static void resetClass(){
         HabitOrganizer.setHabitList(events);
     }
 
+    /**
+     * Copies list temporary to after test reset it
+     * @return
+     */
     private static List<Habit> copyList(){
         List<Habit> tmpList = new ArrayList<>();
         for (Habit habit : habitOrganizer.getHabitList()){
@@ -82,6 +97,4 @@ public class TestHabitOrganizer {
         habitOrganizer.remove(1);
         Assert.assertEquals(2, habitOrganizer.getHabitList().size());
     }
-
-
 }

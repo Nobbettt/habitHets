@@ -1,12 +1,14 @@
 package model;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
+/**
+ * This test class test logic in Habit class
+ */
 public class TestHabit {
 
     /**
