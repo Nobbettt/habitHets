@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ControllerCalendar implements Initializable, Listener {
+public class ControllerCalendar implements Initializable, Listener, ViewListener {
     public static ControllerCalendar instance;
     @FXML private AnchorPane mainPane;
     @FXML private Label currentValueLbl;
@@ -103,6 +103,7 @@ public class ControllerCalendar implements Initializable, Listener {
         instance = this;
         todoView = new TodoView();
         monthView = new MonthView();
+        EventObserver.addListener(this);
     }
 
     /**
@@ -127,7 +128,7 @@ public class ControllerCalendar implements Initializable, Listener {
         setupTodo();
         setupHabit();
         setUpChoiceBoxes();
-        renderDay();
+        renderWeek();
         updateTimeline();
         setUpdateViewOnStart();
     }
@@ -211,7 +212,7 @@ public class ControllerCalendar implements Initializable, Listener {
         AnchorPane ap = new AnchorPane();
         calendarPane.getChildren().add(ap);
 
-        setAsMarkedInNavBar(dayBtn);
+        setAsMarkedInNavBar(weekBtn);
     }
 
 
@@ -778,5 +779,11 @@ public class ControllerCalendar implements Initializable, Listener {
     protected void finalize() throws Throwable {
         System.out.println("hej");
         super.finalize();
+    }
+
+    @Override
+    public void actOnUpdate(String msg) {
+        int id = Integer.valueOf(msg);
+        editEventPressed(id);
     }
 }

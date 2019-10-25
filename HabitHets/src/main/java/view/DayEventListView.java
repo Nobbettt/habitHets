@@ -97,7 +97,7 @@ class DayEventListView extends StackPane {
         eventView.setTranslateY((facade.getEventStarttime(id).getHour() * 120) + (facade.getEventStarttime(id).getMinute()) * 2); //todo WTF
         double height = calculateLenght(id) * 2;
         eventView.setPrefHeight(height);
-        double width = this.vBoxWidth/facade.calculateOverlaps(ldt,id);
+        double width = this.vBoxWidth/facade.countOverlaps(ldt,id);
         eventView.setPrefWidth((width));
     }
 
@@ -157,7 +157,7 @@ class DayEventListView extends StackPane {
      */
     private double calculateTranslateX(int id) {
         Facade facade = new Facade();
-        double x = vBoxWidth/facade.calculateOverlaps(ldt,id);
+        double x = vBoxWidth/facade.countOverlaps(ldt,id);
         if (x == vBoxWidth) {
             return 0;
         } else {

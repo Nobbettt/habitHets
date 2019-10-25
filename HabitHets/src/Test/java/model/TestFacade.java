@@ -31,7 +31,7 @@ public class TestFacade {
         f.createEvent(LocalDateTime.now(),15,30,17,00,"Event3", "Place", "Desc");
         int id = EventOrganizer.getEventList().get(0).getId();
         Assert.assertEquals(3, EventOrganizer.getEventList().size());
-        Assert.assertEquals("3.0", String.valueOf(f.calculateOverlaps(LocalDateTime.now(), id)));
+        Assert.assertEquals("3.0", String.valueOf(f.countOverlaps(LocalDateTime.now(), id)));
     }
 
     @Test

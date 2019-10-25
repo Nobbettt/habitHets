@@ -6,7 +6,7 @@ import java.util.List;
 
 class OverlapsCounter {
 
-    static double calculateOverlaps(LocalDateTime dateTime, int id) {
+    static double countOverlaps(LocalDateTime dateTime, int id) {
 
         double i = 0;
         List<Event> overlaps = new ArrayList<>();
