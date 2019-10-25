@@ -54,6 +54,7 @@ public class MonthView extends StackPane implements ViewAble {
                 AnchorPane a = new AnchorPane();
                 Label l = new Label(" ");
                 a.getChildren().add(l);
+                l.setTranslateX(5);
                 l.setStyle("-fx-font-size: 16px");
                 if(j == 0){
                     l.setTextFill(Color.valueOf("#e64e4e"));
@@ -109,7 +110,7 @@ public class MonthView extends StackPane implements ViewAble {
     private void drawPreviousMonth(int lastDayPrevMonth, int firstDate){
         for(int l = firstDate; 0 <= l; l--){
             monthdays.get(l).setText(String.valueOf(lastDayPrevMonth+2));
-            monthdays.get(l).setStyle("-fx-opacity: .5");
+            monthdays.get(l).setStyle("-fx-opacity: .5; -fx-font-size: 16px");
             lastDayPrevMonth--;
         }
     }
@@ -126,7 +127,7 @@ public class MonthView extends StackPane implements ViewAble {
                 LocalDateTime tmpDay = ldtList.get(j);
                 Integer daynb = tmpDay.getDayOfMonth();
                 monthdays.get(i).setText(daynb.toString());
-                monthdays.get(i).setStyle("-fx-opacity: 1");
+                monthdays.get(i).setStyle("-fx-opacity: 1; -fx-font-size: 16px");
                 j++;
             }else{
                 monthdays.get(i).setText(" ");
@@ -147,7 +148,7 @@ public class MonthView extends StackPane implements ViewAble {
             LocalDateTime tmpDay = nextMonth.get(firstDayNextMonth);
             Integer daynb = tmpDay.getDayOfMonth();
             monthdays.get(l).setText(daynb.toString());
-            monthdays.get(l).setStyle("-fx-opacity: .5");
+            monthdays.get(l).setStyle("-fx-opacity: .5; -fx-font-size: 16px");
             firstDayNextMonth++;
         }
     }

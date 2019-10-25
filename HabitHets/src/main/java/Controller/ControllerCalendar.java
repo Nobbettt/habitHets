@@ -314,6 +314,7 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
         weekView.updateView(masterDateTime);
         renderCalendar(weekView);
         renderCalendar(weekView);
+
     }
 
     /**
@@ -456,6 +457,11 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     private void renderCalendar(Node node) {
         if(calendarPane.getChildren() != null) {
             calendarPane.getChildren().clear();
+        }
+        if(currentView == expandedDayView || currentView == weekView) {
+            addButton.setVisible(true);
+        } else {
+            addButton.setVisible(false);
         }
         calendarPane.getChildren().add(node);
         fitItem(calendarPane, node, 0, 0, 0, 0);

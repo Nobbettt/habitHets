@@ -11,8 +11,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #595959;" stylesheets="@css/day-style.css" type="StackPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #595959;" stylesheets="@css/day-style.css" type="StackPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #595959;">
         <items>
@@ -47,7 +48,10 @@
                   <TextArea fx:id="noteField" layoutX="109.0" layoutY="66.0" onKeyReleased="#notehandle" opacity="0.8" prefHeight="200.0" prefWidth="200.0" promptText="Write your notes here" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <opaqueInsets>
                         <Insets />
-                     </opaqueInsets></TextArea>
+                     </opaqueInsets>
+                     <font>
+                        <Font size="16.0" />
+                     </font></TextArea>
                </children>
             </AnchorPane>
         </items>
