@@ -41,10 +41,6 @@ public class TodoDoneElementView extends AnchorPane  {
         return cb.get(0);
     }
 
-    /**
-     * Is called from the constructor
-     * Sets up the view and prepares it
-     */
     private void setUpTodo(){
         CheckBox c = (CheckBox)getChildren().get(0);
         c.setText(facade.getDoneTodoTitle(id));
@@ -52,8 +48,6 @@ public class TodoDoneElementView extends AnchorPane  {
         c.setSelected(true);
         cb.add(c);
     }
-
-
 
     @FXML
     private void remove(){

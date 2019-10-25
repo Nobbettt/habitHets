@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class is responsible for the graphical representation of the single habit that can be found in the habit view
+ */
 class HabitObjectView extends AnchorPane {
     private int id;
     private Facade facade;

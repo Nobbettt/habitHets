@@ -15,6 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is responsible for the graphical representation of the months in a year in year view in the application
+ */
 class MonthInYear extends AnchorPane  {
 
     @FXML private GridPane gridPane;

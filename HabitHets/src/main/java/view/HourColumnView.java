@@ -4,6 +4,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * This class is responsible for the time stamps in the left column, that can be found in the expanded day- and week view
+ */
 class HourColumnView extends VBox {
     HourColumnView() {
         for (int i = 0; i < 24; i++) {

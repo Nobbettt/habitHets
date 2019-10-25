@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class is responsible for the graphical representation of the week view in the application
+ */
 public class WeekView extends StackPane implements ViewAble {
     @FXML private ScrollPane scrollPane;
     @FXML private GridPane weekGrid;

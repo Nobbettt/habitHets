@@ -15,6 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is responsible for the graphical representation of the month view in the application
+ */
 public class MonthView extends StackPane implements ViewAble {
     @FXML private GridPane monthGrid;
     @FXML private ScrollPane scrollPane;
@@ -66,6 +69,11 @@ public class MonthView extends StackPane implements ViewAble {
         }
     }
 
+    /**
+     * Is implemented by the view interface
+     * Updates the content in this view given a DateTime
+     * @param currentDay
+     */
     @Override
     public void updateView(LocalDateTime currentDay) {
         List<LocalDateTime> ldtList = calender.getLdtMonthFromDate(currentDay);

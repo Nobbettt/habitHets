@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is responsible for the graphical representation of the events in the week- and single day view in the application
+ */
 public class EventView extends AnchorPane {
     @FXML
     private Label titleLabel;

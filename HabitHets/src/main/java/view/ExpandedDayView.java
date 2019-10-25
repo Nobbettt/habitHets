@@ -13,6 +13,9 @@ import model.Facade;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+/**
+ * This class is responsible for the graphical representation of the single day view in the application
+ */
 public class ExpandedDayView extends StackPane implements ViewAble {
 
     @FXML private ScrollPane scrollPane;
@@ -41,6 +44,11 @@ public class ExpandedDayView extends StackPane implements ViewAble {
         setupDayView();
     }
 
+    /**
+     * Is implemented by the view interface
+     * Updates the content in this view given a DateTime
+     * @param currentDay
+     */
     @Override
     public void updateView(LocalDateTime currentDay) {
         String weekday = "" + currentDay.getDayOfMonth() + "/" + currentDay.getMonthValue();//week.get(i)....getWeekdayfunction()

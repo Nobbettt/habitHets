@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is responsible for the graphical representation of the habit view in the application
+ */
 public class HabitView extends AnchorPane implements ViewListener {
-
     @FXML private VBox vBox;
     @FXML private ScrollPane scrollPane;
     @FXML private AnchorPane newHabit;

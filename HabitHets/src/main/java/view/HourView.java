@@ -5,6 +5,9 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
+/**
+ * This class is responsible for the hours that are represented in the DayEventList view that is used in expanded day- and week view
+ */
 class HourView extends AnchorPane {
 
     /**

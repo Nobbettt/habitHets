@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is responsible for the graphical representation of a single in a week in the week view, in the application
+ */
 class DayEventListView extends StackPane {
     private VBox vBox;
     private List<HBox> hBoxList;
