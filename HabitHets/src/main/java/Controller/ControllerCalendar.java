@@ -87,9 +87,7 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * A constructor for the class that sets all the needed attributes as well as imports all the
      * data stored from previous runs
      */
-
     public ControllerCalendar() {
-        // to change -->
         TxtDbCommunicator.importDb();
 
         masterDateTime = LocalDateTime.now();
@@ -109,7 +107,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     /**
      * A method is called every min to update the timeline in GUI
      */
-
     private void updateTimeline() {
         timeNow = LocalDateTime.now();
         currentView.updateTimeLine(timeNow.getHour(), timeNow.getMinute());
@@ -120,7 +117,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * @param url
      * @param resourceBundle
      */
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupTimeline();
@@ -215,11 +211,9 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
         setAsMarkedInNavBar(weekBtn);
     }
 
-
     /**
      * on click this methods moves the represented time unit back in time depending on the current view.
      */
-
     @FXML
     private void prevClick() {
         if(currentView == expandedDayView) {
@@ -245,7 +239,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     /**
      * on click this methods moves the represented time unit forward in time depending on the current view.
      */
-
     @FXML
     private void nextClick() {
         if(currentView == expandedDayView) {
@@ -264,7 +257,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     /**
      * Updates the main label between the arrow buttons in the navigation bar depending on view/ time-unit and masterDateTime (the date that is visible on screen)
      */
-
     private void updateHeadLbl() {
         String headLbl = "";
         if(currentView == expandedDayView) {
@@ -283,7 +275,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     /**
      * On click method for day button, responsible for changing the calendar view to desired time unit
      */
-
     @FXML
     private void showCalendarDayClick() {
         renderDay();
@@ -296,7 +287,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * Updates child view, in this case expandedDayView with day info
      * Changes the calendar view to single day view
      */
-
     private void renderDay() {
         List<LocalDateTime> list = new ArrayList<>();
         list.add(copyMasterdate());
@@ -397,7 +387,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * A fxml method that prevents the user from shutting down the create-event pop-up screen by consuming the click
      * @param event the event that the mousetrap protects
      */
-
     @FXML
     public void mouseTrapCreateEvent(Event event){
         event.consume();
@@ -407,7 +396,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * A fxml method that prevents the user from shutting down the edit-event pop-up screen by consuming the click
      * @param event the event that the mousetrap protects
      */
-
     @FXML
     public void mouseTrapEditEvent(Event event){
         event.consume();
@@ -416,7 +404,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     /**
      * A fxml method that is called when the create-event pop-up shall be closed
      */
-
     @FXML
     public void closeCreateEvent() {
         resetAllField();
@@ -426,7 +413,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     /**
      * A fxml method that is called when the edit-event pop-up shall be closed
      */
-
     @FXML
     public void closeEditEvent() {
         editPage.toBack();
@@ -436,7 +422,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * Click function for the habit toggle button
      * Collapses and extends the habit view and stretches the calendar view accordingly
      */
-
     @FXML
     private void toggleHabitClick() {
         double widthValue;
@@ -514,7 +499,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     /**
      * Updates the HabitView, it is called from the actOnUpdate that is implemented from the Listener interface
      */
-
     private void updateHabitView(){
         habitView.updateHabitView(facade.getAllHabitIds());
     }
@@ -523,7 +507,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * A method that is implemented from the Listener interface, when something this class listens to notifies its
      * listeners this method will be called
      */
-
     @Override
     public void actOnUpdate() {
         updateTodoView();
@@ -534,7 +517,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * A fxml method that is called when the button that enables the user to add events is called,
      * it resets the value of the datePicker, sets a temporary title to "New Event" and centers the popup
      */
-
     @FXML
     private void addButtonClick(){
         dateChooser.setValue(LocalDate.now());
@@ -545,7 +527,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     /**
      * Closes the pop-up where the user creates a new event and returns back to the previous screen
      */
-
     @FXML
     private void closeButtonClick(){
         resetAllField();
@@ -580,7 +561,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * @param bkgPane a pane to be centered
      * @param pane a pane to be centered
      */
-
     private void displayPopUps(AnchorPane bkgPane, AnchorPane pane) {
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         double centerX = screenBounds.getWidth()/2;
@@ -596,7 +576,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * Makes sure that input the user has given is correct, if it isn't it corrects it in order to make sure no errors
      * will occur
      */
-
     private void checkCreationInput(){
         if (titleField.getText() == null){
             titleField.setText("New Event");
@@ -613,7 +592,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * Delegates all choiceboxes in the create/edit page to another function that gives them all needed information
      * to be used
      */
-
     private void setUpChoiceBoxes(){
         setUpChoicebox(fromHourTime, true);
         setUpChoicebox(fromMinuteTime, false);
@@ -631,7 +609,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * @param isHour a boolean that is true if the checkbox is made to show hours or false if the checkbox will
      *               show minutes
      */
-
     private void setUpChoicebox (ComboBox<String> c, boolean isHour){
         ArrayList<String> a = new ArrayList<>();
         c.setEditable(true);
@@ -662,7 +639,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     /**
      * Clears all the different javafx elements a user can edit so it is empty at next use
      */
-
     public void resetAllField(){
         titleField.clear();
         dateChooser.setValue(LocalDate.now());
@@ -679,7 +655,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * of the event that is to be edited
      * @param id the id of the event that is going to be edited
      */
-
     @FXML
     public void editEventPressed(int id){
         populateExtendedEvent(id);
@@ -690,7 +665,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * A fxml method that closes the edit-page pop-up and brings forward the previous the screen that was used
      * before the edit-page was opened
      */
-
     @FXML
     public void editClosePressed(){
         editPage.toBack();
@@ -700,7 +674,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * Saves the input the user has given in the edit screen by editing the event in the EventOrganizer eventList through
      * the facade interface
      */
-
     @FXML
     public void editSavePressed() {
         int fromHour = Integer.parseInt(editFromHourTime.getValue());
@@ -721,7 +694,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
     /**
      * Goes through all the input given by the user and edits necessary fields so that to not cause any errors when saving
      */
-
     private void checkEditInput(){
         if (editTitle.getText() == null || editTitle.getText().isEmpty()){
             editTitle.setText("Edited Event");
@@ -738,7 +710,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * When the "delete-event" button in the edit page has been pressed by the user, this methods is called. This
      * closes the edit-page and deletes the event from the EventOrganizer list through the facade
      */
-
     @FXML
     private void deleteEventPressed(){
         editPage.toBack();
@@ -751,7 +722,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * corresponding values of the event that is to be edited
      * @param id the id of the event that is going to be edited
      */
-
     private void populateExtendedEvent(int id){
         LocalDateTime eventStarttime = facade.getEventStarttime(id);
         LocalDateTime eventEndtime = facade.getEventEndtime(id);
@@ -770,15 +740,8 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * Creates a new LocalDateTime copy of the masterDateTime to ensure that is not edited somewhere else, increasing
      * immutability
      */
-
     private LocalDateTime copyMasterdate(){
         return LocalDateTime.of(masterDateTime.getYear(), masterDateTime.getMonthValue(), masterDateTime.getDayOfMonth(), masterDateTime.getHour(), masterDateTime.getMinute());
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        System.out.println("hej");
-        super.finalize();
     }
 
     @Override
