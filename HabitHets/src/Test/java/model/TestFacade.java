@@ -47,7 +47,7 @@ public class TestFacade {
     public void createAnEvent(){
         clearEventlist();
         Facade f = new Facade();
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        EventOrganizer eventOrganizer = EventOrganizer.getInstance();
         clearEventlist();
         Assert.assertTrue(eventOrganizer.getEventList().size() == 0);
         f.createEvent(LocalDateTime.now(),12,12,14,14,"title", "loc", "desc");
@@ -59,7 +59,7 @@ public class TestFacade {
     public void removeAnEvent(){
         clearEventlist();
         Facade f = new Facade();
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        EventOrganizer eventOrganizer = EventOrganizer.getInstance();
         f.createEvent(LocalDateTime.now(),12,12,14,14,"title", "loc", "desc");
         Assert.assertEquals(1, eventOrganizer.getEventList().size());
         int id = eventOrganizer.getEventList().get(0).getId();
@@ -71,7 +71,7 @@ public class TestFacade {
     public void editAnEvent(){
         clearEventlist();
         Facade f = new Facade();
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        EventOrganizer eventOrganizer = EventOrganizer.getInstance();
         f.createEvent(LocalDateTime.now(),12,12,14,14,"title1", "loc", "desc");
         int id = eventOrganizer.getEventList().get(0).getId();
         Assert.assertEquals("title1", f.getEventTitle(id));
@@ -83,7 +83,7 @@ public class TestFacade {
     public void getEventStarttime(){
         clearEventlist();
         Facade f = new Facade();
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        EventOrganizer eventOrganizer = EventOrganizer.getInstance();
         f.createEvent(LocalDateTime.now(),12,12,14,14,"title1", "loc", "desc");
         int id = eventOrganizer.getEventList().get(0).getId();
         Assert.assertEquals("12:12", f.getEventStarttimeString(id));
@@ -93,7 +93,7 @@ public class TestFacade {
     public void getEventLocation(){
         clearEventlist();
         Facade f = new Facade();
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        EventOrganizer eventOrganizer = EventOrganizer.getInstance();
         f.createEvent(LocalDateTime.now(),12,12,14,14,"title1", "loc", "desc");
         int id = eventOrganizer.getEventList().get(0).getId();
         Assert.assertEquals("loc", f.getEventLocation(id));
@@ -103,7 +103,7 @@ public class TestFacade {
     public void getEventDescription(){
         clearEventlist();
         Facade f = new Facade();
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        EventOrganizer eventOrganizer = EventOrganizer.getInstance();
         f.createEvent(LocalDateTime.now(),12,12,14,14,"title1", "loc", "desc");
         int id = eventOrganizer.getEventList().get(0).getId();
         Assert.assertEquals("desc", f.getEventDesc(id));
@@ -113,7 +113,7 @@ public class TestFacade {
     public void getEventStartTime(){
         clearEventlist();
         Facade f = new Facade();
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        EventOrganizer eventOrganizer = EventOrganizer.getInstance();
         f.createEvent(LocalDateTime.of(2019,12,31,00,00),12,12,14,14,"title1", "loc", "desc");
         int id = eventOrganizer.getEventList().get(0).getId();
         Assert.assertTrue(LocalDateTime.of(2019,12,31,12,12).equals(f.getEventStarttime(id)));
@@ -123,7 +123,7 @@ public class TestFacade {
     public void getEventEndTime(){
         clearEventlist();
         Facade f = new Facade();
-        EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+        EventOrganizer eventOrganizer = EventOrganizer.getInstance();
         f.createEvent(LocalDateTime.of(2019,12,31,00,00),12,12,14,14,"title1", "loc", "desc");
         int id = eventOrganizer.getEventList().get(0).getId();
         Assert.assertTrue(LocalDateTime.of(2019,12,31,14,14).equals(f.getEventEndtime(id)));
@@ -173,7 +173,7 @@ public class TestFacade {
     public void removingADoneTodo() {
         clearTodoLists();
         Facade f = new Facade();
-        TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
+        TodoOrganizer todoOrganizer = TodoOrganizer.getInstance();
         Assert.assertEquals(0, todoOrganizer.getDoneTodoList().size());
         Assert.assertEquals(0, todoOrganizer.getTodoList().size());
         f.createNewTodo("TodoTitle");
@@ -300,18 +300,18 @@ public class TestFacade {
     }
 
     private void clearEventlist(){
-        EventOrganizer organizer = EventOrganizer.getInstant();
+        EventOrganizer organizer = EventOrganizer.getInstance();
         organizer.getEventList().clear();
     }
 
     private void clearTodoLists(){
-        TodoOrganizer organizer = TodoOrganizer.getInstant();
+        TodoOrganizer organizer = TodoOrganizer.getInstance();
         organizer.getTodoList().clear();
         organizer.getDoneTodoList().clear();
     }
 
     private void clearAllHabits(){
-        HabitOrganizer organizer = HabitOrganizer.getInstant();
+        HabitOrganizer organizer = HabitOrganizer.getInstance();
         organizer.getHabitList().clear();
 
     }

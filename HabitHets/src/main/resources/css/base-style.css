@@ -14,7 +14,7 @@
 .navbar-btn:hover, .navbar-arrow-btn:hover {
     -fx-opacity: .75;
     -fx-cursor: hand;
-    -fx-text-fill: red;
+    -fx-text-fill: #e64e4e;
 }
 .navbar-btn, .navbar-arrow-btn {
     -fx-background-color: transparent;

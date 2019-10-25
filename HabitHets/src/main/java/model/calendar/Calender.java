@@ -9,8 +9,13 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 
 public class Calender {
-    private static Calender instant;
+    private static Calender instance;
     private static List<Year> years;
+
+    /**
+     * A private constructor the ensure that a new instance of a Calendar class is never created, this is in line with
+     * the Singleton Pattern. Creates all the years in the application.
+     */
 
     private Calender() {
         int yearsBack = 2;
@@ -18,14 +23,20 @@ public class Calender {
         years = getYears(yearsBack, yearsForward);
     }
 
-    public static Calender getInstant() {
-        if (instant == null) {
+    /**
+     * A static method that gives the current instance if it has been created before, otherwise a new instance is
+     * created and returned. The attribute instance is also set the created instance in that case. This is in line with the Singleton patten.
+     * @return the only instance of the Calendar class
+     */
 
-            instant = new Calender();
-            return instant;
+    public static Calender getInstance() {
+        if (instance == null) {
+
+            instance = new Calender();
+            return instance;
 
         } else {
-            return instant;
+            return instance;
         }
     }
 
