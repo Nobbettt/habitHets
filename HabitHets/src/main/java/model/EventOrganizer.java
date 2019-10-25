@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventOrganizer implements IOrganizer {
+class EventOrganizer implements IOrganizer {
     private static List<Event> eventList;
 
     /**

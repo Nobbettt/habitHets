@@ -25,6 +25,7 @@ public class TodoView extends AnchorPane {
     @FXML private ScrollPane todoScrollpane;
     @FXML private ScrollPane doneTodoScrollpane;
     private Facade facade;
+    List<CheckBox> checkBoxes = new ArrayList<>();
 
     /**
      * Imports fxml file and sets this class as the fx controller and root of the fxml file
@@ -74,7 +75,7 @@ public class TodoView extends AnchorPane {
         newTodo.toFront();
     }
 
-    List<CheckBox> checkBoxes = new ArrayList<>();
+
 
     public void updateTodoView( ) {
         vboxtodo.getChildren().clear();

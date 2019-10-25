@@ -4,7 +4,7 @@ package model;
  * This class
  */
 
-public class Todo {
+class Todo {
     private String title;
     private int id;
 
@@ -12,7 +12,6 @@ public class Todo {
         this.title = title;
         this.id = id;
     }
-
 
     String getTitle() {
         return title;
@@ -25,5 +24,4 @@ public class Todo {
     int getId() {
         return id;
     }
-
 }

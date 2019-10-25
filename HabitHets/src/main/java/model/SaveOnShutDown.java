@@ -17,7 +17,6 @@ public class SaveOnShutDown {
      * @param newTxt
      */
     private static void writeFile(String file, String newTxt) {
-
         Path currentRelativePath = Paths.get("");
         String relativePath = currentRelativePath.toAbsolutePath().toString();
 
@@ -171,7 +170,7 @@ public class SaveOnShutDown {
      * @param str
      * @return
      */
-    static String removeConflicts(String str) {
+    private static String removeConflicts(String str) {
         if (str != null && !str.isEmpty()) {
             for (String conflict : conflicts) {
                 str = checkString(str, conflict);

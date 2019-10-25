@@ -21,7 +21,6 @@ public class TxtDbCommunicator {
      * @return
      */
     private static String readFile(String file) {
-
         Path currentRelativePath = Paths.get("");
         String relativePath = currentRelativePath.toAbsolutePath().toString();
 
