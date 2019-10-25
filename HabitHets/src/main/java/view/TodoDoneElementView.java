@@ -53,7 +53,6 @@ class TodoDoneElementView extends AnchorPane  {
     private void remove(){
         for (CheckBox c : cb){
             if (!c.isSelected()){
-                facade.createNewTodo(facade.getDoneTodoTitle(id));
                 facade.moveBackTodo(id);
             }
         }

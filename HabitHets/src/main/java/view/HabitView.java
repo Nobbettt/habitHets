@@ -58,7 +58,6 @@ public class HabitView extends AnchorPane implements ViewListener {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         habitsList = new ArrayList<>();
-        isExpanded = true;
     }
 
     /**

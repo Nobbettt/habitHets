@@ -55,7 +55,7 @@ public class TestEvent {
         Assert.assertEquals(2, eventOrganizer.getEventList().size());
         eventOrganizer.remove(eventOrganizer.getEventList().get(1).getId());
         Assert.assertEquals(1, eventOrganizer.getEventList().size());
-        eventOrganizer.remove(5);
+        eventOrganizer.remove(-1);
         Assert.assertEquals(1, eventOrganizer.getEventList().size());
     }
 
