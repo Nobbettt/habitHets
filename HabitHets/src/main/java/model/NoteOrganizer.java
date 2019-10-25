@@ -10,7 +10,7 @@ import java.util.List;
  * Therefore the Open-Closed principle is exerted.
  */
 
-public class NoteOrganizer implements IHandler {
+public class NoteOrganizer implements IOrganizer {
     private static NoteOrganizer instant;
     private static List<Note> notesList;
 

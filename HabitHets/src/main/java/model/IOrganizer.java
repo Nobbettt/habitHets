@@ -1,6 +1,6 @@
 package model;
 
- interface IHandler {
+ interface IOrganizer {
     void remove(int id);
 
 }

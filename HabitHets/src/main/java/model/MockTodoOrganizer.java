@@ -8,7 +8,7 @@ import java.util.List;
  * This class contains methods and lists that affect a todoo.
  */
 
-public class MockTodoOrganizer implements IHandler {
+public class MockTodoOrganizer implements IOrganizer {
     private static MockTodoOrganizer instant;
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;

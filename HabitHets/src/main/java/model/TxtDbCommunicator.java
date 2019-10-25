@@ -81,7 +81,7 @@ public class TxtDbCommunicator {
                 }
             }
             Factory.setEventIdCount(highestId);
-            EventOrganizer.getInstant().setEventList(tmpList);
+            EventOrganizer.getInstance().setEventList(tmpList);
         }
     }
 
