@@ -13,6 +13,13 @@ class Interval {
     private final boolean inclusiveStart;
     private final boolean inclusiveEnd;
 
+    /**
+     * A class for checking if two intervals of LocalDateTime is overlapping
+     * @param start LocalDateTime at the start of the interval
+     * @param inclusiveStart a boolean that is true if the first minute is included in the interval
+     * @param end LocalDateTime at the end of the interval
+     * @param inclusiveEnd a boolean that is true if the last minute is included in the interval
+     */
     Interval(LocalDateTime start, boolean inclusiveStart, LocalDateTime end, boolean inclusiveEnd) {
         this.start = start;
         this.end = end;

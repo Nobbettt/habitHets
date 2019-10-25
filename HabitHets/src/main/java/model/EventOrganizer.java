@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *This class handles logic that has to do with more than one event.
+ */
 class EventOrganizer implements IOrganizer {
     private static List<Event> eventList;
 

@@ -34,6 +34,12 @@ class OverlapsCounter {
         return count;
     }
 
+    /**
+     * checks if the event that is given overlaps with any other event on that day. if that is true it adds that event
+     * to another list called overlaps. The events in the overlaps list is also later checked if they overlap
+     * @param events the list of events on the day
+     * @param id the id of the event
+     */
     private static void firstCheck(List<Event> events, int id) {
         for (Event tmpEvent : events) {
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
@@ -46,6 +52,11 @@ class OverlapsCounter {
         }
     }
 
+    /**
+     * checks if any of the events that overlapped with the first event overlaps with any other events
+     * @param events the list of events on that day
+     * @param id the id of the event that is tested
+     */
     private static void secondCheck(List<Event> events, int id) {
         for (Event event1 : overlaps) {
             Interval interval1 = new Interval(event1.getStartTime(), true, event1.getEndTime(), true);
