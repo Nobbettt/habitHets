@@ -14,7 +14,7 @@ public class TestTodo {
     static List<Todo> doneTodos;
 
     /**
-     * preparations for upcoming test
+     * Preparations for the test be creating a copy of the database and creating a temporary list in the organizer
      */
     @BeforeClass
     public static void setUp() {
@@ -26,7 +26,7 @@ public class TestTodo {
     }
 
     /**
-     * Clears tmp list
+     * Clears temporary list in organizer
      */
     @Before
     public void clear(){
@@ -35,7 +35,7 @@ public class TestTodo {
     }
 
     /**
-     * Resets to real data
+     * Resets the organizers list to the actual list and removes the temporary
      */
     @AfterClass
     public static void resetClass(){
@@ -44,7 +44,7 @@ public class TestTodo {
     }
 
     /**
-     * creates a clone of the list to reset to real data
+     * Copies list temporary to after test reset it
      * @return
      */
     private static List<Todo> copyTodoList(){
@@ -56,7 +56,7 @@ public class TestTodo {
     }
 
     /**
-     * creates a clone of the list to reset to real data
+     * Copies list temporary to after test reset it
      * @return
      */
     private static List<Todo> copyDoneTodoList(){

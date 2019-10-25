@@ -13,7 +13,7 @@ public class TestHabitOrganizer {
     static List<Habit> events;
 
     /**
-     * prepares test class for tests
+     * Preparations for the test be creating a copy of the database and creating a temporary list in the organizer
      */
     @BeforeClass
     public static void setUp() {
@@ -23,7 +23,7 @@ public class TestHabitOrganizer {
     }
 
     /**
-     * clears list before test
+     * Clears temporary list in organizer
      */
     @Before
     public void clear(){
@@ -31,7 +31,7 @@ public class TestHabitOrganizer {
     }
 
     /**
-     * resets locally saved data to real data
+     * Resets the organizers list to the actual list and removes the temporary
      */
     @AfterClass
     public static void resetClass(){

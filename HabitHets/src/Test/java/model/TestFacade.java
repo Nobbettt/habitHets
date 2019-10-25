@@ -23,7 +23,7 @@ public class TestFacade {
     static List<Note> notes;
 
     /**
-     * Function does preparations for upcoming test
+     * Preparations for the test be creating a copy of the database and creating a temporary list in the organizer
      */
     @BeforeClass
     public static void setUp() {
@@ -42,7 +42,7 @@ public class TestFacade {
     }
 
     /**
-     * clears list to enable tests
+     * Clears temporary list in organizer
      */
     @Before
     public void clear(){
@@ -54,7 +54,7 @@ public class TestFacade {
     }
 
     /**
-     * resets lists to real data
+     * Resets the organizers list to the actual list and removes the temporary
      */
     @AfterClass
     public static void resetClass(){
@@ -177,6 +177,9 @@ public class TestFacade {
         Assert.assertTrue(eventOrganizer.getEventList().size() == 1);
     }
 
+    /**
+     * Tests if an event is removed as expected
+     */
     @Test
     public void removeAnEvent(){
         Facade f = new Facade();
