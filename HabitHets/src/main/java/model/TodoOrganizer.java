@@ -6,8 +6,8 @@ import java.util.List;
 /**
  * This class contains methods and lists that affect a todoo.
  */
-public class TodoOrganizer implements IOrganizer {
-    private static TodoOrganizer instant;
+
+class TodoOrganizer implements IOrganizer {
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
     private static List<Listener> listeners = new ArrayList<>();
@@ -15,9 +15,13 @@ public class TodoOrganizer implements IOrganizer {
     /**
      * The constructor of TodoOrganizer sets the list of todos and doneTodos.
      */
-    private TodoOrganizer() {
-        todoList = new ArrayList<>();
-        doneTodoList = new ArrayList<>();
+    TodoOrganizer() {
+        if (todoList == null) {
+            todoList = new ArrayList<>();
+        }
+        if (doneTodoList == null) {
+            doneTodoList = new ArrayList<>();
+        }
     }
 
     /**
@@ -35,22 +39,6 @@ public class TodoOrganizer implements IOrganizer {
     static void setDoneTodoList(List<Todo> doneTodoList) {
         TodoOrganizer.doneTodoList = doneTodoList;
     }
-
-    /**
-     * Control if object is created , so that there may only be one at a time.
-     * If there is an instant, another one will not be created.
-     * If there is not, an instant will be created.
-     */
-    public static TodoOrganizer getInstant() {
-        if (instant == null) {
-            instant = new TodoOrganizer();
-            return instant;
-
-        } else {
-            return instant;
-        }
-    }
-
 
     /**
      * This method creates a new toddoo. You have to enter the todoo's title, the todoo get it's id from the factory class
@@ -178,7 +166,6 @@ public class TodoOrganizer implements IOrganizer {
             int limit = doneTodoList.size()-5;
             for (int a=0; a<limit ;a++){
                 doneTodoList.remove(0);
-                int id = doneTodoList.get(0).getId();
                 notifyListener();
             }
         }
@@ -207,6 +194,7 @@ public class TodoOrganizer implements IOrganizer {
     static void moveBackDoneTodo(int id) {
         for (int i = 0; i < doneTodoList.size(); i++) {
             if (doneTodoList.get(i).getId() == id) {
+                addTodo(getDoneTodoList().get(i).getTitle());
                 doneTodoList.remove(i);
                 notifyListener();
                 return;

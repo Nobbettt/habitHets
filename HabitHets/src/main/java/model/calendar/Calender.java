@@ -41,7 +41,6 @@ public class Calender {
         return tmpYears;
     }
 
-
     /**
      * @return The list of years.
      */
@@ -169,7 +168,6 @@ public class Calender {
      */
     public static String getMonthString(LocalDateTime ltd){
         return getMonth(ltd).getString();
-
     }
 
     /**

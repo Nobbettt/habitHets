@@ -8,8 +8,7 @@ import java.util.Stack;
 /**
  *This class handles logic that has to do with more than one habit.
  */
-public class HabitOrganizer implements IOrganizer {
-    private static HabitOrganizer instant;
+class HabitOrganizer implements IOrganizer {
     private static List<Habit> habitList;
     private static List<Listener> listeners = new ArrayList<>();
 
@@ -17,8 +16,10 @@ public class HabitOrganizer implements IOrganizer {
      * Constructor of HabitOrganizer that creates
      * a list of habits
      */
-    private HabitOrganizer() {
-        habitList = new ArrayList<>();
+    HabitOrganizer() {
+        if (habitList == null){
+            habitList = new ArrayList<>();
+        }
     }
 
     static void setHabitList(List<Habit> list) {

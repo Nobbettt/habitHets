@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable, Listener, ViewListener {
-    public static ControllerCalendar instance;
     @FXML private AnchorPane mainPane;
     @FXML private Label currentValueLbl;
     @FXML private AnchorPane creationPage;
@@ -98,7 +97,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
         habitView = new HabitView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
-        instance = this;
         todoView = new TodoView();
         monthView = new MonthView();
         EventObserver.addListener(this);
@@ -685,7 +683,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
             LocalDateTime to = LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), toHour, toMinute);
             checkEditInput();
             facade.editEvent(Integer.valueOf(idLabel.getText()), editTitle.getText(), editLocation.getText(), editDesc.getText(), from, to);
-
         }
         updateCurrentView();
         editPage.toBack();

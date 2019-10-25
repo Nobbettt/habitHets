@@ -19,7 +19,6 @@ import java.util.List;
  * This class is responsible for the graphical representation of the months in a year in year view in the application
  */
 class MonthInYear extends AnchorPane  {
-
     @FXML private GridPane gridPane;
     @FXML private Label monthLabel;
     private List<Label> days = new ArrayList<>();

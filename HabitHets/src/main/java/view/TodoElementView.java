@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodoElementView extends AnchorPane  {
+class TodoElementView extends AnchorPane  {
     private Facade facade;
     private int id;
     List<CheckBox> checkBoxes= new ArrayList<>();

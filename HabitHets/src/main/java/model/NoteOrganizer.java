@@ -9,8 +9,7 @@ import java.util.List;
  * NoteOrganizer class holds all logic for Note, in order to create a more modular class structure.
  * Therefore the Open-Closed principle is exerted.
  */
-public class NoteOrganizer implements IOrganizer {
-    private static NoteOrganizer instant;
+class NoteOrganizer implements IOrganizer {
     private static List<Note> notesList;
     private NoteOrganizer() {
         notesList = new ArrayList<>();
@@ -28,13 +27,16 @@ public class NoteOrganizer implements IOrganizer {
 
         } else {
             return instant;
+
+    NoteOrganizer() {
+        if (notesList == null) {
+            notesList = new ArrayList<>();
         }
     }
 
     static List<Note> getNotes() {
         return notesList;
     }
-
 
     /**
      * Method that removes a Note from a list of Notes, using the id set when creating a Note from Factory.
