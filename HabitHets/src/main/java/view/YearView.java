@@ -50,8 +50,8 @@ public class YearView extends AnchorPane implements ViewAble {
     @Override
     public void updateView(LocalDateTime currentDay) {
         for(int i=0; i< monthInYears.size(); i++){
-            LocalDateTime l = Calender.getInstant().getLdtYearFromDate(currentDay).get(i);
-            monthInYears.get(i).updateView(Calender.getInstant().getLdtMonthFromDate(l), Calender.getInstant().getMonthString(l));
+            LocalDateTime l = Calender.getInstance().getLdtYearFromDate(currentDay).get(i);
+            monthInYears.get(i).updateView(Calender.getInstance().getLdtMonthFromDate(l), Calender.getInstance().getMonthString(l));
         }
 
     }

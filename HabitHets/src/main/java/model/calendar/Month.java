@@ -4,17 +4,27 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Month{
+class Month{
     List<Day> days;
     private int monthNb;
 
-
+    /**
+     * The constructor for the month class. Given a year and a month number the month will create a a list of all
+     * the day and set the attribute monthNb to this month's month value
+     * @param year the year this month is in
+     * @param monthNb what month of the year the month is
+     */
     Month(int year, int monthNb) {
         this.monthNb = monthNb;
         this.days = getDays(year, monthNb);
     }
 
-
+    /**
+     * A method that is called when the month is created that creates all the days of that month
+     * @param year the year that this month is in
+     * @param monthNb the month number of this month
+     * @return A list of the days that the month contains
+     */
     private List<Day> getDays(int year, int monthNb){
         LocalDateTime ldt = LocalDateTime.of(year, monthNb,1,0,0);
         List<Day> tmpDays = new ArrayList<>();
@@ -26,9 +36,20 @@ public class Month{
         return tmpDays;
     }
 
+    /**
+     * A getter for the list of
+     * @return the list of days in the month
+     */
+
     List<Day> getDays() {
         return days;
     }
+
+    /**
+     * A method that returns the day object of a date given a LocalDatTime of that date
+     * @param ldt the LocalDateTime that you want the corresponding Day of
+     * @return the day that is represented by the given LocalDateTime
+     */
 
     Day getDayFromLDT(LocalDateTime ldt){
         for (Day day : getDays()){
@@ -38,6 +59,11 @@ public class Month{
         }
         return null;
     }
+
+    /**
+     * A method that checks the value of the month and return the corresponding String
+     * @return the String of what month this is
+     */
 
     String getString() {
         switch (monthNb) {

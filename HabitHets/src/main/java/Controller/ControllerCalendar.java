@@ -94,7 +94,7 @@ public class ControllerCalendar implements Initializable, Listener {
 
         masterDateTime = LocalDateTime.now();
         facade = new Facade();
-        calender = Calender.getInstant();
+        calender = Calender.getInstance();
         yearView = new YearView();
         weekView = new WeekView();
         habitView = new HabitView();
@@ -593,6 +593,11 @@ public class ControllerCalendar implements Initializable, Listener {
         }
     }
 
+    /**
+     * Delegates all choiceboxes in the create/edit page to another function that gives them all needed information
+     * to be used
+     */
+
     private void setUpChoiceBoxes(){
         setUpChoicebox(fromHourTime, true);
         setUpChoicebox(fromMinuteTime, false);
@@ -603,6 +608,13 @@ public class ControllerCalendar implements Initializable, Listener {
         setUpChoicebox(editToHourTime, true);
         setUpChoicebox(editToMinuteTime, false);
     }
+
+    /**
+     * the method that sets up a given checkbox as either a hour or a minute box
+     * @param c the checkbox that shall be set up
+     * @param isHour a boolean that is true if the checkbox is made to show hours or false if the checkbox will
+     *               show minutes
+     */
 
     private void setUpChoicebox (ComboBox<String> c, boolean isHour){
         ArrayList<String> a = new ArrayList<>();
@@ -631,6 +643,10 @@ public class ControllerCalendar implements Initializable, Listener {
 
     }
 
+    /**
+     * Clears all the different javafx elements a user can edit so it is empty at next use
+     */
+
     public void resetAllField(){
         titleField.clear();
         dateChooser.setValue(LocalDate.now());
@@ -642,16 +658,32 @@ public class ControllerCalendar implements Initializable, Listener {
         toMinuteTime.getSelectionModel().selectFirst();
     }
 
+    /**
+     * An fxml method that opens the edit-page pop-up for events and populates that screen with the information
+     * of the event that is to be edited
+     * @param id the id of the event that is going to be edited
+     */
+
     @FXML
     public void editEventPressed(int id){
         populateExtendedEvent(id);
         displayPopUps(editPage, eventEditPane);
     }
 
+    /**
+     * A fxml method that closes the edit-page pop-up and brings forward the previous the screen that was used
+     * before the edit-page was opened
+     */
+
     @FXML
     public void editClosePressed(){
         editPage.toBack();
     }
+
+    /**
+     * Saves the input the user has given in the edit screen by editing the event in the EventOrganizer eventList through
+     * the facade interface
+     */
 
     @FXML
     public void editSavePressed() {
@@ -660,9 +692,9 @@ public class ControllerCalendar implements Initializable, Listener {
         int toHour = Integer.parseInt(editToHourTime.getValue());
         int toMinute = Integer.parseInt(editToMinuteTime.getValue());
         if (toHour > fromHour || toHour == fromHour && toMinute > fromMinute) {
-            checkEditInput();
             LocalDateTime from = LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), fromHour, fromMinute);
             LocalDateTime to = LocalDateTime.of(editDate.getValue().getYear(), editDate.getValue().getMonth(), editDate.getValue().getDayOfMonth(), toHour, toMinute);
+            checkEditInput();
             facade.editEvent(Integer.valueOf(idLabel.getText()), editTitle.getText(), editLocation.getText(), editDesc.getText(), from, to);
 
         }
@@ -670,8 +702,12 @@ public class ControllerCalendar implements Initializable, Listener {
         editPage.toBack();
     }
 
+    /**
+     * Goes through all the input given by the user and edits necessary fields so that to not cause any errors when saving
+     */
+
     private void checkEditInput(){
-        if (editTitle.getText() == null){
+        if (editTitle.getText() == null || editTitle.getText().isEmpty()){
             editTitle.setText("Edited Event");
         }
         if (editLocation.getText() == null){
@@ -682,12 +718,23 @@ public class ControllerCalendar implements Initializable, Listener {
         }
     }
 
+    /**
+     * When the "delete-event" button in the edit page has been pressed by the user, this methods is called. This
+     * closes the edit-page and deletes the event from the EventOrganizer list through the facade
+     */
+
     @FXML
     private void deleteEventPressed(){
         editPage.toBack();
         facade.deleteEvent(Integer.valueOf(idLabel.getText()));
         updateCurrentView();
     }
+
+    /**
+     * When the edit page is to be opened this methods sets the values in the different javafx elements of the
+     * corresponding values of the event that is to be edited
+     * @param id the id of the event that is going to be edited
+     */
 
     private void populateExtendedEvent(int id){
         LocalDateTime eventStarttime = facade.getEventStarttime(id);
@@ -702,6 +749,11 @@ public class ControllerCalendar implements Initializable, Listener {
         editLocation.setText(facade.getEventLocation(id));
         idLabel.setText(String.valueOf(id));
     }
+
+    /**
+     * Creates a new LocalDateTime copy of the masterDateTime to ensure that is not edited somewhere else, increasing
+     * immutability
+     */
 
     private LocalDateTime copyMasterdate(){
         return LocalDateTime.of(masterDateTime.getYear(), masterDateTime.getMonthValue(), masterDateTime.getDayOfMonth(), masterDateTime.getHour(), masterDateTime.getMinute());

@@ -43,7 +43,7 @@ class DayEventListView extends StackPane {
 
     private void setUpTimeLine() {
         tl = new Line(0, 0, 2000, 0);
-        tl.setStroke(Color.valueOf("#47bcad"));
+        tl.setStroke(Color.valueOf("#e64e4e"));
         tl.setStrokeWidth(2);
         this.getChildren().add(tl);
 
@@ -94,7 +94,7 @@ class DayEventListView extends StackPane {
         double timeHeight = 0;
         if (hour < 12) {
             timeHeight = (12 - hour) * hHeight;
-            timeHeight -= hHeight - (minute * 2);
+            timeHeight -= (minute * 2);
             timeHeight *= -1;
         } else {
             timeHeight = (hour - 12) * hHeight;
