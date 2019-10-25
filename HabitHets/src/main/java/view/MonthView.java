@@ -22,41 +22,49 @@ public class MonthView extends StackPane implements ViewAble {
     private List<Label> weeknb;
     private Calender calender;
 
+    /**
+     * Imports fxml file and sets this class as the fx controller and root of the fxml file
+     * loads the file and checks for exception
+     */
     public MonthView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/month.fxml"));
-              fxmlLoader.setRoot(this);
-              fxmlLoader.setController(this);
-              try {
-                fxmlLoader.load();
-              } catch (IOException exception) {
-                  throw new RuntimeException(exception);
-               }
-              setupMonth();
-              this.calender = Calender.getInstance();
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+        setupMonth();
+        this.calender = Calender.getInstance();
     }
 
-     private void setupMonth() {
-         monthdays = new ArrayList<>();
-         weeknb = new ArrayList<>();
-         for(int i = 1; i < 7; i++){
-             for(int j = 0; j < 8; j++){
-                 AnchorPane a = new AnchorPane();
-                 Label l = new Label(" ");
-                 a.getChildren().add(l);
-                 l.setStyle("-fx-font-size: 16px");
-                 if(j == 0){
-                     l.setTextFill(Color.valueOf("#FF4500"));
-                     weeknb.add(l);
-                 }
-                 else{
-                     l.setTextFill(Color.valueOf("#FFFF"));
-                     monthdays.add(l);
-                 }
+    /**
+     * Is called from the constructor
+     * Sets up the view and prepares it to make it possible to just update the existing content in future
+     */
+    private void setupMonth() {
+        monthdays = new ArrayList<>();
+        weeknb = new ArrayList<>();
+        for(int i = 1; i < 7; i++){
+            for(int j = 0; j < 8; j++){
+                AnchorPane a = new AnchorPane();
+                Label l = new Label(" ");
+                a.getChildren().add(l);
+                l.setStyle("-fx-font-size: 16px");
+                if(j == 0){
+                    l.setTextFill(Color.valueOf("#FF4500"));
+                    weeknb.add(l);
+                }
+                else{
+                    l.setTextFill(Color.valueOf("#FFFF"));
+                    monthdays.add(l);
+                }
 
-                 monthGrid.add(a, j, i);
-             }
-         }
-     }
+                monthGrid.add(a, j, i);
+            }
+        }
+    }
 
     @Override
     public void updateView(LocalDateTime currentDay) {
@@ -82,7 +90,7 @@ public class MonthView extends StackPane implements ViewAble {
      */
     @Override
     public void updateTimeLine(int hour, int minute) {
-        //nothing to see here
+        //nothing to see here, just a dumb function inherited from the ViewAble interface
     }
 
     private void drawPreviousMonth(int lastDayPrevMonth, int firstDate){
@@ -92,7 +100,6 @@ public class MonthView extends StackPane implements ViewAble {
             lastDayPrevMonth--;
         }
     }
-
 
     private void drawCurrentMonth(List<LocalDateTime> ldtList, int firstDate){
         int j = 0;
@@ -106,7 +113,6 @@ public class MonthView extends StackPane implements ViewAble {
             }else{
                 monthdays.get(i).setText(" ");
             }
-
         }
     }
 

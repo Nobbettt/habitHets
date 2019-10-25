@@ -22,6 +22,14 @@ class DayEventListView extends StackPane {
 
     DayEventListView(LocalDateTime ldt) {
         this.ldt = ldt;
+        setUpDayView();
+    }
+
+    /**
+     * Is called from the constructor
+     * Sets up the view and prepares it to make it possible to just update the existing content in future
+     */
+    private void setUpDayView() {
         this.facade = new Facade();
         hBoxList = new ArrayList<>();
         vBox = new VBox();
@@ -41,6 +49,10 @@ class DayEventListView extends StackPane {
         vBox.setPickOnBounds(false);
     }
 
+    /**
+     * Is called from the constructor
+     * Sets up the view and prepares the time line
+     */
     private void setUpTimeLine() {
         tl = new Line(0, 0, 2000, 0);
         tl.setStroke(Color.valueOf("#e64e4e"));

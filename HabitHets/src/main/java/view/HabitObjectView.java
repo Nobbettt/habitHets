@@ -15,10 +15,8 @@ import java.util.List;
 
 
 class HabitObjectView extends AnchorPane {
-
     private int id;
     private Facade facade;
-
     @FXML private Label streakLabel;
     @FXML private Label bestStreakLabel;
     @FXML private Button color;
@@ -27,19 +25,20 @@ class HabitObjectView extends AnchorPane {
     @FXML private Button edit;
     @FXML private Button deleteHabit;
 
-
-
+    /**
+     * Imports fxml file and sets this class as the fx controller and root of the fxml file
+     * loads the file and checks for exception
+     * Sets local id to the received id
+     */
     public HabitObjectView(int id) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/habitElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
         this.id = id;
         this.facade = new Facade();
     }
@@ -89,7 +88,6 @@ class HabitObjectView extends AnchorPane {
             color.setStyle("-fx-background-color: #999; -fx-border-color: "+ facade.getHabitColor(id));
         }
     }
-
 
     void hideHabits(){
         habitGrid.setVisible(false);

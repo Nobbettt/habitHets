@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoView extends AnchorPane {
-
     @FXML private AnchorPane todoList;
     @FXML private Button addTodo;
     @FXML private VBox vboxtodo;
@@ -27,8 +26,10 @@ public class TodoView extends AnchorPane {
     @FXML private ScrollPane doneTodoScrollpane;
     private Facade facade;
 
-
-
+    /**
+     * Imports fxml file and sets this class as the fx controller and root of the fxml file
+     * loads the file and checks for exception
+     */
     public TodoView(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/todo.fxml"));
         fxmlLoader.setRoot(this);
@@ -45,8 +46,6 @@ public class TodoView extends AnchorPane {
         doneTodoScrollpane.setFitToWidth(true);
         doneTodoScrollpane.setFitToHeight(true);
         this.facade = new Facade();
-
-
     }
 
     @FXML
@@ -62,30 +61,20 @@ public class TodoView extends AnchorPane {
         if (todoTitle.getText() != null && !todoTitle.getText().isEmpty()){
             facade.createNewTodo(todoTitle.getText());
             todoTitle.clear();
-
         }
         else{
             todoTitle.clear();
         }
         updateTodoView();
-
     }
 
     @FXML
     private void addTodoOnClick(){
         newTodo.setVisible(true);
-        newTodo.toFront();/*
-
-
-
-        todoOrganizer.add();
-        List<Todo> newTodo = new ArrayList<>();
-        newTodo.add(todoOrganizer.getTodoList().get(todoOrganizer.getTodoList().size()-1));
-        updateTodoView(todoOrganizer.getTodoList());*/
+        newTodo.toFront();
     }
 
     List<CheckBox> checkBoxes = new ArrayList<>();
-
 
     public void updateTodoView( ) {
         vboxtodo.getChildren().clear();
@@ -96,9 +85,7 @@ public class TodoView extends AnchorPane {
         }
         for (int id : facade.getDoneTodoIds()) {
             TodoDoneElementView todoDoneElement = new TodoDoneElementView(id);
-            //todoDoneElement.getChildren().get(1).setVisible(false);
             vboxdonetodo.getChildren().add(todoDoneElement);
-            //todoDoneElement.getCb().setSelected(true);
         }
 
         for (int i = 0; i < vboxtodo.getChildren().size(); i++) {
@@ -109,12 +96,7 @@ public class TodoView extends AnchorPane {
                 vboxtodo.getChildren().remove(td);
                 TodoDoneElementView tdd = new TodoDoneElementView(td.getTodoID());
                 vboxdonetodo.getChildren().add(tdd);
-
             }
         }
-
-        }
-
-
-
+    }
 }

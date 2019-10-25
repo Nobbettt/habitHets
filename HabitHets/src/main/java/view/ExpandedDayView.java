@@ -15,21 +15,19 @@ import java.time.LocalDateTime;
 
 public class ExpandedDayView extends StackPane implements ViewAble {
 
-    @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private GridPane dayGrid;
-    @FXML
-    private Label weekDayLbl;
-    @FXML
-    private TextArea noteField;
-    @FXML
-    private Button saveNoteButton;
+    @FXML private ScrollPane scrollPane;
+    @FXML private GridPane dayGrid;
+    @FXML private Label weekDayLbl;
+    @FXML private TextArea noteField;
+    @FXML private Button saveNoteButton;
     private DayEventListView dayEvents;
     private LocalDateTime day;
     private Facade facade;
 
-
+    /**
+     * Imports fxml file and sets this class as the fx controller and root of the fxml file
+     * loads the file and checks for exception
+     */
     public ExpandedDayView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/expandedDayView.fxml"));// todo
         fxmlLoader.setRoot(this);
@@ -41,8 +39,6 @@ public class ExpandedDayView extends StackPane implements ViewAble {
         }
         this.facade = new Facade();
         setupDayView();
-
-
     }
 
     @Override
@@ -68,6 +64,10 @@ public class ExpandedDayView extends StackPane implements ViewAble {
         dayEvents.updateTimeline(hour, minute);
     }
 
+    /**
+     * Is called from the constructor
+     * Sets up the view and prepares it to make it possible to just update the existing content in future
+     */
     private void setupDayView() {
         dayGrid.setGridLinesVisible(true);
 

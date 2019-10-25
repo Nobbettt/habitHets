@@ -3,7 +3,6 @@ package view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -29,29 +28,36 @@ public class HabitView extends AnchorPane implements ViewListener {
     private List<HabitObjectView> habitsList;
     private HabitObjectView editing;
     private Facade facade;
-
     private boolean isExpanded;
 
-
+    /**
+     * Imports fxml file and sets this class as the fx controller and root of the fxml file
+     * loads the file and checks for exception
+     * Fits content to window
+     */
     public HabitView() {
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/habit.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        setUpHabit();
+        this.facade = new Facade();
+    }
 
+    /**
+     * Is called from the constructor
+     * Sets up the view and prepares it
+     */
+    private void setUpHabit() {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         habitsList = new ArrayList<>();
         isExpanded = true;
-        this.facade = new Facade();
     }
-
 
 
     public boolean getIsExpanded() {
@@ -59,7 +65,6 @@ public class HabitView extends AnchorPane implements ViewListener {
     }
 
     public void setIsExpanded(boolean state) { isExpanded = state;}
-
 
     private void setVisibilityAdd(Boolean visibility){
         create.setVisible(visibility);
@@ -85,12 +90,10 @@ public class HabitView extends AnchorPane implements ViewListener {
             save.toFront();
             title.setText(facade.getHabitTitle(Integer.valueOf(msg)));
             idLbl.setText(msg);
-            //java.awt.Color tmpC = java.awt.Color.decode(facade.getHabitColor(editing.getHabitID()));
             Color c = Color.valueOf(facade.getHabitColor(Integer.valueOf(msg)));
             colorPicker.setValue(c);
             habitModifyTypeLabel.setText("Edit Habit");
         }
-
     }
 
     @FXML
@@ -155,7 +158,6 @@ public class HabitView extends AnchorPane implements ViewListener {
         isExpanded = true;
     }
 
-
      public void updateHabitView(List<Integer> ids) {
         vBox.getChildren().clear();
         for (Integer id: ids){
@@ -176,7 +178,6 @@ public class HabitView extends AnchorPane implements ViewListener {
         return "#" + (format(value.getRed()) + format(value.getGreen()) + format(value.getBlue()) + format(value.getOpacity()))
                 .toUpperCase();
     }
-
 
     @Override
     public void actOnUpdate(String msg) {

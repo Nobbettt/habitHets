@@ -21,11 +21,14 @@ class MonthInYear extends AnchorPane  {
     @FXML private Label monthLabel;
     private List<Label> days = new ArrayList<>();
 
+    /**
+     * Imports fxml file and sets this class as the fx controller and root of the fxml file
+     * loads the file and checks for exception
+     */
     MonthInYear() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/monthInYear.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try {
             fxmlLoader.load();
         } catch (
@@ -34,8 +37,6 @@ class MonthInYear extends AnchorPane  {
         }
         setup();
     }
-
-
 
     void updateView(List<LocalDateTime> list, String monthName) {
         LocalDateTime firstDay = list.get(0);
@@ -52,15 +53,13 @@ class MonthInYear extends AnchorPane  {
                 days.get(i).setText(dayNb.toString());
                 dc++;
             }
-
-
         }
-
-
     }
 
-
-
+    /**
+     * Is called from the constructor
+     * Sets up the view and prepares it to make it possible to just update the existing content in future
+     */
     private void setup(){
         for (int i = 1; i < gridPane.getRowCount(); i++) {
             for (int j = 0; j < gridPane.getColumnCount(); j++) {
@@ -78,14 +77,9 @@ class MonthInYear extends AnchorPane  {
     }
 
     private void fitItem(AnchorPane parent, Node child) {
-
             setTopAnchor(child, 0.0);
-
             setRightAnchor(child, 0.0);
-
             setBottomAnchor(child, 0.0);
-
             setLeftAnchor(child, 0.0);
         }
-
 }

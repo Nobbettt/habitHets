@@ -21,6 +21,12 @@ public class EventView extends AnchorPane {
     private Facade facade;
     private List<ViewListener> listeners = new ArrayList<>();
 
+    /**
+     * Imports fxml file and sets this class as the fx controller and root of the fxml file
+     * loads the file and checks for exception
+     * Sets local id for the received event
+     * Updates the labels of the view to the content that corresponds to the received id
+     */
     EventView(int id) {
         this.id = id;
         facade = new Facade();

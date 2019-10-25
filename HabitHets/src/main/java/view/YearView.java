@@ -36,8 +36,11 @@ public class YearView extends AnchorPane implements ViewAble {
         setUpYear();
     }
 
+    /**
+     * Is called from the constructor
+     * Sets up the view and prepares it to make it possible to just update the existing content in future
+     */
     private void setUpYear() {
-
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 3; j++) {
                 MonthInYear miy = new MonthInYear();

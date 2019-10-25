@@ -11,13 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoDoneElementView extends AnchorPane  {
-
     private Facade facade;
     private int id;
+    List<CheckBox> checkBoxes= new ArrayList<>();
 
-
-
-
+    /**
+     * Imports fxml file and sets this class as the fx controller and root of the fxml file
+     * loads the file and checks for exception
+     */
     TodoDoneElementView(int id) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/todoDoneElement.fxml"));
         fxmlLoader.setRoot(this);
@@ -32,7 +33,6 @@ public class TodoDoneElementView extends AnchorPane  {
         this.facade = new Facade();
         this.id = id;
         setUpTodo();
-
     }
 
     List<CheckBox> cb = new ArrayList<>();
@@ -41,6 +41,10 @@ public class TodoDoneElementView extends AnchorPane  {
         return cb.get(0);
     }
 
+    /**
+     * Is called from the constructor
+     * Sets up the view and prepares it
+     */
     private void setUpTodo(){
         CheckBox c = (CheckBox)getChildren().get(0);
         c.setText(facade.getDoneTodoTitle(id));
@@ -48,8 +52,6 @@ public class TodoDoneElementView extends AnchorPane  {
         c.setSelected(true);
         cb.add(c);
     }
-
-    List<CheckBox> checkBoxes= new ArrayList<>();
 
 
 
@@ -61,6 +63,5 @@ public class TodoDoneElementView extends AnchorPane  {
                 facade.moveBackTodo(id);
             }
         }
-
     }
 }

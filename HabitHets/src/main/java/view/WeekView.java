@@ -30,8 +30,11 @@ public class WeekView extends StackPane implements ViewAble {
     private List<DayEventListView> weekDayEvents;
     private Calender calender;
 
+    /**
+     * Imports fxml file and sets this class as the fx controller and root of the fxml file
+     * loads the file and checks for exception
+     */
     public WeekView() {
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/week.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -74,7 +77,8 @@ public class WeekView extends StackPane implements ViewAble {
     }
 
     /**
-     * Initializes and prepares the columns for content
+     * Is called from the constructor
+     * Sets up the view and prepares it to make it possible to just update the existing content in future
      */
     private void setUpWeek() {
         scrollPane.setFitToWidth(true);
