@@ -31,7 +31,6 @@ public class Calender {
 
     public static Calender getInstance() {
         if (instance == null) {
-
             instance = new Calender();
             return instance;
 

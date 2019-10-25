@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class SaveOnShutDown {
+    private static final String[] conflicts = {"<end>", "<//>"};
     /**
      * Function creates a new txt file (overwrites a existing file if name already taken)
      * Sets the new files content to newTxt string parameter
@@ -27,7 +28,6 @@ public class SaveOnShutDown {
         }
     }
 
-    private static final String[] conflicts = {"<end>", "<//>"};
     /**
      * Access function to save all the objects (Todos, DoneTodos, Habits, Notes, Events) on shutdown.
      */
@@ -45,7 +45,6 @@ public class SaveOnShutDown {
      * When all objects all converted to a single string it writes it to the todo.txt which is found in the db folder
      */
     private static void saveTodo() {
-        // id,title;id,title;
         TodoOrganizer todoOrganizer = new TodoOrganizer();
         List<Todo> todoList = todoOrganizer.getTodoList();
         StringBuilder txt = new StringBuilder();
@@ -63,7 +62,6 @@ public class SaveOnShutDown {
      * When all objects all converted to a single string it writes it to the todoDone.txt which is found in the db folder
      */
     private static void saveDoneTodo() {
-        // id,title;id,title;
         TodoOrganizer todoOrganizer = new TodoOrganizer();
         List<Todo> doneTodoList = todoOrganizer.getDoneTodoList();
         StringBuilder txt = new StringBuilder();
@@ -81,7 +79,6 @@ public class SaveOnShutDown {
      * When all objects all converted to a single string it writes it to the habit.txt which is found in the db folder
      */
     private static void saveHabit() {
-        // id,title,bestStreak,Color,daterecord,ldt=ldt=ldt=ldt;id,title,bestStreak,Color,daterecord,ldt=ldt=ldt=ldt;
         HabitOrganizer habitOrganizer = new HabitOrganizer();
         List<Habit> habitList = habitOrganizer.getHabitList();
         StringBuilder txt = new StringBuilder();
@@ -118,7 +115,6 @@ public class SaveOnShutDown {
      * When all objects all converted to a single string it writes it to the note.txt which is found in the db folder
      */
     private static void saveNote() {
-        // id,title,2019-10-21;
         NoteOrganizer noteOrganizer = new NoteOrganizer();
         List<Note> noteList = noteOrganizer.getNotes();
         StringBuilder txt = new StringBuilder();
@@ -139,7 +135,6 @@ public class SaveOnShutDown {
      * When all objects all converted to a single string it writes it to the event.txt which is found in the db folder
      */
     private static void saveEvent() {
-        // id,2019-10-22T05:00:25,2019-10-22T05:00:25,Title thing,Location thing,Description thing,#47bcad
         EventOrganizer eventOrganizer = new EventOrganizer();
         List<Event> eventList = eventOrganizer.getEventList();
         StringBuilder txt = new StringBuilder();
