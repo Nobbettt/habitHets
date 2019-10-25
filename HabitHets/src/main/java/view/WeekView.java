@@ -62,7 +62,7 @@ public class WeekView extends StackPane implements ViewAble {
     }
 
     /**
-     * updates the horizontal line that indicates the time given the two parameters
+     * Updates TimeLines position that is visible on screen every 60th second, is only being called if current view is either weekView or expandedDayView
      * @param hour
      * @param minute
      */
