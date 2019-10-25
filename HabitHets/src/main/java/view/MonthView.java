@@ -56,7 +56,7 @@ public class MonthView extends StackPane implements ViewAble {
                 a.getChildren().add(l);
                 l.setStyle("-fx-font-size: 16px");
                 if(j == 0){
-                    l.setTextFill(Color.valueOf("#FF4500"));
+                    l.setTextFill(Color.valueOf("#e64e4e"));
                     weeknb.add(l);
                 }
                 else{

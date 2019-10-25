@@ -127,15 +127,28 @@ public class ControllerCalendar implements Initializable, Listener {
         setupTodo();
         setupHabit();
         setUpChoiceBoxes();
-
-        renderWeek();
+        renderDay();
         updateTimeline();
+        setUpdateViewOnStart();
+    }
+
+
+    private void setUpdateViewOnStart() {
+        timeLineCaller = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateViewOnStart()));
+        timeLineCaller.setCycleCount(10);
+        timeLineCaller.play();
+    }
+
+    private void updateViewOnStart() {
+        currentView = expandedDayView;
+        expandedDayView.updateView(masterDateTime);
+        currentView = weekView;
+        weekView.updateView(masterDateTime);
     }
 
     /**
      * Sets up all things needed in order for the timeline to properly work
      */
-
     private void setupTimeline(){
         timeLineCaller = new Timeline(new KeyFrame(Duration.seconds(60), event -> updateTimeline()));
         timeLineCaller.setCycleCount(Timeline.INDEFINITE);
@@ -198,7 +211,7 @@ public class ControllerCalendar implements Initializable, Listener {
         AnchorPane ap = new AnchorPane();
         calendarPane.getChildren().add(ap);
 
-        setAsMarkedInNavBar(weekBtn);
+        setAsMarkedInNavBar(dayBtn);
     }
 
 
@@ -289,6 +302,7 @@ public class ControllerCalendar implements Initializable, Listener {
         currentView = expandedDayView;
         expandedDayView.updateView(masterDateTime);
         renderCalendar(expandedDayView);
+        renderCalendar(expandedDayView);
     }
 
     /**
@@ -309,6 +323,7 @@ public class ControllerCalendar implements Initializable, Listener {
     private void renderWeek() {
         currentView = weekView;
         weekView.updateView(masterDateTime);
+        renderCalendar(weekView);
         renderCalendar(weekView);
     }
 
@@ -759,4 +774,9 @@ public class ControllerCalendar implements Initializable, Listener {
         return LocalDateTime.of(masterDateTime.getYear(), masterDateTime.getMonthValue(), masterDateTime.getDayOfMonth(), masterDateTime.getHour(), masterDateTime.getMinute());
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("hej");
+        super.finalize();
+    }
 }
