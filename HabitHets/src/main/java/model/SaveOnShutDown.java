@@ -23,7 +23,7 @@ public class SaveOnShutDown {
         String relativePath = currentRelativePath.toAbsolutePath().toString();
 
         try {
-            Files.write( Paths.get(relativePath + "/src/main/java/model/db/"+file), newTxt.getBytes());
+            Files.write( Paths.get(relativePath + "/src/main/resources/db/"+file), newTxt.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }

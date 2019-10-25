@@ -2,7 +2,6 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -29,7 +28,7 @@ public class TxtDbCommunicator {
         String text = "";
         Scanner scanner;
         try {
-            scanner = new Scanner( new File(relativePath + "/src/main/java/model/db/"+file) );
+            scanner = new Scanner( new File(relativePath + "/src/main/resources/db/"+file) );
             while (scanner.hasNextLine()) {
                 text = scanner.useDelimiter("\\A").next();
             }
