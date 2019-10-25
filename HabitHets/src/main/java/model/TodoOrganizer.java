@@ -8,10 +8,10 @@ import java.util.List;
  * This class contains methods and lists that affect a todoo.
  */
 
-public class TodoOrganizer implements IOrganizer {
+class TodoOrganizer implements IOrganizer {
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
-
+    private static List<Listener> listeners = new ArrayList<>();
 
     /**
      * The constructor of TodoOrganizer sets the list of todos and doneTodos.
@@ -32,7 +32,6 @@ public class TodoOrganizer implements IOrganizer {
     static void setDoneTodoList(List<Todo> doneTodoList) {
         TodoOrganizer.doneTodoList = doneTodoList;
     }
-
 
     /**
      * This method creates a new toddoo. You have to enter the todoo's title, the todoo get it's id from the factory class
@@ -108,8 +107,6 @@ public class TodoOrganizer implements IOrganizer {
         return ids;
     }
 
-
-
     static Todo getTodoOfId(int id){
         for (Todo todo : getTodoList()){
             if (todo.getId() == id){
@@ -142,12 +139,8 @@ public class TodoOrganizer implements IOrganizer {
         }
     }
 
-    private static List<Listener> listeners = new ArrayList<>();
-
-
     static void addListener(Listener l){
         listeners.add(l);
-
     }
 
     private static void notifyListener(){

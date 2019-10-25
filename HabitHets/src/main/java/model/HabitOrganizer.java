@@ -8,8 +8,9 @@ import java.util.Stack;
 /**
  *This class handles logic that has to do with more than one habit.
  */
-public class HabitOrganizer implements IOrganizer {
+class HabitOrganizer implements IOrganizer {
     private static List<Habit> habitList;
+    private static List<Listener> listeners = new ArrayList<>();
 
     /**
      * Constructor of HabitOrganizer that creates
@@ -53,9 +54,6 @@ public class HabitOrganizer implements IOrganizer {
         habitList.add(Factory.createHabit(title, new Stack(),0,color,LocalDate.now()));
         notifyListener();
     }
-
-    private static List<Listener> listeners = new ArrayList<>();
-
 
     static void addListener(Listener l){
         listeners.add(l);

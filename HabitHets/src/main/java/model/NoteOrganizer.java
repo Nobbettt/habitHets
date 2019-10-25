@@ -10,7 +10,7 @@ import java.util.List;
  * Therefore the Open-Closed principle is exerted.
  */
 
-public class NoteOrganizer implements IOrganizer {
+class NoteOrganizer implements IOrganizer {
     private static List<Note> notesList;
 
     NoteOrganizer() {
@@ -22,7 +22,6 @@ public class NoteOrganizer implements IOrganizer {
     static List<Note> getNotes() {
         return notesList;
     }
-
 
     /**
      * Method that removes a Note from a list of Notes, using the id set when creating a Note from Factory.

@@ -7,13 +7,11 @@ import javafx.scene.layout.AnchorPane;
 import model.Facade;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class is responsible for the graphical representation of the events in the week- and single day view in the application
  */
-public class EventView extends AnchorPane {
+class EventView extends AnchorPane {
     @FXML
     private Label titleLabel;
     @FXML
@@ -49,6 +47,5 @@ public class EventView extends AnchorPane {
     @FXML
     public void editEventClicked(){
         EventObserver.listenersReact(id);
-
     }
 }

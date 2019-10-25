@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * This class defines what a note is and all the variables a note needs.
  */
-public class Note {
+class Note {
     private int id;
     private String description;
     private LocalDate day;

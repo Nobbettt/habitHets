@@ -31,7 +31,6 @@ public class Calender {
 
     public static Calender getInstance() {
         if (instance == null) {
-
             instance = new Calender();
             return instance;
 
@@ -56,12 +55,10 @@ public class Calender {
         return tmpYears;
     }
 
-
     /**
      *
      * @return The list of years.
      */
-
     private List<Year> getYears() {
         return years;
     }
@@ -185,7 +182,6 @@ public class Calender {
      */
     public String getMonthString(LocalDateTime ltd){
         return getMonth(ltd).getString();
-
     }
 
     /**
