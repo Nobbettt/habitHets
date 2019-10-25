@@ -70,6 +70,9 @@ public class TestWeek {
         Assert.assertTrue(day == calender.getYear(2019).getMonth(1).getDays().get(0));
     }
 
+    /**
+     * Test if a calendar is accidentally created twice is the same calendar
+     */
     @Test
     public void testSameCalendar(){
         Calender calender1 = new Calender();
