@@ -146,9 +146,9 @@ public class SaveOnShutDown {
         for(Event event : eventList) {
             if (event.getDescription() != null) {
                 txt.append(event.getId()).append("<//>");
-                String startTime = formatter.format(event.getStartTime());
+                String startTime = formatter.format(event.getStartTime().withSecond(02));
                 txt.append(startTime).append("<//>");
-                String endTime = formatter.format(event.getEndTime());
+                String endTime = formatter.format(event.getEndTime().withSecond(02));
                 txt.append(endTime).append("<//>");
                 String cleanTitle = removeConflicts(event.getTitle());
                 txt.append(cleanTitle).append("<//>");

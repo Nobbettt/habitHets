@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+/**
+ * Each method in the Facade class delegates the method call to the responsible class. No actual calculations or
+ * logic is done in this class but rather it simply points the method call to the responsible class that contains
+ * the logic
+ */
 public class Facade {
     private EventOrganizer eventOrganizer = new EventOrganizer();
     private NoteOrganizer noteOrganizer = new NoteOrganizer();

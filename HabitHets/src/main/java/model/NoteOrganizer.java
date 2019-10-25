@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * NoteOrganizer class holds all logic for Note, in order to create a more modular class structure.
+ * NoteOrganizer class holds all logic for multiple notes, in order to create a more modular class structure.
  * Therefore the Open-Closed principle is exerted.
  */
 class NoteOrganizer implements IOrganizer {
