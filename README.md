@@ -18,8 +18,8 @@ The tests are applied to test the different Classes fully (except for getters an
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management
-* [JavaFX] (https://openjfx.io/) - Graphical and media packages
-* [JUnit] (https://junit.org/junit5/) - Unit testing
+* [JavaFX](https://openjfx.io/) - Graphical and media packages
+* [JUnit](https://junit.org/junit5/) - Unit testing
 
 
 ## Authors
