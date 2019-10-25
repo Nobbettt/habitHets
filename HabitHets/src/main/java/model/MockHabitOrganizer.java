@@ -8,7 +8,7 @@ import java.util.Stack;
 /**
  *This class handles logic that has to do with more than one habit.
  */
-public class MockHabitOrganizer implements IHandler{
+public class MockHabitOrganizer implements IOrganizer {
     private static MockHabitOrganizer instant;
     private static List<Habit> habitList;
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Facade {
-    private EventOrganizer eventOrganizer = EventOrganizer.getInstant();
+    private EventOrganizer eventOrganizer = EventOrganizer.getInstance();
     private NoteOrganizer noteOrganizer = NoteOrganizer.getInstance();
     private TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
     private HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
@@ -15,7 +15,7 @@ public class Facade {
         double i = 0;
         List<Event> overlaps = new ArrayList<>();
         List<Event> overlaps2 = new ArrayList<>();
-        List<Event> events = EventOrganizer.getInstant().getEventsOfDay(dateTime);
+        List<Event> events = EventOrganizer.getInstance().getEventsOfDay(dateTime);
         Interval interval = new Interval(getEventStarttime(id), true, getEventEndtime(id), true);
         for (Event tmpEvent : events) {
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);

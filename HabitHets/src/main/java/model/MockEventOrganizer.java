@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MockEventOrganizer implements IHandler {
+public class MockEventOrganizer implements IOrganizer {
     private static MockEventOrganizer instant;
     private static List<Event> eventList;
 

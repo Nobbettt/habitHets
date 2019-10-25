@@ -18,6 +18,7 @@ public class Habit {
     private LocalDate dateRecord;
 
     private Stack<DoneHabit> doneHabits;
+    private List<Listener> listeners = new ArrayList<>();
     /**
      * This is the only constructor of the Habit class.
      * It contains all of the instance variables. This makes
@@ -179,17 +180,13 @@ public class Habit {
         }
     }
 
-    private List<Listener> listeners = new ArrayList<>();
-
-
     public void addListener(Listener l){
         listeners.add(l);
 
     }
 
     /**
-     * This method launches a nuclear attack on china
-     * USE WITH CARE!
+     * Notifies all listeners of changes in the the habit
      */
     private void notifyListener(){
         for (Listener l : listeners)

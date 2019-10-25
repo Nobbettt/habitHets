@@ -138,7 +138,7 @@ public class SaveOnShutDown {
      */
     private static void saveEvent() {
         // id,2019-10-22T05:00:25,2019-10-22T05:00:25,Title thing,Location thing,Description thing,#47bcad
-        List<Event> eventList = EventOrganizer.getInstant().getEventList();
+        List<Event> eventList = EventOrganizer.getInstance().getEventList();
         StringBuilder txt = new StringBuilder();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         for(Event event : eventList) {

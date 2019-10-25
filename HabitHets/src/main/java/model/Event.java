@@ -11,6 +11,16 @@ public class Event {
     private String description;
     private String color;
 
+    /**
+     * The constructor of the Event class that sets all is's values upon creation
+     * @param id the id of the Event
+     * @param startTime a LocalDateTime that represents the start time of the event
+     * @param endTime a LocalDateTime that represents the end time of the event
+     * @param title the title of the event
+     * @param location the location of the event as a String
+     * @param description a description of the event
+     * @param color the color of the event
+     */
     public Event(int id, LocalDateTime startTime, LocalDateTime endTime, String title, String location, String description, String color) {
         this.id = id;
         this.startTime = startTime;
@@ -20,14 +30,6 @@ public class Event {
         this.description = description;
         this.color = color;
     }
-
-    public Event(int id, LocalDateTime startTime, LocalDateTime endTime, String title) {
-        this.id = id;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.title = title;
-    }
-
 
     String getColor() {
         return color;
@@ -77,6 +79,10 @@ public class Event {
         this.title = title;
     }
 
+    /**
+     * Checks the start time of the event and reformats it as a String and returns that String
+     * @return a String the start time of the event in the format HH:mm (Hour:Minute)
+     */
     String timeString() {
         String hour;
         String minute;
