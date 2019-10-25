@@ -6,9 +6,10 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.util.Stack;
 
+/**
+ * This test class test logic in Habit class
+ */
 public class TestHabit {
-
-
 
     /**
      * A test-method for getStreak() in Habit.

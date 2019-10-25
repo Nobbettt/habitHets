@@ -4,31 +4,22 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventOrganizer implements IOrganizer {
-    private static EventOrganizer instance;
+/**
+ *This class handles logic that has to do with more than one event.
+ */
+class EventOrganizer implements IOrganizer {
     private static List<Event> eventList;
 
     /**
      * A private constructor for the EventOrganizer so that only a single instance will exist, this is in line with the
      * Singleton Pattern
      */
-    private EventOrganizer() {
-        eventList = new ArrayList<>();
-    }
-
-    /**
-     * A method that returns the only instance of an EventOrganizer, if there is so such instance it creates it and sets
-     * the instance attribute to that newly created instance
-     * @return the only instance of an EventOrganizer
-     */
-    static EventOrganizer getInstance() {
-        if (instance == null) {
-            instance = new EventOrganizer();
-            return instance;
-        } else {
-            return instance;
+    EventOrganizer() {
+        if (eventList == null){
+            eventList = new ArrayList<>();
         }
     }
+
 
     /**
      * Creates a new event through the Factory class and adds it to the static list of events

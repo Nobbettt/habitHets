@@ -4,11 +4,16 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+/**
+ * Each method in the Facade class delegates the method call to the responsible class. No actual calculations or
+ * logic is done in this class but rather it simply points the method call to the responsible class that contains
+ * the logic
+ */
 public class Facade {
-    private EventOrganizer eventOrganizer = EventOrganizer.getInstance();
-    private NoteOrganizer noteOrganizer = NoteOrganizer.getInstance();
-    private TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
-    private HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
+    private EventOrganizer eventOrganizer = new EventOrganizer();
+    private NoteOrganizer noteOrganizer = new NoteOrganizer();
+    private TodoOrganizer todoOrganizer = new TodoOrganizer();
+    private HabitOrganizer habitOrganizer = new HabitOrganizer();
 
     public double countOverlaps(LocalDateTime dateTime, int id) {
         return OverlapsCounter.countOverlaps(dateTime, id);

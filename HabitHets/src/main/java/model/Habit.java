@@ -42,15 +42,15 @@ public class Habit {
         return dateRecord;
     }
 
-    public int getId(){
+    int getId(){
         return id;
     }
 
-    public String getTitle(){
+    String getTitle(){
         return title;
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
         this.title = title;
     }
 
@@ -62,11 +62,11 @@ public class Habit {
         this.bestStreak = bestStreak;
     }
 
-    public String getColor(){
+    String getColor(){
         return color;
     }
 
-    public void setColor(String color) {
+    void setColor(String color) {
         this.color = color;
     }
 
@@ -87,7 +87,6 @@ public class Habit {
      * fact that someone hasn't checked their habit YET today.
      * @return
      */
-
     int getStreak() {
         int streak = 0;
         LocalDate date;
@@ -180,6 +179,10 @@ public class Habit {
         }
     }
 
+    /**
+     * Adds listener to list of listeners
+     * @param l
+     */
     public void addListener(Listener l){
         listeners.add(l);
 
@@ -192,5 +195,4 @@ public class Habit {
         for (Listener l : listeners)
             l.actOnUpdate();
     }
-
 }

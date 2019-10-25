@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodoDoneElementView extends AnchorPane  {
+class TodoDoneElementView extends AnchorPane  {
     private Facade facade;
     private int id;
     List<CheckBox> checkBoxes= new ArrayList<>();
@@ -53,7 +53,6 @@ public class TodoDoneElementView extends AnchorPane  {
     private void remove(){
         for (CheckBox c : cb){
             if (!c.isSelected()){
-                facade.createNewTodo(facade.getDoneTodoTitle(id));
                 facade.moveBackTodo(id);
             }
         }

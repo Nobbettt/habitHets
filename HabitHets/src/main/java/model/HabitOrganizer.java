@@ -8,21 +8,24 @@ import java.util.Stack;
 /**
  *This class handles logic that has to do with more than one habit.
  */
-public class HabitOrganizer implements IOrganizer {
-    private static HabitOrganizer instant;
+class HabitOrganizer implements IOrganizer {
     private static List<Habit> habitList;
+    private static List<Listener> listeners = new ArrayList<>();
 
     /**
      * Constructor of HabitOrganizer that creates
      * a list of habits
      */
-    private HabitOrganizer() {
-        habitList = new ArrayList<>();
+    HabitOrganizer() {
+        if (habitList == null){
+            habitList = new ArrayList<>();
+        }
     }
 
     static void setHabitList(List<Habit> list) {
         HabitOrganizer.habitList = list;
     }
+
     /**
      * This method controls if an object is created.
      * This makes sure that there may only be one instance
@@ -31,13 +34,6 @@ public class HabitOrganizer implements IOrganizer {
      * an instance will be created.
      * @return
      */
-    static HabitOrganizer getInstant() {
-        if (instant == null) {
-            instant = new HabitOrganizer();
-        }
-        return instant;
-
-    }
 
     static List<Habit> getHabitList() {
         return habitList;
@@ -57,7 +53,6 @@ public class HabitOrganizer implements IOrganizer {
                 return;
             }
         }
-
     }
 
     /**
@@ -68,19 +63,27 @@ public class HabitOrganizer implements IOrganizer {
         notifyListener();
     }
 
-    private static List<Listener> listeners = new ArrayList<>();
-
-
+    /**
+     * Adds a listener to list of listeners
+     * @param l
+     */
     static void addListener(Listener l){
         listeners.add(l);
-
     }
 
+    /**
+     * Function notifies all listeners in listener list
+     */
     private static void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();
     }
 
+    /**
+     * Returns habit by id
+     * @param msg
+     * @return
+     */
     static Habit getHabitById(String msg) {
         int id = Integer.valueOf(msg);
         for (Habit h : habitList) {
@@ -100,6 +103,9 @@ public class HabitOrganizer implements IOrganizer {
         return null;
     }
 
+    /**
+     * @return all habits id's
+     */
     static List<Integer> getAllHabitIDs(){
         List<Integer> ids = new ArrayList<>();
         for (Habit habit : getHabitList()){

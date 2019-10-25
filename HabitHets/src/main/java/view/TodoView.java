@@ -1,4 +1,5 @@
 package view;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -13,6 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is responsible for the graphical representation of the todo view in the application
+ */
 public class TodoView extends AnchorPane {
     @FXML private AnchorPane todoList;
     @FXML private Button addTodo;
@@ -25,6 +29,7 @@ public class TodoView extends AnchorPane {
     @FXML private ScrollPane todoScrollpane;
     @FXML private ScrollPane doneTodoScrollpane;
     private Facade facade;
+    List<CheckBox> checkBoxes = new ArrayList<>();
 
     /**
      * Imports fxml file and sets this class as the fx controller and root of the fxml file
@@ -48,12 +53,18 @@ public class TodoView extends AnchorPane {
         this.facade = new Facade();
     }
 
+    /**
+     * Closes new todo popup on close click
+     */
     @FXML
     private void closeNewTodoWindow(){
         newTodo.setVisible(false);
         newTodo.toBack();
     }
 
+    /**
+     * Saves new todo on click from input
+     */
     @FXML
     private void saveNewTodo(){
         newTodo.setVisible(false);
@@ -68,14 +79,18 @@ public class TodoView extends AnchorPane {
         updateTodoView();
     }
 
+    /**
+     * Displays input interface to add a todo
+     */
     @FXML
     private void addTodoOnClick(){
         newTodo.setVisible(true);
         newTodo.toFront();
     }
 
-    List<CheckBox> checkBoxes = new ArrayList<>();
-
+    /**
+     * Updates todos in view
+     */
     public void updateTodoView( ) {
         vboxtodo.getChildren().clear();
         vboxdonetodo.getChildren().clear();
