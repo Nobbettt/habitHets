@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Test is week is working as expected
+ */
 public class TestWeek {
     @Test
     public void testGetDayFromLtd(){
@@ -15,6 +18,9 @@ public class TestWeek {
         Assert.assertEquals("12/12", testDay.getString());
     }
 
+    /**
+     * Tests is the correct week is returned given an LocalDateTime
+     */
     @Test
     public void testGetWeekFromLdt(){
         LocalDateTime testTime = LocalDateTime.now();
@@ -25,7 +31,9 @@ public class TestWeek {
         Assert.assertEquals("27/10", dayList.get(dayList.size()-1).getString());
     }
 
-
+    /**
+     * Tests is the correct week is returned before new year
+     */
     @Test
     public void testGetWeekFromLdtBeforeNewYear(){
         LocalDateTime testTime = LocalDateTime.of(2019,12,30,00,00);
@@ -37,6 +45,9 @@ public class TestWeek {
         Assert.assertEquals("5/1", dayList.get(dayList.size()-1).getString());
     }
 
+    /**
+     * Tests is the correct week is returned after new year
+     */
     @Test
     public void testGetWeekFromLdtAfterNewYear() {
         LocalDateTime testTime = LocalDateTime.of(2021, 1, 2, 00, 00);
@@ -48,6 +59,9 @@ public class TestWeek {
         Assert.assertEquals("3/1", dayList.get(dayList.size() - 1).getString());
     }
 
+    /**
+     * Tests is the correct week is returned given an LocalDateTime
+     */
     @Test
     public void testSameDay(){
         Calender calender = new Calender();
