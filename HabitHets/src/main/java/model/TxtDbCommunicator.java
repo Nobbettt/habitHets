@@ -62,6 +62,7 @@ public class TxtDbCommunicator {
      * Keeps track of the highest ID attribute and updates the Factory classes local eventIdCount variable.
      */
     private static void getDbEvent() {
+        EventOrganizer eventOrganizer = new EventOrganizer();
         int highestId = 0;
         String eventTxt = TxtDbCommunicator.readFile("event");
         if(!eventTxt.isEmpty()) {
@@ -79,7 +80,7 @@ public class TxtDbCommunicator {
                 }
             }
             Factory.setEventIdCount(highestId);
-            EventOrganizer.getInstance().setEventList(tmpList);
+            eventOrganizer.setEventList(tmpList);
         }
     }
 
@@ -92,6 +93,7 @@ public class TxtDbCommunicator {
      */
     private static void getDbNote() {
         int highestId = 0;
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
         String noteTxt = TxtDbCommunicator.readFile("note");
         if(!noteTxt.isEmpty()) {
             List<Note> tmpList = new ArrayList<>();
@@ -105,7 +107,7 @@ public class TxtDbCommunicator {
                 }
             }
             Factory.setNoteIdCount(highestId);
-            NoteOrganizer.getInstance().setNotesList(tmpList);
+            noteOrganizer.setNotesList(tmpList);
         }
     }
 
@@ -118,6 +120,7 @@ public class TxtDbCommunicator {
      */
     private static void getDbHabit() {
         int highestId = 0;
+        HabitOrganizer habitOrganizer = new HabitOrganizer();
         String todoTxt = TxtDbCommunicator.readFile("habit");
         if(!todoTxt.isEmpty()) {
             List<Habit> tmpList = new ArrayList<>();
@@ -132,7 +135,7 @@ public class TxtDbCommunicator {
                 }
             }
             Factory.setHabitIdCount(highestId);
-            HabitOrganizer.getInstant().setHabitList(tmpList);
+            habitOrganizer.setHabitList(tmpList);
         }
     }
 
@@ -159,6 +162,7 @@ public class TxtDbCommunicator {
      * Keeps track of the highest ID attribute and updates the Factory classes local todoIdCount variable.
      */
     private static int getDbTodo(int highestId) {
+        TodoOrganizer todoOrganizer = new TodoOrganizer();
         String todoTxt = TxtDbCommunicator.readFile("todo");
         if (!todoTxt.isEmpty()) {
             List<Todo> tmpList = new ArrayList<>();
@@ -171,7 +175,7 @@ public class TxtDbCommunicator {
                     highestId = t.getId();
                 }
             }
-            TodoOrganizer.getInstant().setTodoList(tmpList);
+            todoOrganizer.setTodoList(tmpList);
         }
         return highestId;
     }
@@ -184,6 +188,7 @@ public class TxtDbCommunicator {
      * Keeps track of the highest ID attribute and updates the Factory classes local todoIdCount variable.
      */
     private static int getDbTodoDone(int highestId) {
+        TodoOrganizer todoOrganizer = new TodoOrganizer();
         String doneTodoTxt = TxtDbCommunicator.readFile("todoDone");
         if(!doneTodoTxt.isEmpty()) {
             List<Todo> tmpList = new ArrayList<>();
@@ -196,7 +201,7 @@ public class TxtDbCommunicator {
                     highestId = t.getId();
                 }
             }
-            TodoOrganizer.getInstant().setDoneTodoList(tmpList);
+            todoOrganizer.setDoneTodoList(tmpList);
         }
         return highestId;
     }

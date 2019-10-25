@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 public class TestHabitOrganizer {
 
-    MockHabitOrganizer habitOrganizer = MockHabitOrganizer.getInstant();
+    HabitOrganizer habitOrganizer = new HabitOrganizer();
 
     /**
      * A test-method for Add() in HabitOrganizer.

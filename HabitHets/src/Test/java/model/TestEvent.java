@@ -3,12 +3,16 @@ package model;
 import org.junit.Assert;
 import org.junit.Test;
 
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TestEvent {
+    EventOrganizer eventOrganizer = new EventOrganizer();
+    List<Event> list = EventOrganizer.getEventList();
+
     @Test
     public void testEventId(){
-        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
         clearEventlist();
         eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
@@ -24,7 +28,6 @@ public class TestEvent {
 
     @Test
     public void testEventModifiers(){
-        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
         clearEventlist();
         eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertEquals("Hej", eventOrganizer.getEventList().get(0).getTitle());
@@ -35,7 +38,6 @@ public class TestEvent {
 
     @Test
     public void testAddRemove(){
-        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
         clearEventlist();
         eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertEquals(1, eventOrganizer.getEventList().size());
@@ -49,7 +51,6 @@ public class TestEvent {
 
     @Test
     public void testTime(){
-        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
         clearEventlist();
         eventOrganizer.addEvent(LocalDateTime.of(2019,10,24,12,00), 10, 0, 12, 0, "Hej", "Blä", "En string");
         Assert.assertTrue((eventOrganizer.getEventList().get(0).getStartTime().isAfter(LocalDateTime.of(2019,10,9,12,00))));
@@ -58,14 +59,13 @@ public class TestEvent {
 
     @Test
     public void testTimestring(){
-        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
         clearEventlist();
         eventOrganizer.addEvent(LocalDateTime.now(), 10, 0, 12, 0, "model.TestEvent", "M1212D", "String");
         Assert.assertTrue(eventOrganizer.getEventList().get(0).timeString().equals("10:00"));
     }
 
     private void clearEventlist(){
-        MockEventOrganizer eventOrganizer = MockEventOrganizer.getInstant();
+        EventOrganizer eventOrganizer = new EventOrganizer();
         eventOrganizer.getEventList().clear();
     }
 }

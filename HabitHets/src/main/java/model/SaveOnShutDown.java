@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Stack;
 
 public class SaveOnShutDown {
-
     /**
      * Function creates a new txt file (overwrites a existing file if name already taken)
      * Sets the new files content to newTxt string parameter
@@ -48,7 +47,8 @@ public class SaveOnShutDown {
      */
     private static void saveTodo() {
         // id,title;id,title;
-        List<Todo> todoList = TodoOrganizer.getInstant().getTodoList();
+        TodoOrganizer todoOrganizer = new TodoOrganizer();
+        List<Todo> todoList = todoOrganizer.getTodoList();
         StringBuilder txt = new StringBuilder();
         for(Todo todo : todoList) {
             txt.append(todo.getId()).append("<//>");
@@ -65,7 +65,8 @@ public class SaveOnShutDown {
      */
     private static void saveDoneTodo() {
         // id,title;id,title;
-        List<Todo> doneTodoList = TodoOrganizer.getInstant().getDoneTodoList();
+        TodoOrganizer todoOrganizer = new TodoOrganizer();
+        List<Todo> doneTodoList = todoOrganizer.getDoneTodoList();
         StringBuilder txt = new StringBuilder();
         for(Todo todo : doneTodoList) {
             txt.append(todo.getId()).append("<//>");
@@ -82,7 +83,8 @@ public class SaveOnShutDown {
      */
     private static void saveHabit() {
         // id,title,bestStreak,Color,daterecord,ldt=ldt=ldt=ldt;id,title,bestStreak,Color,daterecord,ldt=ldt=ldt=ldt;
-        List<Habit> habitList = HabitOrganizer.getInstant().getHabitList();
+        HabitOrganizer habitOrganizer = new HabitOrganizer();
+        List<Habit> habitList = habitOrganizer.getHabitList();
         StringBuilder txt = new StringBuilder();
         for(Habit habit : habitList) {
             txt.append(habit.getId()).append("<//>");
@@ -118,7 +120,8 @@ public class SaveOnShutDown {
      */
     private static void saveNote() {
         // id,title,2019-10-21;
-        List<Note> noteList = NoteOrganizer.getInstance().getNotes();
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
+        List<Note> noteList = noteOrganizer.getNotes();
         StringBuilder txt = new StringBuilder();
         for(Note note : noteList) {
             if(note.getDescription() != null && !note.getDescription().isEmpty()) {
@@ -138,7 +141,8 @@ public class SaveOnShutDown {
      */
     private static void saveEvent() {
         // id,2019-10-22T05:00:25,2019-10-22T05:00:25,Title thing,Location thing,Description thing,#47bcad
-        List<Event> eventList = EventOrganizer.getInstance().getEventList();
+        EventOrganizer eventOrganizer = new EventOrganizer();
+        List<Event> eventList = eventOrganizer.getEventList();
         StringBuilder txt = new StringBuilder();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         for(Event event : eventList) {

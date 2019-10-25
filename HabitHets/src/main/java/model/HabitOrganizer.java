@@ -9,34 +9,20 @@ import java.util.Stack;
  *This class handles logic that has to do with more than one habit.
  */
 public class HabitOrganizer implements IOrganizer {
-    private static HabitOrganizer instant;
     private static List<Habit> habitList;
 
     /**
      * Constructor of HabitOrganizer that creates
      * a list of habits
      */
-    private HabitOrganizer() {
-        habitList = new ArrayList<>();
+    HabitOrganizer() {
+        if (habitList == null){
+            habitList = new ArrayList<>();
+        }
     }
 
     static void setHabitList(List<Habit> list) {
         HabitOrganizer.habitList = list;
-    }
-    /**
-     * This method controls if an object is created.
-     * This makes sure that there may only be one instance
-     * at the time (singleton-pattern). If there already exists an
-     * instance, another one will not be created. If there in not,
-     * an instance will be created.
-     * @return
-     */
-    static HabitOrganizer getInstant() {
-        if (instant == null) {
-            instant = new HabitOrganizer();
-        }
-        return instant;
-
     }
 
     static List<Habit> getHabitList() {

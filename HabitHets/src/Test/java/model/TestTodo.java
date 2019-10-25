@@ -11,7 +11,7 @@ public class TestTodo {
 
     @Test
     public void testTodoAdd(){
-        MockTodoOrganizer todoOrganizer = MockTodoOrganizer.getInstant();
+        TodoOrganizer todoOrganizer = new TodoOrganizer();
         todoOrganizer.addTodo("Undvika todo 2");
         todoOrganizer.addTodo("Säga hej till Tina");
         Assert.assertEquals(2, todoOrganizer.getTodoList().size());
@@ -28,7 +28,7 @@ public class TestTodo {
 
     @Test
     public void testTodoUpdateSubject(){
-        MockTodoOrganizer todoOrganizer = MockTodoOrganizer.getInstant();
+        TodoOrganizer todoOrganizer = new TodoOrganizer();
         todoOrganizer.addTodo("Undvika todo 2");
         todoOrganizer.addTodo("Säga hej till Tina");
         Assert.assertEquals("testTodo", todoOrganizer.getTodoList().get(0).getTitle() );
@@ -43,7 +43,7 @@ public class TestTodo {
 
     @Test
     public void testTodoRemove() {
-        MockTodoOrganizer todoOrganizer = MockTodoOrganizer.getInstant();
+        TodoOrganizer todoOrganizer = new TodoOrganizer();
         todoOrganizer.addTodo("Undvika todo 2");
         todoOrganizer.addTodo("Säga hej till Tina");
         Assert.assertEquals(2, todoOrganizer.getTodoList().size());
@@ -62,7 +62,7 @@ public class TestTodo {
 
     @Test
     public void testLengthOfDoneTodoList() {
-        MockTodoOrganizer todoOrganizer = MockTodoOrganizer.getInstant();
+        TodoOrganizer todoOrganizer = new TodoOrganizer();
         for (int a =0; a<8 ;a++){
             todoOrganizer.addTodo("Undvika todo 2");
             todoOrganizer.getTodoList().get(a).setTitle(""+a+"");
@@ -86,7 +86,7 @@ public class TestTodo {
 
     @Test
     public void deleteTodo(){
-        MockTodoOrganizer todoOrganizer = MockTodoOrganizer.getInstant();
+        TodoOrganizer todoOrganizer = new TodoOrganizer();
         todoOrganizer.addTodo("Undvika todo 2");
         todoOrganizer.addTodo("Säga hej till Tina");
         Assert.assertEquals(2, todoOrganizer.getTodoList().size());

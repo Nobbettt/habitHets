@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerCalendar implements Initializable, Listener, ViewListener {
-    public static ControllerCalendar instance;
     @FXML private AnchorPane mainPane;
     @FXML private Label currentValueLbl;
     @FXML private AnchorPane creationPage;
@@ -100,7 +99,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
         habitView = new HabitView();
         expandedDayView = new ExpandedDayView();
         currentView = weekView;
-        instance = this;
         todoView = new TodoView();
         monthView = new MonthView();
         EventObserver.addListener(this);
@@ -773,12 +771,6 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
 
     private LocalDateTime copyMasterdate(){
         return LocalDateTime.of(masterDateTime.getYear(), masterDateTime.getMonthValue(), masterDateTime.getDayOfMonth(), masterDateTime.getHour(), masterDateTime.getMinute());
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        System.out.println("hej");
-        super.finalize();
     }
 
     @Override

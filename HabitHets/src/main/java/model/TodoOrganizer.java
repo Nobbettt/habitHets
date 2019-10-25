@@ -9,7 +9,6 @@ import java.util.List;
  */
 
 public class TodoOrganizer implements IOrganizer {
-    private static TodoOrganizer instant;
     private static List<Todo> todoList;
     private static List<Todo> doneTodoList;
 
@@ -17,9 +16,13 @@ public class TodoOrganizer implements IOrganizer {
     /**
      * The constructor of TodoOrganizer sets the list of todos and doneTodos.
      */
-    private TodoOrganizer() {
-        todoList = new ArrayList<>();
-        doneTodoList = new ArrayList<>();
+    TodoOrganizer() {
+        if (todoList == null) {
+            todoList = new ArrayList<>();
+        }
+        if (doneTodoList == null) {
+            doneTodoList = new ArrayList<>();
+        }
     }
 
     static void setTodoList(List<Todo> todoList) {
@@ -28,22 +31,6 @@ public class TodoOrganizer implements IOrganizer {
 
     static void setDoneTodoList(List<Todo> doneTodoList) {
         TodoOrganizer.doneTodoList = doneTodoList;
-    }
-
-    /**
-     * Control if object is created , so that there may only be one at a time.
-     * If there is an instant, another one will not be created.
-     * If there is not, an instant will be created.
-     */
-
-    public static TodoOrganizer getInstant() {
-        if (instant == null) {
-            instant = new TodoOrganizer();
-            return instant;
-
-        } else {
-            return instant;
-        }
     }
 
 

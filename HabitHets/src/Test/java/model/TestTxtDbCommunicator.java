@@ -15,15 +15,16 @@ public class TestTxtDbCommunicator {
      */
     @Test
     public void testSave(){
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
 
         Note note_ = new Note(1, "THIS STRING IS BEEING TESTED", LocalDate.now().minusYears(2));
         List<Note> list = new ArrayList<>();
         list.add(note_);
-        NoteOrganizer.getInstance().setNotesList(list);
+        noteOrganizer.setNotesList(list);
 
         SaveOnShutDown.saveAll();
         TxtDbCommunicator.importDb();
-        Note note = NoteOrganizer.getInstance().getNoteDate(LocalDate.now().minusYears(2));
+        Note note = noteOrganizer.getNoteDate(LocalDate.now().minusYears(2));
         String desc = note.getDescription();
 
         Assert.assertEquals("THIS STRING IS BEEING TESTED", desc);

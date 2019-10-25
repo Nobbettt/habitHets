@@ -16,7 +16,7 @@ public class NoteTest{
     @Test
     public void addNoteTest() {
         clearList();
-        MockNoteOrganizer noteOrganizer = MockNoteOrganizer.getInstance();
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("hej", LocalDate.now());
         noteOrganizer.addNote("he", LocalDate.now());
         noteOrganizer.addNote("hej", LocalDate.now());
@@ -34,7 +34,7 @@ public class NoteTest{
     @Test
     public void removeNoteTest(){
         clearList();
-        MockNoteOrganizer noteOrganizer = MockNoteOrganizer.getInstance();
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("hej",LocalDate.now());
         noteOrganizer.addNote("hej",LocalDate.now());
         Assert.assertEquals(2,noteOrganizer.getNotes().size());
@@ -52,7 +52,7 @@ public class NoteTest{
     @Test
     public void setDescriptionTest(){
         clearList();
-        MockNoteOrganizer noteOrganizer = MockNoteOrganizer.getInstance();
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("hej", LocalDate.now());
         noteOrganizer.getNotes().get(0).setDescription("lol");
         Assert.assertEquals("lol",noteOrganizer.getNotes().get(0).getDescription());
@@ -65,7 +65,7 @@ public class NoteTest{
     @Test
     public void testSetId(){
         clearList();
-        MockNoteOrganizer noteOrganizer = MockNoteOrganizer.getInstance();
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("hej",LocalDate.now());
         noteOrganizer.getNotes().get(0).setId(4);
         Assert.assertEquals(4, noteOrganizer.getNotes().get(0).getId());
@@ -78,7 +78,7 @@ public class NoteTest{
     @Test
     public void isNoteOnDayTest(){
         clearList();
-        MockNoteOrganizer noteOrganizer = MockNoteOrganizer.getInstance();
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("hej", LocalDate.now());
         Assert.assertTrue(noteOrganizer.isNoteOnDay(LocalDateTime.now()));
     }
@@ -90,7 +90,7 @@ public class NoteTest{
     @Test
     public void getNoteDateTest(){
         clearList();
-        MockNoteOrganizer noteOrganizer = MockNoteOrganizer.getInstance();
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.addNote("w",LocalDate.now());
         Assert.assertEquals(noteOrganizer.getNotes().get(0),noteOrganizer.getNoteDate(LocalDate.now()));
     }
@@ -103,12 +103,12 @@ public class NoteTest{
     public void setNotesListTest(){
         clearList();
         List<Note> notesList = new ArrayList<>();
-        MockNoteOrganizer noteOrganizer = MockNoteOrganizer.getInstance();
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.setNotesList(notesList);
     }
 
     private void clearList(){
-        MockNoteOrganizer noteOrganizer = MockNoteOrganizer.getInstance();
+        NoteOrganizer noteOrganizer = new NoteOrganizer();
         noteOrganizer.getNotes().clear();
     }
 }
