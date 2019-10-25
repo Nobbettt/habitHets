@@ -2,6 +2,9 @@ package model;
 
 import java.time.LocalDateTime;
 
+/**
+ * This function is used by OverlapsCounter and checks if events overlap in a day
+ */
 class Interval {
 
     private final LocalDateTime start;
@@ -10,16 +13,19 @@ class Interval {
     private final boolean inclusiveStart;
     private final boolean inclusiveEnd;
 
-    Interval(LocalDateTime start, boolean inclusiveStart,
-             LocalDateTime end, boolean inclusiveEnd) {
-
+    Interval(LocalDateTime start, boolean inclusiveStart, LocalDateTime end, boolean inclusiveEnd) {
         this.start = start;
         this.end = end;
-
         this.inclusiveStart = inclusiveStart;
         this.inclusiveEnd = inclusiveEnd;
     }
 
+    /**
+     * Checks if localDateTimes overlap
+     * Returns true or false
+     * @param other
+     * @return
+     */
     boolean overlaps(Interval other) {
         if ((this.start.equals(other.getEnd()) && this.inclusiveStart && other.isInclusiveEnd()) || (this.end.equals(other.getStart()) && this.inclusiveEnd && other.isInclusiveStart())) {
             return true;

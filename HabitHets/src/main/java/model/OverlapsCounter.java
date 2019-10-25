@@ -14,7 +14,7 @@ class OverlapsCounter {
     private static double count;
 
     /**
-     * Function calculates
+     * Function calculates how many times a event overlaps with others
      * @param dateTime
      * @param id
      * @return

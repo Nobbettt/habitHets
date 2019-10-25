@@ -11,6 +11,7 @@ import java.util.Stack;
 public class MockHabitOrganizer implements IOrganizer {
     private static MockHabitOrganizer instant;
     private static List<Habit> habitList;
+    private static List<Listener> listeners = new ArrayList<>();
 
     /**
      * Constructor of HabitOrganizer that creates
@@ -68,19 +69,28 @@ public class MockHabitOrganizer implements IOrganizer {
         notifyListener();
     }
 
-    private static List<Listener> listeners = new ArrayList<>();
-
-
+    /**
+     * Adds a listener to list of listeners
+     * @param l
+     */
     static void addListener(Listener l){
         listeners.add(l);
 
     }
 
+    /**
+     * Function notifies all listeners in listener list
+     */
     private static void notifyListener(){
         for (Listener l : listeners)
             l.actOnUpdate();
     }
 
+    /**
+     * Returns habit by id
+     * @param msg
+     * @return
+     */
     static Habit getHabitById(String msg) {
         int id = Integer.valueOf(msg);
         for (Habit h : habitList) {
@@ -100,6 +110,9 @@ public class MockHabitOrganizer implements IOrganizer {
         return null;
     }
 
+    /**
+     * @return all habits id's
+     */
     static List<Integer> getAllHabitIDs(){
         List<Integer> ids = new ArrayList<>();
         for (Habit habit : getHabitList()){

@@ -25,26 +25,50 @@ public class Note {
         this.id = id;
     }
 
+    /**
+     *
+     * @return description
+     */
     String getDescription() {
         return description;
     }
 
+    /**
+     * sets description
+     * @param description
+     */
     void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * returns id
+     * @return
+     */
     int getId(){
         return id;
     }
 
+    /**
+     *
+     * @return day
+     */
     LocalDate getDay() {
         return day;
     }
 
+    /**
+     * sets notes id
+     * @param id
+     */
     void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * sets day as LocalDatTime
+     * @param day
+     */
     void setDay(LocalDate day) {
         this.day = day;
     }

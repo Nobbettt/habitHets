@@ -87,7 +87,6 @@ public class Habit {
      * fact that someone hasn't checked their habit YET today.
      * @return
      */
-
     int getStreak() {
         int streak = 0;
         LocalDate date;
@@ -180,6 +179,10 @@ public class Habit {
         }
     }
 
+    /**
+     * Adds listener to list of listeners
+     * @param l
+     */
     public void addListener(Listener l){
         listeners.add(l);
 
