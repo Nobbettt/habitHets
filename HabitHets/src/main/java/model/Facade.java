@@ -2,7 +2,6 @@ package model;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Facade {
@@ -11,8 +10,8 @@ public class Facade {
     private TodoOrganizer todoOrganizer = TodoOrganizer.getInstant();
     private HabitOrganizer habitOrganizer = HabitOrganizer.getInstant();
 
-    public double calculateOverlaps(LocalDateTime dateTime, int id) {
-        return OverlapsCounter.calculateOverlaps(dateTime, id);
+    public double countOverlaps(LocalDateTime dateTime, int id) {
+        return OverlapsCounter.countOverlaps(dateTime, id);
     }
 
     public String getNoteTextFromLdt(LocalDateTime ldt){

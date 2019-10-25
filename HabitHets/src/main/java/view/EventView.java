@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import Controller.ControllerCalendar;
 import model.Facade;
 
 import java.io.IOException;
@@ -20,9 +19,7 @@ public class EventView extends AnchorPane {
     @FXML
     private Label timeLabel;
     private int id;
-    private ControllerCalendar controllerCalendar;
     private Facade facade;
-    private List<ViewListener> listeners = new ArrayList<>();
 
     /**
      * Imports fxml file and sets this class as the fx controller and root of the fxml file
@@ -44,12 +41,11 @@ public class EventView extends AnchorPane {
         }
         titleLabel.setText(facade.getEventTitle(id));
         timeLabel.setText(facade.getEventStarttimeString(id));
-        controllerCalendar = ControllerCalendar.instance;
     }
 
     @FXML
     public void editEventClicked(){
-        controllerCalendar.editEventPressed(id);
+        EventObserver.listenersReact(id);
 
     }
 }
