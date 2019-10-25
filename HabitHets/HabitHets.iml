@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <content url="file://$MODULE_DIR$/target" />
@@ -26,16 +27,6 @@
     </orderEntry>
     <orderEntry type="library" name="javafx11 new" level="application" />
     <orderEntry type="library" name="javafx" level="application" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.10" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac:11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac:11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:11" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:11" level="project" />

@@ -32,7 +32,7 @@ class HabitObjectView extends AnchorPane {
      * loads the file and checks for exception
      * Sets local id to the received id
      */
-    public HabitObjectView(int id) {
+    HabitObjectView(int id) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/habitElement.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

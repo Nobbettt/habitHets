@@ -16,10 +16,11 @@ class OverlapsCounter {
      * @return
      */
     static double countOverlaps(LocalDateTime dateTime, int id) {
+        EventOrganizer eventOrganizer = new EventOrganizer();
         double i = 0;
         List<Event> overlaps = new ArrayList<>();
         List<Event> overlaps2 = new ArrayList<>();
-        List<Event> events = EventOrganizer.getInstance().getEventsOfDay(dateTime);
+        List<Event> events = eventOrganizer.getEventsOfDay(dateTime);
         Interval interval = new Interval(EventOrganizer.getEventOfId(id).getStartTime(), true, EventOrganizer.getEventOfId(id).getEndTime(), true);
         for (Event tmpEvent : events) {
             Interval tmpInterval = new Interval(tmpEvent.getStartTime(), true, tmpEvent.getEndTime(), true);
