@@ -193,6 +193,6 @@ public class Habit {
      */
     private void notifyListener(){
         for (Listener l : listeners)
-            l.actOnUpdate();
+            l.actOnUpdate(2);
     }
 }

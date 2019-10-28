@@ -23,7 +23,7 @@ public class TestWeek {
      */
     @Test
     public void testGetWeekFromLdt(){
-        LocalDateTime testTime = LocalDateTime.now();
+        LocalDateTime testTime = LocalDateTime.of(2019,10,25,00,01);
         Calender calender = new Calender();
         List<Day> dayList = calender.getWeekFromLDT(testTime);
         Assert.assertEquals(7, dayList.size());

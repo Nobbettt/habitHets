@@ -512,9 +512,16 @@ public class ControllerCalendar implements Initializable, Listener, ViewListener
      * listeners this method will be called
      */
     @Override
-    public void actOnUpdate() {
-        updateTodoView();
-        updateHabitView();
+    public void actOnUpdate(int sit) {
+        switch (sit) {
+            case 1:
+                updateTodoView();
+                break;
+            case 2:
+                updateHabitView();
+                break;
+                default:
+        }
     }
 
     /**

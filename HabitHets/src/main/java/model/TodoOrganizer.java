@@ -184,7 +184,7 @@ class TodoOrganizer implements IOrganizer {
      */
     private static void notifyListener(){
         for (Listener l : listeners)
-            l.actOnUpdate();
+            l.actOnUpdate(1);
     }
 
     /**

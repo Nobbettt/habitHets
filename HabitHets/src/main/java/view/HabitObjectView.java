@@ -44,7 +44,6 @@ class HabitObjectView extends AnchorPane {
         this.id = id;
         listeners = new ArrayList<>();
         this.facade = new Facade();
-        hideHabits();
     }
 
     /**
